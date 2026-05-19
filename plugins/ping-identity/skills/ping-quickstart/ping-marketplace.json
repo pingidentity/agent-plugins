@@ -1,0 +1,29 @@
+{
+  "skill_id": "ping-quickstart",
+  "display_name": "Ping Identity Quickstart",
+  "description": "Orientation and platform detection for Ping Identity. Routes users to the right skill based on their platform (PingOne, PingOne ST, on-prem software) and what they are trying to accomplish.",
+  "version": "1.0.0",
+  "publisher": "Ping Identity",
+  "tags": {
+    "product_family": ["pingone-mt", "pingone-st", "ping-software", "cross-platform"],
+    "products": ["pingone", "pingone-st", "pingfederate", "pingaccess", "pingdirectory"],
+    "capabilities": ["quickstart"],
+    "audience": ["admin", "developer", "architect", "operator"],
+    "use_cases": ["workforce", "customer", "cross-platform", "ai-identity"],
+    "protocols": []
+  },
+  "entry_point": "SKILL.md",
+  "references": {
+    "path": "references/"
+  },
+  "related_skills": [
+    "ping-foundation",
+    "ping-orchestration",
+    "ping-universal-services",
+    "ping-app-integration",
+    "ping-identity-for-ai"
+  ],
+  "min_context_tokens": 200,
+  "max_curated_docs": 2,
+  "max_shortlist_docs": 10
+}

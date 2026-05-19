@@ -1,0 +1,69 @@
+{
+  "plugin": "ping-identity",
+  "description": "Local reference index for plugin-only installs. Lists all curated anchors and generated shortlists by skill and platform branch.",
+  "last_updated": null,
+  "skills": {
+    "ping-quickstart": {
+      "references": [
+        "skills/ping-quickstart/references/getting-started-overview.md",
+        "skills/ping-quickstart/references/choose-the-right-ping-platform.md",
+        "skills/ping-quickstart/references/common-starting-patterns.md"
+      ]
+    },
+    "ping-foundation": {
+      "curated": [
+        "skills/ping-foundation/references/curated/cross-platform/foundation-overview.md",
+        "skills/ping-foundation/references/curated/cross-platform/tenant-and-environment-setup.md",
+        "skills/ping-foundation/references/curated/cross-platform/policy-and-branding-basics.md",
+        "skills/ping-foundation/references/curated/cross-platform/core-admin-patterns.md",
+        "skills/ping-foundation/references/curated/pingone-st/foundation-overview.md",
+        "skills/ping-foundation/references/curated/pingone-st/app-setup.md",
+        "skills/ping-foundation/references/curated/pingone-st/authentication-fundamentals.md",
+        "skills/ping-foundation/references/curated/pingone-st/themes-and-customization.md",
+        "skills/ping-foundation/references/curated/pingone-st/directory-setup.md"
+      ],
+      "generated": {
+        "pingone-mt": "skills/ping-foundation/references/generated/pingone-mt/top-25.json",
+        "pingone-st": "skills/ping-foundation/references/generated/pingone-st/top-25.json",
+        "ping-software": "skills/ping-foundation/references/generated/ping-software/top-25.json",
+        "cross-platform": "skills/ping-foundation/references/generated/cross-platform/top-10.json"
+      }
+    },
+    "ping-orchestration": {
+      "curated": [
+        "skills/ping-orchestration/references/curated/pingone-st/journey-design-patterns.md",
+        "skills/ping-orchestration/references/curated/pingone-st/nodes/basic-auth-nodes.md",
+        "skills/ping-orchestration/references/curated/pingone-st/nodes/mfa-nodes.md",
+        "skills/ping-orchestration/references/curated/pingone-st/nodes/risk-management-nodes.md",
+        "skills/ping-orchestration/references/curated/pingone-st/nodes/identity-management-nodes.md",
+        "skills/ping-orchestration/references/curated/pingone-st/nodes/utility-nodes.md",
+        "skills/ping-orchestration/references/curated/pingone-st/nodes/federation-contextual-nodes.md",
+        "skills/ping-orchestration/references/curated/pingone-st/scripted-decision-nodes.md",
+        "skills/ping-orchestration/references/curated/pingone-st/inner-journeys.md",
+        "skills/ping-orchestration/references/curated/pingone-mt/davinci-overview.md",
+        "skills/ping-orchestration/references/curated/pingone-mt/davinci-flow-patterns.md"
+      ],
+      "generated": {
+        "pingone-mt": "skills/ping-orchestration/references/generated/pingone-mt/top-25.json",
+        "pingone-st": "skills/ping-orchestration/references/generated/pingone-st/top-25.json",
+        "ping-software": "skills/ping-orchestration/references/generated/ping-software/top-25.json",
+        "cross-platform": "skills/ping-orchestration/references/generated/cross-platform/top-10.json"
+      }
+    },
+    "ping-universal-services": {
+      "note": "Planned. Not yet built.",
+      "curated": [],
+      "generated": {}
+    },
+    "ping-app-integration": {
+      "note": "Planned. Not yet built.",
+      "curated": [],
+      "generated": {}
+    },
+    "ping-identity-for-ai": {
+      "note": "Planned. Not yet built.",
+      "curated": [],
+      "generated": {}
+    }
+  }
+}

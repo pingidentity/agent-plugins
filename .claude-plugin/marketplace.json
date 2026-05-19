@@ -1,0 +1,22 @@
+{
+  "name": "ping-identity-skills",
+  "owner": {
+    "name": "Ping Identity",
+    "email": "developer-experience@pingidentity.com"
+  },
+  "description": "Agent skills for configuring, orchestrating, and integrating Ping Identity platforms — PingOne MT, PingOne Advanced Identity Cloud (ST), and on-premises Ping software.",
+  "plugins": [
+    {
+      "name": "ping-identity",
+      "source": "./plugins/ping-identity",
+      "displayName": "Ping Identity",
+      "description": "Full skill suite for Ping Identity platforms. Covers platform setup, authentication journey design, universal services, app integration, and identity for AI workloads.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Ping Identity"
+      },
+      "category": "identity",
+      "keywords": ["ping", "pingone", "aic", "pingfederate", "identity", "authentication", "journeys", "davinci"]
+    }
+  ]
+}

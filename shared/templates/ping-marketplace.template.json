@@ -1,0 +1,25 @@
+{
+  "skill_id": "ping-<skill-name>",
+  "display_name": "<Human-readable skill name>",
+  "description": "<One to two sentences: what this skill covers, written for discovery. Focus on user job, not product names.>",
+  "version": "1.0.0",
+  "publisher": "Ping Identity",
+  "tags": {
+    "product_family": ["<pingone-mt|pingone-st|ping-software|cross-platform>"],
+    "products": ["<exact product names>"],
+    "capabilities": ["<foundation|orchestration|universal-services|app-integration|identity-for-ai|quickstart>"],
+    "audience": ["<admin|developer|architect|operator>"],
+    "use_cases": ["<workforce|customer|cross-platform|ai-identity>"],
+    "protocols": ["<oidc|saml|oauth2|scim|ldap — only if relevant>"]
+  },
+  "entry_point": "SKILL.md",
+  "references": {
+    "curated_path": "references/curated/",
+    "generated_path": "references/generated/",
+    "runtime_path": "references/runtime/<platform>/docs-mcp-routing.md"
+  },
+  "related_skills": ["<ping-skill-name>"],
+  "min_context_tokens": 500,
+  "max_curated_docs": 3,
+  "max_shortlist_docs": 25
+}

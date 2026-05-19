@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__plugin_polaris_glean__read_document",
+      "Bash(xargs sed *)",
+      "WebFetch(domain:docs.pingidentity.com)",
+      "mcp__plugin_polaris_glean__search",
+      "WebFetch(domain:docs.pingoneaic)",
+      "Bash(python3 *)"
+    ]
+  }
+}
