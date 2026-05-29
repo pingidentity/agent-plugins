@@ -100,6 +100,6 @@ Ask at most one question at a time:
 
 Load 1–2 of these matching the user's question. Stop when orientation is sufficient.
 
-- `references/getting-started-overview.md`
-- `references/choose-the-right-ping-platform.md`
-- `references/common-starting-patterns.md`
+- `references/curated/getting-started-overview.md`
+- `references/curated/choose-the-right-ping-platform.md`
+- `references/curated/common-starting-patterns.md`
