@@ -1,0 +1,33 @@
+{
+  "skill_id": "ping-app-integration",
+  "display_name": "Ping Identity App Integration",
+  "description": "Web, mobile, and SDK integration patterns for Ping Identity platforms. Covers Android, iOS, and React SDK references; OIDC web app integration; browser auth flows; orchestration SDK references; and on-prem app-side integration.",
+  "version": "0.1.0-scaffold",
+  "publisher": "Ping Identity",
+  "tags": {
+    "product_family": ["pingone-mt", "pingone-st", "ping-software", "cross-platform"],
+    "products": [
+      "pingone",
+      "pingone-st",
+      "pingfederate",
+      "pingaccess"
+    ],
+    "capabilities": ["app-integration"],
+    "audience": ["developer"],
+    "use_cases": ["workforce", "customer"],
+    "protocols": ["oidc", "oauth2", "saml"]
+  },
+  "entry_point": "SKILL.md",
+  "references": {
+    "curated_path": "references/curated/",
+    "generated_path": "references/generated/"
+  },
+  "related_skills": [
+    "ping-quickstart",
+    "ping-foundation",
+    "ping-orchestration"
+  ],
+  "min_context_tokens": 500,
+  "max_curated_docs": 3,
+  "max_shortlist_docs": 20
+}
