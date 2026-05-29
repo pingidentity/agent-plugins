@@ -1,0 +1,7 @@
+{
+  "name": "ping-identity",
+  "version": "1.0.0",
+  "description": "Six-umbrella agent skill suite for Ping Identity: PingOne MT, PingOne ST (AIC), Ping Software Suite, DaVinci, universal services, app integration, identity for AI.",
+  "author": { "name": "Ping Identity" },
+  "keywords": ["ping", "pingone", "aic", "davinci", "pingfederate", "identity", "authentication", "ciam", "ai-identity"]
+}
