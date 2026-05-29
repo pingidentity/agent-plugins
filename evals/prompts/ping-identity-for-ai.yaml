@@ -1,0 +1,35 @@
+skill: ping-identity-for-ai
+version: 1
+trigger_prompts:
+  - id: T-01
+    prompt: "Give my AI agent a verified identity so it can securely access our internal APIs using Ping."
+    expected_anchors: []
+    expected_tier: curated
+    notes: "Phase 1 will populate expected_anchors once curated anchors exist."
+
+  - id: T-02
+    prompt: "How do I apply Verified Trust signals in my MCP server to authenticate requests from AI agents?"
+    expected_anchors: []
+    expected_tier: curated
+    notes: "Phase 1 will populate expected_anchors once curated anchors exist."
+
+  - id: T-03
+    prompt: "Design a workforce helpdesk AI authentication pattern using Ping Identity for our internal support bot."
+    expected_anchors: []
+    expected_tier: curated
+    notes: "Phase 1 will populate expected_anchors once curated anchors exist."
+
+non_trigger_prompts:
+  - id: N-01
+    prompt: "Set up PingOne MT and register an OIDC application for my web portal."
+    expected_skill: ping-foundation
+
+  - id: N-02
+    prompt: "Build a user registration journey in AIC with email OTP and progressive profiling."
+    expected_skill: ping-orchestration
+
+ambiguous_prompts:
+  - id: A-01
+    prompt: "I need to authenticate an agent."
+    expected_clarification_keywords: ["ai", "human", "user", "machine", "api", "bot", "verified trust", "oidc"]
+    notes: "Agent could mean an AI agent (identity-for-ai) or a Ping agent/service (foundation)."

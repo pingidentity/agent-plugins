@@ -1,0 +1,99 @@
+skill: ping-foundation
+version: 1
+trigger_prompts:
+  - id: T-01
+    prompt: "How do I provision a new PingOne MT environment and set up my first OIDC application?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-mt/tenant-and-environment-setup.md
+    expected_tier: curated
+    notes: "Seeded curated path may differ — update once Phase 1 reorganizes foundation anchors."
+
+  - id: T-02
+    prompt: "How do I register an OIDC application in AIC for my React app?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-st/app-setup.md
+    expected_tier: curated
+
+  - id: T-03
+    prompt: "How do I set up a PingOne ST tenant from scratch — realms, managed objects, admin setup?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-st/foundation-overview.md
+    expected_tier: curated
+
+  - id: T-04
+    prompt: "Configure an SAML SP connection on PingFederate for Salesforce SSO."
+    expected_anchors: []
+    expected_tier: curated
+    notes: "On-prem software admin — foundation skill, no specific curated anchor yet."
+
+  - id: T-05
+    prompt: "How do I connect an external LDAP directory to PingOne ST?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-st/directory-setup.md
+    expected_tier: curated
+
+  - id: T-06
+    prompt: "Set up custom branding and themes in AIC for our consumer portal."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-st/themes-and-customization.md
+    expected_tier: curated
+
+  - id: T-07
+    prompt: "Configure an authentication policy in PingOne ST for step-up MFA."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-st/authentication-fundamentals.md
+    expected_tier: curated
+
+  - id: T-08
+    prompt: "How do I install and initially configure PingDirectory on Linux?"
+    expected_anchors: []
+    expected_tier: curated
+    notes: "Ping Software Suite admin — no specific curated anchor yet."
+
+  - id: T-09
+    prompt: "How do I set up MFA policies in PingOne MT for my workforce users?"
+    expected_anchors: []
+    expected_tier: curated
+    notes: "PingOne MT policy setup."
+
+  - id: T-10
+    prompt: "Set up an OIDC app in PingOne MT with client credentials grant for a backend service."
+    expected_anchors: []
+    expected_tier: curated
+
+non_trigger_prompts:
+  - id: N-01
+    prompt: "Build a DaVinci flow for customer login with risk-based step-up MFA."
+    expected_skill: ping-orchestration
+    notes: "Flow design — not admin setup."
+
+  - id: N-02
+    prompt: "Where do I start with Ping Identity? We don't know which product to pick."
+    expected_skill: ping-quickstart
+
+  - id: N-03
+    prompt: "Integrate the Ping Android SDK with my DaVinci flows."
+    expected_skill: ping-app-integration
+
+  - id: N-04
+    prompt: "Add PingOne Verify KYC to my registration flow."
+    expected_skill: ping-orchestration
+    notes: "Service invocation inside a flow — not admin setup."
+
+  - id: N-05
+    prompt: "Give my AI agent a verified identity using Ping."
+    expected_skill: ping-identity-for-ai
+
+ambiguous_prompts:
+  - id: A-01
+    prompt: "Configure MFA."
+    expected_clarification_keywords: ["pingone", "aic", "platform", "mt", "st", "policy", "journey"]
+    notes: "MFA config (foundation) vs MFA step-up in a journey (orchestration)."
+
+  - id: A-02
+    prompt: "Set up SSO."
+    expected_clarification_keywords: ["pingone", "aic", "software", "platform", "workforce", "ciam"]
+
+  - id: A-03
+    prompt: "Add a user to Ping."
+    expected_clarification_keywords: ["pingone", "aic", "directory", "platform", "mt", "st"]

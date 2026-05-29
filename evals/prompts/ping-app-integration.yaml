@@ -1,0 +1,35 @@
+skill: ping-app-integration
+version: 1
+trigger_prompts:
+  - id: T-01
+    prompt: "Integrate the Ping orchestration SDK with my Android app to drive AIC journeys."
+    expected_anchors: []
+    expected_tier: curated
+    notes: "Phase 1 will populate expected_anchors once curated anchors exist."
+
+  - id: T-02
+    prompt: "Use the Ping iOS SDK in my Swift app to connect to DaVinci flows."
+    expected_anchors: []
+    expected_tier: curated
+    notes: "Phase 1 will populate expected_anchors once curated anchors exist."
+
+  - id: T-03
+    prompt: "Wire OIDC login into my React web application using PingOne MT as the identity provider."
+    expected_anchors: []
+    expected_tier: curated
+    notes: "Phase 1 will populate expected_anchors once curated anchors exist."
+
+non_trigger_prompts:
+  - id: N-01
+    prompt: "Register an OIDC application in my PingOne MT admin console."
+    expected_skill: ping-foundation
+    notes: "Platform-side app registration — not code integration."
+
+  - id: N-02
+    prompt: "Build a DaVinci flow for user registration with email OTP."
+    expected_skill: ping-orchestration
+
+ambiguous_prompts:
+  - id: A-01
+    prompt: "I need to integrate Ping into my app."
+    expected_clarification_keywords: ["android", "ios", "react", "web", "mobile", "sdk", "platform", "oidc"]

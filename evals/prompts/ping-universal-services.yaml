@@ -1,0 +1,36 @@
+skill: ping-universal-services
+version: 1
+trigger_prompts:
+  - id: T-01
+    prompt: "Add PingOne Verify for KYC identity proofing during my customer registration journey."
+    expected_anchors: []
+    expected_tier: curated
+    notes: "Phase 1 will populate expected_anchors once curated anchors exist."
+
+  - id: T-02
+    prompt: "Score risk with PingOne Protect and adapt the authentication journey based on the risk signal."
+    expected_anchors: []
+    expected_tier: curated
+    notes: "Phase 1 will populate expected_anchors once curated anchors exist."
+
+  - id: T-03
+    prompt: "Issue a verifiable credential to a user who completed identity proofing in my PingOne environment."
+    expected_anchors: []
+    expected_tier: curated
+    notes: "Phase 1 will populate expected_anchors once curated anchors exist."
+
+non_trigger_prompts:
+  - id: N-01
+    prompt: "Set up the PingOne MT environment and register an OIDC application."
+    expected_skill: ping-foundation
+    notes: "Admin setup — not a shared service invocation."
+
+  - id: N-02
+    prompt: "Build a login journey in AIC with email OTP."
+    expected_skill: ping-orchestration
+
+ambiguous_prompts:
+  - id: A-01
+    prompt: "I need to add verification to my registration flow."
+    expected_clarification_keywords: ["verify", "protect", "risk", "identity proofing", "mfa", "otp", "service"]
+    notes: "Verification could mean MFA (orchestration) or KYC (universal-services)."
