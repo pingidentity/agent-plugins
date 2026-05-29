@@ -4,19 +4,17 @@
     "name": "Ping Identity",
     "email": "developer-experience@pingidentity.com"
   },
-  "description": "Agent skills for configuring, orchestrating, and integrating Ping Identity platforms — PingOne MT, PingOne Advanced Identity Cloud (ST), and on-premises Ping software.",
+  "description": "Agent skills for Ping Identity platforms — six umbrella skills covering PingOne MT, PingOne Advanced Identity Cloud (ST), Ping Software Suite, DaVinci, universal services, app integration, and identity for AI.",
   "plugins": [
     {
       "name": "ping-identity",
       "source": "./plugins/ping-identity",
       "displayName": "Ping Identity",
-      "description": "Full skill suite for Ping Identity platforms. Covers platform setup, authentication journey design, universal services, app integration, and identity for AI workloads.",
+      "description": "Six umbrella skills modelled on the Cloudflare few-broad-skills approach: ping-quickstart, ping-foundation, ping-orchestration, ping-universal-services, ping-app-integration, ping-identity-for-ai. Each routes by intent, platform family, exact product/service, and reference tier.",
       "version": "1.0.0",
-      "author": {
-        "name": "Ping Identity"
-      },
+      "author": { "name": "Ping Identity" },
       "category": "identity",
-      "keywords": ["ping", "pingone", "aic", "pingfederate", "identity", "authentication", "journeys", "davinci"]
+      "keywords": ["ping", "pingone", "aic", "davinci", "pingfederate", "pingaccess", "identity", "authentication", "ciam", "ai-identity"]
     }
   ]
 }
