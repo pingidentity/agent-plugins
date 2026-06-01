@@ -338,13 +338,21 @@ Sets a custom error response when routing to Failure.
 | Inner journey chain (MFA) | ITE(ThreatDetection) → ITE(MFADeviceRegistration) → ITE(MFAAuthentication) → SuccessNode |
 | Session enrichment | SetState → SetSessionProperties |
 
+## Prerequisites
+
+- PingOne AIC or PingAM tenant with at least one journey and realm configured.
+- Scripts referenced by ScriptedDecisionNode must be created in the Scripts service before the node can be saved.
+
+## Common variants
+
+- **AIC ESV-backed scripts:** use `ESVs` (Environment-Specific Variables) rather than hardcoded values in ScriptedDecisionNode scripts for multi-environment portability.
+- **Async provisioning:** add a `PollingWaitNode` after `CreateObjectNode(CREATED)` in registration journeys that rely on IDM event hooks for downstream provisioning.
+
 ## Related references
 
 - `nodes/basic-auth-nodes.md`
 - `nodes/mfa-nodes.md`
 - `nodes/identity-management-nodes.md`
-- `../scripted-decision-nodes.md`
-- `../inner-journeys.md`
 
 ## Source
 

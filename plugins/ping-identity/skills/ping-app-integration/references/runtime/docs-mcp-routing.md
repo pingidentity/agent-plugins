@@ -1,7 +1,12 @@
 ---
 title: Docs MCP routing — ping-app-integration
+product_family: cross-platform
+capabilities: ["app-integration"]
+doc_type: reference
 status: current
-last_updated: 2026-05-29
+canonical: false
+audience: ["developer"]
+last_updated: 2026-06-01
 ---
 
 # Runtime tier — Docs MCP routing for ping-app-integration
@@ -29,10 +34,9 @@ Retrieve specific sections, not full page dumps.
 
 ## Helix as a runtime path
 
-Production-bound execution runs through Helix conversation APIs. The decision rule for sandbox-vs-production lives in `rules/runtime-selection.md`. Helix is **not** a v1 skill; it is a runtime tier referenced from this file.
+Production-bound execution runs through Helix conversation APIs. Runtime selection rule: use the sandbox environment when the request originates from a development or CI context (no real user credentials, feature flags not promoted to production). Use the production Helix tier when the request is user-initiated and requires real token issuance against a production tenant. Helix is **not** a v1 skill; it is a runtime tier referenced from this file.
 
 ## Related
 
-- `rules/runtime-selection.md`
 - `references/curated/` — tier 1
 - `references/generated/` — tier 2

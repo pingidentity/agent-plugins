@@ -1,5 +1,10 @@
 ---
 title: Docs MCP routing — ping-identity-for-ai
+product_family: cross-platform
+capabilities: ["identity-for-ai"]
+doc_type: reference
+canonical: false
+audience: ["developer", "architect"]
 status: current
 last_updated: 2026-05-29
 ---
@@ -29,10 +34,16 @@ Retrieve specific sections, not full page dumps.
 
 ## Helix as a runtime path
 
-Production-bound execution runs through Helix conversation APIs. The decision rule for sandbox-vs-production lives in `rules/runtime-selection.md`. Helix is **not** a v1 skill; it is a runtime tier referenced from this file.
+Production-bound execution runs through Helix conversation APIs. Helix is **not** a v1 skill; it is a runtime tier referenced from this file.
+
+### Sandbox vs production decision rule (apply in order)
+
+1. If the user asks for a plan, explanation, walkthrough, or evaluation help → `docs` mode.
+2. If the user names a sandbox, trial, POC, or asks "how would I…" → `docs` mode.
+3. If the user names a production tenant, asks to apply/create/update/configure in a specific tenant, or invokes a `/ping:` command with `--apply` → `helix` mode.
+4. If the user is unclear, default to `docs` and ask one clarifying question: "Do you want a plan to apply manually, or should I execute this against a live tenant via Helix?"
 
 ## Related
 
-- `rules/runtime-selection.md`
 - `references/curated/` — tier 1
 - `references/generated/` — tier 2

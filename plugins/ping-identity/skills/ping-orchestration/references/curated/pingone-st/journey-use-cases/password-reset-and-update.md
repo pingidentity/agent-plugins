@@ -67,7 +67,7 @@ SessionDataNode (sessionDataKey: UserToken, sharedStateKey: userName)
                 → true: PageNode ("Update Password")
                 → false: FailureNode
       → false (passwordless user): EmailSuspendNode
-            → [resume after email click]
+            → [journey resumes when the user follows the resume URI in the email]
             → PageNode ("Update Password")
   → PageNode ("Update Password")
         → ValidatedPasswordNode (validateInput: true)

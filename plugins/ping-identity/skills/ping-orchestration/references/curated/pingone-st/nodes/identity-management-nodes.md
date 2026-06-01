@@ -20,7 +20,7 @@ Nodes for reading, writing, and managing user identity data during authenticatio
 ## Scope
 
 **Covers:** Attribute collection and validation, user object creation/update/lookup, consent, KBA, profile completeness, social login, and PingOne Verify integration.
-**Does NOT cover:** Directory setup or managed object schema — see `ping-foundation` → `directory-setup.md`. Deep provisioning flows — see `ping-orchestration` reconciliation patterns.
+**Does NOT cover:** Directory setup or managed object schema — see `ping-foundation` → `directory-setup.md`. Deep provisioning and reconciliation patterns — outside the scope of this reference.
 
 ---
 
@@ -141,43 +141,7 @@ Updates an existing managed object with attribute values from shared state.
 
 ## Social Login
 
-### Social Provider Handler node (V2)
-Initiates authentication via a configured social identity provider (Google, Apple, Facebook, etc.) or any OIDC-compliant external IdP. Use V2 — V1 (`SocialProviderHandlerNode`) is deprecated.
-
-**Configuration:**
-
-| Field | Notes |
-|---|---|
-| `script` | Transformation script to map normalized IdP claims to managed object attributes |
-| `usernameAttribute` | The IDM attribute containing the username for this object |
-| `clientType` | `BROWSER` (default) or `NATIVE` (for Ping SDK for Android/iOS) |
-| `storeTokens` | `true` stores access and refresh tokens in transient state (needed to revoke user authorization later) |
-| `subjectAttribute` | LDAP attribute from which the subject value is retrieved; only used when IDM Provisioning is disabled |
-| `detectConnectionTimeOut` | `true` enables timeout detection and routes to `timeoutOutcome` |
-
-- Outcomes: **ACCOUNT_EXISTS** / **NO_ACCOUNT** / **SOCIAL_AUTH_INTERRUPTED** / **timeoutOutcome** (if `detectConnectionTimeOut: true`)
-- `ACCOUNT_EXISTS`: continue to authentication or profile completion
-- `NO_ACCOUNT`: route to profile collection PageNode → `CreateObjectNode` for social registration
-- `SOCIAL_AUTH_INTERRUPTED`: route to FailureNode
-- `timeoutOutcome`: route to FailureNode or retry
-
-**Entry pattern:** Present a PageNode with a `ScriptedDecisionNode` or `ChoiceCollector` exposing outcomes `localAuthentication` / `socialAuthentication` as the first step. The social path leads to Social Provider Handler; the local path leads to username/password collection.
-
-### Select Identity Provider node (`SelectIdPNode`)
-Presents the user with a list of available social identity providers to choose from. Produces a `socialAuthentication` or `localAuthentication` outcome.
-
-**Configuration:**
-
-| Field | Notes |
-|---|---|
-| `includeLocalAuthentication` | `true` adds local username/password as an option alongside social providers |
-| `offerOnlyExisting` | `true` limits choices to providers already linked to the user's account (requires IDM) |
-| `passwordAttribute` | The IDM attribute that verifies the user during local authentication (required when `offerOnlyExisting: true`) |
-| `identityAttribute` | Attribute used to look up an existing user (required when `offerOnlyExisting: true`) |
-| `filteredProviders` | List of specific provider names to display; empty = all providers in Social Identity Provider Service |
-
-- Outcomes: **socialAuthentication** / **localAuthentication**
-- Use `SelectIdPNode` as an alternative to a manual PageNode + ChoiceCollector entry pattern — it renders the IdP picker UI automatically
+See `nodes/federation-contextual-nodes.md` → Social Provider Handler node (V2) and Select Identity Provider node for the full social login node documentation and entry patterns.
 
 ---
 
@@ -295,21 +259,7 @@ Evaluates whether a specified amount of time has elapsed since the user register
 - Outcomes: **True** (elapsed time has passed) / **False** (elapsed time has not passed)
 - Use case: gate time-sensitive flows (e.g., require re-verification if account was created more than N minutes ago)
 
-### Passthrough Authentication node
-Authenticates a user against a third-party system via an ICF connector. Enables hybrid deployments where credentials are validated against an external system (Active Directory, LDAP, custom connector).
-
-**Configuration:**
-
-| Field | Notes |
-|---|---|
-| `systemEndpoint` | Name of the ICF connector to use for passthrough authentication |
-| `objectType` | ICF object type for the authenticating object |
-| `identityAttribute` | Attribute used as the username for authentication |
-| `passwordAttribute` | Attribute used as the password for authentication |
-
-- Outcomes: **Authenticated** / **Failed** / **Missing Input**
-- `Missing Input`: one or both credentials not present in state — route to credential collection
-- Use when migrating from legacy directories that cannot be replaced immediately
+For passthrough authentication against a third-party system via ICF connector, see `nodes/basic-auth-nodes.md` → Passthrough Authentication node.
 
 ---
 
@@ -360,9 +310,20 @@ Attempts to match an authenticating user against a PingOne identity.
 | Social registration | SocialProviderHandlerV2(NO_ACCOUNT) → PageNode(AttributeCollector) → RequiredAttributesPresent → CreateObject |
 | Time-gated re-verification | TimeSinceDecision(True) → verification inner journey |
 
+## Prerequisites
+
+- Managed object schema configured in IDM with the required attributes present and viewable.
+- IDM accessible from the AIC/PingAM journey engine (standard in AIC; requires IDM connector in standalone PingAM).
+
+## Common variants
+
+- **B2B tenant:** use `managed/alpha_organization` alongside `managed/alpha_user` for org-scoped attribute collection.
+- **Social registration:** Social Provider Handler V2 writes normalized claims to shared state; `AttributeCollectorNode` fills any missing required fields before `CreateObjectNode`.
+
 ## Related references
 
 - `nodes/basic-auth-nodes.md`
+- `nodes/federation-contextual-nodes.md`
 - `nodes/utility-nodes.md`
 - `journey-use-cases/account-recovery-and-username-reminder.md`
 - `journey-use-cases/social-and-local-registration-authentication.md`

@@ -1,10 +1,10 @@
 ---
 name: ping-quickstart
-description: Front door for all Ping Identity work. Detects the user's platform and routes to the correct skill. Use for ANY question about where to start, which Ping product to choose, evaluating PingOne vs PingOne ST vs on-premises, or when the platform is unknown — including advisory, evaluation, and "help me decide" requests. Also invoke with /ping-quickstart.
+description: Use this skill whenever you need to orient a user in the Ping Identity ecosystem — where to start, which platform to choose, or when the platform is unknown. Front door for all Ping Identity work. Also trigger when the user is migrating from ForgeRock or another IAM platform, asking "where do we start" for any Ping feature, evaluating the product landscape, or starting Ping for the first time (workforce or CIAM). Routes to the correct skill after detecting platform and intent. Trigger phrases: where do I start with Ping, which Ping product do I need, PingOne vs PingOne ST vs PingFederate, help me decide, evaluating Ping Identity, migrating from ForgeRock, recommended starting point, /ping-quickstart.
 compatibility: Designed for Ping Identity platform tasks. Requires no tools — orientation and routing only.
 metadata:
   publisher: Ping Identity
-  version: "1.0"
+  version: "1.0.0"
 ---
 
 # ping-quickstart
@@ -29,12 +29,22 @@ Trigger on ANY of the following — including questions, evaluation discussions,
 - "Should we use the cloud or on-prem version of Ping?"
 - "Advise me on which Ping platform fits our use case"
 - "Help me understand the Ping Identity product landscape before we commit"
+- "We're migrating from ForgeRock to Ping — what does the migration path look like?"
+- "Where do we start with adding [feature] to our app?" (any feature, when the platform is unspecified)
+- "We want to add identity verification / KYC — where do we start?"
+- "What's the recommended starting point for Ping employee identity?"
 
-**Catch-all:** Trigger this skill whenever the user's platform or starting point is unknown or unclear, or when they are in evaluation/planning mode and need orientation before selecting a product or skill.
+**Catch-all rule:** Trigger this skill whenever the user's platform or starting point is unknown or unclear, when they use "where do we start", "what should we set up first", "what's the recommended starting point", or "not sure whether to use [product A] or [product B]" framing. Trigger on migration intents (ForgeRock → Ping, Okta → Ping, Auth0 → Ping). Trigger when platform is not yet specified and the user is in evaluation or orientation mode.
 
 ## When NOT to use this skill
 
-- If you already know the platform and task: use the appropriate skill directly (`ping-foundation`, `ping-orchestration`, etc.)
+- User asks to configure a PingOne OIDC application → use `ping-foundation`
+- User asks to build a registration journey or DaVinci flow in PingOne ST → use `ping-orchestration`
+- User asks to integrate the Ping iOS or Android SDK → use `ping-app-integration`
+- User asks about PingOne Protect risk scoring, PingOne Verify, or PingOne MFA policy → use `ping-universal-services`
+- User asks about Verified Trust, AI agent identity, or securing AI agents with Ping → use `ping-identity-for-ai`
+- User asks to configure PingFederate adapters or PingAccess policies on an existing deployment → use `ping-foundation`
+- User already knows their platform (PingOne, PingOne ST, or Ping Software) and knows their task → skip this skill and use the relevant skill directly
 
 ## Multi-skill use cases
 

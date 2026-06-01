@@ -57,7 +57,7 @@ A single tenant can serve distinct branding to different user populations by ass
 
 **Access:** Theme Editor → Custom CSS tab
 
-Use browser DevTools against hosted pages to identify target element class names before writing overrides.
+Custom CSS class names are subject to change with product updates; validate against the current rendered output before deploying overrides.
 
 **CSP constraint:** PingOne ST hosted pages enforce a Content Security Policy. External fonts or assets loaded from custom CSS require the origin to be added to the CSP configuration.
 
@@ -115,9 +115,9 @@ Use browser DevTools against hosted pages to identify target element class names
 
 ## Related references
 
-- `foundation-overview.md`
-- `authentication-fundamentals.md`
-- `app-setup.md`
+- `references/curated/pingone-st/foundation-overview.md`
+- `references/curated/pingone-st/authentication-fundamentals.md`
+- `references/curated/pingone-st/app-setup.md`
 
 ## Source
 

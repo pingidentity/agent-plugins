@@ -215,18 +215,7 @@ Extracts a username from the client certificate's Subject or SAN field and write
 
 ## Behavioral Nodes
 
-### Login Count Decision node
-Routes based on cumulative login count stored in the user's profile.
-
-- `interval: AT` (exactly N) or `AFTER` (N or more); `amount: N`
-- Outcomes: **True** / **False**
-- Primary use: trigger one-time progressive profiling or onboarding at a specific login number
-
-### Increment Login Count node
-Increments the user's stored login count by 1. Single `outcome`.
-
-- Place post-registration and post-authentication to keep the count accurate
-- Required at registration (`CreateObjectNode(CREATED)` → `IncrementLoginCountNode`) to initialize the count so `LoginCountDecisionNode` triggers on the correct subsequent login
+For login-count-based routing and incrementing the login counter, see `nodes/utility-nodes.md` → Login Count Decision node and Increment Login Count node.
 
 ---
 
@@ -241,6 +230,17 @@ Increments the user's stored login count by 1. Single `outcome`.
 | Persistent cookie SSO | Persistent Cookie Decision(True) → Success / (False) → login journey |
 | First-login onboarding | Login Count Decision(AT=1, True) → onboarding inner journey → Increment Login Count |
 | Certificate-based auth | Certificate Collector → Certificate Validation → Certificate User Extractor → Success |
+
+## Prerequisites
+
+- Social identity providers (Google, Apple, Facebook, etc.) registered in the Social Identity Provider service within the realm.
+- Twilio credentials (account SID, auth token, Verify service SID) configured before using Twilio Verify nodes.
+- SAML2 external IdP metadata imported and the realm's SAML2 service enabled for `SAML2AuthenticationNode`.
+
+## Common variants
+
+- **Enterprise social login:** use OIDC ID Token Validator instead of Social Provider Handler when a native app supplies a pre-obtained ID token.
+- **Device trust for step-up:** combine Device Profile Collector → Device Match → `AuthLevelDecision` to skip MFA for trusted devices.
 
 ## Related references
 

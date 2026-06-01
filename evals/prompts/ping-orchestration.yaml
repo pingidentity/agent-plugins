@@ -43,6 +43,7 @@ trigger_prompts:
     expected_anchors:
       - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/nodes/utility-nodes.md
     expected_tier: curated
+    notes: "Scripted Decision node documentation lives in utility-nodes.md (scripting section). No separate scripted-decision-nodes.md exists."
 
   - id: T-08
     prompt: "I'm building a financial services app and need to add PingOne Protect risk integration to my AIC journey to trigger step-up for high-risk transactions."
@@ -72,18 +73,27 @@ non_trigger_prompts:
   - id: N-02
     prompt: "Where do I start with Ping Identity? We don't know which platform to use."
     expected_skill: ping-quickstart
+    notes: "Platform selection and orientation — not flow design."
 
   - id: N-03
     prompt: "How do I register an OIDC app in my PingOne MT environment?"
     expected_skill: ping-foundation
+    notes: "App registration is a platform configuration task, not orchestration."
 
   - id: N-04
     prompt: "Integrate the Ping iOS SDK with my AIC journeys in my Swift app."
     expected_skill: ping-app-integration
+    notes: "SDK integration into an app is handled by ping-app-integration, not flow design."
 
   - id: N-05
     prompt: "Give my AI agent a Verified Trust identity for accessing our APIs."
     expected_skill: ping-identity-for-ai
+    notes: "AI agent identity and trust — not authentication flow design."
+
+  - id: N-06
+    prompt: "How do I configure PingOne Verify for document proofing without embedding it in a journey?"
+    expected_skill: ping-universal-services
+    notes: "Standalone universal service invocation without flow design — should route to ping-universal-services per the skill's When NOT to use section."
 
 ambiguous_prompts:
   - id: A-01

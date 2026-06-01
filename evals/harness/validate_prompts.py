@@ -45,10 +45,16 @@ def validate_prompt_file(path: Path) -> None:
         )
 
 
+SKIP_VALIDATION = {"composition"}  # composition.yaml uses a different schema (multi-skill)
+
+
 def validate_all(paths: Iterable[Path] | None = None) -> list[Path]:
     paths = list(paths) if paths is not None else sorted(PROMPTS_DIR.glob("*.yaml"))
     failed: list[Path] = []
     for p in paths:
+        if p.stem in SKIP_VALIDATION:
+            print(f"SKIP {p.relative_to(REPO_ROOT)} (composition schema)")
+            continue
         try:
             validate_prompt_file(p)
             print(f"OK  {p.relative_to(REPO_ROOT)}")

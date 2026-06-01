@@ -222,6 +222,17 @@ Increments or sets the session authentication level.
 | Transaction authorization | PingOneAuthorize(permit) → proceed / (PUSH_REQ) → push notification / (deny) → FailureNode |
 | Block locked accounts | AccountActiveDecision(false) → FailureNode / (true) → credential collection |
 
+## Prerequisites
+
+- PingOne Protect service enabled in the PingOne environment.
+- PingOne Authorize license required for `PingOneAuthorizeNode` and policy-driven KBA.
+- Protect SDK initialized before `PingOneProtectEvaluationNode` runs — the Initialize node must precede it in the same session.
+
+## Common variants
+
+- **Registration risk evaluation:** set `flowType: REGISTRATION` on the Evaluation node; use a separate inner journey from the authentication path.
+- **Transaction authorization only (no login risk):** invoke the Protect pattern from within a post-login inner journey triggered by a specific action (e.g., payment, profile change).
+
 ## Related references
 
 - `nodes/mfa-nodes.md`

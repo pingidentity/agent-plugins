@@ -1,23 +1,99 @@
 skill: ping-universal-services
-version: 1
+version: 2
 trigger_prompts:
   - id: T-01
-    prompt: "Add PingOne Verify for KYC identity proofing during my customer registration journey."
-    expected_anchors: []
+    prompt: "Add PingOne Verify for KYC identity proofing during my customer registration journey in AIC."
+    expected_anchors:
+      - references/curated/choosing-the-right-service.md
+      - references/curated/service-invocation-patterns.md
     expected_tier: curated
-    notes: "Phase 1 will populate expected_anchors once curated anchors exist."
+    notes: "PingOne ST / AIC context — Verify for KYC."
 
   - id: T-02
     prompt: "Score risk with PingOne Protect and adapt the authentication journey based on the risk signal."
-    expected_anchors: []
+    expected_anchors:
+      - references/curated/choosing-the-right-service.md
+      - references/curated/service-invocation-patterns.md
     expected_tier: curated
-    notes: "Phase 1 will populate expected_anchors once curated anchors exist."
+    notes: "Protect risk evaluation — platform-ambiguous."
 
   - id: T-03
     prompt: "Issue a verifiable credential to a user who completed identity proofing in my PingOne environment."
-    expected_anchors: []
+    expected_anchors:
+      - references/curated/choosing-the-right-service.md
+      - references/curated/service-invocation-patterns.md
     expected_tier: curated
-    notes: "Phase 1 will populate expected_anchors once curated anchors exist."
+    notes: "PingOne Credentials issuance after Verify."
+
+  - id: T-04
+    prompt: "Add PingOne Protect risk evaluation to my DaVinci login flow and branch on LOW, MEDIUM, HIGH scores."
+    expected_anchors:
+      - references/curated/service-invocation-patterns.md
+      - references/curated/cross-platform-service-usage.md
+    expected_tier: curated
+    notes: "PingOne MT (DaVinci) Protect invocation — explicit platform context."
+
+  - id: T-05
+    prompt: "I'm using PingOne Advanced Identity Cloud. How do I add the PingOne Protect evaluation node to my login journey and handle the Challenge and Deny outcomes?"
+    expected_anchors:
+      - references/curated/service-invocation-patterns.md
+    expected_tier: curated
+    notes: "PingOne ST / AIC Protect journey node."
+
+  - id: T-06
+    prompt: "My users need to complete a document + liveness check (KYC) before they can access their account in my PingOne MT DaVinci flow. How do I add PingOne Verify?"
+    expected_anchors:
+      - references/curated/choosing-the-right-service.md
+      - references/curated/service-invocation-patterns.md
+    expected_tier: curated
+    notes: "PingOne MT (DaVinci) Verify KYC."
+
+  - id: T-07
+    prompt: "How do I issue a PingOne verifiable credential to a user after they complete onboarding?"
+    expected_anchors:
+      - references/curated/service-invocation-patterns.md
+    expected_tier: curated
+    notes: "PingOne Credentials issuance."
+
+  - id: T-08
+    prompt: "Set up PingOne IGA so managers can certify access to sensitive applications on a quarterly basis."
+    expected_anchors:
+      - references/curated/choosing-the-right-service.md
+      - references/curated/universal-services-overview.md
+    expected_tier: curated
+    notes: "PingOne IGA governance / access review."
+
+  - id: T-09
+    prompt: "I want to enforce fine-grained attribute-based access control at my API gateway using PingOne Authorize — how do I connect it to my PingFederate deployment?"
+    expected_anchors:
+      - references/curated/service-invocation-patterns.md
+      - references/curated/cross-platform-service-usage.md
+    expected_tier: curated
+    notes: "PingOne Authorize with PingFederate as enforcement point."
+
+  - id: T-10
+    prompt: "I'm not sure which Ping shared service I need — I want to check whether a user is who they say they are during a high-value transaction. Is that Verify, Protect, or MFA?"
+    expected_anchors:
+      - references/curated/choosing-the-right-service.md
+      - references/curated/universal-services-overview.md
+    expected_tier: curated
+    notes: "Cross-service selection — which service do I need."
+
+  - id: T-11
+    prompt: "How do I invoke the PingOne IGA connector from an AIC journey node to check entitlements during login?"
+    expected_anchors:
+      - references/curated/service-invocation-patterns.md
+      - references/curated/cross-platform-service-usage.md
+    expected_tier: curated
+    notes: "PingOne ST / AIC IGA journey node invocation."
+
+  - id: T-12
+    prompt: "I need to call the PingOne Protect risk evaluation API from a PingFederate custom adapter — how do I integrate it?"
+    expected_anchors:
+      - references/curated/service-invocation-patterns.md
+      - references/curated/cross-platform-service-usage.md
+    expected_tier: curated
+    notes: "Ping Software Suite REST API invocation of Protect."
 
 non_trigger_prompts:
   - id: N-01
@@ -26,11 +102,59 @@ non_trigger_prompts:
     notes: "Admin setup — not a shared service invocation."
 
   - id: N-02
-    prompt: "Build a login journey in AIC with email OTP."
+    prompt: "Build a login journey in AIC with email OTP and a username/password node."
     expected_skill: ping-orchestration
+    notes: "Flow/journey design without any named Universal Service invocation."
+
+  - id: N-03
+    prompt: "How do I configure the PingFederate LDAP data store connection to my Active Directory?"
+    expected_skill: ping-foundation
+    notes: "Platform admin configuration — PingFederate data store setup."
+
+  - id: N-04
+    prompt: "Integrate the PingOne Protect JavaScript SDK into my React single-page application."
+    expected_skill: ping-app-integration
+    notes: "SDK/app integration task — not service orchestration."
+
+  - id: N-05
+    prompt: "Design a DaVinci flow for progressive profiling that collects user attributes across three login sessions."
+    expected_skill: ping-orchestration
+    notes: "DaVinci flow design — no Universal Service invocation."
 
 ambiguous_prompts:
   - id: A-01
     prompt: "I need to add verification to my registration flow."
-    expected_clarification_keywords: ["verify", "protect", "risk", "identity proofing", "mfa", "otp", "service"]
+    expected_clarification_keywords:
+      - verify
+      - protect
+      - risk
+      - identity proofing
+      - mfa
+      - otp
+      - service
     notes: "Verification could mean MFA (orchestration) or KYC (universal-services)."
+
+  - id: A-02
+    prompt: "My users are getting suspicious login attempts — how do I add security to my AIC journey?"
+    expected_clarification_keywords:
+      - protect
+      - risk
+      - mfa
+      - signal
+      - fraud
+      - threat
+      - score
+    notes: "Could be PingOne Protect (universal-services) or just adding MFA (orchestration); needs clarification on whether risk scoring or a second factor is the goal."
+
+  - id: A-03
+    prompt: "A user says they can't verify their identity when they try to log in — is this a Verify issue or an MFA issue?"
+    expected_clarification_keywords:
+      - verify
+      - mfa
+      - document
+      - liveness
+      - otp
+      - push
+      - second factor
+      - identity proofing
+    notes: "Could route to universal-services (Verify) or ping-orchestration (MFA); distinction depends on whether document/liveness check or second authentication factor is involved."

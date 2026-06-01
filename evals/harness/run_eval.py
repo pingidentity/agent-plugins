@@ -189,7 +189,11 @@ def main() -> int:
     all_pass = True
     out: dict[str, dict] = {}
 
+    SKIP_FILES = {"composition"}  # multi-skill format, not a per-skill prompt set
+
     for f in files:
+        if f.stem in SKIP_FILES:
+            continue
         pset = load_prompt_set(f)
         if args.layer == 1:
             r = score_layer_1(pset, adapter)

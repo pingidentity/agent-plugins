@@ -1,17 +1,15 @@
 ---
 name: ping-universal-services
-description: Shared services skill for strategic value layers used across PingOne MT, PingOne ST (AIC), and Ping Software Suite — Protect, Verify, Credentials, IGA, SSO, and Authorize. Use this skill whenever a task involves a Universal Service consumed from multiple platforms rather than administered from one platform alone. Covers service selection guidance, invocation patterns from PingOne or AIC, policy and verification patterns, cross-product service usage, and positioning. Also invoke with /ping-universal-services.
+description: Use this skill whenever a task involves configuring or invoking a Ping Universal Service (Protect, Verify, Credentials, IGA, Authorize, or SSO) at the service or policy level — e.g., setting risk thresholds, configuring a Verify policy, issuing credentials, wiring Authorize. Do NOT use for integrating a service SDK into app code (that is ping-app-integration). Do NOT use for vague "add security" or "prevent suspicious logins" requests without a named service — clarify first. Covers service selection guidance, invocation patterns from DaVinci flows or AIC journeys, policy configuration, and cross-product usage. Also invoke with /ping-universal-services.
 compatibility: Designed for Ping Identity shared services work. References product docs and the Ping Marketplace.
 metadata:
   publisher: Ping Identity
-  version: "0.1.0-scaffold"
+  version: "1.0.0"
 ---
 
 # ping-universal-services
 
-> **Status:** Phase 0 scaffold per strategy doc § 4. Body authored in Phase 1. Routing logic stub only.
-
-Shared strategic services used across PingOne and AIC rather than a single-product admin surface.
+Shared strategic services used across PingOne MT, PingOne ST (AIC), and Ping Software Suite — invoked from flows rather than administered as standalone products. Covers PingOne Protect (risk), PingOne Verify (identity proofing / KYC), PingOne Credentials (verifiable credentials), PingOne IGA (governance), PingOne Authorize (fine-grained authorization), and cross-platform SSO.
 
 ## Invocation
 
@@ -32,7 +30,9 @@ Invoke explicitly with `/ping-universal-services` or by saying "use ping-univers
 - If the task is platform setup or admin: use `ping-foundation`.
 - If the task is flow / journey design (without a specific service invocation): use `ping-orchestration`.
 - If the user is just orienting or choosing a platform: use `ping-quickstart`.
-- If the task is app / SDK integration: use `ping-app-integration`.
+- If the task is integrating a Protect / Verify / Credentials **SDK or library into app code**: use `ping-app-integration` — SDK wiring is app integration, not service configuration.
+- If the user mentions "add security" or "prevent suspicious logins" without naming a specific service, ask a clarifying question — the task may be Protect (risk scoring) or just MFA (orchestration).
+- If the task is generic app / SDK integration without referencing a named Universal Service: use `ping-app-integration`.
 
 ## Multi-skill use cases
 
@@ -45,6 +45,15 @@ A complete identity verification or risk-based flow typically spans:
 | Service invocation (Protect, Verify, etc.) | `ping-universal-services` (this skill) |
 | App integration | `ping-app-integration` |
 
+**End-to-end example — risk-gated identity proofing with Protect + Verify:**
+
+1. Use `ping-foundation` to provision the PingOne environment and license both Protect and Verify.
+2. Use `ping-orchestration` to design the DaVinci flow or AIC journey (login nodes, branching logic).
+3. Use `ping-universal-services` (this skill) to configure the Protect connector/node, set the risk policy thresholds, wire the Verify connector/node, and handle VERIFIED / REQUIRES_REVIEW outcomes.
+4. Use `ping-app-integration` to embed the Protect JavaScript SDK in the user-facing application.
+
+When Protect and Verify are configured here, hand off to `ping-app-integration` for SDK wiring and to `ping-orchestration` for any remaining flow-level branching.
+
 ## Routing — Step 1: What are you trying to do?
 
 | Task | Branch |
@@ -53,21 +62,21 @@ A complete identity verification or risk-based flow typically spans:
 | Identity proofing / document + liveness check | Verify branch |
 | Issue or present verifiable credentials | Credentials branch |
 | Governance, access reviews, provisioning | IGA branch |
-| Fine-grained authorization policies | Authorize / SSO branch |
+| Fine-grained authorization policies | Authorize branch |
+| Cross-application session management / token issuance | SSO branch |
 | "Which service do I need?" | Cross-service selection (curated overview) |
 
-## Step 2: Platform branch
+## Step 2: Load the curated reference
 
-| Platform | Curated reference |
+| Task | Curated reference |
 |---|---|
-| PingOne MT | `references/curated/<service>.md` (Phase 1) |
-| PingOne ST (AIC) | `references/curated/<service>.md` (Phase 1) |
-| Cross-platform | `references/curated/universal-services-overview.md` (Phase 1) |
+| Cross-service selection / orientation | `references/curated/universal-services-overview.md` |
+| Service selection decision (which service do I need?) | `references/curated/choosing-the-right-service.md` |
+| Invocation patterns (DaVinci, AIC, PingFederate) | `references/curated/service-invocation-patterns.md` |
+| Cross-platform usage constraints and service chaining | `references/curated/cross-platform-service-usage.md` |
 
 ## Retrieval escalation
 
-Per strategy doc § 0:
-
 1. Curated anchors (`references/curated/`) — load 1–3 max. Stop if sufficient.
-2. Generated shortlist (`references/generated/<service>/top-N.json`) — Phase 2.
-3. Docs MCP fallback — see `references/runtime/docs-mcp-routing.md`. Only if curated + shortlist insufficient.
+2. Generated shortlists (`references/generated/<service>/`) — not yet populated; skip this tier until CI populates them.
+3. Docs MCP fallback — see `references/runtime/docs-mcp-routing.md`. Only if curated anchors are insufficient.

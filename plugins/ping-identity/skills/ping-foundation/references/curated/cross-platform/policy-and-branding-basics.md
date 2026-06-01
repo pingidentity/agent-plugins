@@ -8,7 +8,7 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: ""
+last_updated: "2026-05-19"
 slug: ""
 ---
 
@@ -65,20 +65,28 @@ Does NOT cover: DaVinci flow design or PingOne ST journey logic — see `ping-or
 
 ## PingOne ST — Theming
 
-- Themes are realm-scoped; one theme can serve as the realm default, others can override per journey
-- Customize: logo, colors, fonts, layout (card or full-page), custom CSS
+For PingOne ST theming configuration, see `references/curated/pingone-st/themes-and-customization.md`.
 
-**Admin surface:** Realm → Theming → Themes → + New Theme
+## Prerequisites
 
-**Assignment levels:**
+Admin access to the target platform (PingOne organization admin for MT; AIC tenant admin for ST).
 
-| Level | Effect |
+## Common variants
+
+| Variant | Note |
 |---|---|
-| Realm default | All journeys in the realm use this theme unless overridden |
-| Journey override | Overrides realm default for all pages shown during that journey |
+| Workforce vs. CIAM | Workforce MFA policy typically uses TOTP/push; CIAM policies often add risk-based conditions and progressive enrollment |
+| Multi-application policies | PingOne MT supports per-application policy override; PingOne ST uses per-journey auth assignment |
+| Layered branding | PingOne MT supports global branding overridden per environment; PingOne ST supports realm and journey-level theme override |
 
 ## Related references
 
-- `foundation-overview.md`
-- `tenant-and-environment-setup.md`
-- `core-admin-patterns.md`
+- `references/curated/cross-platform/foundation-overview.md`
+- `references/curated/cross-platform/tenant-and-environment-setup.md`
+- `references/curated/cross-platform/core-admin-patterns.md`
+
+## Source
+
+[PingOne sign-on policies](https://docs.pingidentity.com/pingone/latest/platformconsole/p1_c_sign_on_policies.html)
+[PingOne branding](https://docs.pingidentity.com/pingone/latest/platformconsole/p1_c_branding.html)
+[PingOne ST authentication journeys](https://docs.pingidentity.com/pingoneaic/latest/am-journey-guide/journey-overview.html)

@@ -95,9 +95,24 @@ The `true`/`false` outcomes on the PageNode come from the embedded `OneTimePassw
 
 ---
 
+## Prerequisites
+
+- PingOne AIC or PingAM tenant with at least one journey configured.
+- Journey creation via the admin console or API with a valid realm.
+
+## Common variants
+
+- **AIC:** same node model; add ESV-backed scripts and hosted-page theme configuration.
+- **PingAM:** same node model; realm config and redirect trust configuration required separately.
+
 ## Related references
 
 - `nodes/utility-nodes.md` — PageNode configuration details
 - `nodes/mfa-nodes.md` — OTP Email Sender, OTP Collector Decision
 - `nodes/basic-auth-nodes.md` — ValidatedUsernameNode, ValidatedPasswordNode
 - `nodes/identity-management-nodes.md` — AttributeCollectorNode
+
+## Source
+
+[Authentication node reference](https://docs.pingidentity.com/auth-node-ref/latest/overview.html)
+[Page node](https://docs.pingidentity.com/auth-node-ref/latest/page.html)

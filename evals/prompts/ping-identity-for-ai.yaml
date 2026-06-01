@@ -3,33 +3,117 @@ version: 1
 trigger_prompts:
   - id: T-01
     prompt: "Give my AI agent a verified identity so it can securely access our internal APIs using Ping."
-    expected_anchors: []
+    expected_anchors:
+      - references/curated/agent-security-patterns.md
     expected_tier: curated
-    notes: "Phase 1 will populate expected_anchors once curated anchors exist."
+    notes: "Primary anchor is agent-security-patterns (M2M auth, client credentials)."
 
   - id: T-02
     prompt: "How do I apply Verified Trust signals in my MCP server to authenticate requests from AI agents?"
-    expected_anchors: []
+    expected_anchors:
+      - references/curated/verified-trust-overview.md
     expected_tier: curated
-    notes: "Phase 1 will populate expected_anchors once curated anchors exist."
 
   - id: T-03
     prompt: "Design a workforce helpdesk AI authentication pattern using Ping Identity for our internal support bot."
-    expected_anchors: []
+    expected_anchors:
+      - references/curated/workforce-helpdesk-ai.md
     expected_tier: curated
-    notes: "Phase 1 will populate expected_anchors once curated anchors exist."
+
+  - id: T-04
+    prompt: "My AI agent needs to call PingOne APIs using the client credentials flow. How do I set that up?"
+    expected_anchors:
+      - references/curated/agent-security-patterns.md
+    expected_tier: curated
+    notes: "Client credentials for AI agent — direct hit on agent-security-patterns."
+
+  - id: T-05
+    prompt: "What scopes should I assign to my autonomous AI agent's OAuth client registration? I want minimal privilege."
+    expected_anchors:
+      - references/curated/agent-security-patterns.md
+    expected_tier: curated
+    notes: "Token scoping strategy — direct hit on agent-security-patterns Pattern 2."
+
+  - id: T-06
+    prompt: "How do I issue a delegated token so our helpdesk AI bot can reset passwords on behalf of authenticated employees?"
+    expected_anchors:
+      - references/curated/workforce-helpdesk-ai.md
+    expected_tier: curated
+    notes: "Delegated token for workforce helpdesk AI."
+
+  - id: T-07
+    prompt: "We want to issue a verifiable credential to an AI agent that includes the outcome of PingOne Verify identity proofing."
+    expected_anchors:
+      - references/curated/verified-trust-overview.md
+    expected_tier: curated
+    notes: "Verified Trust with identity proofing outcome as VC input."
+
+  - id: T-08
+    prompt: "One of our AI agents has been compromised. How do I revoke its access immediately and ensure our audit logs capture what it did?"
+    expected_anchors:
+      - references/curated/agent-security-patterns.md
+    expected_tier: curated
+    notes: "Revocation and audit trail for AI agents."
+
+  - id: T-09
+    prompt: "We are building an LLM-fronted customer portal. How do we authenticate end users of this AI-powered application using PingOne?"
+    expected_anchors:
+      - references/curated/identity-for-ai-overview.md
+      - references/curated/workforce-helpdesk-ai.md
+    expected_tier: curated
+    notes: "AI app authentication for an LLM-fronted application."
+
+  - id: T-10
+    prompt: "What is the recommended identity onboarding process for registering a new AI agent with Ping Identity so it can start calling protected APIs?"
+    expected_anchors:
+      - references/curated/identity-for-ai-overview.md
+      - references/curated/agent-security-patterns.md
+    expected_tier: curated
+    notes: "Identity proofing / onboarding for AI agent — covers both overview and agent security."
 
 non_trigger_prompts:
   - id: N-01
     prompt: "Set up PingOne MT and register an OIDC application for my web portal."
     expected_skill: ping-foundation
+    notes: "Standard app registration — no AI context. Belongs in ping-foundation."
 
   - id: N-02
     prompt: "Build a user registration journey in AIC with email OTP and progressive profiling."
     expected_skill: ping-orchestration
+    notes: "Journey design for human users — no AI context. Belongs in ping-orchestration."
+
+  - id: N-03
+    prompt: "How do I integrate the PingOne SDK into my React Native app so users can log in with their PingOne credentials?"
+    expected_skill: ping-app-integration
+    notes: "React SDK integration for human users — no AI context. Belongs in ping-app-integration."
+
+  - id: N-04
+    prompt: "Configure a DaVinci flow that adds MFA to the login journey for our B2C customer portal."
+    expected_skill: ping-orchestration
+    notes: "DaVinci flow for user MFA — not AI-specific. Belongs in ping-orchestration."
+
+  - id: N-05
+    prompt: "What is the difference between PingOne MT and PingOne ST and which one should I choose for my new project?"
+    expected_skill: ping-quickstart
+    notes: "Platform selection and orientation. Belongs in ping-quickstart."
+
+  - id: N-06
+    prompt: "Configure a PingOne Protect risk policy and set a risk threshold for adaptive authentication on our login journey."
+    expected_skill: ping-universal-services
+    notes: "PingOne Protect as a standalone risk service — no AI agent context. Belongs in ping-universal-services, not ping-identity-for-ai."
 
 ambiguous_prompts:
   - id: A-01
     prompt: "I need to authenticate an agent."
     expected_clarification_keywords: ["ai", "human", "user", "machine", "api", "bot", "verified trust", "oidc"]
     notes: "Agent could mean an AI agent (identity-for-ai) or a Ping agent/service (foundation)."
+
+  - id: A-02
+    prompt: "I need to secure API access for an automated process that runs on a schedule and calls our internal services."
+    expected_clarification_keywords: ["ai", "agent", "batch", "machine", "llm", "autonomous", "client credentials", "job"]
+    notes: "Could be an AI agent (identity-for-ai / agent-security-patterns) or a traditional batch job (foundation / standard OAuth). Clarify whether the process is AI-driven or a scripted automation."
+
+  - id: A-03
+    prompt: "How do I add trust to my application so that downstream services can rely on the claims it presents?"
+    expected_clarification_keywords: ["verified trust", "oidc", "jwt", "signed assertion", "ai", "verifiable credential", "standard oidc"]
+    notes: "Could be Verified Trust / verifiable credentials (identity-for-ai) or standard OIDC token-based trust (foundation). Clarify whether the application is an AI agent presenting verifiable credentials or a standard app consuming OIDC tokens."

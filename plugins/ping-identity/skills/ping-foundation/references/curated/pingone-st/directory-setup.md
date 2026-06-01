@@ -20,7 +20,7 @@ Identity store options, schema configuration, and provisioning patterns for Ping
 ## Scope
 
 **Covers:** PingDS identity store, external LDAP/AD connection, managed objects and schema, provisioning and reconciliation.
-**Does NOT cover:** Authentication journey configuration — see `authentication-fundamentals.md`. Deep provisioning flow design — see `ping-orchestration`.
+**Does NOT cover:** Authentication journey configuration — see `references/curated/pingone-st/authentication-fundamentals.md`. Deep provisioning flow design — see `ping-orchestration`.
 
 ---
 
@@ -147,9 +147,9 @@ PingIDM uses **mappings** to move identity data between systems.
 
 ## Related references
 
-- `foundation-overview.md`
-- `authentication-fundamentals.md`
-- `app-setup.md`
+- `references/curated/pingone-st/foundation-overview.md`
+- `references/curated/pingone-st/authentication-fundamentals.md`
+- `references/curated/pingone-st/app-setup.md`
 
 ## Source
 

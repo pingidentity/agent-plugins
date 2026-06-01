@@ -8,7 +8,7 @@ use_cases: ["workforce", "customer"]
 doc_type: concept
 status: current
 canonical: true
-last_updated: ""
+last_updated: "2026-05-19"
 slug: ""
 ---
 
@@ -55,8 +55,24 @@ Does NOT cover: flow design (see `ping-orchestration`) or app integration code (
 4. Define authentication policy / journey / adapter chain
 5. Test sign-in
 
+## Prerequisites
+
+Valid for any administrator with access to the relevant Ping Identity platform (PingOne organization account, PingOne ST subscription, or on-premises server access).
+
+## Common variants
+
+| Variant | Note |
+|---|---|
+| PingOne MT | Multi-tenant cloud; environments managed via apps.pingone.com; no infrastructure to operate |
+| PingOne ST | Single-tenant SaaS; customer-specific URL; deeper customization, PingAM/IDM/DS stack |
+| Ping Software Suite | Self-managed on-prem or IaaS; full infrastructure responsibility; use server profiles for config-as-code |
+
 ## Related references
 
-- `tenant-and-environment-setup.md`
-- `policy-and-branding-basics.md`
-- `core-admin-patterns.md`
+- `references/curated/cross-platform/tenant-and-environment-setup.md`
+- `references/curated/cross-platform/policy-and-branding-basics.md`
+- `references/curated/cross-platform/core-admin-patterns.md`
+
+## Source
+
+[Ping Identity Documentation](https://docs.pingidentity.com/)

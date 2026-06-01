@@ -304,6 +304,18 @@ The `ScriptedDecisionNode` sets `invalidCodeErrorMessage` in shared state. The P
 | Combined MFA enrollment | Combined MFA Registration → Recovery Code Display → Success |
 | Recovery code fallback (OATH) | OathTokenVerifierNode(recoveryCodeOutcome) → PageNode(RecoveryCodeCollectorDecisionNode[OATH]) → (True) Success |
 
+## Prerequisites
+
+- FIDO2/WebAuthn registration and authentication require HTTPS and a configured Relying Party.
+- OATH/TOTP requires the ForgeRock Authenticator or a compatible TOTP app on the user's device.
+- Push authentication requires the ForgeRock Authenticator app and a configured push service (APNs/FCM).
+- Twilio SMS/voice OTP requires a Twilio account SID, auth token, and Verify service SID.
+
+## Common variants
+
+- **FIDO2 enterprise deployment:** set `userVerificationRequirement: REQUIRED` and `authenticatorAttachment: CROSS_PLATFORM` for security key policies.
+- **SMS-only fallback:** use `OTPSMSSenderNode` + `OTPCollectorDecisionNode` when device-based MFA is not available.
+
 ## Related references
 
 - `nodes/basic-auth-nodes.md`

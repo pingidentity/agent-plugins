@@ -145,27 +145,7 @@ Extracts a value from the current active session into shared state, enabling aut
 
 ## Attribute-Based Branching
 
-### Attribute Present Decision node
-Checks whether a specific attribute exists in the user's profile or shared state.
-
-- Outcomes: **True** (attribute present) / **False** (attribute absent)
-- `presentAttribute: password` — detects whether a user has a password set; returns `False` for passwordless users, enabling conditional routing to email-gated verification instead of current-password challenge
-
-### Attribute Value Decision node
-Evaluates whether a specific attribute in the user's profile matches a configured comparison operation.
-
-**Configuration:**
-
-| Field | Notes |
-|---|---|
-| `comparisonOperation` | `PRESENT` — checks attribute exists; `EQUALS` — checks attribute value equals `comparisonValue` |
-| `comparisonAttribute` | The object attribute to evaluate (e.g., `emailVerified`) |
-| `comparisonValue` | Value to compare against when using `EQUALS` (e.g., `true`) |
-| `identityAttribute` | The IDM attribute used to look up the user object |
-
-- Outcomes: **True** / **False**
-- `PRESENT` does not require `comparisonValue` — it is a null/existence check only
-- Common use: "Is Email Verified?" gate — `comparisonAttribute: emailVerified`, `comparisonOperation: EQUALS`, `comparisonValue: true`; `False` triggers email verification inner journey
+See `nodes/identity-management-nodes.md` → Attribute Present Decision node and Attribute Value Decision node for attribute-based branching.
 
 ---
 
@@ -190,11 +170,22 @@ Ends the journey with an authentication failure. No session created. Use at the 
 | Passwordless user branch | AttributePresentDecisionNode(`password` = False) → EmailSuspendNode / (True) → DataStoreDecisionNode |
 | Email verification gate | AttributeValueDecisionNode(False) → email verification inner journey → (true) proceed |
 
+## Prerequisites
+
+- Identity store (IDM managed object schema) configured and accessible.
+- Realm data store or LDAP/AD connector configured for credential validation.
+
+## Common variants
+
+- **LDAP-backed realm:** use `LDAPDecisionNode` instead of `DataStoreDecisionNode`; LDAP returns additional password-policy outcomes.
+- **Active Directory passthrough:** use `ADDecisionNode` for AD-specific NTLM/Kerberos validation.
+
 ## Related references
 
 - `nodes/mfa-nodes.md`
 - `nodes/utility-nodes.md`
 - `nodes/risk-management-nodes.md`
+- `nodes/identity-management-nodes.md`
 - `journey-use-cases/password-reset-and-update.md`
 
 ## Source

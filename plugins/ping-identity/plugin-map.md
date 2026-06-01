@@ -14,21 +14,21 @@ Index of included skills, their purpose, and when to use each. Use this file to 
 **Use when:** The task is setup, configuration, or administration of a platform — tenant/environment creation, app registration, directory setup, authentication policy, branding.
 **Not for:** Designing flows or journeys (→ ping-orchestration); invoking shared services (→ ping-universal-services); app/SDK code integration (→ ping-app-integration).
 
-### ping-orchestration *(planned)*
+### ping-orchestration
 **Path:** `skills/ping-orchestration/`
 **Use when:** The task is designing or troubleshooting a DaVinci flow, PingOne ST journey, or PingAM authentication tree.
 
-### ping-universal-services *(planned)*
+### ping-universal-services
 **Path:** `skills/ping-universal-services/`
-**Use when:** The task involves invoking a Ping Universal Service: Protect, Verify, Credentials, IGA, Neo, or Authorize — across PingOne MT or PingOne ST.
+**Use when:** The task involves invoking a Ping Universal Service: PingOne Protect (risk scoring), PingOne Verify (identity verification/KYC), PingOne Credentials, IGA, Neo, or Authorize — across PingOne MT or PingOne ST. Also use for cross-platform shared service orchestration and service invocation patterns.
 
-### ping-app-integration *(planned)*
+### ping-app-integration
 **Path:** `skills/ping-app-integration/`
-**Use when:** The task is integrating Ping into an application — Android SDK, iOS SDK, React SDK, DaVinci SDK, browser flows, or on-prem app-side configuration.
+**Use when:** The task is integrating Ping into an application — Android SDK, iOS SDK, React SDK, DaVinci SDK, browser flows, or on-prem app-side configuration. Covers mobile and web SDK setup, OIDC/OAuth wiring, and integration troubleshooting.
 
-### ping-identity-for-ai *(planned)*
+### ping-identity-for-ai
 **Path:** `skills/ping-identity-for-ai/`
-**Use when:** The task involves securing AI agents, Verified Trust, or identity patterns for AI-driven applications.
+**Use when:** The task involves securing AI agents with Ping Identity, implementing Verified Trust, building workforce helpdesk AI (password reset, account unlock), or applying identity security patterns to AI-driven applications and agentic workflows.
 
 ## Selection rule
 

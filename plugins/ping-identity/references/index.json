@@ -1,13 +1,13 @@
 {
   "plugin": "ping-identity",
   "description": "Local reference index for plugin-only installs. Lists all curated anchors and generated shortlists by skill and platform branch.",
-  "last_updated": null,
+  "last_updated": "2026-06-01",
   "skills": {
     "ping-quickstart": {
-      "references": [
-        "skills/ping-quickstart/references/getting-started-overview.md",
-        "skills/ping-quickstart/references/choose-the-right-ping-platform.md",
-        "skills/ping-quickstart/references/common-starting-patterns.md"
+      "curated": [
+        "skills/ping-quickstart/references/curated/getting-started-overview.md",
+        "skills/ping-quickstart/references/curated/choose-the-right-ping-platform.md",
+        "skills/ping-quickstart/references/curated/common-starting-patterns.md"
       ]
     },
     "ping-foundation": {
@@ -38,8 +38,15 @@
         "skills/ping-orchestration/references/curated/pingone-st/nodes/identity-management-nodes.md",
         "skills/ping-orchestration/references/curated/pingone-st/nodes/utility-nodes.md",
         "skills/ping-orchestration/references/curated/pingone-st/nodes/federation-contextual-nodes.md",
-        "skills/ping-orchestration/references/curated/pingone-st/scripted-decision-nodes.md",
-        "skills/ping-orchestration/references/curated/pingone-st/inner-journeys.md",
+        "skills/ping-orchestration/references/curated/pingone-st/routing-index.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/passwordless-mfa-registration.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/social-and-local-registration-authentication.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/password-reset-and-update.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/financial-services-step-up.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/progressive-profiling.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/pingone-protect-risk-integration.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/mfa-authentication-multi-method.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/account-recovery-and-username-reminder.md",
         "skills/ping-orchestration/references/curated/pingone-mt/davinci-overview.md",
         "skills/ping-orchestration/references/curated/pingone-mt/davinci-flow-patterns.md"
       ],
@@ -51,18 +58,41 @@
       }
     },
     "ping-universal-services": {
-      "note": "Planned. Not yet built.",
-      "curated": [],
-      "generated": {}
+      "curated": [
+        "skills/ping-universal-services/references/curated/universal-services-overview.md",
+        "skills/ping-universal-services/references/curated/choosing-the-right-service.md",
+        "skills/ping-universal-services/references/curated/service-invocation-patterns.md",
+        "skills/ping-universal-services/references/curated/cross-platform-service-usage.md"
+      ],
+      "generated": {
+        "protect": "skills/ping-universal-services/references/generated/protect/.gitkeep",
+        "verify": "skills/ping-universal-services/references/generated/verify/.gitkeep",
+        "credentials": "skills/ping-universal-services/references/generated/credentials/.gitkeep",
+        "sso": "skills/ping-universal-services/references/generated/sso/.gitkeep",
+        "iga": "skills/ping-universal-services/references/generated/iga/.gitkeep"
+      }
     },
     "ping-app-integration": {
-      "note": "Planned. Not yet built.",
-      "curated": [],
-      "generated": {}
+      "curated": [
+        "skills/ping-app-integration/references/curated/app-integration-overview.md",
+        "skills/ping-app-integration/references/curated/mobile-integration-basics.md",
+        "skills/ping-app-integration/references/curated/web-integration-basics.md",
+        "skills/ping-app-integration/references/curated/integration-troubleshooting-basics.md"
+      ],
+      "generated": {
+        "mobile": "skills/ping-app-integration/references/generated/mobile/.gitkeep",
+        "web": "skills/ping-app-integration/references/generated/web/.gitkeep",
+        "orchestration-sdks": "skills/ping-app-integration/references/generated/orchestration-sdks/.gitkeep",
+        "on-prem-integration": "skills/ping-app-integration/references/generated/on-prem-integration/.gitkeep"
+      }
     },
     "ping-identity-for-ai": {
-      "note": "Planned. Not yet built.",
-      "curated": [],
+      "curated": [
+        "skills/ping-identity-for-ai/references/curated/identity-for-ai-overview.md",
+        "skills/ping-identity-for-ai/references/curated/verified-trust-overview.md",
+        "skills/ping-identity-for-ai/references/curated/agent-security-patterns.md",
+        "skills/ping-identity-for-ai/references/curated/workforce-helpdesk-ai.md"
+      ],
       "generated": {}
     }
   }

@@ -20,7 +20,7 @@ Register OIDC, OAuth 2.0, and SAML applications in PingOne ST so they can authen
 ## Scope
 
 **Covers:** OIDC client registration, OAuth 2.0 client setup, SAML SP/IdP registration, key configuration fields.
-**Does NOT cover:** Journey design — see `authentication-fundamentals.md`. Provisioning to external systems — see `directory-setup.md`.
+**Does NOT cover:** Journey design — see `references/curated/pingone-st/authentication-fundamentals.md`. Provisioning to external systems — see `references/curated/pingone-st/directory-setup.md`.
 
 ---
 
@@ -105,8 +105,8 @@ Configure provisioning after basic app setup is complete and the identity store 
 ## Prerequisites
 
 - PingOne ST tenant with admin access
-- Realm configured with at least one identity store (see `directory-setup.md`)
-- At least one authentication journey ready or in progress (see `authentication-fundamentals.md`)
+- Realm configured with at least one identity store (see `references/curated/pingone-st/directory-setup.md`)
+- At least one authentication journey ready or in progress (see `references/curated/pingone-st/authentication-fundamentals.md`)
 
 ## Common variants
 
@@ -118,9 +118,9 @@ Configure provisioning after basic app setup is complete and the identity store 
 
 ## Related references
 
-- `authentication-fundamentals.md`
-- `foundation-overview.md`
-- `directory-setup.md`
+- `references/curated/pingone-st/authentication-fundamentals.md`
+- `references/curated/pingone-st/foundation-overview.md`
+- `references/curated/pingone-st/directory-setup.md`
 
 ## Source
 

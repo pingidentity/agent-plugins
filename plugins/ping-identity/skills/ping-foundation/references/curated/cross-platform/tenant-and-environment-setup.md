@@ -8,7 +8,7 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: ""
+last_updated: "2026-05-19"
 slug: ""
 ---
 
@@ -19,7 +19,7 @@ Provisioning requirements and key configuration decisions for a new PingOne envi
 ## Scope
 
 Covers: initial provisioning and configuration of environments/tenants.
-Does NOT cover: on-prem server installation (see `core-admin-patterns.md`).
+Does NOT cover: on-prem server installation (see `references/curated/cross-platform/core-admin-patterns.md`).
 
 ## PingOne MT — New Environment
 
@@ -38,8 +38,6 @@ Does NOT cover: on-prem server installation (see `core-admin-patterns.md`).
 | Custom domain | Settings → Custom Domains |
 | Notification sender (email/SMS) | Settings → Notifications |
 | Default sign-on policy | Policies → Sign-on |
-
-**Prerequisites:** PingOne organization account with admin access.
 
 ---
 
@@ -66,12 +64,23 @@ Does NOT cover: on-prem server installation (see `core-admin-patterns.md`).
 - Enable social providers (Google, Apple, etc.)
 - Configure federation (SAML SP or OIDC RP)
 
-**Prerequisites:** PingOne ST subscription; tenant URL and initial superadmin credentials from onboarding email.
+## Prerequisites
+
+- **PingOne MT:** PingOne organization account with admin access.
+- **PingOne ST:** PingOne ST subscription; tenant URL and initial superadmin credentials from onboarding email.
+
+## Common variants
+
+| Variant | Note |
+|---|---|
+| Multi-region HA tenants | PingOne ST production tenants support multi-region high availability; configured during Ping onboarding |
+| Sandbox-to-production promotion | Export configuration from dev/staging using frodo-cli or admin API; import to production tenant |
+| Environment-per-pipeline | PingOne MT supports multiple environments (dev, staging, prod) within one organization; use environment types to control SLA |
 
 ## Related references
 
-- `foundation-overview.md`
-- `policy-and-branding-basics.md`
+- `references/curated/cross-platform/foundation-overview.md`
+- `references/curated/cross-platform/policy-and-branding-basics.md`
 
 ## Source
 

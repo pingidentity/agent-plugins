@@ -282,6 +282,15 @@ If the request is high level, stay at the level of design patterns, user-visible
 
 ---
 
+## Prerequisites
+
+- PingOne AIC or PingAM tenant with at least one realm and journey capability enabled.
+
+## Common variants
+
+- **CIAM design defaults:** anti-enumeration required on all recovery/reset flows; progressive consent collection; social login with local account fallback.
+- **Workforce design defaults:** step-up authentication tied to resource sensitivity; delegated admin separation; stricter session lifetime enforcement.
+
 ## Related references
 
 - `nodes/basic-auth-nodes.md`
@@ -290,8 +299,6 @@ If the request is high level, stay at the level of design patterns, user-visible
 - `nodes/identity-management-nodes.md`
 - `nodes/utility-nodes.md`
 - `nodes/federation-contextual-nodes.md`
-- `scripted-decision-nodes.md`
-- `inner-journeys.md`
 
 ## Source
 

@@ -8,7 +8,7 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: ""
+last_updated: "2026-05-19"
 slug: ""
 ---
 
@@ -92,7 +92,26 @@ All platforms expose REST APIs for automation:
 | PingAccess | System → Backup → Export Configuration |
 | PingDirectory | `backup` and `restore` CLI tools |
 
+## Prerequisites
+
+Admin access to the relevant platform: PingOne organization admin, PingOne ST superadmin, or server administrator credentials for on-premises products.
+
+## Common variants
+
+| Variant | Note |
+|---|---|
+| API-only configuration | Prefer the REST API for all platforms; use the admin UI only for initial bootstrapping or when an API endpoint is not available |
+| Console-driven configuration | Use for one-off tasks, diagnostics, or platform features not yet exposed via API |
+| Config-as-code (Ping Software Suite) | Use server profiles (Git-backed) for PingFederate and PingAccess; use frodo-cli for PingOne MT/ST exports |
+
 ## Related references
 
-- `foundation-overview.md`
-- `tenant-and-environment-setup.md`
+- `references/curated/cross-platform/foundation-overview.md`
+- `references/curated/cross-platform/tenant-and-environment-setup.md`
+
+## Source
+
+[PingOne API Reference](https://apidocs.pingidentity.com/pingone/platform/v1/api/)
+[PingFederate Admin API](https://docs.pingidentity.com/pingfederate/latest/admin-api-reference/pf-admin-api-reference.html)
+[PingAccess Admin API](https://docs.pingidentity.com/pingaccess/latest/pa-admin-api/pa-admin-api.html)
+[PingDirectory Admin Guide](https://docs.pingidentity.com/pingdirectory/latest/pd-directory-server-administration-guide/pd-ds-admin-overview.html)

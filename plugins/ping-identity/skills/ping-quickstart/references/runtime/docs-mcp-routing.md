@@ -27,12 +27,7 @@ When Docs MCP is required, query it with:
 
 Retrieve specific sections, not full page dumps.
 
-## Helix as a runtime path
-
-Production-bound execution runs through Helix conversation APIs. The decision rule for sandbox-vs-production lives in `rules/runtime-selection.md`. Helix is **not** a v1 skill; it is a runtime tier referenced from this file.
-
 ## Related
 
-- `rules/runtime-selection.md`
 - `references/curated/` — tier 1
 - `references/generated/` — tier 2
