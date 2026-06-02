@@ -9,8 +9,8 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-05-19"
-slug: "https://docs.pingidentity.com/pingoneaic/latest/getting_started/getting_started-identity_store.html"
+last_updated: "2026-06-02"
+slug: "https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-identity_store.html"
 ---
 
 # PingOne ST — Directory Setup (User Management)
@@ -153,7 +153,7 @@ PingIDM uses **mappings** to move identity data between systems.
 
 ## Source
 
-[Identity store setup — PingOne ST](https://docs.pingidentity.com/pingoneaic/latest/getting_started/getting_started-identity_store.html)
-[Managed objects — PingIDM](https://docs.pingidentity.com/pingoneaic/latest/idm-guide/managed-objects.html)
-[LDAP connector configuration](https://docs.pingidentity.com/pingoneaic/latest/idm-connector-reference/ldap-connector.html)
-[Provisioning and reconciliation](https://docs.pingidentity.com/pingoneaic/latest/idm-guide/provisioning-overview.html)
+[Identity store setup — PingOne ST](https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-identity_store.html)
+[Managed objects — PingIDM](https://docs.pingidentity.com/pingoneaic/idm-guide/managed-objects.html)
+[LDAP connector configuration](https://docs.pingidentity.com/pingoneaic/idm-connector-reference/ldap-connector.html)
+[Provisioning and reconciliation](https://docs.pingidentity.com/pingoneaic/idm-guide/provisioning-overview.html)

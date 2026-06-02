@@ -8,7 +8,8 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-05-29"
+last_updated: "2026-06-01"
+slug: "https://docs.pingidentity.com/pingoneaic/latest/planning/plan-identity-cloud.html"
 ---
 
 # Common Starting Patterns
@@ -121,10 +122,26 @@ Known gotchas:
 
 ## Pattern 5: Migrate from ForgeRock / legacy deployment
 
-**Platform:** PingOne ST
-**Skill:** `ping-foundation` → `pingone-st`
+**Platform:** PingOne ST (server/SDK migration), PingOne MT (PingFederate migration)
+**Skill:** `ping-foundation` → `pingone-st`; `ping-orchestration` for SDK migration
 
-Required configuration fields:
+Three migration sub-paths apply; choose the one that matches your situation:
+
+**Path A — SDK code migration** (mobile/web app code only):
+Packages are renamed; ForgeRock SDK EOL is 15 April 2028. Platform constraints: iOS requires iOS 16+ and Swift 6.0+; Android shifts to Kotlin Coroutines (`FRSession` → `SuccessNode` + Journey API); JavaScript shifts from `@forgerock/javascript-sdk` to `@forgerock/journey-client` and `@forgerock/oidc-client` with async init and instance-based (not static) API.
+AI-assisted migration guides are available on GitHub: `ForgeRock/ping-android-sdk`, `ForgeRock/ping-ios-sdk`, and `ForgeRock/ping-javascript-sdk` — each contains a `MIGRATION.md`.
+Reference: https://developer.pingidentity.com/orchsdks/journey/migration.html
+
+**Path B — Server/SaaS migration (ForgeRock AM/IDM → AIC)**:
+Uses a 4-phase S2S model: Assess & Plan → Transform → Adopt & Refine → Enable.
+PingGateway key-sharing route allows an in-place FQDN swap with constraints: tenant must have ≤2 realms, signing/encryption keys must be exportable, and there must be a single FQDN entry point.
+Reference: https://docs.pingidentity.com/pingoneaic/latest/planning/plan-identity-cloud.html
+
+**Path C — PingFederate → PingOne MT (Cloud Acceleration Toolset)**:
+Requires PingFederate 10.3+, PingOne with SSO + DaVinci enabled, and a Worker App with Environment Admin role. Applications fall into three categories: Migratable (direct lift), Change Required (config adjustments needed), and Reimagine (rearchitect for PingOne). The toolset is accessed in the PingOne console under Migration > Cloud Migration.
+Reference: https://docs.pingidentity.com/pingone/migration-tools/p1_cloud_acceleration_toolset.html
+
+Required configuration fields (Path B — server migration):
 | Field | Value guidance |
 |---|---|
 | Target realm | `alpha` or `bravo` depending on use case |
@@ -137,6 +154,13 @@ Known gotchas:
 - Custom authentication nodes (scripted or Java) must be rewritten as PingOne ST custom nodes; they do not import directly.
 - LDIF imports retain password hashes only if the hash algorithm is supported by PingDirectory; bcrypt hashes from ForgeRock IDM may require re-hash on first login.
 - Users will need to re-register MFA devices unless the TOTP seed is migrated manually via the `totpSecretKey` attribute.
+- The old Helix CMS solution-guide migration URLs are permanently 404 with no redirect. Canonical SDK migration entry point: `developer.pingidentity.com/orchsdks/journey/migration.html`.
+
+---
+
+## Note: Migrating from Okta or Auth0
+
+No public migration guide or toolset currently exists on Ping's docs for Okta or Auth0 migration. Direct the customer to their Account Executive or open a support case. Partner tooling is available but not documented on official Ping docs.
 
 ---
 
@@ -193,4 +217,9 @@ Known gotchas:
 
 ## Source
 
-[Ping Identity Solution Guides](https://docs.pingidentity.com/solution-guides/)
+- Pattern 1 (Employee SSO): https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started.html
+- Pattern 2 (CIAM): https://docs.pingidentity.com/pingoneaic/latest/getting-started/overview.html
+- Pattern 3 (MFA): https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started.html
+- Pattern 4 (API protection): https://docs.pingidentity.com/pingfederate/13.0/pf_pf_landing_page.html
+- Pattern 5 (Migration): https://developer.pingidentity.com/orchsdks/journey/migration.html; https://docs.pingidentity.com/pingoneaic/latest/planning/plan-identity-cloud.html; https://docs.pingidentity.com/pingone/migration-tools/p1_cloud_acceleration_toolset.html
+- Pattern 6 (Verify): https://docs.pingidentity.com/solution-guides/htg_overview.html

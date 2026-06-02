@@ -9,8 +9,8 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-05-19"
-slug: "https://docs.pingidentity.com/pingoneaic/latest/getting_started/getting_started-create_oauth2_client.html"
+last_updated: "2026-06-02"
+slug: "https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-create_oauth2_client.html"
 ---
 
 # PingOne ST — App Setup
@@ -102,6 +102,31 @@ Configure provisioning after basic app setup is complete and the identity store 
 
 ---
 
+---
+
+## Token and session configuration
+
+| Setting | Applies to | Constraint |
+|---|---|---|
+| Access token lifetime | OIDC clients | Configured per client; default varies by realm; shorter is better for API security |
+| Refresh token rotation | OIDC clients with offline_access | Rotating refresh tokens reduce replay risk; configure grace period to avoid revocation on concurrent use |
+| ID token claims | OIDC clients | Claims populated from mapped identity store attributes; map attributes under Application → Claims |
+| PKCE enforcement | Public clients | Required for SPA and native apps; enforced by setting Client Type = Public |
+| Token blacklisting | All OIDC clients | PingAM supports stateful access tokens with per-token revocation; enable via OAuth 2.0 provider settings |
+
+---
+
+## Common gotchas
+
+| Gotcha | Symptom | Fix |
+|---|---|---|
+| Client registered in wrong realm | `invalid_client` error at token endpoint; client not found | Confirm the realm in the OIDC discovery endpoint matches the realm where the client was created |
+| Redirect URI mismatch | `redirect_uri mismatch` error from PingAM | Register the exact URI; trailing slash and path case are significant |
+| Journey not activated | Login flow returns error or no response | Activate the journey from the Journey editor before testing |
+| Application using realm default journey | Different login experience than expected | Override the journey at Application settings → Authentication → Journey |
+| SAML SP metadata imported but entity ID mismatch | SAML assertion delivery fails | Verify entity ID in the imported metadata matches what the SP will send in `AuthnRequest` |
+| Token endpoint authentication method mismatch | `invalid_client` on token exchange | Align client's configured auth method with what the SDK or HTTP client sends |
+
 ## Prerequisites
 
 - PingOne ST tenant with admin access
@@ -124,6 +149,6 @@ Configure provisioning after basic app setup is complete and the identity store 
 
 ## Source
 
-[Register OAuth 2.0 clients — PingOne ST](https://docs.pingidentity.com/pingoneaic/latest/getting_started/getting_started-create_oauth2_client.html)
-[OIDC client registration](https://docs.pingidentity.com/pingoneaic/latest/am-oidc-guide/oidc-client-registration.html)
-[SAML application registration](https://docs.pingidentity.com/pingoneaic/latest/am-saml2-guide/saml2-sp-registration.html)
+[Register OAuth 2.0 clients — PingOne ST](https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-create_oauth2_client.html)
+[OIDC client registration](https://docs.pingidentity.com/pingoneaic/am-oidc-guide/oidc-client-registration.html)
+[SAML application registration](https://docs.pingidentity.com/pingoneaic/am-saml2-guide/saml2-sp-registration.html)

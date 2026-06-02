@@ -3,12 +3,14 @@ title: "Choose the Right Ping Platform"
 product_family: cross-platform
 products: ["pingone", "pingone-st", "pingfederate", "pingaccess", "pingdirectory"]
 capabilities: ["quickstart"]
+services: []
 audience: ["admin", "architect"]
 use_cases: ["workforce", "customer", "cross-platform"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-05-29"
+last_updated: "2026-06-01"
+slug: "https://docs.pingidentity.com/pingone/introduction_to_pingone/p1_introduction.html"
 ---
 
 # Choose the Right Ping Platform
@@ -39,18 +41,44 @@ Does NOT cover: configuration steps — see `ping-foundation`; journey or flow d
 
 ---
 
+## Orchestration layer decision
+
+| Scenario | Use |
+|---|---|
+| DaVinci flows on PingOne MT | DaVinci SDK / DaVinci orchestration |
+| AIC / PingAM journey trees | Journey SDK / orchestration |
+| OIDC-compliant server (PingFederate, any IdP) | OIDC Sign-on — server-side journey changes reflected without app rebuild |
+
+Source: https://developer.pingidentity.com/orchsdks/index.html
+
+---
+
 ## Key differentiators
 
 ### PingOne MT vs PingOne ST
 
 | Dimension | PingOne MT | PingOne ST |
 |---|---|---|
-| Management model | SaaS console (apps.pingone.com) | Fully managed tenant; REST/UI admin |
+| Management model | SaaS console (console.pingone.com) | Fully managed tenant; REST/UI admin |
 | Orchestration | DaVinci flows (no-code/low-code) | Journey trees (node-based, highly scriptable) |
 | Customization depth | Moderate — DaVinci connectors and policies | High — custom nodes, scripts, Groovy, JavaScript |
 | ForgeRock migration path | Limited — best for greenfield | Primary target — journey/tree import supported |
 | Self-service | PingOne self-service app | Configurable self-service journeys |
-| Pricing model | Per-user/per-MAU subscription | Managed service; contract-based |
+| Pricing model | Per-user/per-MAU subscription | Managed service; AIC includes Dev/Staging/Prod; UAT and additional Sandbox are paid add-ons. |
+
+### Identifying your P14E variant
+
+PingOne for Enterprise (P14E) has four variants, identifiable by the top navigation bar:
+
+| Variant | Top nav indicators |
+|---|---|
+| Standard P14E | Dashboard / Apps / Users / Setup / Account |
+| P14E for MSPs | Adds Customers menu |
+| PingOne SSO for SaaS Apps | Adds Customer Connections |
+| PingOne SSO for SaaS Apps with Managed Accounts | Adds Customer Connections + Managed Accounts |
+
+Admin entry point for P14E: `admin.pingone.com`.
+Source: https://docs.pingidentity.com/pingoneforenterprise/p14e_which_p14e_am_i_using.html
 
 ### Cloud vs Software Suite
 
@@ -133,7 +161,7 @@ Before making a platform selection decision, have the following inputs ready:
 
 ### Evaluation / PoC context vs production selection
 
-- For a PoC: start with PingOne MT trial (fastest to stand up) even if the final decision may be PingOne ST; use the PoC to validate use cases and skill requirements before committing.
+- For a PoC: start with PingOne MT trial (fastest to stand up); use the PoC to validate use cases and skill requirements before committing.
 - For production selection: run a formal requirements-to-criteria mapping using the decision matrix above; involve architecture and security teams.
 
 ### Greenfield vs migration context
@@ -141,12 +169,6 @@ Before making a platform selection decision, have the following inputs ready:
 - Greenfield (no existing identity infrastructure): PingOne MT is lowest-friction; PingOne ST if journey complexity is anticipated.
 - Migration from ForgeRock AM/IDM: PingOne ST is the primary migration target; journey trees import directly.
 - Migration from legacy PingFederate: upgrade in place (major version) or lift to PingOne MT/ST for the orchestration layer while PingFederate continues as a federation bridge.
-
-### Hybrid deployment patterns
-
-- PingFederate as a federation bridge: keep PingFederate for WS-Fed/legacy SAML apps while adding PingOne MT for new OIDC/DaVinci flows.
-- PingDirectory as an authoritative store with PingOne MT as the policy layer: use the PingOne Gateway for PingDirectory to sync/proxy identity.
-- PingOne ST consuming PingDirectory via LDAP identity store connector: common pattern for ForgeRock migrations.
 
 ---
 
@@ -157,4 +179,7 @@ Before making a platform selection decision, have the following inputs ready:
 
 ## Source
 
-[Ping Identity Solution Guides](https://docs.pingidentity.com/solution-guides/)
+- Decision matrix: https://docs.pingidentity.com/pingone/introduction_to_pingone/p1_introduction.html
+- P14E disambiguation: https://docs.pingidentity.com/pingoneforenterprise/p14e_which_p14e_am_i_using.html
+- SDK decision matrix: https://developer.pingidentity.com/orchsdks/index.html
+- Solution guides: https://docs.pingidentity.com/solution-guides/htg_overview.html

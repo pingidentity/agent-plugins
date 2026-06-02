@@ -43,9 +43,7 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 | App/SDK integration code | `ping-app-integration` |
 | AI agent identity | `ping-identity-for-ai` |
 
-**Workforce SSO + MFA (PingFederate):** ping-foundation (install, SP connection) → ping-universal-services (PingID MFA) → ping-app-integration (app endpoint config)
-
-**CIAM registration (PingOne ST):** ping-foundation (tenant, realm, identity store) → ping-orchestration (registration journey) → ping-universal-services (Verify) → ping-app-integration (hosted login integration)
+**Workforce SSO + MFA (PingFederate):** ping-foundation → ping-universal-services (PingID MFA) → ping-app-integration. **CIAM registration (PingOne ST):** ping-foundation → ping-orchestration (registration journey) → ping-universal-services (Verify) → ping-app-integration
 
 ---
 
@@ -61,10 +59,17 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 
 ## PingOne MT
 
-**Curated anchors** (load first — 1 to 3 max):
-- `references/curated/cross-platform/foundation-overview.md`
-- `references/curated/cross-platform/tenant-and-environment-setup.md`
-- `references/curated/cross-platform/policy-and-branding-basics.md`
+**Curated anchors — pick 1–3 matching the task:**
+
+| Task | Anchor |
+|---|---|
+| Platform orientation, org/environment structure | `references/curated/cross-platform/foundation-overview.md` |
+| Create environment, enable services | `references/curated/pingone-mt/tenant-and-environment-setup.md` |
+| Register OIDC, SAML, or Worker app | `references/curated/pingone-mt/app-registration.md` |
+| Configure sign-on policy, MFA, step-up | `references/curated/pingone-mt/sign-on-policies.md` |
+| Directory, LDAP gateway, populations, groups | `references/curated/pingone-mt/directory-and-populations.md` |
+| Admin roles, onboarding administrators | `references/curated/pingone-mt/admin-roles-and-access.md` |
+| Branding, notification templates | `references/curated/cross-platform/policy-and-branding-basics.md` |
 
 **Generated shortlist** (fallback): `references/generated/pingone-mt/top-25.json` — sub-files: `tenants.md`, `apps.md`, `policies.md`, `directories.md`
 
@@ -88,11 +93,14 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 
 ## Ping Software Suite
 
-**Curated anchors** (load first — pick the most relevant):
-- `references/curated/cross-platform/foundation-overview.md`
-- `references/curated/cross-platform/core-admin-patterns.md`
-- `references/curated/ping-software/pingfederate-basics.md`
-- `references/curated/ping-software/pingdirectory-basics.md`
+**Curated anchors — pick 1–3 matching the task:**
+
+| Task | Anchor |
+|---|---|
+| PingFederate federation, SP/IdP connections, adapters | `references/curated/ping-software/pingfederate-basics.md` |
+| PingDirectory installation, replication, schema | `references/curated/ping-software/pingdirectory-basics.md` |
+| PingAccess web app and API protection | `references/curated/ping-software/pingaccess-basics.md` |
+| Cross-platform admin patterns (LDAP, OIDC, APIs) | `references/curated/cross-platform/core-admin-patterns.md` |
 
 **Generated shortlist by product** (fallback): `references/generated/ping-software/top-25.json`
 
@@ -100,9 +108,7 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 
 ## Retrieval and execution
 
-See `references/runtime/docs-mcp-routing.md` for full MCP tool-first execution rules and retrieval escalation steps.
-
-**Quick rule:** (1) scan for MCP tools that can perform the operation directly; (2) if none, load 1–3 curated anchors for the detected platform and task; (3) if still insufficient, scan the generated shortlist.
+**Rule:** (1) scan for MCP tools first; (2) load 1–3 curated anchors for the platform/task; (3) fall back to generated shortlist. Full rules: `references/runtime/docs-mcp-routing.md`.
 
 ## Cross-skill escalation
 
@@ -111,4 +117,3 @@ See `references/runtime/docs-mcp-routing.md` for full MCP tool-first execution r
 | DaVinci flows or PingOne ST journey design | `ping-orchestration` |
 | Shared services (Protect, Verify, IGA, Credentials) | `ping-universal-services` |
 | App/SDK code integration | `ping-app-integration` |
-| Platform selection or orientation | `ping-quickstart` |

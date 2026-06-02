@@ -8,7 +8,7 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-05-19"
+last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf-admin-guide.html"
 ---
 
@@ -133,6 +133,15 @@ Required fields: LDAP URL (`ldaps://`), Bind DN, Bind password, Base DN, Usernam
 | PingFederate + PingDirectory | Most common workforce SSO pattern; PingDirectory serves as the identity store with LDAP |
 | Server profile (config-as-code) | Recommended for production; all config stored in Git and applied at container startup |
 | PingFederate as OAuth AS | Used when PingFederate issues tokens to downstream APIs; requires Access Token Manager configuration |
+
+## Common gotchas
+
+| Gotcha | Symptom | Fix |
+|---|---|---|
+| SP connection using wrong ACS URL | SAML response POSTed to wrong endpoint; SP returns error | Import SP metadata to auto-populate ACS URL; verify against SP documentation |
+| Admin console port exposed | PF admin API accessible from internet | Restrict port 9999 to management CIDR; use HTTPS only |
+| LDAP pool exhaustion | Authentication latency spikes under load | Increase LDAP data store connection pool size in System → Data Stores |
+| Clock skew exceeds SAML tolerance | SAML assertion rejected as expired or not yet valid | Verify NTP sync on PingFederate server and all SP/IdP hosts; default tolerance is 5 minutes |
 
 ## Related references
 

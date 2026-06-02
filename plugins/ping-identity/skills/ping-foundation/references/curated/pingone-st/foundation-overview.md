@@ -9,8 +9,8 @@ use_cases: ["workforce", "customer"]
 doc_type: concept
 status: current
 canonical: true
-last_updated: "2026-05-19"
-slug: "https://docs.pingidentity.com/pingoneaic/latest/index.html"
+last_updated: "2026-06-02"
+slug: "https://docs.pingidentity.com/pingoneaic/index.html"
 ---
 
 # PingOne ST — Foundation Overview
@@ -34,7 +34,7 @@ PingOne ST (formerly ForgeRock Identity Cloud) is a fully managed, single-tenant
 
 It is distinct from PingOne MT (multi-tenant cloud) in:
 - Deployment model: single-tenant per customer, not shared infrastructure
-- Control plane: AIC admin console at a customer-specific URL, not apps.pingone.com
+- Control plane: AIC admin console at a customer-specific URL, not the shared PingOne MT admin console
 - Customization depth: full journey/tree authoring, schema extension, custom scripts
 - Component model: three integrated products (PingAM, PingIDM, PingDS) vs. PingOne's service-based model
 
@@ -89,6 +89,51 @@ Most day-to-day admin work happens in the AIC tenant admin console. The AM and I
 
 Production tenants support multi-region high availability.
 
+---
+
+## Component interaction model
+
+The three core components share data but have distinct responsibilities:
+
+| Component | Who configures it | Key objects it manages |
+|---|---|---|
+| PingAM | AIC console + AM admin console | OAuth 2.0 clients, realms, journeys, OIDC provider settings, SAML entities, sessions |
+| PingIDM | IDM admin console | Managed objects (users, roles, groups, organizations), provisioning mappings, connectors, reconciliation jobs |
+| PingDS | Mostly automatic | User data storage; schema extensions done in PingIDM but stored in PingDS |
+
+Components communicate over internal APIs. PingAM reads user data from PingDS via the IDM REST API — not directly over LDAP. This means all user attribute mappings should be configured in IDM's managed object schema, not at the LDAP level.
+
+---
+
+## Tenant access and URL patterns
+
+| Surface | URL pattern |
+|---|---|
+| AIC tenant admin console | `https://admin.<tenant>.forgerock.io/` |
+| AM admin console (low-level config) | `https://<tenant>.forgerock.io/am/console` |
+| IDM admin console | `https://<tenant>.forgerock.io/platform/` |
+| End-user hosted login | `https://<tenant>.forgerock.io/am/XUI/` |
+| OIDC discovery (alpha realm) | `https://<tenant>.forgerock.io/am/oauth2/realms/root/realms/alpha/.well-known/openid-configuration` |
+| AM REST API | `https://<tenant>.forgerock.io/am/json/` |
+| IDM REST API | `https://<tenant>.forgerock.io/openidm/` |
+
+Custom domains replace the `<tenant>.forgerock.io` hostname in all end-user-facing URLs. Admin console URLs retain the default hostname regardless of custom domain configuration.
+
+---
+
+## First-login setup sequence
+
+Complete these steps in order before registering applications or onboarding users:
+
+1. Verify realm selection: `alpha` for customer-facing, `bravo` for internal, or plan additional realms
+2. Configure identity store: verify PingDS is operational or connect external LDAP/AD
+3. Set up custom domain (production tenants)
+4. Configure email provider (SMTP or Ping-managed) for notification delivery
+5. Apply branding theme to realm
+6. Register OAuth 2.0 / OIDC applications
+7. Build or import authentication journeys
+8. Test end-to-end login before directing real users
+
 ## Prerequisites
 
 - PingOne ST subscription provisioned by Ping Identity
@@ -112,4 +157,4 @@ Production tenants support multi-region high availability.
 
 ## Source
 
-[PingOne ST Documentation](https://docs.pingidentity.com/pingoneaic/latest/index.html)
+[PingOne ST Documentation](https://docs.pingidentity.com/pingoneaic/index.html)

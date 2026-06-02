@@ -33,6 +33,8 @@ Trigger on ANY of the following — including questions, evaluation discussions,
 - "Where do we start with adding [feature] to our app?" (any feature, when the platform is unspecified)
 - "We want to add identity verification / KYC — where do we start?"
 - "What's the recommended starting point for Ping employee identity?"
+- "What license do I need for DaVinci / Protect / Verify?"
+- "I inherited a Ping deployment — where do I start?"
 
 **Catch-all rule:** Trigger this skill whenever the user's platform or starting point is unknown or unclear, when they use "where do we start", "what should we set up first", "what's the recommended starting point", or "not sure whether to use [product A] or [product B]" framing. Trigger on migration intents (ForgeRock → Ping, Okta → Ping, Auth0 → Ping). Trigger when platform is not yet specified and the user is in evaluation or orientation mode.
 
@@ -101,8 +103,7 @@ Ask or infer from context:
 Ask at most one question at a time:
 
 1. "Are you setting something up for the first time, or do you have an existing deployment?"
-2. "Is this for employees (workforce) or customers (CIAM)?"
-3. "Are you working in PingOne, PingOne ST, or on-premises software?"
+2. "Are you working in PingOne, PingOne ST, or on-premises software?"
 
 ---
 
@@ -113,3 +114,6 @@ Load 1–2 of these matching the user's question. Stop when orientation is suffi
 - `references/curated/getting-started-overview.md`
 - `references/curated/choose-the-right-ping-platform.md`
 - `references/curated/common-starting-patterns.md`
+- `references/curated/pingone-licensing-and-packaging.md`
+- `references/curated/forgerock-to-ping-migration-paths.md`
+- `references/curated/inherited-deployment-orientation.md`

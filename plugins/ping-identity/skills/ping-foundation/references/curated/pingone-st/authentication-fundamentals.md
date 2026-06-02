@@ -9,8 +9,8 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-05-19"
-slug: "https://docs.pingidentity.com/pingoneaic/latest/am-journey-guide/journey-overview.html"
+last_updated: "2026-06-02"
+slug: "https://docs.pingidentity.com/pingoneaic/am-journey-guide/journey-overview.html"
 ---
 
 # PingOne ST — Authentication Fundamentals
@@ -90,11 +90,40 @@ Journeys must be **activated** to be available for authentication. A deactivated
 | OIDC `acr_values` | Append `&acr_values=<journey-name>` to the authorization request |
 | Direct AM endpoint | `/login?authIndexType=service&authIndexValue=<journey-name>` — use for testing or legacy integrations |
 
+---
+
+## Journey troubleshooting patterns
+
+| Symptom | Likely cause | Diagnosis step |
+|---|---|---|
+| Journey returns error on activation | Node configuration is incomplete or references a deleted script | Open the journey editor; look for nodes with red indicators; check Scripts for the referenced script |
+| User reaches `Failure` node unexpectedly | A credential validation node rejected the input (wrong password, locked account, schema mismatch) | Enable debug logging in PingAM (`org.forgerock.openam.auth.nodes` logger) and replay the authentication |
+| Journey skipped entirely for authenticated user | Session already exists; journey caching prevents re-execution | Append `ForceAuth=true` to the authorization request to bypass session-level caching |
+| Inner journey not executing | Inner journey is deactivated or the Journey node references the wrong name | Verify the inner journey is activated; check the Journey node's `Journey Name` field for exact case-sensitive match |
+| `Cannot find node of type X` error | A node type was removed from the product or a module was disabled | Check if the node's plugin is installed and enabled; reinstall or replace the node |
+| `Scripted Decision` node always exits on `False` | Script syntax error or unhandled exception | Check the AM server log for `ScriptException` entries; validate the script independently |
+
+---
+
+## Session management
+
+| Setting | Location | Notes |
+|---|---|---|
+| Session idle timeout | Realm → Sessions → Max Idle Time | After this period of inactivity the session expires; user must re-authenticate |
+| Session max time | Realm → Sessions → Max Session Time | Absolute limit regardless of activity; prevents infinite sessions |
+| Session quota | Realm → Sessions → Maximum Sessions | Limits concurrent sessions per user; older sessions destroyed when limit reached |
+| Session notifications | AM admin console → Sessions → Notifications | Push session invalidation events to registered listeners (e.g., app server logout) |
+
+Session tokens issued by PingAM are bound to the realm. A session created in the `alpha` realm is not valid in the `bravo` realm.
+
+Cross-realm SSO requires explicit federation configuration (e.g., an OAuth2 authorization grant referencing a cross-realm token, or a SAML federation between the two realms). This is an advanced pattern — plan the realm architecture before onboarding users to avoid cross-realm session issues.
+
 ## Prerequisites
 
 - PingOne ST tenant with at least one realm configured
 - Identity store connected to the realm (see `references/curated/pingone-st/directory-setup.md`)
 - Admin access to Authentication → Journeys
+- Scripts environment configured if Scripted Decision nodes will be used (AIC admin console → Scripts)
 
 ## Common variants
 
@@ -103,15 +132,20 @@ Journeys must be **activated** to be available for authentication. A deactivated
 | Inner journeys | Nest frequently-reused logic (e.g., MFA step) into a reusable inner journey invoked by a Journey node |
 | Workforce vs. CIAM | Workforce flows are often simpler (username + password + MFA). CIAM flows add registration, progressive profiling, and verification steps — typically built in `ping-orchestration`. |
 | ForgeRock AM auth trees | Same underlying model as PingAM trees. Existing ForgeRock trees can be migrated to PingOne ST journeys with node mapping. |
+| ACR-based routing | Different client apps can invoke different journeys by passing `acr_values` on the authorization request; map ACR values to journey names in OAuth 2.0 provider settings |
 
 ## Related references
 
-- `references/curated/pingone-st/app-setup.md`
-- `references/curated/pingone-st/foundation-overview.md`
-- `references/curated/pingone-st/directory-setup.md`
+- `references/curated/pingone-st/app-setup.md` — assign journeys to OIDC/SAML applications
+- `references/curated/pingone-st/foundation-overview.md` — tenant and realm architecture
+- `references/curated/pingone-st/directory-setup.md` — identity store configuration required before journey data store decisions
 
 ## Source
 
-[Journey overview — PingOne ST](https://docs.pingidentity.com/pingoneaic/latest/am-journey-guide/journey-overview.html)
-[Authentication nodes reference](https://docs.pingidentity.com/pingoneaic/latest/am-authentication/authentication-node-reference.html)
-[Getting started: authentication journey](https://docs.pingidentity.com/pingoneaic/latest/getting_started/getting_started-authentication_journey.html)
+[Journey overview — PingOne ST](https://docs.pingidentity.com/pingoneaic/am-journey-guide/journey-overview.html)
+[Authentication nodes reference](https://docs.pingidentity.com/pingoneaic/am-authentication/authentication-node-reference.html)
+[Getting started: authentication journey](https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-authentication_journey.html)
+[Session management — PingAM](https://docs.pingidentity.com/pingoneaic/am-sessions-guide/session-management-overview.html)
+[Scripted decision node — PingAM](https://docs.pingidentity.com/pingoneaic/am-authentication/auth-node-scripted-decision.html)
+[Inner journeys — PingAM](https://docs.pingidentity.com/pingoneaic/am-journey-guide/journey-inner-trees.html)
+[ACR values and authentication — PingAM](https://docs.pingidentity.com/pingoneaic/am-oidc-guide/oidc-acr-values.html)

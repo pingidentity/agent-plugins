@@ -9,8 +9,8 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-05-19"
-slug: "https://docs.pingidentity.com/pingoneaic/latest/ui-customization-guide/ui-theming.html"
+last_updated: "2026-06-02"
+slug: "https://docs.pingidentity.com/pingoneaic/ui-customization-guide/ui-theming.html"
 ---
 
 # PingOne ST — Themes and Customization
@@ -98,6 +98,36 @@ Custom CSS class names are subject to change with product updates; validate agai
 
 ---
 
+---
+
+## Email notification templates
+
+Email templates are separate from visual themes but affect the end-user branding experience.
+
+| Template category | Admin surface |
+|---|---|
+| Registration / welcome | Realm → Notifications → Email → Registration |
+| Password reset | Realm → Notifications → Email → Password Reset |
+| MFA enrollment | Realm → Notifications → Email → MFA Enrollment |
+| Custom journey notifications | Realm → Notifications → Email → + New Template |
+
+Template editor supports HTML with Freemarker expressions for dynamic values (e.g., `${user.givenName}`, `${resetLink}`). Test templates using the preview function before saving.
+
+CSP note: images embedded in email templates must be hosted on an externally accessible URL — PingOne ST does not host email images; reference them via absolute URL in the template HTML.
+
+---
+
+## Common gotchas
+
+| Gotcha | Symptom | Fix |
+|---|---|---|
+| Theme change not visible to end users | Hosted page still shows old branding | Theme must be set as default in the realm, or assigned explicitly to the journey or app |
+| Custom font blocked by CSP | Font request fails; fallback font renders instead | Add the font CDN origin to Security → Content Security Policy → `font-src` directive |
+| Social button CSS override does not reorder buttons | Social buttons appear in unexpected position despite CSS | Social button position is controlled by the Social Provider Handler node position in the journey; CSS controls visual style only |
+| Account pages not themed | End-user account page shows default Ping branding | Account page theming is managed under Realm → Theming → Account Theme — different from the main Login theme |
+| Dark mode not applying | Custom CSS `prefers-color-scheme` media query ignored | CSP or class name changes between product versions may break CSS selectors; re-inspect rendered DOM after each product update |
+| Error pages partially themed | System error pages (500-level) still show Ping default theme | PingAM system error pages are not fully themeable; customize error messages via AM admin console → Realm → General Settings → Error Page |
+
 ## Prerequisites
 
 - PingOne ST tenant with at least one realm
@@ -121,6 +151,6 @@ Custom CSS class names are subject to change with product updates; validate agai
 
 ## Source
 
-[UI theming — PingOne ST](https://docs.pingidentity.com/pingoneaic/latest/ui-customization-guide/ui-theming.html)
-[UI customization overview](https://docs.pingidentity.com/pingoneaic/latest/ui-customization-guide/ui-overview.html)
-[Getting started: apply basic branding](https://docs.pingidentity.com/pingoneaic/latest/getting_started/getting_started-apply_branding.html)
+[UI theming — PingOne ST](https://docs.pingidentity.com/pingoneaic/ui-customization-guide/ui-theming.html)
+[UI customization overview](https://docs.pingidentity.com/pingoneaic/ui-customization-guide/ui-overview.html)
+[Getting started: apply basic branding](https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-apply_branding.html)

@@ -8,8 +8,8 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-05-19"
-slug: ""
+last_updated: "2026-06-02"
+slug: "https://docs.pingidentity.com/pingone/integrations/p1_ldap_gateways.html"
 ---
 
 # Core Admin Patterns
@@ -91,6 +91,46 @@ All platforms expose REST APIs for automation:
 | PingFederate | Server → Archive Configuration (ZIP); Git-backed server profiles recommended |
 | PingAccess | System → Backup → Export Configuration |
 | PingDirectory | `backup` and `restore` CLI tools |
+
+---
+
+## Pattern: Secret and credential rotation
+
+Rotating client secrets without downtime:
+
+| Step | Notes |
+|---|---|
+| 1. Generate new secret in the platform | PingOne MT: app → Client Secret → Rotate; PingFederate: client record → regenerate secret |
+| 2. Configure retention window | Keep old secret valid for a rolling period (grace period) while consumers update |
+| 3. Update consumers (apps, pipelines) | Deploy new secret to all services using the client |
+| 4. Verify old secret is no longer in use | Check access logs for tokens issued with old client secret |
+| 5. Remove old secret (or let it expire) | After all consumers are updated |
+
+For PingOne MT Worker apps: the secret can be retrieved only at creation time; if lost, rotate immediately.
+
+---
+
+## Pattern: Monitoring and health checks
+
+| Platform | Health check endpoint |
+|---|---|
+| PingOne MT | No direct health check endpoint; use OIDC discovery document to verify availability: `https://auth.pingone.com/<envId>/as/.well-known/openid-configuration` |
+| PingOne ST | AM health: `https://<tenant>/am/json/health/live`; IDM health: `https://<tenant>/openidm/info/ping` |
+| PingFederate | `https://<host>:9031/pf/heartbeat.ping` (returns HTTP 200 with body `SERVER_ALIVE`) |
+| PingAccess | `https://<host>:3000/pa/heartbeat.ping` (engine node; requires PA version-specific path) |
+| PingDirectory | `bin/status` CLI; or LDAP search on `cn=monitor` for operational data |
+
+---
+
+## Pattern: Audit log access
+
+| Platform | Audit log access |
+|---|---|
+| PingOne MT | Admin console → Reports → Audit; or Admin API `GET /v1/environments/{envId}/activities` |
+| PingOne ST | AM audit log: `https://<tenant>/am/json/audit/access`; IDM audit: `/openidm/audit/access` |
+| PingFederate | Log files in `<pf-home>/log/` — `audit.log`, `server.log`; or syslog forward |
+| PingAccess | Log files in `<pa-home>/log/` — `audit.log`; or syslog forward |
+| PingDirectory | `<pd-home>/logs/access` — LDAP access log; filterable by operation type |
 
 ## Prerequisites
 
