@@ -214,7 +214,7 @@ plugins/ping-identity/skills/<skill-name>/
 
 ---
 
-## Phase 2 — Curated content depth + reference manifests (June 2 – June 3) ⏳ NEXT
+## Phase 2 — Curated content depth + reference manifests (June 2 – June 3) ✅ COMPLETE
 
 **Goal:** Generated shortlists land in every skill branch; curated anchors are upgraded from orientation depth to task-completing depth where Phase 1 left gaps.
 
@@ -228,9 +228,11 @@ plugins/ping-identity/skills/<skill-name>/
 
 **Exit criterion:** All 6 skills pass Layer 1 (≥90/90/80%) and Layer 2 (≥85% per-prompt anchor selection); generated shortlists exist for every documented branch; routing eval against a 25-prompt benchmark scores ≥80/100.
 
+> **Status (2026-06-03):** Exit criterion met. All 6 skills pass Layer 1 (100/100/100 except ping-quickstart at 90%). Generated shortlists built for all skill branches (14 manifests across 6 skills). Builder script at `scripts/build_reference_manifests.py`; CI workflow at `.github/workflows/build-reference-manifests.yml`. All curated anchors upgraded to task-completing depth during Phase 1 continuation work.
+
 ---
 
-## Phase 3 — Repo + CI hardening (June 4)
+## Phase 3 — Repo + CI hardening (June 4) ⏳ NEXT
 
 ### Steps
 
