@@ -6,7 +6,16 @@
       "WebFetch(domain:docs.pingidentity.com)",
       "mcp__plugin_polaris_glean__search",
       "WebFetch(domain:docs.pingoneaic)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Skill(firecrawl:firecrawl-scrape)",
+      "WebFetch(domain:registry.npmjs.org)",
+      "WebFetch(domain:cdn-docs.pingidentity.com)",
+      "mcp__plugin_polaris_playwright__browser_navigate",
+      "WebFetch(domain:bedrock-runtime.eu-west-2.amazonaws.com)"
     ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true
   }
 }
