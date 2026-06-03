@@ -9,8 +9,8 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-06-01"
-slug: "https://docs.pingidentity.com/davinci/latest/flows-overview.html"
+last_updated: "2026-06-02"
+slug: "https://docs.pingidentity.com/davinci/flows/davinci_flows.html"
 ---
 
 # PingOne MT — DaVinci Flow Patterns
@@ -139,5 +139,7 @@ Map subflow output variables explicitly. All subflows should have a defined succ
 
 ## Source
 
-[DaVinci flow design](https://docs.pingidentity.com/davinci/latest/flows-overview.html)
-[DaVinci connectors](https://docs.pingidentity.com/davinci/latest/connectors.html)
+[DaVinci flows](https://docs.pingidentity.com/davinci/flows/davinci_flows.html)
+[Getting started with flows](https://docs.pingidentity.com/davinci/flows/davinci_getting_started.html)
+[DaVinci connectors](https://docs.pingidentity.com/davinci/connectors/davinci_connections.html)
+[Best practices](https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices.html)

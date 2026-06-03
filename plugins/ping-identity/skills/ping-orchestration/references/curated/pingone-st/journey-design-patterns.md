@@ -9,7 +9,7 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-05-19"
+last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/pingoneaic/journeys/auth-nodes.html"
 ---
 

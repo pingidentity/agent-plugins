@@ -56,7 +56,8 @@
         "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/mfa-authentication-multi-method.md",
         "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/account-recovery-and-username-reminder.md",
         "skills/ping-orchestration/references/curated/pingone-mt/davinci-overview.md",
-        "skills/ping-orchestration/references/curated/pingone-mt/davinci-flow-patterns.md"
+        "skills/ping-orchestration/references/curated/pingone-mt/davinci-flow-patterns.md",
+        "skills/ping-orchestration/references/curated/pingone-mt/davinci-registration-and-mfa.md"
       ],
       "generated": {
         "pingone-mt": "skills/ping-orchestration/references/generated/pingone-mt/top-25.json",

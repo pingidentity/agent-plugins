@@ -95,8 +95,9 @@ Sub-routing by task and journey use case: see `references/curated/pingone-st/rou
 
 | Task | Reference |
 |---|---|
-| DaVinci flow concepts, connectors, variables | `references/curated/pingone-mt/davinci-overview.md` |
-| DaVinci flow design patterns | `references/curated/pingone-mt/davinci-flow-patterns.md` |
+| DaVinci flow concepts, connectors, variables, versioning | `references/curated/pingone-mt/davinci-overview.md` |
+| DaVinci flow design patterns (login, registration, step-up, error) | `references/curated/pingone-mt/davinci-flow-patterns.md` |
+| DaVinci registration + email verification + MFA enrollment/step-up | `references/curated/pingone-mt/davinci-registration-and-mfa.md` |
 
 **Generated shortlist** (fallback):
 - `references/generated/pingone-mt/top-25.json`
