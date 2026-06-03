@@ -1,0 +1,34 @@
+{
+  "skill_id": "ping-orchestration",
+  "display_name": "Ping Identity Orchestration",
+  "description": "Design and build authentication flows, journeys, and orchestration logic. Covers PingOne ST journeys and authentication trees, DaVinci flows (PingOne MT), scripted decision nodes, inner journeys, and multi-step registration and login patterns.",
+  "version": "1.0.0",
+  "publisher": "Ping Identity",
+  "tags": {
+    "product_family": ["pingone-mt", "pingone-st"],
+    "products": [
+      "pingone-st",
+      "pingam",
+      "davinci",
+      "pingone"
+    ],
+    "capabilities": ["orchestration"],
+    "audience": ["developer", "architect", "admin"],
+    "use_cases": ["workforce", "customer"],
+    "protocols": ["oidc", "oauth2", "saml"]
+  },
+  "entry_point": "SKILL.md",
+  "references": {
+    "curated_path": "references/curated/",
+    "generated_path": "references/generated/"
+  },
+  "related_skills": [
+    "ping-foundation",
+    "ping-universal-services",
+    "ping-app-integration",
+    "ping-quickstart"
+  ],
+  "min_context_tokens": 500,
+  "max_curated_docs": 3,
+  "max_shortlist_docs": 25
+}

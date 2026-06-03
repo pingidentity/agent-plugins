@@ -1,0 +1,6 @@
+{
+  "name": "ping-identity",
+  "version": "1.0.0",
+  "description": "Six-umbrella agent skill suite for Ping Identity platforms.",
+  "author": { "name": "Ping Identity" }
+}

@@ -1,0 +1,118 @@
+{
+  "plugin": "ping-identity",
+  "description": "Local reference index for plugin-only installs. Lists all curated anchors and generated shortlists by skill and platform branch.",
+  "last_updated": "2026-06-03",
+  "skills": {
+    "ping-quickstart": {
+      "curated": [
+        "skills/ping-quickstart/references/curated/getting-started-overview.md",
+        "skills/ping-quickstart/references/curated/choose-the-right-ping-platform.md",
+        "skills/ping-quickstart/references/curated/common-starting-patterns.md",
+        "skills/ping-quickstart/references/curated/pingone-licensing-and-packaging.md",
+        "skills/ping-quickstart/references/curated/forgerock-to-ping-migration-paths.md",
+        "skills/ping-quickstart/references/curated/inherited-deployment-orientation.md",
+        "skills/ping-quickstart/references/curated/end-to-end-validation.md"
+      ]
+    },
+    "ping-foundation": {
+      "curated": [
+        "skills/ping-foundation/references/curated/cross-platform/foundation-overview.md",
+        "skills/ping-foundation/references/curated/cross-platform/tenant-and-environment-setup.md",
+        "skills/ping-foundation/references/curated/cross-platform/policy-and-branding-basics.md",
+        "skills/ping-foundation/references/curated/cross-platform/core-admin-patterns.md",
+        "skills/ping-foundation/references/curated/pingone-mt/tenant-and-environment-setup.md",
+        "skills/ping-foundation/references/curated/pingone-mt/app-registration.md",
+        "skills/ping-foundation/references/curated/pingone-mt/sign-on-policies.md",
+        "skills/ping-foundation/references/curated/pingone-mt/directory-and-populations.md",
+        "skills/ping-foundation/references/curated/pingone-mt/admin-roles-and-access.md",
+        "skills/ping-foundation/references/curated/pingone-mt/themes-and-branding.md",
+        "skills/ping-foundation/references/curated/ping-software/pingfederate-basics.md",
+        "skills/ping-foundation/references/curated/ping-software/pingdirectory-basics.md",
+        "skills/ping-foundation/references/curated/ping-software/pingaccess-basics.md",
+        "skills/ping-foundation/references/curated/pingone-st/foundation-overview.md",
+        "skills/ping-foundation/references/curated/pingone-st/app-setup.md",
+        "skills/ping-foundation/references/curated/pingone-st/authentication-fundamentals.md",
+        "skills/ping-foundation/references/curated/pingone-st/themes-and-customization.md",
+        "skills/ping-foundation/references/curated/pingone-st/directory-setup.md"
+      ],
+      "generated": {
+        "pingone-mt": "skills/ping-foundation/references/generated/pingone-mt/top-25.json",
+        "pingone-st": "skills/ping-foundation/references/generated/pingone-st/top-25.json",
+        "ping-software": "skills/ping-foundation/references/generated/ping-software/top-25.json",
+        "cross-platform": "skills/ping-foundation/references/generated/cross-platform/top-10.json"
+      }
+    },
+    "ping-orchestration": {
+      "curated": [
+        "skills/ping-orchestration/references/curated/pingone-st/journey-design-patterns.md",
+        "skills/ping-orchestration/references/curated/pingone-st/nodes/basic-auth-nodes.md",
+        "skills/ping-orchestration/references/curated/pingone-st/nodes/mfa-nodes.md",
+        "skills/ping-orchestration/references/curated/pingone-st/nodes/risk-management-nodes.md",
+        "skills/ping-orchestration/references/curated/pingone-st/nodes/identity-management-nodes.md",
+        "skills/ping-orchestration/references/curated/pingone-st/nodes/utility-nodes.md",
+        "skills/ping-orchestration/references/curated/pingone-st/nodes/federation-contextual-nodes.md",
+        "skills/ping-orchestration/references/curated/pingone-st/routing-index.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/passwordless-mfa-registration.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/social-and-local-registration-authentication.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/password-reset-and-update.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/financial-services-step-up.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/progressive-profiling.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/pingone-protect-risk-integration.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/mfa-authentication-multi-method.md",
+        "skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/account-recovery-and-username-reminder.md",
+        "skills/ping-orchestration/references/curated/pingone-mt/davinci-overview.md",
+        "skills/ping-orchestration/references/curated/pingone-mt/davinci-flow-patterns.md",
+        "skills/ping-orchestration/references/curated/pingone-mt/davinci-registration-and-mfa.md",
+        "skills/ping-orchestration/references/curated/cross-platform/passkeys-and-passwordless.md"
+      ],
+      "generated": {
+        "pingone-mt": "skills/ping-orchestration/references/generated/pingone-mt/top-25.json",
+        "pingone-st": "skills/ping-orchestration/references/generated/pingone-st/top-25.json",
+        "ping-software": "skills/ping-orchestration/references/generated/ping-software/top-25.json",
+        "cross-platform": "skills/ping-orchestration/references/generated/cross-platform/top-10.json"
+      }
+    },
+    "ping-universal-services": {
+      "curated": [
+        "skills/ping-universal-services/references/curated/universal-services-overview.md",
+        "skills/ping-universal-services/references/curated/choosing-the-right-service.md",
+        "skills/ping-universal-services/references/curated/service-invocation-patterns.md",
+        "skills/ping-universal-services/references/curated/cross-platform-service-usage.md",
+        "skills/ping-universal-services/references/curated/protect-configuration.md",
+        "skills/ping-universal-services/references/curated/verify-configuration.md"
+      ],
+      "generated": {
+        "protect": "skills/ping-universal-services/references/generated/protect/.gitkeep",
+        "verify": "skills/ping-universal-services/references/generated/verify/.gitkeep",
+        "credentials": "skills/ping-universal-services/references/generated/credentials/.gitkeep",
+        "sso": "skills/ping-universal-services/references/generated/sso/.gitkeep",
+        "iga": "skills/ping-universal-services/references/generated/iga/.gitkeep"
+      }
+    },
+    "ping-app-integration": {
+      "curated": [
+        "skills/ping-app-integration/references/curated/app-integration-overview.md",
+        "skills/ping-app-integration/references/curated/mobile-integration-basics.md",
+        "skills/ping-app-integration/references/curated/web-integration-basics.md",
+        "skills/ping-app-integration/references/curated/server-side-integration-basics.md",
+        "skills/ping-app-integration/references/curated/integration-troubleshooting-basics.md"
+      ],
+      "generated": {
+        "mobile": "skills/ping-app-integration/references/generated/mobile/.gitkeep",
+        "web": "skills/ping-app-integration/references/generated/web/.gitkeep",
+        "orchestration-sdks": "skills/ping-app-integration/references/generated/orchestration-sdks/.gitkeep",
+        "on-prem-integration": "skills/ping-app-integration/references/generated/on-prem-integration/.gitkeep"
+      }
+    },
+    "ping-identity-for-ai": {
+      "curated": [
+        "skills/ping-identity-for-ai/references/curated/identity-for-ai-overview.md",
+        "skills/ping-identity-for-ai/references/curated/verified-trust-overview.md",
+        "skills/ping-identity-for-ai/references/curated/agent-security-patterns.md",
+        "skills/ping-identity-for-ai/references/curated/workforce-helpdesk-ai.md",
+        "skills/ping-identity-for-ai/references/curated/agent-gateway-mcp.md"
+      ],
+      "generated": {}
+    }
+  }
+}

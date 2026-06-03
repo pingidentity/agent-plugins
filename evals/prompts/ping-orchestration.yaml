@@ -1,0 +1,147 @@
+skill: ping-orchestration
+version: 1
+trigger_prompts:
+  - id: T-01
+    prompt: "I want to build a registration journey in PingOne ST that collects email, sends a verification OTP, and creates a managed object on success. What nodes do I need and in what order?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/journey-design-patterns.md
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/nodes/basic-auth-nodes.md
+    expected_tier: curated
+
+  - id: T-02
+    prompt: "Build a DaVinci flow that does username/password login, checks risk with PingOne Protect, and triggers MFA step-up if risk is medium or high."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-mt/davinci-flow-patterns.md
+    expected_tier: curated
+
+  - id: T-03
+    prompt: "How do I add MFA nodes to an existing AIC authentication journey? I want to support both TOTP and push notification."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/nodes/mfa-nodes.md
+    expected_tier: curated
+
+  - id: T-04
+    prompt: "Design an AIC passwordless registration journey that collects a WebAuthn credential."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/passwordless-mfa-registration.md
+    expected_tier: curated
+
+  - id: T-05
+    prompt: "I need a social login plus local registration flow in PingOne ST. How should I structure the journey?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/social-and-local-registration-authentication.md
+    expected_tier: curated
+
+  - id: T-06
+    prompt: "Build a self-service password reset flow in AIC using email OTP."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/password-reset-and-update.md
+    expected_tier: curated
+
+  - id: T-07
+    prompt: "How do I add a scripted decision node to my PingOne ST authentication tree to check a custom attribute?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/nodes/utility-nodes.md
+    expected_tier: curated
+    notes: "Scripted Decision node documentation lives in utility-nodes.md (scripting section). No separate scripted-decision-nodes.md exists."
+
+  - id: T-08
+    prompt: "I'm building a financial services app and need to add PingOne Protect risk integration to my AIC journey to trigger step-up for high-risk transactions."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/financial-services-step-up.md
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/nodes/risk-management-nodes.md
+    expected_tier: curated
+
+  - id: T-09
+    prompt: "How does the federation node work in PingOne ST for SAML IdP delegation?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/nodes/federation-contextual-nodes.md
+    expected_tier: curated
+
+  - id: T-10
+    prompt: "Design a progressive profiling journey in AIC that collects additional user attributes after initial login."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/progressive-profiling.md
+    expected_tier: curated
+
+  # ----- Strategy doc § 9 use cases (Getting Started 0–30) -----
+
+  - id: T-50
+    prompt: "Build me a secure sign-up, sign-in, and recovery experience in AIC — registration, login, password reset, account recovery."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/journey-design-patterns.md
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/passwordless-mfa-registration.md
+    expected_tier: curated
+    notes: "strategy-uc-4 (AIC)"
+
+  - id: T-51
+    prompt: "Design a DaVinci registration flow with email verification and inline MFA enrollment for PingOne MT."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-mt/davinci-registration-and-mfa.md
+    expected_tier: curated
+    notes: "strategy-uc-4 (DaVinci)"
+
+  - id: T-52
+    prompt: "Add passkey / FIDO2 passwordless authentication to our customer journey, with magic link fallback."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/cross-platform/passkeys-and-passwordless.md
+    expected_tier: curated
+    notes: "strategy-uc-5 (passkeys)"
+
+  - id: T-53
+    prompt: "Build or adapt the orchestration layer for our recovery flow — the existing journey isn't handling MFA reset correctly."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/account-recovery-and-username-reminder.md
+    expected_tier: curated
+    notes: "strategy-uc-7 (recovery)"
+
+  - id: T-54
+    prompt: "How do I add risk-based step-up MFA to our DaVinci sign-in flow using PingOne Protect signals?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-mt/davinci-flow-patterns.md
+    expected_tier: curated
+    notes: "strategy-uc-5 (Protect step-up)"
+
+non_trigger_prompts:
+  - id: N-01
+    prompt: "How do I install PingFederate on RHEL and configure initial admin settings?"
+    expected_skill: ping-foundation
+    notes: "On-prem admin setup — not flow design."
+
+  - id: N-02
+    prompt: "Where do I start with Ping Identity? We don't know which platform to use."
+    expected_skill: ping-quickstart
+    notes: "Platform selection and orientation — not flow design."
+
+  - id: N-03
+    prompt: "How do I register an OIDC app in my PingOne MT environment?"
+    expected_skill: ping-foundation
+    notes: "App registration is a platform configuration task, not orchestration."
+
+  - id: N-04
+    prompt: "Integrate the Ping iOS SDK with my AIC journeys in my Swift app."
+    expected_skill: ping-app-integration
+    notes: "SDK integration into an app is handled by ping-app-integration, not flow design."
+
+  - id: N-05
+    prompt: "Give my AI agent a Verified Trust identity for accessing our APIs."
+    expected_skill: ping-identity-for-ai
+    notes: "AI agent identity and trust — not authentication flow design."
+
+  - id: N-06
+    prompt: "How do I configure PingOne Verify for document proofing without embedding it in a journey?"
+    expected_skill: ping-universal-services
+    notes: "Standalone universal service invocation without flow design — should route to ping-universal-services per the skill's When NOT to use section."
+
+ambiguous_prompts:
+  - id: A-01
+    prompt: "Should I use a journey or a DaVinci flow?"
+    expected_clarification_keywords: ["pingone", "aic", "mt", "st", "platform", "product"]
+
+  - id: A-02
+    prompt: "AIC or DaVinci for my login flow?"
+    expected_clarification_keywords: ["use case", "workforce", "ciam", "requirement", "platform"]
+
+  - id: A-03
+    prompt: "Where do I configure MFA in Ping?"
+    expected_clarification_keywords: ["pingone", "aic", "platform", "mt", "st", "journey", "policy"]

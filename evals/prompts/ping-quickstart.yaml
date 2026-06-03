@@ -1,0 +1,130 @@
+skill: ping-quickstart
+version: 1
+trigger_prompts:
+  - id: T-01
+    prompt: "Where do I start with Ping Identity? We're a new company and don't know which product to pick."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/getting-started-overview.md
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/choose-the-right-ping-platform.md
+    expected_tier: curated
+    notes: "Classic orientation prompt — platform unknown."
+
+  - id: T-02
+    prompt: "We're evaluating PingOne vs PingOne Advanced Identity Cloud vs PingFederate. What questions should we be asking?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/choose-the-right-ping-platform.md
+    expected_tier: curated
+
+  - id: T-03
+    prompt: "I inherited a Ping deployment and don't know where to begin. How do I get oriented?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/getting-started-overview.md
+    expected_tier: curated
+
+  - id: T-04
+    prompt: "Should we go with PingOne cloud or PingFederate on-prem for our enterprise SSO project?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/choose-the-right-ping-platform.md
+    expected_tier: curated
+
+  - id: T-05
+    prompt: "We're a bank building a new mobile banking app and need login plus MFA. Where do we start with Ping?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/getting-started-overview.md
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/common-starting-patterns.md
+    expected_tier: curated
+    notes: "CIAM mobile — platform unknown."
+
+  - id: T-06
+    prompt: "We're migrating from ForgeRock to Ping. What does the migration path look like?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/common-starting-patterns.md
+    expected_tier: curated
+
+  - id: T-07
+    prompt: "Help me understand the Ping Identity product landscape before we commit to a platform."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/choose-the-right-ping-platform.md
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/getting-started-overview.md
+    expected_tier: curated
+
+  - id: T-08
+    prompt: "We need CIAM for our customer portal. We're not sure whether to use PingOne or AIC."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/choose-the-right-ping-platform.md
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/common-starting-patterns.md
+    expected_tier: curated
+
+  - id: T-09
+    prompt: "We want to add identity verification KYC to our onboarding flow. Where do we start?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/common-starting-patterns.md
+    expected_tier: curated
+
+  - id: T-10
+    prompt: "We're setting up Ping for employee identity for the first time. What's the recommended starting point?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/getting-started-overview.md
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/common-starting-patterns.md
+    expected_tier: curated
+
+  # ----- Strategy doc § 9 use cases (Getting Started 0–30) -----
+
+  - id: T-50
+    prompt: "Help me get started with Ping for my use case — we want a customer login experience but don't know which Ping product fits."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/getting-started-overview.md
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/choose-the-right-ping-platform.md
+    expected_tier: curated
+    notes: "strategy-uc-1"
+
+  - id: T-51
+    prompt: "Test this end to end and tell me what I need to change before going live with our Ping setup."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/end-to-end-validation.md
+    expected_tier: curated
+    notes: "strategy-uc-9 — cross-cutting validation"
+
+  - id: T-52
+    prompt: "How do I validate that my Ping configuration actually works? I just finished building a sign-on policy and a journey."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/end-to-end-validation.md
+    expected_tier: curated
+    notes: "strategy-uc-9"
+
+non_trigger_prompts:
+  - id: N-01
+    prompt: "Build me a registration journey in PingOne ST that collects email and sends an OTP."
+    expected_skill: ping-orchestration
+    notes: "Platform and task named explicitly — route to orchestration."
+
+  - id: N-02
+    prompt: "Add an OIDC application to my AIC tenant."
+    expected_skill: ping-foundation
+    notes: "Specific admin task on a named platform."
+
+  - id: N-03
+    prompt: "Integrate the Ping iOS SDK with our AIC journeys."
+    expected_skill: ping-app-integration
+
+  - id: N-04
+    prompt: "Score risk with PingOne Protect during my login flow and adapt the journey."
+    expected_skill: ping-orchestration
+    notes: "Specific orchestration + services task — not an orientation question."
+
+  - id: N-05
+    prompt: "Give my AI agent a verified identity for API access using Ping."
+    expected_skill: ping-identity-for-ai
+
+ambiguous_prompts:
+  - id: A-01
+    prompt: "I want to add MFA."
+    expected_clarification_keywords: ["pingone", "aic", "platform", "workforce", "ciam", "mt", "st"]
+
+  - id: A-02
+    prompt: "How do I do passwordless?"
+    expected_clarification_keywords: ["pingone", "aic", "platform", "product", "davinci", "journey"]
+
+  - id: A-03
+    prompt: "We need risk-based authentication."
+    expected_clarification_keywords: ["pingone", "aic", "platform", "protect", "davinci", "journey"]

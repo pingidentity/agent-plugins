@@ -1,0 +1,44 @@
+{
+  "ping-app-integration": {
+    "layer": 1,
+    "trigger": 1.0,
+    "non_trigger": 1.0,
+    "ambiguous": 1.0,
+    "passed": true
+  },
+  "ping-foundation": {
+    "layer": 1,
+    "trigger": 1.0,
+    "non_trigger": 1.0,
+    "ambiguous": 1.0,
+    "passed": true
+  },
+  "ping-identity-for-ai": {
+    "layer": 1,
+    "trigger": 1.0,
+    "non_trigger": 1.0,
+    "ambiguous": 1.0,
+    "passed": true
+  },
+  "ping-orchestration": {
+    "layer": 1,
+    "trigger": 1.0,
+    "non_trigger": 1.0,
+    "ambiguous": 1.0,
+    "passed": true
+  },
+  "ping-quickstart": {
+    "layer": 1,
+    "trigger": 0.9,
+    "non_trigger": 1.0,
+    "ambiguous": 1.0,
+    "passed": true
+  },
+  "ping-universal-services": {
+    "layer": 1,
+    "trigger": 1.0,
+    "non_trigger": 1.0,
+    "ambiguous": 1.0,
+    "passed": true
+  }
+}

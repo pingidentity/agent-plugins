@@ -1,0 +1,6 @@
+{
+  "name": "ping-identity",
+  "version": "1.0.0",
+  "description": "Core Ping Identity platform skills: ping-quickstart, ping-foundation, ping-orchestration, ping-universal-services, ping-app-integration, ping-identity-for-ai.",
+  "author": { "name": "Ping Identity" }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "ping-identity-skills",
+  "owner": { "name": "Ping Identity" },
+  "description": "Agent skills for Ping Identity platforms — six umbrella skills covering platform setup, orchestration, universal services, app integration, AI identity patterns, and platform routing.",
+  "plugins": [
+    {
+      "name": "ping-identity",
+      "source": "./plugins/ping-identity"
+    }
+  ]
+}
