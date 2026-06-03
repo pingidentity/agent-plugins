@@ -38,7 +38,7 @@ Does NOT cover:
 | Dimension | What moves | Who drives it | Primary skill | Docs entry point |
 |---|---|---|---|---|
 | A — SDK code | Mobile/web app authentication code from ForgeRock SDK to Ping Orchestration SDK | Developer | `ping-app-integration` | [SDK migration](https://developer.pingidentity.com/orchsdks/journey/migration.html) |
-| B — Server/SaaS | Self-managed ForgeRock AM/IDM tenant → PingOne Advanced Identity Cloud (AIC) | Architect + PS | `ping-foundation` | [AIC planning & migration](https://docs.pingidentity.com/pingoneaic/latest/planning/plan-identity-cloud.html) |
+| B — Server/SaaS | Self-managed ForgeRock AM/IDM tenant → PingOne Advanced Identity Cloud (AIC) | Architect + PS | `ping-foundation` | [AIC planning & migration](https://docs.pingidentity.com/pingoneaic/planning/plan-identity-cloud.html) |
 | C — PingFederate → PingOne MT | PingFederate apps and policies → PingOne MT via Cloud Acceleration Toolset | Admin + Architect | `ping-foundation` | [Cloud Acceleration Toolset](https://docs.pingidentity.com/pingone/migration-tools/p1_cloud_acceleration_toolset.html) |
 
 These dimensions are independent. A single engagement may involve all three, or only one.
@@ -198,7 +198,7 @@ If a customer asks about this path:
 ## Source
 
 - SDK migration: https://developer.pingidentity.com/orchsdks/journey/migration.html
-- AIC planning and migration: https://docs.pingidentity.com/pingoneaic/latest/planning/plan-identity-cloud.html
+- AIC planning and migration: https://docs.pingidentity.com/pingoneaic/planning/plan-identity-cloud.html
 - Cloud Acceleration Toolset: https://docs.pingidentity.com/pingone/migration-tools/p1_cloud_acceleration_toolset.html
 - AIC environments: https://docs.pingidentity.com/pingoneaic/tenants/environments.html
 - AIC realms: https://docs.pingidentity.com/pingoneaic/realms/alpha-bravo-realms.html

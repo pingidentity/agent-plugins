@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SKILL.md Frontmatter Schema",
+  "description": "Required frontmatter for every SKILL.md. Drives marketplace listing, routing, and IDE discovery.",
+  "type": "object",
+  "required": ["name", "description", "compatibility", "metadata"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "maxLength": 64,
+      "description": "Lowercase hyphenated skill name. Must exactly match the directory name."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 50,
+      "description": "Trigger description. Used by IDE discovery and skill routing. Must be specific enough for an agent to decide whether to activate this skill."
+    },
+    "compatibility": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Short note on what platforms, tools, or context this skill requires."
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["publisher", "version"],
+      "additionalProperties": false,
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "Publishing organisation, e.g. 'Ping Identity'"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
+          "description": "Semantic version string, e.g. '1.0.0'"
+        }
+      }
+    }
+  }
+}
