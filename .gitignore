@@ -8,3 +8,5 @@ PHASE-3-PLAN.md
 SUMMARY.md
 docs/
 *.local.json
+.env.local
+.env

@@ -105,13 +105,25 @@ Pass bar: 90% trigger / 90% non-trigger / 80% ambiguous. Full results: `evals/re
 
 Run the eval yourself:
 ```bash
-pip install pyyaml jsonschema
-python3 -m evals.harness.validate_prompts
-# Mock (no API key needed):
+pip install pyyaml jsonschema anthropic
+
+# Mock — no API key needed, deterministic:
 python3 -m evals.harness.run_eval --adapter mock --layer 1
-# Live (requires LLM API key — see evals/harness/adapters/claude.py):
+
+# Live — direct Anthropic API:
+export ANTHROPIC_API_KEY=sk-ant-...
+export MODEL_DIRECT=claude-3-5-sonnet-20241022
+python3 -m evals.harness.run_eval --adapter claude --layer 1
+
+# Live — AWS Bedrock:
+export CLAUDE_CODE_USE_BEDROCK=1
+export AWS_REGION=us-east-1
+export AWS_BEARER_TOKEN_BEDROCK=<token>
+export MODEL_BEDROCK=<cross-region-inference-profile-id>
 python3 -m evals.harness.run_eval --adapter claude --layer 1
 ```
+
+All four env vars for the chosen path are required — the adapter has no defaults and will exit with a clear error message if any are missing.
 
 ---
 
