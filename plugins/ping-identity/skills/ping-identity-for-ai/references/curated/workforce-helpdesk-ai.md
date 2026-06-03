@@ -9,8 +9,8 @@ use_cases: ["workforce"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-06-01"
-slug: "https://docs.pingidentity.com/pingone/token-exchange"
+last_updated: "2026-06-03"
+slug: "https://docs.pingidentity.com/pingone/use_cases/p1_oauth_2_token_exchange.html"
 ---
 
 # Workforce Helpdesk AI — Identity Pattern for AI Assistants Acting on Behalf of Employees

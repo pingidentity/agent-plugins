@@ -9,8 +9,8 @@ use_cases: ["ai-identity"]
 doc_type: reference
 status: current
 canonical: true
-last_updated: "2026-06-01"
-slug: "https://docs.pingidentity.com/davinci/verified-trust"
+last_updated: "2026-06-03"
+slug: "https://docs.pingidentity.com/davinci/applications/davinci_applications.html"
 ---
 
 # Verified Trust Overview — Ping Identity

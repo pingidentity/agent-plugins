@@ -61,9 +61,12 @@ Complete agent token scoping, Verified Trust signal design, and delegation model
 
 | Task | Curated anchor |
 |---|---|
-| Overview / strategy for Identity for AI | `references/curated/identity-for-ai-overview.md` |
-| Give an AI agent an identity / machine-to-machine auth | `references/curated/agent-security-patterns.md` |
-| Token scoping, rotation, revocation, or audit for agents | `references/curated/agent-security-patterns.md` |
+| Overview / strategy for Identity for AI (5-pillar) | `references/curated/identity-for-ai-overview.md` |
+| Register an AI agent as a managed identity | `references/curated/agent-security-patterns.md` |
+| Machine-to-machine auth, token scoping, rotation, revocation | `references/curated/agent-security-patterns.md` |
+| CIBA human-in-the-loop approvals for high-risk agent actions | `references/curated/agent-security-patterns.md` |
+| Bot / agentic AI detection in flows (Protect) | `references/curated/agent-security-patterns.md` |
+| Protect / secure an MCP server (PingGateway) | `references/curated/agent-gateway-mcp.md` |
 | Apply Verified Trust signals or verifiable credentials | `references/curated/verified-trust-overview.md` |
 | Workforce helpdesk AI — delegation + step-up pattern | `references/curated/workforce-helpdesk-ai.md` |
 | AI application end-user authentication (delegated) | `references/curated/workforce-helpdesk-ai.md` |

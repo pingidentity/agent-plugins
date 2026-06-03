@@ -102,7 +102,8 @@
         "skills/ping-identity-for-ai/references/curated/identity-for-ai-overview.md",
         "skills/ping-identity-for-ai/references/curated/verified-trust-overview.md",
         "skills/ping-identity-for-ai/references/curated/agent-security-patterns.md",
-        "skills/ping-identity-for-ai/references/curated/workforce-helpdesk-ai.md"
+        "skills/ping-identity-for-ai/references/curated/workforce-helpdesk-ai.md",
+        "skills/ping-identity-for-ai/references/curated/agent-gateway-mcp.md"
       ],
       "generated": {}
     }

@@ -9,8 +9,8 @@ use_cases: ["ai-identity"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-06-01"
-slug: "https://docs.pingidentity.com/pingone/oauth-client-credentials"
+last_updated: "2026-06-03"
+slug: "https://docs.pingidentity.com/pingone/ai_agents/p1_ai_agents.html"
 ---
 
 # Agent Security Patterns — Securing AI Agents with Ping Identity
@@ -21,6 +21,40 @@ Patterns for securing autonomous and semi-autonomous AI agents that call Ping Id
 
 Covers: OAuth 2.0 client credentials flow as the default machine-to-machine pattern for AI agents, token scoping strategy, short-lived token rotation, revocation on compromise, and correlatable audit patterns.
 Does NOT cover: human-in-the-loop delegation (see `references/curated/workforce-helpdesk-ai.md`), Verified Trust signal issuance (see `references/curated/verified-trust-overview.md`), or standard OIDC application registration for user-facing apps (see `ping-foundation`).
+
+---
+
+## Pattern 0: Register the agent as a managed identity
+
+Before any token is issued, the AI agent should be registered as a first-class identity — not just an anonymous OAuth2 client. This enables lifecycle management, ownership tracking, and audit.
+
+### PingOne — AI Agents feature
+
+PingOne supports registering AI agents as managed identities via the **AI Agents** admin surface (requires Agent IAM Core license; contact Ping Identity Sales).
+
+| Registration field | Notes |
+|---|---|
+| Agent name | Human-readable label; appears in audit logs and admin console |
+| Owner | The human or team responsible for the agent |
+| Client ID | Auto-generated OAuth 2.0 client ID |
+| Client authentication method | `private_key_jwt` (recommended) or `client_secret_basic` |
+| Scopes | Minimum required; configured at registration |
+
+Registered agents appear in the AI Agents list (Directory > AI Agents in the PingOne console) alongside human identities.
+
+### PingOne AIC — Dynamic agent onboarding via `/aiagent/register`
+
+AIC provides a dedicated DCR endpoint for AI agents: `/aiagent/register` (in addition to the standard `/register`). This endpoint onboards AI agents as dynamic OAuth 2.0 clients with agent-specific defaults.
+
+> **Availability:** Production-ready as of 2026-06-03. Currently available on the **Rapid channel** only; Regular channel promotion is planned.
+
+AIC AI agents can perform tasks on behalf of end users through a delegated token exchange process (RFC 8693), maintaining distinct accountability and granular access control.
+
+### Agent detection — know your agents
+
+- Track all agent registrations in a registry (admin console, IDP admin API, or CMDB).
+- Each agent should have a documented owner and expiry/renewal date.
+- Disable agents that are decommissioned — do not leave them in a dormant but active state.
 
 ---
 
@@ -148,6 +182,49 @@ Every API call made by an AI agent must be attributable to that agent, the actio
 
 ---
 
+## Pattern 6: Human-in-the-loop (HITL) approvals via CIBA
+
+For high-risk agent actions (fund transfers, privileged access grants), the agent should pause execution and request explicit human approval before proceeding — without requiring the human to be present in the original session.
+
+**CIBA (Client Initiated Backchannel Authentication)** is the OAuth 2.0 pattern for this:
+
+```
+AI Agent → CIBA authorization request (POST /bc-authorize)
+              → Ping AS sends push notification to user's mobile app
+              → User approves or denies on device
+              → Ping AS returns approval signal to agent
+AI Agent → Token exchange (RFC 8693) for elevated token
+AI Agent → Performs high-risk action with HITL-approved token
+```
+
+| HITL scenario | Mechanism |
+|---|---|
+| Fund transfer approval | Agent pauses; CIBA push to approver (user or manager); agent proceeds only on explicit approval |
+| Privileged access grant | Same pattern; approver may be the user or a separate admin identity |
+| Account disable (admin) | Full admin re-authentication; not delegation |
+
+**CIBA support:** PingFederate (native CIBA endpoint); PingOne AIC (Journey-based backchannel auth). CIBA requires a registered push delivery mechanism (PingID mobile, APNs/FCM push) on the approver's device.
+
+**Constraint:** CIBA polling timeout must be shorter than the agent's operation timeout. If the human does not respond within the CIBA timeout, the authorization is abandoned — the agent must handle this as a failure, not a retry.
+
+## Pattern 7: Bot and agent detection
+
+PingOne Protect's **bot detection predictor** explicitly identifies agentic AI automation, CUAs (computer-using agents), and automated frameworks as high-risk activity. This enables flows to:
+- Block agents masquerading as human users
+- Flag unexpected agentic activity from known human sessions
+- Identify specific agent types in the risk evaluation response
+
+**Integration:** Wire Protect into the authentication flow for any application that handles both human and agent traffic. Branch on `result.recommendation.value`:
+- `ALLOW` — proceed normally
+- `CHALLENGE` — step-up (or CIBA approval for agents)
+- `BLOCK` — deny; agent should not be authenticating through a human flow
+
+**For legitimate non-human flows:** Register agents via `private_key_jwt` client credentials — they bypass the Protect flow entirely. Bot detection fires when an agent incorrectly uses a human-facing authentication endpoint.
+
+See `ping-universal-services` → `protect-configuration.md` for the full bot detection predictor configuration.
+
+---
+
 ## Anti-patterns
 
 | Anti-pattern | Risk | Correct alternative |
@@ -189,7 +266,10 @@ Every API call made by an AI agent must be attributable to that agent, the actio
 
 ## Source
 
-[PingOne OAuth 2.0 client credentials](https://docs.pingidentity.com/pingone/oauth-client-credentials)
-[PingFederate OAuth 2.0 AS guide](https://docs.pingidentity.com/pingfederate/oauth-as)
-[RFC 8693 — OAuth 2.0 Token Exchange](https://datatracker.ietf.org/doc/html/rfc8693)
-[RFC 7523 — JWT Profile for OAuth 2.0 Client Authentication](https://datatracker.ietf.org/doc/html/rfc7523)
+- https://docs.pingidentity.com/pingone/ai_agents/p1_ai_agents.html
+- https://docs.pingidentity.com/pingoneaic/release-notes/rapid-channel/ai-agents.html
+- https://docs.pingidentity.com/pingoneaic/release-notes/rapid-channel/ai-agents-configure-on-behalf-of-authentication-flow.html
+- https://docs.pingidentity.com/pingoneaic/release-notes/rapid-channel/ai-agents-configure-dcr-onboarding-flow.html
+- https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_risk_predictors.html
+- https://datatracker.ietf.org/doc/html/rfc8693
+- https://datatracker.ietf.org/doc/html/rfc7523

@@ -9,8 +9,8 @@ use_cases: ["ai-identity"]
 doc_type: concept
 status: current
 canonical: true
-last_updated: "2026-06-01"
-slug: "https://docs.pingidentity.com/identity-for-ai"
+last_updated: "2026-06-03"
+slug: "https://docs.pingidentity.com/solution-guides/identity-for-ai/identity-for-ai-solutions.html"
 ---
 
 # Identity for AI Overview — Ping Identity
@@ -24,15 +24,17 @@ Does NOT cover: general platform setup (see `ping-foundation`), user journey des
 
 ---
 
-## The three buckets of Identity for AI
+## The five pillars of Identity for AI
 
-Ping Identity organizes AI-era identity work into three distinct problem areas. Each has a distinct trust boundary and requires different Ping capabilities.
+Ping Identity's Identity for AI solution covers five distinct problem areas. Each has a distinct trust boundary and requires different Ping capabilities.
 
-| Bucket | What it means | Primary Ping surface |
+| Pillar | What it means | Primary Ping surface |
 |---|---|---|
-| **Verified Trust** | Giving AI agents and AI applications verifiable, digitally signed trust signals — so that a relying party can cryptographically confirm an assertion about the agent, device, or user identity without calling back to the issuer | DaVinci flow connector, Journey node, Verifiable Credentials issuer/wallet |
-| **Agent Security** | Securing the connection between an autonomous AI agent and the APIs or protected resources it calls — using standard identity protocols (OAuth 2.0 / OIDC) so that no long-lived secrets are embedded in the agent | PingOne OAuth 2.0 AS, PingFederate OAuth AS, PingOne AIC |
-| **AI App Authentication** | Authenticating end-users of AI-powered applications (LLM chat interfaces, AI copilots, AI-fronted portals) — the same OIDC flows used for standard apps, with additional considerations for delegated agent actions on behalf of authenticated users | PingOne MT, PingOne AIC (Journey), DaVinci |
+| **Agent Identity** | Registering AI agents as first-class OAuth 2.0 identities — with unique credentials, lifecycle management, and ownership tracking — so agents are managed identities, not anonymous service accounts | PingOne (AI Agents feature), PingOne AIC (`/aiagent/register` DCR endpoint), PingFederate (dynamic client registration) |
+| **Agent Security** | Securing what agents can do after they authenticate — delegated access, scoped tokens, least-privilege controls, and token exchange so agents act on behalf of users through delegation, not impersonation | PingOne OAuth 2.0 AS, PingFederate OAuth AS, PingOne AIC |
+| **Agent Gateway** | Protecting the MCP servers, APIs, and resources agents call at runtime — validating requests, enforcing policy, throttling, and creating centralized audit trails before traffic reaches backend tools | PingGateway Agent Gateway module (MCP security gateway) |
+| **Agent Detection** | Detecting and responding to suspicious agent behavior — using Protect's bot detection predictor, which explicitly identifies agentic AI automation, CUAs, and automated frameworks | PingOne Protect (bot detection predictor) |
+| **AI App Authentication + Verified Trust** | Authenticating end-users of AI-powered apps (LLM chat interfaces, copilots), delegating access on their behalf, and embedding cryptographically verifiable trust signals that cross organizational boundaries | PingOne MT, PingOne AIC (Journey), DaVinci, PingOne Credentials |
 
 ---
 
@@ -49,40 +51,49 @@ Ping Identity organizes AI-era identity work into three distinct problem areas. 
 
 ---
 
-## Intent-to-sub-area routing table
+## Intent-to-pillar routing table
 
-Use this table to identify which curated anchor to load for a given user intent.
-
-| User intent | Sub-area | Curated anchor |
+| User intent | Pillar | Curated anchor |
 |---|---|---|
-| "Give my AI agent an identity so it can call our APIs" | Agent Security | `references/curated/agent-security-patterns.md` |
+| "Give my AI agent an identity so it can call our APIs" | Agent Identity + Security | `references/curated/agent-security-patterns.md` |
+| "Register my AI agent as a managed identity in PingOne / AIC" | Agent Identity | `references/curated/agent-security-patterns.md` |
 | "Use client credentials flow for an autonomous agent" | Agent Security | `references/curated/agent-security-patterns.md` |
-| "Short-lived tokens for agent rotation / revocation" | Agent Security | `references/curated/agent-security-patterns.md` |
-| "Apply Verified Trust signals in my MCP server" | Verified Trust | `references/curated/verified-trust-overview.md` |
-| "Issue a verifiable credential for my AI agent" | Verified Trust | `references/curated/verified-trust-overview.md` |
-| "Workforce helpdesk AI — authenticate users for the AI bot" | AI App Auth + Delegation | `references/curated/workforce-helpdesk-ai.md` |
-| "Delegated token for an AI assistant acting on behalf of a user" | AI App Auth + Delegation | `references/curated/workforce-helpdesk-ai.md` |
+| "Short-lived tokens, rotation, revocation for agents" | Agent Security | `references/curated/agent-security-patterns.md` |
+| "Protect / secure an MCP server" | Agent Gateway | `references/curated/agent-gateway-mcp.md` |
+| "PingGateway as MCP gateway" | Agent Gateway | `references/curated/agent-gateway-mcp.md` |
+| "Detect agentic AI or bot activity in my flows" | Agent Detection | `references/curated/agent-security-patterns.md` + `ping-universal-services` Protect skill |
+| "Apply Verified Trust signals / verifiable credentials" | Verified Trust | `references/curated/verified-trust-overview.md` |
+| "Issue a verifiable credential for an AI agent" | Verified Trust | `references/curated/verified-trust-overview.md` |
+| "Workforce helpdesk AI — delegation + step-up" | AI App Auth + Delegation | `references/curated/workforce-helpdesk-ai.md` |
+| "Delegated token for AI assistant acting on behalf of user" | AI App Auth + Delegation | `references/curated/workforce-helpdesk-ai.md` |
 | "Identity for AI architecture overview / strategy" | Overview | `references/curated/identity-for-ai-overview.md` |
-| "AI application user authentication — LLM-fronted app" | AI App Auth | `references/curated/workforce-helpdesk-ai.md` (generic delegation pattern applies) |
-| "Identity proofing outcome as a trust signal for AI" | Verified Trust | `references/curated/verified-trust-overview.md` |
+| "Identity proofing outcome as trust signal for AI" | Verified Trust | `references/curated/verified-trust-overview.md` |
 
 ---
 
-## Relevant Ping products by sub-area
+## Relevant Ping products by pillar
 
-### Verified Trust
-- **PingOne DaVinci** — Verified Trust flow connector; issues and verifies trust assertions within an orchestration flow.
-- **PingOne AIC (Journey)** — Journey node for credential issuance and verification.
-- **PingOne Credentials** — Verifiable credential wallet and issuer; manages the full VC lifecycle (issue, hold, present, revoke).
+### Agent Identity
+- **PingOne** — AI Agents feature; register agents as first-class OAuth 2.0 identities with lifecycle management. License: Agent IAM Core (contact Ping Sales).
+- **PingOne AIC** — `/aiagent/register` DCR endpoint for dynamic agent onboarding; AI Agents admin UI in realm left-nav. **Available on Rapid channel as of 2026-06-03; Regular channel promotion planned.**
+- **PingFederate** — Dynamic client registration (DCR) for agent self-enrollment at runtime.
 
 ### Agent Security
-- **PingOne** — OAuth 2.0 Authorization Server for PingOne-hosted client credential grants; manages application registrations and scopes.
-- **PingFederate** — OAuth 2.0 AS for enterprise / on-premises deployments; supports dynamic client registration, token introspection, and JWT-bearer agent auth.
-- **PingOne AIC** — Journey-based auth for AI agents that need a human-step-up; also the OAuth AS for AIC-deployed workloads.
+- **PingOne** — OAuth 2.0 AS for client credential grants; Worker application registration; scoped tokens.
+- **PingFederate** — OAuth 2.0 AS; supports `private_key_jwt`, mTLS, dynamic client registration, RFC 7523 JWT bearer.
+- **PingOne AIC** — Journey-based step-up for agents requiring human approval (CIBA); OAuth AS for AIC workloads.
 
-### AI App Authentication
-- **PingOne MT / PingOne AIC** — OIDC provider for end-user authentication of AI-powered applications.
-- **PingOne DaVinci** — Orchestration for multi-step authentication flows in AI app onboarding or sensitive action step-up.
+### Agent Gateway
+- **PingGateway 2025.11.1+ / 2026.x** — Agent Gateway module (McpAuditFilter, McpProtectionFilter, McpValidationFilter); acts as OAuth 2.0 RS in front of MCP servers; requires RFC 8707 on the AS.
+
+### Agent Detection
+- **PingOne Protect** — Bot detection predictor explicitly identifies agentic AI automation, CUAs, and automated frameworks; returns HIGH risk + bot-specific agent type in the evaluation response.
+
+### Verified Trust + AI App Authentication
+- **PingOne DaVinci** — Verified Trust flow connector (DaVinci Advanced license required); issues/verifies signed trust assertions.
+- **PingOne AIC (Journey)** — Journey nodes for credential issuance and verification.
+- **PingOne Credentials** — W3C Verifiable Credential wallet, issuance, revocation.
+- **PingOne MT / AIC** — OIDC provider for end-user authentication of AI-powered apps; delegation via RFC 8693 token exchange.
 
 ---
 
@@ -102,21 +113,29 @@ Use this table to identify which curated anchor to load for a given user intent.
 
 ---
 
-## Decision guide: which sub-area do you need?
+## Decision guide: which pillar do you need?
 
-Use this guide to route quickly when the user's request is ambiguous.
+**Is the question about registering and managing the agent as a digital identity?**
+→ Agent Identity (`agent-security-patterns.md` — registration section)
 
-**Is a human user involved in the flow?**
-- No → Agent Security (client credentials, token scoping, rotation, revocation)
-- Yes, and the agent acts on the user's behalf → AI App Authentication + Delegation (`workforce-helpdesk-ai.md`)
-- Yes, and the agent presents claims to the user's resource → Verified Trust
+**Is the question about what the agent can access and how tokens are scoped/rotated/revoked?**
+→ Agent Security (`agent-security-patterns.md`)
+
+**Is the question about protecting an MCP server or API that agents call?**
+→ Agent Gateway (`agent-gateway-mcp.md`)
+
+**Is the question about detecting suspicious or unexpected agentic activity in flows?**
+→ Agent Detection → `ping-universal-services` (Protect bot detection predictor)
+
+**Is the question about a human user involved in the flow?**
+- Agent acts on the user's behalf → AI App Auth + Delegation (`workforce-helpdesk-ai.md`)
+- Agent presents claims across org boundaries → Verified Trust (`verified-trust-overview.md`)
 
 **Is the primary concern portability of claims across organizational boundaries?**
-- Yes → Verified Trust (verifiable credentials, DID-based trust)
-- No → Agent Security (standard OAuth tokens within one AS)
+→ Verified Trust (`verified-trust-overview.md`)
 
 **Is the integration a standard OIDC app without AI-specific patterns?**
-- Yes → Route to `ping-foundation` or `ping-app-integration`, not this skill
+→ Route to `ping-foundation` or `ping-app-integration`, not this skill
 
 ---
 
@@ -154,6 +173,9 @@ A production AI identity solution composes multiple skills in sequence. See the 
 
 ## Source
 
-[Ping Identity Identity for AI](https://docs.pingidentity.com/identity-for-ai)
-[PingOne DaVinci Documentation](https://docs.pingidentity.com/davinci)
-[PingOne Credentials Documentation](https://docs.pingidentity.com/pingone/credentials)
+- https://docs.pingidentity.com/solution-guides/identity-for-ai/identity-for-ai-solutions.html
+- https://docs.pingidentity.com/pingone/ai_agents/p1_ai_agents.html
+- https://docs.pingidentity.com/pingoneaic/release-notes/rapid-channel/ai-agents.html
+- https://docs.pingidentity.com/davinci/applications/davinci_applications.html
+- https://docs.pingidentity.com/pinggateway/2026/mcp/index.html
+- https://developer.pingidentity.com/identity-for-ai/release-notes/idai-whats-new.html

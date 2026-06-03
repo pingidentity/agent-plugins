@@ -8,7 +8,7 @@
   },
   "ping-foundation": {
     "layer": 1,
-    "trigger": 0.9,
+    "trigger": 1.0,
     "non_trigger": 1.0,
     "ambiguous": 1.0,
     "passed": true
