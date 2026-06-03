@@ -64,6 +64,44 @@ trigger_prompts:
       - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/progressive-profiling.md
     expected_tier: curated
 
+  # ----- Strategy doc § 9 use cases (Getting Started 0–30) -----
+
+  - id: T-50
+    prompt: "Build me a secure sign-up, sign-in, and recovery experience in AIC — registration, login, password reset, account recovery."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/journey-design-patterns.md
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/passwordless-mfa-registration.md
+    expected_tier: curated
+    notes: "strategy-uc-4 (AIC)"
+
+  - id: T-51
+    prompt: "Design a DaVinci registration flow with email verification and inline MFA enrollment for PingOne MT."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-mt/davinci-registration-and-mfa.md
+    expected_tier: curated
+    notes: "strategy-uc-4 (DaVinci)"
+
+  - id: T-52
+    prompt: "Add passkey / FIDO2 passwordless authentication to our customer journey, with magic link fallback."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/cross-platform/passkeys-and-passwordless.md
+    expected_tier: curated
+    notes: "strategy-uc-5 (passkeys)"
+
+  - id: T-53
+    prompt: "Build or adapt the orchestration layer for our recovery flow — the existing journey isn't handling MFA reset correctly."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/journey-use-cases/account-recovery-and-username-reminder.md
+    expected_tier: curated
+    notes: "strategy-uc-7 (recovery)"
+
+  - id: T-54
+    prompt: "How do I add risk-based step-up MFA to our DaVinci sign-in flow using PingOne Protect signals?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-mt/davinci-flow-patterns.md
+    expected_tier: curated
+    notes: "strategy-uc-5 (Protect step-up)"
+
 non_trigger_prompts:
   - id: N-01
     prompt: "How do I install PingFederate on RHEL and configure initial admin settings?"

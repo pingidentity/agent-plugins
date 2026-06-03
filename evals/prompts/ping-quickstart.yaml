@@ -68,6 +68,30 @@ trigger_prompts:
       - plugins/ping-identity/skills/ping-quickstart/references/curated/common-starting-patterns.md
     expected_tier: curated
 
+  # ----- Strategy doc § 9 use cases (Getting Started 0–30) -----
+
+  - id: T-50
+    prompt: "Help me get started with Ping for my use case — we want a customer login experience but don't know which Ping product fits."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/getting-started-overview.md
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/choose-the-right-ping-platform.md
+    expected_tier: curated
+    notes: "strategy-uc-1"
+
+  - id: T-51
+    prompt: "Test this end to end and tell me what I need to change before going live with our Ping setup."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/end-to-end-validation.md
+    expected_tier: curated
+    notes: "strategy-uc-9 — cross-cutting validation"
+
+  - id: T-52
+    prompt: "How do I validate that my Ping configuration actually works? I just finished building a sign-on policy and a journey."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-quickstart/references/curated/end-to-end-validation.md
+    expected_tier: curated
+    notes: "strategy-uc-9"
+
 non_trigger_prompts:
   - id: N-01
     prompt: "Build me a registration journey in PingOne ST that collects email and sends an OTP."

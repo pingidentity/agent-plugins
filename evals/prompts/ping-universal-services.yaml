@@ -95,6 +95,22 @@ trigger_prompts:
     expected_tier: curated
     notes: "Ping Software Suite REST API invocation of Protect."
 
+  # ----- Strategy doc § 9 use cases (Getting Started 0–30) -----
+
+  - id: T-50
+    prompt: "Add risk-based security with PingOne Protect to detect suspicious logins and trigger step-up."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-universal-services/references/curated/protect-configuration.md
+    expected_tier: curated
+    notes: "strategy-uc-5 (Protect)"
+
+  - id: T-51
+    prompt: "Add identity verification (KYC) using PingOne Verify during customer onboarding."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-universal-services/references/curated/verify-configuration.md
+    expected_tier: curated
+    notes: "strategy-uc-5 (Verify)"
+
 non_trigger_prompts:
   - id: N-01
     prompt: "Set up the PingOne MT environment and register an OIDC application."

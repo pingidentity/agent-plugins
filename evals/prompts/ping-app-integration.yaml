@@ -80,6 +80,36 @@ trigger_prompts:
     expected_tier: curated
     notes: "Token refresh failure after background — covers offline_access scope and token storage accessibility."
 
+  # ----- Strategy doc § 9 use cases (Getting Started 0–30) -----
+
+  - id: T-50
+    prompt: "Integrate my existing React web app with PingOne — give me the implementation path for OIDC sign-in."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-app-integration/references/curated/web-integration-basics.md
+    expected_tier: curated
+    notes: "strategy-uc-6 (web)"
+
+  - id: T-51
+    prompt: "Connect my Android app to a DaVinci flow on PingOne MT — install SDK, init, handle callbacks."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-app-integration/references/curated/mobile-integration-basics.md
+    expected_tier: curated
+    notes: "strategy-uc-6 (mobile Android)"
+
+  - id: T-52
+    prompt: "Integrate my Node.js backend with PingOne using Authorization Code + PKCE — including token validation, refresh, and 429 retry handling."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-app-integration/references/curated/server-side-integration-basics.md
+    expected_tier: curated
+    notes: "strategy-uc-6 (server-side)"
+
+  - id: T-53
+    prompt: "I need a service-to-service token exchange between two backend microservices using Ping — what's the right pattern?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-app-integration/references/curated/server-side-integration-basics.md
+    expected_tier: curated
+    notes: "strategy-uc-6 (M2M / token exchange)"
+
 non_trigger_prompts:
   - id: N-01
     prompt: "Register an OIDC application in my PingOne MT admin console."

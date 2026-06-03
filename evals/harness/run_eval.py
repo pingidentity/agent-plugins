@@ -154,6 +154,8 @@ def _build_adapter(name: str) -> LLMAdapter:
     if name == "mock":
         rules: list[MockRule] = []
         for prompt_file in sorted(PROMPTS_DIR.glob("*.yaml")):
+            if prompt_file.stem in {"composition"}:
+                continue
             pset = load_prompt_set(prompt_file)
             for p in pset.trigger:
                 rules.append(MockRule(
