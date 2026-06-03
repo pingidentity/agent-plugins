@@ -27,6 +27,11 @@ python3 -m evals.harness.run_eval --adapter claude --layer 1
 
 All three commands must exit 0 before you open a PR.
 
+You can also run the validator without cloning — install directly from GitHub:
+```bash
+npx github:pingidentity/agent-plugins validate
+```
+
 ---
 
 ## PR checklist

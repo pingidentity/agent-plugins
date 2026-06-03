@@ -200,6 +200,15 @@ _FORBIDDEN_URLS = [
     (r'docs\.pingidentity\.com/pingoneaic/latest/', "contains /latest/ in AIC URL (use versioned path)"),
 ]
 
+# UI navigation phrases forbidden in curated anchors
+_UI_NAV_PATTERNS = [
+    r'\bclick\s+\w',
+    r'\bnavigate\s+to\b',
+    r'\bgo\s+to\s+the\b',
+    r'\bopen\s+the\s+(menu|console|panel|page|tab|dialog|dropdown)\b',
+    r'\bselect\s+the\s+(menu|option|tab|checkbox|button)\b',
+]
+
 
 def _detect_expected_family(md_path: Path, curated_root: Path) -> Optional[str]:
     """Infer expected product_family from directory path."""
@@ -237,11 +246,52 @@ def _check_curated_anchor(md_path: Path, curated_root: Path, repo_root: Path) ->
                 f"{hint}: product_family '{actual}' does not match directory path '{expected_family}'"
             )
 
-    # Forbidden URL patterns
     body = md_path.read_text(encoding="utf-8")
+
+    # Forbidden URL patterns
     for pattern, reason in _FORBIDDEN_URLS:
         if re.search(pattern, body):
             errors.append(f"{hint}: {reason}")
+
+    # ## Scope section required
+    if "## Scope" not in body:
+        errors.append(f"{hint}: missing '## Scope' section (must include Covers/Does NOT cover)")
+
+    # Covers / Does NOT cover inside Scope
+    scope_match = re.search(r'## Scope\s*(.*?)(?=\n## |\Z)', body, re.DOTALL)
+    if scope_match:
+        scope_text = scope_match.group(1)
+        if "Covers" not in scope_text:
+            errors.append(f"{hint}: ## Scope is missing 'Covers:' statement")
+        if "Does NOT cover" not in scope_text and "Does not cover" not in scope_text:
+            errors.append(f"{hint}: ## Scope is missing 'Does NOT cover:' statement")
+
+    # No UI navigation steps
+    body_lower = body.lower()
+    for pattern in _UI_NAV_PATTERNS:
+        if re.search(pattern, body_lower):
+            errors.append(
+                f"{hint}: contains UI navigation language ('{re.search(pattern, body_lower).group(0).strip()}') "
+                f"— write field tables and decision rules instead"
+            )
+            break  # one error per file is enough
+
+    # Cross-references must be repo-relative (no absolute paths like /Users/... or bare filenames)
+    for m in re.finditer(r'\[([^\]]+)\]\((/[^)]+\.md|[^/\)][^)]*\.md)\)', body):
+        ref = m.group(2)
+        # Bare filename (no path separator) or absolute path
+        if ref.startswith("/") or ("/" not in ref and not ref.startswith("http")):
+            errors.append(f"{hint}: cross-reference '{ref}' must be a repo-relative path")
+
+    # Plugin files must not reference /shared/
+    plugin_root = repo_root / "plugins"
+    try:
+        md_path.relative_to(plugin_root)
+        in_plugin = True
+    except ValueError:
+        in_plugin = False
+    if in_plugin and re.search(r'[(`"\']/?shared/', body):
+        errors.append(f"{hint}: plugin file references /shared/ — plugin files must be self-contained")
 
     return errors
 

@@ -1,0 +1,16 @@
+{
+  "name": "@pingidentity/agent-plugins",
+  "version": "1.0.0",
+  "description": "Ping Identity agent skill validation CLI. Run `npx github:pingidentity/agent-plugins validate` to validate skill content.",
+  "bin": {
+    "skills-ref": "./tools/skills-ref/bin/validate.js"
+  },
+  "scripts": {
+    "validate": "node tools/skills-ref/bin/validate.js validate"
+  },
+  "keywords": ["ping", "pingidentity", "skills", "agent-skills", "validate"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  }
+}
