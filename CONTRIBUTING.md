@@ -10,7 +10,10 @@ This repo ships the 6 umbrella skills for the Ping Identity agent skills package
 git clone https://github.com/pingidentity/agent-plugins.git
 cd agent-plugins
 
-# Validate everything
+# Install pre-commit hooks (run once after cloning)
+bash scripts/install-hooks.sh
+
+# Validate everything manually
 python3 scripts/validate_skills.py --root .
 
 # Run evals (mock, no API key needed)
@@ -28,7 +31,8 @@ All three commands must exit 0 before you open a PR.
 
 ## PR checklist
 
-Before opening a PR, confirm every item:
+The pre-commit hook (`bash scripts/install-hooks.sh`) runs the first four checks automatically on every `git commit`. Confirm all items before opening a PR:
+
 
 - [ ] `python3 scripts/validate_skills.py --root .` exits 0
 - [ ] `python3 -m evals.harness.validate_prompts` exits 0

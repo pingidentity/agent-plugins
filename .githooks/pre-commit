@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# Pre-commit hook: validate skill content + run mock evals.
+# Installed via: git config core.hooksPath .githooks
+# Or: scripts/install-hooks.sh
+#
+# Skips checks if no relevant files changed.
+
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+# Detect which files are staged
+STAGED=$(git diff --cached --name-only)
+
+SKILLS_CHANGED=$(echo "$STAGED" | grep -E \
+  "^plugins/ping-identity/skills/|^plugins/ping-identity/references/index\.json|^shared/schemas/|^scripts/validate_skills\.py" \
+  || true)
+
+EVALS_CHANGED=$(echo "$STAGED" | grep -E \
+  "^evals/|^plugins/ping-identity/skills/" \
+  || true)
+
+if [ -z "$SKILLS_CHANGED" ] && [ -z "$EVALS_CHANGED" ]; then
+  exit 0
+fi
+
+echo "🔍 Running pre-commit checks..."
+
+# ── 1. Skill content validator ──────────────────────────────────────────────
+if [ -n "$SKILLS_CHANGED" ]; then
+  echo "  → Validating skill content..."
+  if ! python3 scripts/validate_skills.py --root .; then
+    echo ""
+    echo "❌ Skill validation failed. Fix the errors above before committing."
+    exit 1
+  fi
+fi
+
+# ── 2. Prompt YAML schema validator ─────────────────────────────────────────
+if [ -n "$EVALS_CHANGED" ]; then
+  echo "  → Validating eval prompt sets..."
+  if ! python3 -m evals.harness.validate_prompts 2>&1 | grep -v "^SKIP"; then
+    echo ""
+    echo "❌ Eval prompt validation failed. Fix the errors above before committing."
+    exit 1
+  fi
+
+  echo "  → Running Layer 1 mock eval..."
+  if ! python3 -m evals.harness.run_eval --adapter mock --layer 1; then
+    echo ""
+    echo "❌ Layer 1 eval failed. All skills must pass before committing."
+    exit 1
+  fi
+
+  echo "  → Running Layer 2 mock eval..."
+  if ! python3 -m evals.harness.run_eval --adapter mock --layer 2; then
+    echo ""
+    echo "❌ Layer 2 eval failed. All skills must pass before committing."
+    exit 1
+  fi
+fi
+
+echo "✅ All pre-commit checks passed."
