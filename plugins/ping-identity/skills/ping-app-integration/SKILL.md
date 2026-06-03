@@ -63,6 +63,7 @@ Complete platform setup first, then flow design, then hand off to this skill for
 | Generic OIDC web app or SAML integration | `references/curated/web-integration-basics.md` |
 | Browser-based redirect / hosted login | `references/curated/web-integration-basics.md` |
 | On-prem app integration (PingFederate, PingAccess) | `references/curated/web-integration-basics.md` |
+| Server-side / backend OIDC, M2M client_credentials, token exchange, CIBA, retry/429 | `references/curated/server-side-integration-basics.md` |
 | Troubleshooting, migration (ForgeRock → Ping SDK) | `references/curated/integration-troubleshooting-basics.md` |
 
 ## Step 2: Retrieval escalation

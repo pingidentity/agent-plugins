@@ -69,7 +69,8 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 | Configure sign-on policy, MFA, step-up | `references/curated/pingone-mt/sign-on-policies.md` |
 | Directory, LDAP gateway, populations, groups | `references/curated/pingone-mt/directory-and-populations.md` |
 | Admin roles, onboarding administrators | `references/curated/pingone-mt/admin-roles-and-access.md` |
-| Branding, notification templates | `references/curated/cross-platform/policy-and-branding-basics.md` |
+| Themes, branding, custom domain, email/SMS templates, DaVinci UI Studio | `references/curated/pingone-mt/themes-and-branding.md` |
+| Cross-platform branding overview | `references/curated/cross-platform/policy-and-branding-basics.md` |
 
 **Generated shortlist** (fallback): `references/generated/pingone-mt/top-25.json` — sub-files: `tenants.md`, `apps.md`, `policies.md`, `directories.md`
 

@@ -1,6 +1,6 @@
 ---
 name: ping-quickstart
-description: Use this skill whenever you need to orient a user in the Ping Identity ecosystem — where to start, which platform to choose, or when the platform is unknown. Front door for all Ping Identity work. Also trigger when the user is migrating from ForgeRock or another IAM platform, asking "where do we start" for any Ping feature, evaluating the product landscape, or starting Ping for the first time (workforce or CIAM). Routes to the correct skill after detecting platform and intent. Trigger phrases: where do I start with Ping, which Ping product do I need, PingOne vs PingOne ST vs PingFederate, help me decide, evaluating Ping Identity, migrating from ForgeRock, recommended starting point, /ping-quickstart.
+description: Use this skill whenever you need to orient a user in the Ping Identity ecosystem — where to start, which platform to choose, or when the platform is unknown. Front door for all Ping Identity work. Also trigger when the user is migrating from ForgeRock or another IAM platform, asking "where do we start" for any Ping feature, evaluating the product landscape, or starting Ping for the first time (workforce or CIAM). Also trigger for cross-cutting end-to-end validation requests — "test this end to end", "validate what I built", "how do I prove the path works" — when no single layer (foundation / orchestration / app) owns the test. Routes to the correct skill after detecting platform and intent. Trigger phrases: where do I start with Ping, which Ping product do I need, PingOne vs PingOne ST vs PingFederate, help me decide, evaluating Ping Identity, migrating from ForgeRock, recommended starting point, test this end to end, validate my Ping setup, /ping-quickstart.
 compatibility: Designed for Ping Identity platform tasks. Requires no tools — orientation and routing only.
 metadata:
   publisher: Ping Identity
@@ -25,16 +25,15 @@ Trigger on ANY of the following — including questions, evaluation discussions,
 - "I'm new to Ping — what should I set up first?"
 - "I inherited a Ping deployment and don't know where to begin"
 - "We're evaluating Ping Identity — what should we be asking?"
-- "What are the pros and cons of PingOne vs PingOne ST vs PingFederate?"
-- "Should we use the cloud or on-prem version of Ping?"
+- "Pros and cons of PingOne vs PingOne ST vs PingFederate; cloud or on-prem?"
 - "Advise me on which Ping platform fits our use case"
-- "Help me understand the Ping Identity product landscape before we commit"
 - "We're migrating from ForgeRock to Ping — what does the migration path look like?"
 - "Where do we start with adding [feature] to our app?" (any feature, when the platform is unspecified)
 - "We want to add identity verification / KYC — where do we start?"
 - "What's the recommended starting point for Ping employee identity?"
 - "What license do I need for DaVinci / Protect / Verify?"
 - "I inherited a Ping deployment — where do I start?"
+- "Test this end to end / validate my Ping setup / how do I prove the path works before going live"
 
 **Catch-all rule:** Trigger this skill whenever the user's platform or starting point is unknown or unclear, when they use "where do we start", "what should we set up first", "what's the recommended starting point", or "not sure whether to use [product A] or [product B]" framing. Trigger on migration intents (ForgeRock → Ping, Okta → Ping, Auth0 → Ping). Trigger when platform is not yet specified and the user is in evaluation or orientation mode.
 
@@ -117,3 +116,4 @@ Load 1–2 of these matching the user's question. Stop when orientation is suffi
 - `references/curated/pingone-licensing-and-packaging.md`
 - `references/curated/forgerock-to-ping-migration-paths.md`
 - `references/curated/inherited-deployment-orientation.md`
+- `references/curated/end-to-end-validation.md` — load when the user is past the build phase and asking "test what I just built"

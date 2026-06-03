@@ -35,20 +35,15 @@ Trigger on ANY question — including advisory, planning, and "what nodes do I n
 
 ## Multi-skill use cases
 
-Orchestration sits in the middle of the stack — platform foundation must exist before flows can be built, and other skills extend what those flows can do.
+Orchestration sits in the middle of the stack. Platform foundation must exist first; other skills extend what flows can do.
 
-| What comes before | Skill |
+| Sequence | Skill |
 |---|---|
-| Tenant, realm, identity store, and app must be configured first | `ping-foundation` |
+| Before: tenant, realm, identity store, app configured | `ping-foundation` |
+| After: add risk scoring, MFA step-up, identity verification within the flow | `ping-universal-services` |
+| After: wire the finished flow into a web, mobile, or SDK-based app | `ping-app-integration` |
 
-| What comes after | Skill |
-|---|---|
-| Add risk scoring, MFA step-up, identity verification within the flow | `ping-universal-services` |
-| Wire the finished flow into a web, mobile, or SDK-based app | `ping-app-integration` |
-
-**Example — CIAM registration with identity proofing:** `ping-foundation` → `ping-orchestration` (journey design) → `ping-universal-services` (PingOne Verify) → `ping-app-integration` (SDK wiring).
-
-**Example — DaVinci workforce SSO:** `ping-foundation` → `ping-orchestration` (DaVinci flow) → `ping-universal-services` (PingOne Protect).
+**Example — CIAM with proofing:** `ping-foundation` → `ping-orchestration` → `ping-universal-services` (Verify) → `ping-app-integration`.
 
 ---
 
@@ -99,15 +94,21 @@ Sub-routing by task and journey use case: see `references/curated/pingone-st/rou
 | DaVinci flow design patterns (login, registration, step-up, error) | `references/curated/pingone-mt/davinci-flow-patterns.md` |
 | DaVinci registration + email verification + MFA enrollment/step-up | `references/curated/pingone-mt/davinci-registration-and-mfa.md` |
 
-**Generated shortlist** (fallback):
-- `references/generated/pingone-mt/top-25.json`
+---
+
+## Cross-platform orchestration patterns
+
+| Task | Reference |
+|---|---|
+| Passkeys / passwordless / FIDO2 design across PingOne MT, PingOne ST, Ping Software | `references/curated/cross-platform/passkeys-and-passwordless.md` |
+
+**Generated shortlist** (fallback): `references/generated/pingone-mt/top-25.json`
 
 ---
 
 ## Retrieval escalation
 
-1. Load 1–3 curated anchors matching the detected platform and task. Stop if sufficient.
-2. If not sufficient, scan the matching generated shortlist. Pull summaries for relevant titles only.
+Load 1–3 curated anchors for the detected platform/task; stop if sufficient. If not, scan the generated shortlist; pull summaries only.
 
 ## Cross-skill escalation
 
