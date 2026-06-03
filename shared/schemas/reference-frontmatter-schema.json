@@ -3,7 +3,7 @@
   "title": "Curated Reference Frontmatter Schema",
   "description": "Required frontmatter for every file in references/curated/. Drives scoring, manifest generation, and routing.",
   "type": "object",
-  "required": ["title", "product_family", "capabilities", "doc_type", "status"],
+  "required": ["title", "product_family", "capabilities", "doc_type", "status", "canonical"],
   "properties": {
     "title": {
       "type": "string",

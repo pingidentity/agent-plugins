@@ -14,12 +14,11 @@ Skills provide **judgment and context** that MCP tools lack. MCP tools handle ex
 |---|---|
 | **Claude Code** | `/plugin add pingidentity/agent-plugins` |
 | **Cursor** | Settings → Rules → Add Rule → Remote Rule → `https://github.com/pingidentity/agent-plugins` |
-| **GitHub Copilot** | Via Agent Skills specification support — see `.well-known/agent-skills/index.json` |
-| **OpenCode** | `npx skills add https://github.com/pingidentity/agent-plugins` |
-| **Codex** | `npx skills add https://github.com/pingidentity/agent-plugins` |
-| **Gemini CLI** | Add plugin path to your `GEMINI.md` or agent configuration |
+| **GitHub Copilot** | Agent Skills discovery via `.well-known/agent-skills/index.json` (see [Copilot docs](https://docs.github.com/en/copilot)) |
+| **Gemini CLI** | Add to `GEMINI.md`: `plugins: [https://github.com/pingidentity/agent-plugins]` |
+| **OpenCode / other** | `npx github:pingidentity/agent-plugins validate` (validator); skill install per agent's plugin spec |
 
-Agent discovery: `https://developer.pingidentity.com/.well-known/agent-skills/index.json`
+Agent discovery index: [`https://raw.githubusercontent.com/pingidentity/agent-plugins/main/.well-known/agent-skills/index.json`](https://raw.githubusercontent.com/pingidentity/agent-plugins/main/.well-known/agent-skills/index.json)
 
 ---
 
@@ -120,7 +119,7 @@ python3 -m evals.harness.run_eval --adapter claude --layer 1
 
 Read `shared/templates/AUTHORING-RULES.md` before writing anything — it is the single source of truth.
 
-Key constraints enforced in review (and Phase 3 CI):
+Key constraints enforced by `scripts/validate_skills.py` and the pre-commit hook:
 - Every reference `.md` requires a complete frontmatter block (`title`, `product_family`, `capabilities`, `doc_type`, `status` are mandatory)
 - `product_family` must match the file's directory path
 - Curated anchors must have a `## Scope` section with explicit Covers/Does NOT cover statements
@@ -142,7 +141,7 @@ Key constraints enforced in review (and Phase 3 CI):
 | 4 | Public launch + repo rename | Planned (TBD) |
 | 5 | Marketplace distribution + blog post | Planned (TBD) |
 
-See [PLAN.md](PLAN.md) for full phase details and exit criteria.
+Full delivery history is tracked in the project's internal planning docs.
 
 ---
 

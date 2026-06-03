@@ -36,7 +36,7 @@ npx github:pingidentity/agent-plugins validate
 
 ## PR checklist
 
-The pre-commit hook (`bash scripts/install-hooks.sh`) runs the first four checks automatically on every `git commit`. Confirm all items before opening a PR:
+The pre-commit hook (`bash scripts/install-hooks.sh`) automatically runs the first four checks on every `git commit` that touches skill content, evals, or schemas. The remaining items require manual verification. Confirm all items before opening a PR:
 
 - [ ] `python3 scripts/validate_skills.py --root .` exits 0
 - [ ] `python3 -m evals.harness.validate_prompts` exits 0
@@ -106,7 +106,7 @@ capabilities: ["foundation"]            # at least one
 services: []
 audience: ["admin", "developer"]
 use_cases: ["workforce", "customer"]
-doc_type: guide                         # guide | reference | concept | troubleshooting | architecture
+doc_type: guide                         # guide | reference | concept | tutorial | troubleshooting | architecture
 status: current                         # current | draft | deprecated
 canonical: true                         # true for all curated anchors
 last_updated: "2026-06-03"             # ISO date
@@ -184,9 +184,9 @@ python3 -m evals.harness.validate_prompts
 
 ## Ownership
 
-- **Skill routing logic and SKILL.md:** TAP / DevEx Catalyst PMs (Ping Identity)
-- **Curated anchor accuracy:** Product teams own the content; skill authors own the structure
+- **Skill routing logic and SKILL.md:** Ping Identity Developer Experience team
+- **Curated anchor accuracy:** Product teams own the content accuracy; skill authors own the structure and routing
 - **Eval prompt sets:** Skill authors
-- **CI and tooling:** DevEx
+- **Tooling and validator:** Ping Identity Developer Experience team
 
 **Support:** This is a community-supported, open-source package. See [README.md](README.md) for the support model. File bugs at `https://github.com/pingidentity/agent-plugins/issues`.

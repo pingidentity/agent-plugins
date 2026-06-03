@@ -21,9 +21,11 @@ import anthropic
 
 from evals.harness.adapters.base import RunResult
 
-# Model IDs — override via MODEL_BEDROCK / MODEL_DIRECT env vars if needed
-_BEDROCK_MODEL = os.environ.get("MODEL_BEDROCK", "eu.anthropic.claude-sonnet-4-6")
-_DIRECT_MODEL = os.environ.get("MODEL_DIRECT", "claude-sonnet-4-6")
+# Model IDs — set via MODEL_BEDROCK / MODEL_DIRECT env vars.
+# Bedrock model IDs are region-prefixed (e.g. us.anthropic.claude-sonnet-4-6).
+# Direct API model IDs follow the standard Anthropic naming scheme.
+_BEDROCK_MODEL = os.environ.get("MODEL_BEDROCK", "us.anthropic.claude-sonnet-4-5-20250514-v1:0")
+_DIRECT_MODEL = os.environ.get("MODEL_DIRECT", "claude-3-5-sonnet-20241022")
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SKILLS_DIR = REPO_ROOT / "plugins" / "ping-identity" / "skills"
@@ -80,10 +82,12 @@ Rules:
 class ClaudeAdapter:
     def __init__(self) -> None:
         if os.environ.get("CLAUDE_CODE_USE_BEDROCK") == "1" or os.environ.get("AWS_BEARER_TOKEN_BEDROCK"):
-            # Bedrock path — uses AWS_BEARER_TOKEN_BEDROCK + AWS_REGION automatically
-            self._client = anthropic.AnthropicBedrock(
-                aws_region=os.environ.get("AWS_REGION", "eu-west-2"),
-            )
+            # Bedrock path — requires AWS_BEARER_TOKEN_BEDROCK and AWS_REGION env vars.
+            # AWS_REGION must be set explicitly; there is no safe default.
+            region = os.environ.get("AWS_REGION")
+            if not region:
+                raise SystemExit("AWS_REGION must be set when using the Bedrock adapter.")
+            self._client = anthropic.AnthropicBedrock(aws_region=region)
             self._model = _BEDROCK_MODEL
         else:
             api_key = os.environ.get("ANTHROPIC_API_KEY")

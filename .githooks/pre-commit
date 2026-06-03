@@ -40,7 +40,7 @@ fi
 # ── 2. Prompt YAML schema validator ─────────────────────────────────────────
 if [ -n "$EVALS_CHANGED" ]; then
   echo "  → Validating eval prompt sets..."
-  if ! python3 -m evals.harness.validate_prompts 2>&1 | grep -v "^SKIP"; then
+  if ! python3 -m evals.harness.validate_prompts; then
     echo ""
     echo "❌ Eval prompt validation failed. Fix the errors above before committing."
     exit 1

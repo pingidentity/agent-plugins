@@ -15,12 +15,19 @@ const path = require("path");
 const args = process.argv.slice(2);
 
 if (args[0] === "validate" || args.length === 0) {
-  // Find repo root by walking up until plugins/ is found
-  let root = process.cwd();
   const fs = require("fs");
-  while (root !== path.parse(root).root) {
-    if (fs.existsSync(path.join(root, "plugins"))) break;
-    root = path.dirname(root);
+
+  // --root <path> takes priority; otherwise walk up to find plugins/
+  let root;
+  const rootIdx = args.indexOf("--root");
+  if (rootIdx !== -1 && args[rootIdx + 1]) {
+    root = path.resolve(args[rootIdx + 1]);
+  } else {
+    root = process.cwd();
+    while (root !== path.parse(root).root) {
+      if (fs.existsSync(path.join(root, "plugins"))) break;
+      root = path.dirname(root);
+    }
   }
 
   const script = path.join(root, "scripts", "validate_skills.py");
