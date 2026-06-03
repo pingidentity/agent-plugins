@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Curated Reference Frontmatter Schema",
+  "description": "Required frontmatter for every file in references/curated/. Drives scoring, manifest generation, and routing.",
+  "type": "object",
+  "required": ["title", "product_family", "capabilities", "doc_type", "status", "canonical"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "description": "Human-readable page title"
+    },
+    "product_family": {
+      "type": "string",
+      "enum": ["pingone-mt", "pingone-st", "ping-software", "cross-platform", "ai-identity"],
+      "description": "Primary platform family. Must match the anchor's directory path segment."
+    },
+    "products": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Specific products this doc covers."
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "foundation", "orchestration", "universal-services",
+          "app-integration", "identity-for-ai", "quickstart",
+          "mfa", "passwordless", "branding", "validation"
+        ]
+      },
+      "description": "Capability buckets. Must include at least one."
+    },
+    "services": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "audience": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["admin", "developer", "architect", "operator"]
+      }
+    },
+    "use_cases": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["workforce", "customer", "cross-platform", "ai-identity"]
+      }
+    },
+    "doc_type": {
+      "type": "string",
+      "enum": ["guide", "reference", "concept", "tutorial", "troubleshooting", "architecture"],
+      "description": "Type of document content."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["current", "draft", "deprecated"],
+      "description": "Publication lifecycle status."
+    },
+    "canonical": {
+      "type": "boolean",
+      "description": "True for hand-authored curated anchors."
+    },
+    "last_updated": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "description": "ISO 8601 date of last substantive update."
+    },
+    "slug": {
+      "type": "string",
+      "description": "Source URL for this anchor."
+    }
+  }
+}

@@ -1,1 +1,12 @@
 .playwright-mcp/
+.claude/
+evals/results/**/
+!evals/results/.gitkeep
+PLAN.md
+CLAUDE.md
+PHASE-3-PLAN.md
+SUMMARY.md
+docs/
+*.local.json
+.env.local
+.env

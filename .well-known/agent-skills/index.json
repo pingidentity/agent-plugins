@@ -1,5 +1,42 @@
 {
   "$schema": "https://agentskills.io/spec/v0.2.0/index.schema.json",
   "version": "0.2.0",
-  "skills": []
+  "skills": [
+    {
+      "name": "ping-quickstart",
+      "description": "Front door for all Ping Identity work. Orients users in the Ping ecosystem — which platform to use, where to start, ForgeRock migration paths, and cross-cutting end-to-end validation.",
+      "source": "https://github.com/pingidentity/agent-plugins/tree/main/plugins/ping-identity/skills/ping-quickstart",
+      "tags": ["ping", "pingone", "aic", "pingfederate", "quickstart", "getting-started", "migration"]
+    },
+    {
+      "name": "ping-foundation",
+      "description": "Platform setup, administration, and core configuration for PingOne MT, PingOne ST (AIC), PingFederate, PingAccess, PingDirectory, and PingID. Covers tenant setup, app registration, directories, policies, and branding.",
+      "source": "https://github.com/pingidentity/agent-plugins/tree/main/plugins/ping-identity/skills/ping-foundation",
+      "tags": ["ping", "pingone", "aic", "pingfederate", "foundation", "setup", "admin", "configuration"]
+    },
+    {
+      "name": "ping-orchestration",
+      "description": "Design and build authentication flows, journeys, and orchestration logic across DaVinci (PingOne MT), AIC/PingAM journeys (PingOne ST), and PingFederate authentication policies.",
+      "source": "https://github.com/pingidentity/agent-plugins/tree/main/plugins/ping-identity/skills/ping-orchestration",
+      "tags": ["ping", "davinci", "aic", "journey", "authentication", "mfa", "registration", "orchestration"]
+    },
+    {
+      "name": "ping-universal-services",
+      "description": "Configure and invoke Ping Universal Services — PingOne Protect (risk), PingOne Verify (KYC), PingOne Credentials, PingOne IGA (governance), and PingOne Authorize — from DaVinci flows or AIC journeys.",
+      "source": "https://github.com/pingidentity/agent-plugins/tree/main/plugins/ping-identity/skills/ping-universal-services",
+      "tags": ["ping", "protect", "verify", "credentials", "iga", "authorize", "risk", "kyc", "universal-services"]
+    },
+    {
+      "name": "ping-app-integration",
+      "description": "Integrate Ping Identity into web, mobile, and server-side applications. Covers Android, iOS, React, and JavaScript SDK integration; backend OIDC/OAuth patterns; on-prem agent integration; and ForgeRock SDK migration.",
+      "source": "https://github.com/pingidentity/agent-plugins/tree/main/plugins/ping-identity/skills/ping-app-integration",
+      "tags": ["ping", "sdk", "android", "ios", "react", "oidc", "oauth", "integration", "mobile", "app"]
+    },
+    {
+      "name": "ping-identity-for-ai",
+      "description": "AI-era identity patterns: agent identity registration, machine-to-machine auth, Verified Trust signals, CIBA human-in-the-loop, bot detection, PingGateway MCP protection, and Ping Identity for AI 5-pillar architecture.",
+      "source": "https://github.com/pingidentity/agent-plugins/tree/main/plugins/ping-identity/skills/ping-identity-for-ai",
+      "tags": ["ping", "ai", "agents", "verified-trust", "mcp", "identity-for-ai", "ciba", "machine-identity"]
+    }
+  ]
 }

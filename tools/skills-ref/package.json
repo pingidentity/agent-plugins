@@ -1,0 +1,13 @@
+{
+  "name": "skills-ref",
+  "version": "0.1.0",
+  "description": "Validate Ping Identity agent skill content against authoring rules.",
+  "bin": {
+    "skills-ref": "./bin/validate.js"
+  },
+  "scripts": {
+    "validate": "node bin/validate.js"
+  },
+  "keywords": ["ping", "skills", "validate", "agent-skills"],
+  "license": "MIT"
+}

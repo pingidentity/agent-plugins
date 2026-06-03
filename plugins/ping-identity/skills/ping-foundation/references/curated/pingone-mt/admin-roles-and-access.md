@@ -94,11 +94,14 @@ Older organizations may have co-located admin and end-user identities. If restru
 
 ### Method 1: Assign roles to an individual user
 
-1. In the target environment, go to Directory > Users.
-2. Select or create the user; click the Roles tab > Grant Roles.
-3. Select the role and scope (environment or population); click Save.
-4. Send the user the Console Login URL (Settings > Environment Properties) and their PingOne username.
-5. On the user's Profile tab, click Verify to send the email verification.
+**Admin surface:** Directory > Users > (user) > Roles tab > Grant Roles
+
+| Step | What to configure |
+|---|---|
+| Select or create the user | Directory > Users |
+| Grant the role | Roles tab → role name + scope (environment or population) |
+| Share the Console Login URL | Settings > Environment Properties → Console Login URL |
+| Trigger email verification | User profile → Verify action sends the verification email |
 
 **Email verification is required** before an administrator can access the console.
 
@@ -106,10 +109,15 @@ Older organizations may have co-located admin and end-user identities. If restru
 
 Groups allow role assignment to scale across many users at once.
 
-1. Go to Directory > Groups; create or select a group.
-2. Add the target users to the group (Add/Remove Users).
-3. On the group's Roles tab, click Grant Roles; select role + scope.
-4. All current and future members of the group inherit the role automatically.
+**Admin surface:** Directory > Groups > (group) > Roles tab > Grant Roles
+
+| Step | What to configure |
+|---|---|
+| Create or select a group | Directory > Groups |
+| Add users to the group | Add/Remove Users on the group record |
+| Assign the role | Roles tab → role name + scope (environment or population) |
+
+All current and future members of the group inherit the role automatically.
 
 **Prerequisite:** Performing admin must have Identity Data Admin role (or equivalent) to create or edit groups.
 
@@ -117,11 +125,16 @@ Groups allow role assignment to scale across many users at once.
 
 Use when the target user does not yet have a PingOne account.
 
-1. Go to Directory > Users > Invite Admin.
-2. Enter name and email; select a population.
-3. Set invitation expiry (max 24 hours); assign roles on the next step.
-4. Click Send Invitation. Invitation appears in the Users list with an active/revoke toggle.
-5. Invitee clicks Complete Registration in email, pastes the invite code, sets a password, and verifies email.
+**Admin surface:** Directory > Users > Invite Admin
+
+| Field | Value guidance |
+|---|---|
+| Name + email | Required; invitation is sent to this address |
+| Population | Scopes the invitation to a specific population |
+| Invitation expiry | Maximum 24 hours from time of issue |
+| Role assignment | Set during the invite flow; takes effect on registration completion |
+
+After the invitation is sent, it appears in the Users list with an active/revoke toggle. The invitee receives an email with a registration link, pastes the invite code, sets a password, and verifies email.
 
 **Prerequisites:** PingOne must be the identity provider; administrator security must be enabled with PingOne or a hybrid authentication source.
 

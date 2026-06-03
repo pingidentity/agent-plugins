@@ -1,11 +1,25 @@
-"""Claude (Anthropic) adapter — Layer 1 routing eval implementation.
+"""LLM adapter for Layer 1 routing eval.
 
 How it works:
   1. Build a system prompt that presents all 6 skills described by their
      SKILL.md description fields.
-  2. Send the user prompt and ask Claude to either route to skill(s) or ask
+  2. Send the user prompt and ask the model to either route to skill(s) or ask
      a clarifying question, returning structured JSON.
   3. Parse the JSON response to populate RunResult.
+
+Two auth paths — set exactly one:
+
+  Direct Anthropic API:
+    ANTHROPIC_API_KEY=<your key>
+    MODEL_DIRECT=<model id, e.g. claude-3-5-sonnet-20241022>
+
+  AWS Bedrock:
+    CLAUDE_CODE_USE_BEDROCK=1
+    AWS_BEARER_TOKEN_BEDROCK=<token>
+    AWS_REGION=<region, e.g. us-east-1>
+    MODEL_BEDROCK=<cross-region inference profile id>
+
+All four env vars for the chosen path are required — no defaults are set.
 """
 from __future__ import annotations
 
@@ -17,10 +31,6 @@ from pathlib import Path
 import anthropic
 
 from evals.harness.adapters.base import RunResult
-
-# Bedrock model IDs
-_BEDROCK_MODEL = "eu.anthropic.claude-sonnet-4-6"
-_DIRECT_MODEL = "claude-sonnet-4-6"
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SKILLS_DIR = REPO_ROOT / "plugins" / "ping-identity" / "skills"
@@ -77,17 +87,33 @@ Rules:
 class ClaudeAdapter:
     def __init__(self) -> None:
         if os.environ.get("CLAUDE_CODE_USE_BEDROCK") == "1" or os.environ.get("AWS_BEARER_TOKEN_BEDROCK"):
-            # Bedrock path — uses AWS_BEARER_TOKEN_BEDROCK + AWS_REGION automatically
-            self._client = anthropic.AnthropicBedrock(
-                aws_region=os.environ.get("AWS_REGION", "eu-west-2"),
-            )
-            self._model = _BEDROCK_MODEL
+            region = os.environ.get("AWS_REGION")
+            model = os.environ.get("MODEL_BEDROCK")
+            missing = [v for v, k in [("AWS_REGION", region), ("MODEL_BEDROCK", model)] if not k]
+            if missing:
+                raise SystemExit(
+                    f"Missing required env vars for Bedrock adapter: {', '.join(missing)}\n"
+                    "Set AWS_REGION and MODEL_BEDROCK (cross-region inference profile ID)."
+                )
+            self._client = anthropic.AnthropicBedrock(aws_region=region)
+            self._model = model
         else:
             api_key = os.environ.get("ANTHROPIC_API_KEY")
+            model = os.environ.get("MODEL_DIRECT")
             if not api_key:
-                raise SystemExit("Neither ANTHROPIC_API_KEY nor AWS_BEARER_TOKEN_BEDROCK is set.")
+                raise SystemExit(
+                    "Missing ANTHROPIC_API_KEY.\n"
+                    "For direct API: set ANTHROPIC_API_KEY and MODEL_DIRECT.\n"
+                    "For Bedrock: set CLAUDE_CODE_USE_BEDROCK=1, AWS_BEARER_TOKEN_BEDROCK, "
+                    "AWS_REGION, and MODEL_BEDROCK."
+                )
+            if not model:
+                raise SystemExit(
+                    "Missing MODEL_DIRECT.\n"
+                    "Set MODEL_DIRECT to the Anthropic model ID (e.g. claude-3-5-sonnet-20241022)."
+                )
             self._client = anthropic.Anthropic(api_key=api_key)
-            self._model = _DIRECT_MODEL
+            self._model = model
         self._system = _build_system_prompt()
 
     def run(self, prompt: str) -> RunResult:

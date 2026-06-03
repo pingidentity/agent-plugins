@@ -9,7 +9,7 @@ doc_type: guide
 status: current
 canonical: true
 last_updated: "2026-06-01"
-slug: "https://docs.pingidentity.com/pingoneaic/latest/planning/plan-identity-cloud.html"
+slug: "https://docs.pingidentity.com/pingoneaic/planning/plan-identity-cloud.html"
 ---
 
 # Common Starting Patterns
@@ -135,7 +135,7 @@ Reference: https://developer.pingidentity.com/orchsdks/journey/migration.html
 **Path B — Server/SaaS migration (ForgeRock AM/IDM → AIC)**:
 Uses a 4-phase S2S model: Assess & Plan → Transform → Adopt & Refine → Enable.
 PingGateway key-sharing route allows an in-place FQDN swap with constraints: tenant must have ≤2 realms, signing/encryption keys must be exportable, and there must be a single FQDN entry point.
-Reference: https://docs.pingidentity.com/pingoneaic/latest/planning/plan-identity-cloud.html
+Reference: https://docs.pingidentity.com/pingoneaic/planning/plan-identity-cloud.html
 
 **Path C — PingFederate → PingOne MT (Cloud Acceleration Toolset)**:
 Requires PingFederate 10.3+, PingOne with SSO + DaVinci enabled, and a Worker App with Environment Admin role. Applications fall into three categories: Migratable (direct lift), Change Required (config adjustments needed), and Reimagine (rearchitect for PingOne). The toolset is accessed in the PingOne console under Migration > Cloud Migration.
@@ -218,8 +218,8 @@ Known gotchas:
 ## Source
 
 - Pattern 1 (Employee SSO): https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started.html
-- Pattern 2 (CIAM): https://docs.pingidentity.com/pingoneaic/latest/getting-started/overview.html
+- Pattern 2 (CIAM): https://docs.pingidentity.com/pingoneaic/getting-started/overview.html
 - Pattern 3 (MFA): https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started.html
 - Pattern 4 (API protection): https://docs.pingidentity.com/pingfederate/13.0/pf_pf_landing_page.html
-- Pattern 5 (Migration): https://developer.pingidentity.com/orchsdks/journey/migration.html; https://docs.pingidentity.com/pingoneaic/latest/planning/plan-identity-cloud.html; https://docs.pingidentity.com/pingone/migration-tools/p1_cloud_acceleration_toolset.html
+- Pattern 5 (Migration): https://developer.pingidentity.com/orchsdks/journey/migration.html; https://docs.pingidentity.com/pingoneaic/planning/plan-identity-cloud.html; https://docs.pingidentity.com/pingone/migration-tools/p1_cloud_acceleration_toolset.html
 - Pattern 6 (Verify): https://docs.pingidentity.com/solution-guides/htg_overview.html
