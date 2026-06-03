@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ping Docs Frontmatter Schema",
+  "description": "Metadata standard for published .md docs. Drives shortlist generation, branch placement, and Docs MCP routing.",
+  "type": "object",
+  "required": ["title", "product_family", "capabilities", "doc_type", "status"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Human-readable page title"
+    },
+    "product_family": {
+      "type": "string",
+      "enum": ["pingone-mt", "pingone-st", "ping-software", "cross-platform"],
+      "description": "Primary platform family. Maps to platform-families.md routing tags."
+    },
+    "products": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Specific product(s) this doc covers, e.g. ['pingfederate', 'pingaccess']"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["foundation", "orchestration", "universal-services", "app-integration", "identity-for-ai", "quickstart"]
+      },
+      "description": "Capability buckets from capability-map.md"
+    },
+    "services": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Universal Services referenced, e.g. ['protect', 'verify', 'iga']"
+    },
+    "audience": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["admin", "developer", "architect", "operator"]
+      }
+    },
+    "use_cases": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["workforce", "customer", "cross-platform", "ai-identity"]
+      }
+    },
+    "doc_type": {
+      "type": "string",
+      "enum": ["guide", "reference", "concept", "tutorial", "troubleshooting", "architecture"],
+      "description": "Type of document content"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["current", "draft", "deprecated"],
+      "description": "Publication lifecycle status"
+    },
+    "canonical": {
+      "type": "boolean",
+      "description": "True if this is the authoritative page for this task. Canonical docs are candidates for curated/ tier."
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO 8601 date of last substantive update"
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL slug for Docs MCP retrieval reference"
+    }
+  }
+}

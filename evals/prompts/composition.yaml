@@ -1,0 +1,42 @@
+skill: composition
+version: 1
+composition_prompts:
+  - id: C-01
+    prompt: "I want to add KYC during registration on my React app"
+    expected_skills:
+      - ping-quickstart
+      - ping-orchestration
+      - ping-universal-services
+      - ping-app-integration
+    notes: "Entry via ping-quickstart (platform/task unknown). KYC = ping-universal-services (PingOne Verify). Registration journey = ping-orchestration. React wiring = ping-app-integration."
+
+  - id: C-02
+    prompt: "Add MFA and risk-based step-up to our iOS banking app"
+    expected_skills:
+      - ping-orchestration
+      - ping-universal-services
+      - ping-app-integration
+    notes: "MFA and risk-based step-up = ping-orchestration (journey/flow design) + ping-universal-services (PingOne Protect for risk scoring). iOS SDK wiring = ping-app-integration."
+
+  - id: C-03
+    prompt: "Build an AI agent that can reset employee passwords with proper audit"
+    expected_skills:
+      - ping-identity-for-ai
+      - ping-foundation
+      - ping-orchestration
+    notes: "AI agent identity patterns = ping-identity-for-ai (workforce helpdesk AI). Directory/policy setup = ping-foundation. Self-service password reset flow = ping-orchestration."
+
+  - id: C-04
+    prompt: "Set up PingOne MT, build a registration journey in DaVinci with email verification, and wire it into our Android app"
+    expected_skills:
+      - ping-foundation
+      - ping-orchestration
+      - ping-app-integration
+    notes: "Tenant/app registration = ping-foundation (PingOne MT). DaVinci flow with email verification = ping-orchestration. Android SDK integration = ping-app-integration."
+
+  - id: C-05
+    prompt: "Secure an AI chatbot that calls our customer data API with Verified Trust and logs every action"
+    expected_skills:
+      - ping-identity-for-ai
+      - ping-universal-services
+    notes: "AI chatbot identity security and Verified Trust = ping-identity-for-ai. API authorization, audit, and service invocation = ping-universal-services (Authorize + cross-platform service patterns)."

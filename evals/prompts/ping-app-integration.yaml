@@ -1,0 +1,153 @@
+skill: ping-app-integration
+version: 2
+trigger_prompts:
+  - id: T-01
+    prompt: "Integrate the Ping orchestration SDK with my Android app to drive AIC journeys."
+    expected_anchors:
+      - "references/curated/app-integration-overview.md"
+      - "references/curated/mobile-integration-basics.md"
+    expected_tier: curated
+    notes: "Android + AIC Journey — primary mobile integration case."
+
+  - id: T-02
+    prompt: "Use the Ping iOS SDK in my Swift app to connect to DaVinci flows."
+    expected_anchors:
+      - "references/curated/mobile-integration-basics.md"
+    expected_tier: curated
+    notes: "iOS Swift + DaVinci — primary iOS integration case."
+
+  - id: T-03
+    prompt: "Wire OIDC login into my React web application using PingOne MT as the identity provider."
+    expected_anchors:
+      - "references/curated/web-integration-basics.md"
+    expected_tier: curated
+    notes: "React + PingOne MT OIDC — primary web integration case."
+
+  - id: T-04
+    prompt: "How do I add the Ping Android SDK to my Kotlin app and authenticate against an AIC Journey?"
+    expected_anchors:
+      - "references/curated/mobile-integration-basics.md"
+    expected_tier: curated
+    notes: "Android SDK + AIC Journey — variation on T-01 emphasizing SDK setup and init."
+
+  - id: T-05
+    prompt: "I want to build a JavaScript SPA that uses @forgerock/davinci-client to drive a PingOne DaVinci flow."
+    expected_anchors:
+      - "references/curated/web-integration-basics.md"
+    expected_tier: curated
+    notes: "JS SPA + DaVinci client — additional React/JS web integration prompt."
+
+  - id: T-06
+    prompt: "My web app needs to redirect users to the Ping-hosted login page and receive tokens after they authenticate."
+    expected_anchors:
+      - "references/curated/web-integration-basics.md"
+    expected_tier: curated
+    notes: "Browser-based hosted login redirect — covers the hosted login page + auth code callback pattern."
+
+  - id: T-07
+    prompt: "How do I configure my Java web application to act as a SAML SP against PingFederate?"
+    expected_anchors:
+      - "references/curated/web-integration-basics.md"
+    expected_tier: curated
+    notes: "On-prem SAML SP integration with PingFederate — covers SAML section of web integration."
+
+  - id: T-08
+    prompt: "We are migrating our Android app from the ForgeRock SDK to the new Ping SDK. What are the breaking changes?"
+    expected_anchors:
+      - "references/curated/integration-troubleshooting-basics.md"
+      - "references/curated/mobile-integration-basics.md"
+    expected_tier: curated
+    notes: "ForgeRock to Ping SDK migration — Android; covers renamed packages and init API changes."
+
+  - id: T-09
+    prompt: "My app is getting a redirect_uri_mismatch error during the OIDC login flow. How do I diagnose and fix it?"
+    expected_anchors:
+      - "references/curated/integration-troubleshooting-basics.md"
+    expected_tier: curated
+    notes: "Redirect URI mismatch — most common integration failure; explicit troubleshooting prompt."
+
+  - id: T-10
+    prompt: "The token exchange is failing with a CORS error even though the authorization redirect worked fine. What is causing this?"
+    expected_anchors:
+      - "references/curated/integration-troubleshooting-basics.md"
+    expected_tier: curated
+    notes: "CORS on token endpoint — failure mode 2; covers diagnosis and platform-specific fixes."
+
+  - id: T-11
+    prompt: "After my app goes to the background, the token refresh stops working and users are logged out. How do I fix this?"
+    expected_anchors:
+      - "references/curated/integration-troubleshooting-basics.md"
+    expected_tier: curated
+    notes: "Token refresh failure after background — covers offline_access scope and token storage accessibility."
+
+  # ----- Strategy doc § 9 use cases (Getting Started 0–30) -----
+
+  - id: T-50
+    prompt: "Integrate my existing React web app with PingOne — give me the implementation path for OIDC sign-in."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-app-integration/references/curated/web-integration-basics.md
+    expected_tier: curated
+    notes: "strategy-uc-6 (web)"
+
+  - id: T-51
+    prompt: "Connect my Android app to a DaVinci flow on PingOne MT — install SDK, init, handle callbacks."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-app-integration/references/curated/mobile-integration-basics.md
+    expected_tier: curated
+    notes: "strategy-uc-6 (mobile Android)"
+
+  - id: T-52
+    prompt: "Integrate my Node.js backend with PingOne using Authorization Code + PKCE — including token validation, refresh, and 429 retry handling."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-app-integration/references/curated/server-side-integration-basics.md
+    expected_tier: curated
+    notes: "strategy-uc-6 (server-side)"
+
+  - id: T-53
+    prompt: "I need a service-to-service token exchange between two backend microservices using Ping — what's the right pattern?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-app-integration/references/curated/server-side-integration-basics.md
+    expected_tier: curated
+    notes: "strategy-uc-6 (M2M / token exchange)"
+
+non_trigger_prompts:
+  - id: N-01
+    prompt: "Register an OIDC application in my PingOne MT admin console."
+    expected_skill: ping-foundation
+    notes: "Platform-side app registration — no code; admin console task belongs to ping-foundation."
+
+  - id: N-02
+    prompt: "Build a DaVinci flow for user registration with email OTP."
+    expected_skill: ping-orchestration
+    notes: "Flow design task — belongs to ping-orchestration, not app-side implementation."
+
+  - id: N-03
+    prompt: "How do I configure a sign-on policy in PingOne Advanced Identity Cloud?"
+    expected_skill: ping-foundation
+    notes: "Admin-side policy configuration — no SDK code; platform setup belongs to ping-foundation."
+
+  - id: N-04
+    prompt: "Design a Journey tree in PingAM that handles adaptive MFA based on device risk score."
+    expected_skill: ping-orchestration
+    notes: "Journey node graph design — flow design task for ping-orchestration, not app integration."
+
+  - id: N-05
+    prompt: "How do I invoke the PingOne Verify service to verify a user's identity document from my backend?"
+    expected_skill: ping-universal-services
+    notes: "Universal service invocation (Verify) — service API call, not app SDK integration; belongs to ping-universal-services."
+
+ambiguous_prompts:
+  - id: A-01
+    prompt: "I need to integrate Ping into my app."
+    expected_clarification_keywords: ["android", "ios", "react", "web", "mobile", "sdk", "platform", "oidc"]
+    notes: "Underspecified — could be mobile or web, any platform; needs clarification on app type and platform."
+
+  - id: A-02
+    prompt: "I need to add login to my app."
+    expected_clarification_keywords: ["android", "ios", "web", "react", "mobile", "platform", "journey", "davinci", "oidc"]
+    notes: "Extremely underspecified — could be mobile, web, any platform, any flow type; needs clarification on all dimensions."
+
+  - id: A-03
+    prompt: "How do I integrate Ping with my backend?"
+    expected_clarification_keywords: ["app-integration", "foundation", "api", "oidc", "client-credentials", "token", "sdk", "server"]
+    notes: "Ambiguous between app-integration (token validation, SDK) and ping-foundation (app registration, API config); backend could mean resource server or admin API."

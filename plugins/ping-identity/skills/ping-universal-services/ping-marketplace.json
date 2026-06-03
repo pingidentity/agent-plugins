@@ -1,0 +1,34 @@
+{
+  "skill_id": "ping-universal-services",
+  "display_name": "Ping Identity Universal Services",
+  "description": "Shared strategic services used across PingOne and AIC: Protect (risk), Verify (KYC), Credentials (verifiable credentials), IGA (governance), SSO, and Authorize.",
+  "version": "1.0.0",
+  "publisher": "Ping Identity",
+  "tags": {
+    "product_family": ["pingone-mt", "pingone-st", "cross-platform"],
+    "products": [
+      "pingone-protect",
+      "pingone-verify",
+      "pingone-credentials",
+      "pingone-authorize",
+      "pingone-iga"
+    ],
+    "capabilities": ["universal-services"],
+    "audience": ["developer", "architect", "admin"],
+    "use_cases": ["workforce", "customer", "cross-platform"]
+  },
+  "entry_point": "SKILL.md",
+  "references": {
+    "curated_path": "references/curated/",
+    "generated_path": "references/generated/"
+  },
+  "related_skills": [
+    "ping-quickstart",
+    "ping-foundation",
+    "ping-orchestration",
+    "ping-app-integration"
+  ],
+  "min_context_tokens": 500,
+  "max_curated_docs": 3,
+  "max_shortlist_docs": 15
+}

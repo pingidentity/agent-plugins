@@ -1,0 +1,37 @@
+{
+  "skill_id": "ping-foundation",
+  "display_name": "Ping Identity Foundation",
+  "description": "Platform setup, administration, and core configuration for PingOne, PingOne Advanced Identity Cloud, and on-premises Ping software. Covers environments, applications, directories, policies, and branding.",
+  "version": "1.0.0",
+  "publisher": "Ping Identity",
+  "tags": {
+    "product_family": ["pingone-mt", "pingone-st", "ping-software"],
+    "products": [
+      "pingone",
+      "pingone-st",
+      "pingfederate",
+      "pingaccess",
+      "pingdirectory",
+      "pingid",
+      "pingam"
+    ],
+    "capabilities": ["foundation"],
+    "audience": ["admin", "architect", "operator"],
+    "use_cases": ["workforce", "customer", "cross-platform"],
+    "protocols": ["oidc", "saml", "oauth2", "ldap", "scim"]
+  },
+  "entry_point": "SKILL.md",
+  "references": {
+    "curated_path": "references/curated/",
+    "generated_path": "references/generated/"
+  },
+  "related_skills": [
+    "ping-quickstart",
+    "ping-orchestration",
+    "ping-universal-services",
+    "ping-app-integration"
+  ],
+  "min_context_tokens": 500,
+  "max_curated_docs": 3,
+  "max_shortlist_docs": 25
+}

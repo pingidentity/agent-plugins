@@ -1,0 +1,34 @@
+---
+description: Apply when working on Ping Identity platform tasks (PingOne MT, PingOne ST/AIC, PingFederate, PingAccess, PingDirectory, PingID, DaVinci).
+alwaysApply: false
+globs:
+  - "**/*.tsx"
+  - "**/*.ts"
+  - "**/*.swift"
+  - "**/*.kt"
+  - "**/*.java"
+  - "**/*.js"
+  - "**/*.jsx"
+---
+
+# Ping Identity skill routing
+
+When the user's task involves Ping Identity platforms, agents have access to six umbrella skills via the agent-skills repo:
+
+- `ping-quickstart` — front door; product-family detection and routing
+- `ping-foundation` — tenant, app, directory, policy, branding, admin
+- `ping-orchestration` — DaVinci flows and journeys
+- `ping-universal-services` — Protect, Verify, Credentials, IGA, SSO
+- `ping-app-integration` — web, mobile, SDK integration
+- `ping-identity-for-ai` — AI agent identity, Verified Trust
+
+## Routing decision order inside every skill
+
+1. What is the user trying to do? (intent)
+2. Which platform family? (PingOne MT / PingOne ST / Ping Software Suite / cross-platform)
+3. Which exact product or service?
+4. Which reference tier? (curated → generated → docs-mcp)
+
+## Tier discipline
+
+Use the smallest trusted context first. Load 1–3 curated anchors before considering the generated shortlist. Use Docs MCP only when the first two tiers are insufficient.
