@@ -1,7 +1,5 @@
 # Ping Identity Agent Skills
 
-[![Validate Skills](https://github.com/pingidentity/agent-plugins/actions/workflows/validate-skills.yml/badge.svg)](https://github.com/pingidentity/agent-plugins/actions/workflows/validate-skills.yml)
-[![Evals](https://github.com/pingidentity/agent-plugins/actions/workflows/run-evals.yml/badge.svg)](https://github.com/pingidentity/agent-plugins/actions/workflows/run-evals.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A public skill package that teaches AI coding agents (Claude Code, Cursor, Copilot CLI, Gemini CLI) how to reason about the Ping Identity platform — which product to use, how to configure it, and how to integrate it into an application.

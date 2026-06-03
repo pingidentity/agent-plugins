@@ -38,7 +38,6 @@ npx github:pingidentity/agent-plugins validate
 
 The pre-commit hook (`bash scripts/install-hooks.sh`) runs the first four checks automatically on every `git commit`. Confirm all items before opening a PR:
 
-
 - [ ] `python3 scripts/validate_skills.py --root .` exits 0
 - [ ] `python3 -m evals.harness.validate_prompts` exits 0
 - [ ] `python3 -m evals.harness.run_eval --adapter mock --layer 1` — all skills PASS
@@ -52,7 +51,7 @@ The pre-commit hook (`bash scripts/install-hooks.sh`) runs the first four checks
 - [ ] `plugins/ping-identity/references/index.json` updated if new curated anchors added
 - [ ] No changes to `/shared/` referenced from `plugins/` (plugin files must be self-contained)
 
-CI runs these checks automatically and blocks merge on failure.
+The pre-commit hook enforces these checks locally on every commit.
 
 ---
 
