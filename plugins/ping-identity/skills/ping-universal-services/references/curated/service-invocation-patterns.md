@@ -30,7 +30,7 @@ use_cases:
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-06-01"
+last_updated: "2026-06-03"
 slug: ""
 ---
 
@@ -213,4 +213,4 @@ Authorize REST response (abbreviated):
 [PingOne Protect API reference](https://apidocs.pingidentity.com/pingone/platform/v1/api/#post-create-risk-evaluation)
 [PingOne Verify API reference](https://apidocs.pingidentity.com/pingone/verify/v1/api/)
 [PingOne Authorize API reference](https://apidocs.pingidentity.com/pingone/authorize/v1/api/)
-[AIC journey node reference](https://docs.pingidentity.com/pingone-st/journey-nodes)
+[AIC journey node reference](https://docs.pingidentity.com/pingoneaic/journeys/auth-nodes.html)

@@ -74,6 +74,8 @@ When Protect and Verify are configured here, hand off to `ping-app-integration` 
 | Service selection decision (which service do I need?) | `references/curated/choosing-the-right-service.md` |
 | Invocation patterns (DaVinci, AIC, PingFederate) | `references/curated/service-invocation-patterns.md` |
 | Cross-platform usage constraints and service chaining | `references/curated/cross-platform-service-usage.md` |
+| Protect predictors, risk policies, Signals SDK setup | `references/curated/protect-configuration.md` |
+| Verify policy fields, verification types, transaction lifecycle | `references/curated/verify-configuration.md` |
 
 ## Retrieval escalation
 

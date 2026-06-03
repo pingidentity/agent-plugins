@@ -71,7 +71,9 @@
         "skills/ping-universal-services/references/curated/universal-services-overview.md",
         "skills/ping-universal-services/references/curated/choosing-the-right-service.md",
         "skills/ping-universal-services/references/curated/service-invocation-patterns.md",
-        "skills/ping-universal-services/references/curated/cross-platform-service-usage.md"
+        "skills/ping-universal-services/references/curated/cross-platform-service-usage.md",
+        "skills/ping-universal-services/references/curated/protect-configuration.md",
+        "skills/ping-universal-services/references/curated/verify-configuration.md"
       ],
       "generated": {
         "protect": "skills/ping-universal-services/references/generated/protect/.gitkeep",

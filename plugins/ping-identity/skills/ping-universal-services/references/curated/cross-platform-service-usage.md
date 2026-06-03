@@ -30,7 +30,7 @@ use_cases:
 doc_type: reference
 status: current
 canonical: true
-last_updated: "2026-06-01"
+last_updated: "2026-06-03"
 slug: ""
 ---
 
@@ -218,5 +218,5 @@ PingOne MT and PingOne ST (AIC) share the same underlying PingOne platform APIs 
 [PingOne Verify developer guide](https://docs.pingidentity.com/pingone/verify)
 [PingOne Authorize developer guide](https://docs.pingidentity.com/pingone/authorize)
 [PingOne IGA developer guide](https://docs.pingidentity.com/pingone/iga)
-[AIC journey node reference](https://docs.pingidentity.com/pingone-st/journey-nodes)
+[AIC journey node reference](https://docs.pingidentity.com/pingoneaic/journeys/auth-nodes.html)
 [DaVinci connector library](https://docs.pingidentity.com/davinci/connectors)

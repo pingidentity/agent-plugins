@@ -29,7 +29,7 @@ use_cases:
 doc_type: concept
 status: current
 canonical: true
-last_updated: "2026-06-01"
+last_updated: "2026-06-03"
 slug: ""
 ---
 
