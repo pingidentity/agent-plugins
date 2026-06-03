@@ -21,7 +21,7 @@ python3 -m evals.harness.validate_prompts
 python3 -m evals.harness.run_eval --adapter mock --layer 1
 python3 -m evals.harness.run_eval --adapter mock --layer 2
 
-# Run evals (live, requires Bedrock credentials)
+# Run evals (live, requires an LLM API key — see evals/harness/adapters/claude.py)
 python3 -m evals.harness.run_eval --adapter claude --layer 1
 ```
 

@@ -49,7 +49,7 @@ A poor description says only what the skill is, not when to invoke it. Agents te
 
 **From Anthropic's skill-creator guidance:** "The description should be deliberately assertive — use language like 'Make sure to use this skill whenever...' rather than passive phrasing, since models tend to undertrigger skills."
 
-Reference: https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md
+Reference: https://agentskills.io/spec/v0.2.0/
 
 ---
 

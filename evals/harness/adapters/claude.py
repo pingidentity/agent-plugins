@@ -1,11 +1,14 @@
-"""Claude (Anthropic) adapter — Layer 1 routing eval implementation.
+"""LLM adapter for Layer 1 routing eval.
 
 How it works:
   1. Build a system prompt that presents all 6 skills described by their
      SKILL.md description fields.
-  2. Send the user prompt and ask Claude to either route to skill(s) or ask
+  2. Send the user prompt and ask the model to either route to skill(s) or ask
      a clarifying question, returning structured JSON.
   3. Parse the JSON response to populate RunResult.
+
+Supports Bedrock (set CLAUDE_CODE_USE_BEDROCK=1 + AWS_BEARER_TOKEN_BEDROCK)
+or direct API (set ANTHROPIC_API_KEY).
 """
 from __future__ import annotations
 
@@ -18,9 +21,9 @@ import anthropic
 
 from evals.harness.adapters.base import RunResult
 
-# Bedrock model IDs
-_BEDROCK_MODEL = "eu.anthropic.claude-sonnet-4-6"
-_DIRECT_MODEL = "claude-sonnet-4-6"
+# Model IDs — override via MODEL_BEDROCK / MODEL_DIRECT env vars if needed
+_BEDROCK_MODEL = os.environ.get("MODEL_BEDROCK", "eu.anthropic.claude-sonnet-4-6")
+_DIRECT_MODEL = os.environ.get("MODEL_DIRECT", "claude-sonnet-4-6")
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SKILLS_DIR = REPO_ROOT / "plugins" / "ping-identity" / "skills"

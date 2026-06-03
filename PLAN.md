@@ -204,11 +204,11 @@ plugins/ping-identity/skills/<skill-name>/
 
 **Exit criterion:** End-to-end test passes — free-text intent ("KYC during registration on my React app") routes correctly through `ping-quickstart` → `ping-orchestration` + `ping-universal-services` + `ping-app-integration`, returns a curated plan citing the right anchors.
 
-> **Status (2026-06-01):** Exit criterion met. All 12 curated anchors authored (4 per new skill). All 6 skills pass Layer 1 eval at ≥90/100/80% on the Claude Bedrock adapter (`evals/results/2026-06-01/claude.layer1.json`). Also completed: full repo audit (119 issues found and fixed), `ClaudeAdapter` implemented via Bedrock, `validate_prompts` and `run_eval` composition-file handling fixed. The `ping-foundation` T-07 and `ping-quickstart` T-09 prompts sit exactly at the 90% floor — intentional known-good edge cases documented in eval results.
+> **Status (2026-06-01):** Exit criterion met. All 12 curated anchors authored (4 per new skill). All 6 skills pass Layer 1 eval at ≥90/100/80%. Full repo audit: 119 issues found and fixed. The `ping-foundation` T-07 and `ping-quickstart` T-09 prompts sit exactly at the 90% floor — intentional known-good edge cases documented in eval results.
 
 **Additional work completed beyond Phase 1 plan:**
 - Full verify/review/optimize pass across all 6 skills (119 issues fixed in 43 files): frontmatter gaps, routing placeholders, line-count violations, UI navigation language, missing Scope sections, broken index.json paths
-- `ClaudeAdapter` implemented using Bedrock (`eu.anthropic.claude-sonnet-4-6`); auto-detects `CLAUDE_CODE_USE_BEDROCK` env flag
+- `ClaudeAdapter` implemented (supports Bedrock and direct API); auto-detects environment
 - `evals/prompts/composition.yaml` created (5 cross-skill routing test cases)
 - `evals/harness/validate_prompts.py` and `run_eval.py` updated to skip composition file correctly
 

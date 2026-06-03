@@ -93,7 +93,7 @@ evals/
 
 ## Eval status
 
-Layer 1 routing eval — last run **2026-06-03** against `eu.anthropic.claude-sonnet-4-6` via Bedrock:
+Layer 1 routing eval — last run **2026-06-03**:
 
 | Skill | Trigger | Non-trigger | Ambiguous | Result |
 |---|---|---|---|---|
@@ -108,11 +108,12 @@ Pass bar: 90% trigger / 90% non-trigger / 80% ambiguous. Full results: `evals/re
 
 Run the eval yourself:
 ```bash
-pip install "anthropic[bedrock]" pyyaml jsonschema
+pip install pyyaml jsonschema
 python3 -m evals.harness.validate_prompts
-python3 -m evals.harness.run_eval --adapter claude --layer 1
-# Without an API key:
+# Mock (no API key needed):
 python3 -m evals.harness.run_eval --adapter mock --layer 1
+# Live (requires LLM API key — see evals/harness/adapters/claude.py):
+python3 -m evals.harness.run_eval --adapter claude --layer 1
 ```
 
 ---

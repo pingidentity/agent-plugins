@@ -15,7 +15,7 @@ on:
   workflow_dispatch:
     inputs:
       live_eval:
-        description: "Run live Claude adapter (Bedrock) — costs API credits"
+        description: "Run live LLM adapter — costs API credits"
         type: boolean
         default: false
 
@@ -80,7 +80,7 @@ jobs:
         run: python3 -m evals.harness.run_eval --adapter mock --layer 2
 
   live-eval-layer1:
-    name: Layer 1 routing eval (live Bedrock)
+    name: Layer 1 routing eval (live LLM)
     runs-on: ubuntu-latest
     needs: [mock-eval-layer1, mock-eval-layer2]
     # Only run on main push or when manually triggered with live_eval=true
@@ -102,9 +102,10 @@ jobs:
 
       - name: Run Layer 1 live eval
         env:
-          CLAUDE_CODE_USE_BEDROCK: "1"
+          CLAUDE_CODE_USE_BEDROCK: ${{ secrets.CLAUDE_CODE_USE_BEDROCK }}
           AWS_BEARER_TOKEN_BEDROCK: ${{ secrets.AWS_BEARER_TOKEN_BEDROCK }}
-          AWS_REGION: ${{ secrets.AWS_REGION || 'eu-west-2' }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python3 -m evals.harness.run_eval --adapter claude --layer 1 --write-results
 
       - name: Upload eval results
