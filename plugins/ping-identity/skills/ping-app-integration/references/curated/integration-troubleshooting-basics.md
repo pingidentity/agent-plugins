@@ -9,8 +9,8 @@ use_cases: ["customer", "workforce", "cross-platform"]
 doc_type: troubleshooting
 status: current
 canonical: true
-last_updated: "2026-06-01"
-slug: "https://docs.pingidentity.com/r/en-us/ping-troubleshooting"
+last_updated: "2026-06-03"
+slug: "https://docs.pingidentity.com/pingone/troubleshooting/p1_troubleshoot_apps.html"
 ---
 
 # Integration Troubleshooting — Top Failure Modes
@@ -191,7 +191,9 @@ Migrating from `forgerock-android-sdk` or `forgerock-ios-sdk` to the Ping Native
 | Token retrieval | `TokenManager.getTokens()` | `@forgerock/oidc-client` `getTokens()` | Update import + call |
 | Session management | `FRSession.logout()` | `oidcClient.logout()` | Update logout call |
 
-**Migration strategy:** address breaking changes in order — (1) dependency declarations, (2) imports, (3) initialization, (4) flow entry points, (5) callback/node handling, (6) token retrieval and storage. Test each phase with the existing journey or DaVinci flow before proceeding to the next.
+**Migration strategy — manual approach:** address breaking changes in order — (1) dependency declarations, (2) imports, (3) initialization, (4) flow entry points, (5) callback/node handling, (6) token retrieval and storage. Test each phase with the existing journey or DaVinci flow before proceeding to the next.
+
+**Automated migration:** For full automated code migration, use the `forgerock-to-ping-journey-migration` skill from the `pingidentity/ping-sdk-agent-skills` plugin. That skill runs a structured 9-phase workflow: (1) Detect platform, (2) Gather context (read manifest, package.json, Podfile), (3) Pre-flight build check, (4) Scope migration, (5) Scan for legacy usage, (6) Preview plan, (7) Apply changes with `[ping-migration] BEGIN/END legacy` comment markers, (8) Post-flight build verification, (9) Write migration report. It never silently deletes code and keeps the build working at every step.
 
 ## Quick-reference diagnostic table
 
@@ -231,8 +233,8 @@ Migrating from `forgerock-android-sdk` or `forgerock-ios-sdk` to the Ping Native
 - `references/curated/mobile-integration-basics.md` — Android and iOS SDK setup including migration table
 - `references/curated/web-integration-basics.md` — JavaScript OIDC and SAML integration
 - `references/curated/app-integration-overview.md` — Integration lifecycle and skill positioning
-- `references/runtime/docs-mcp-routing.md` — Escalation to Docs MCP for issues not covered here
+- `pingidentity/ping-sdk-agent-skills` — `forgerock-to-ping-journey-migration` skill for automated SDK migration
 
 ## Source
 
-[Ping Identity Troubleshooting Documentation](https://docs.pingidentity.com/r/en-us/ping-troubleshooting)
+[Ping Identity Troubleshooting Documentation](https://docs.pingidentity.com/pingone/troubleshooting/p1_troubleshoot_apps.html)

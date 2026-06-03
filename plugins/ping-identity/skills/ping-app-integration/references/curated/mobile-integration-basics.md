@@ -9,8 +9,8 @@ use_cases: ["customer", "workforce", "cross-platform"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-06-01"
-slug: "https://docs.pingidentity.com/r/en-us/pingone-native-sdk"
+last_updated: "2026-06-03"
+slug: "https://docs.pingidentity.com/pingone/native-sdks/p1_native_sdks_landing.html"
 ---
 
 # Mobile Integration Basics — Android and iOS SDK
@@ -211,6 +211,16 @@ For custom-scheme URIs (`myapp://callback`): no AASA file required; register the
 
 PingOne push approval and FIDO2 assertions may require biometric prompts. The app needs `NSFaceIDUsageDescription` in `Info.plist` for Face ID. Absence of this key causes a crash at runtime on Face ID–capable devices — it does not degrade gracefully.
 
+### Swift 6 concurrency notes
+
+The Ping iOS SDK is compatible with Swift 6's strict concurrency model. Key constraints:
+
+- All SDK callbacks and `async` methods must be called from the `@MainActor` context or a structured concurrency task. Calling from a background thread without proper actor isolation produces Swift 6 compiler errors.
+- `OidcClient` and journey/DaVinci client methods are `async` — use `await` inside `Task { }` blocks when calling from SwiftUI `.onAppear` or button actions.
+- The SDK's `@MainActor`-annotated types must not be used from non-isolated closures. If integrating with Combine or legacy UIKit callbacks, use `Task { @MainActor in ... }` to hop to the main actor.
+
+---
+
 ## Feature comparison table
 
 | Feature | Android | iOS |
@@ -226,6 +236,29 @@ PingOne push approval and FIDO2 assertions may require biometric prompts. The ap
 | FIDO2 / passkeys | `fido` module, Android 9+ | `PingFido` module (iOS 16+, passkey API) |
 | DaVinci collectors | `davinci` module, Jetpack Compose | `PingDavinci` module, SwiftUI |
 | Journey callbacks | `journey` module | `PingJourney` module |
+
+## DaVinci collector types (Android and iOS)
+
+When driving a DaVinci flow with the `davinci` / `PingDavinci` module, the SDK delivers **collectors** per step. Render by type:
+
+| Collector type | Interaction | Notes |
+|---|---|---|
+| `TextCollector` | Text input | Username, email, any free-text |
+| `PasswordCollector` | Masked password input | |
+| `SubmitCollector` | Submit / Continue button | Advances the flow |
+| `FlowCollector` | Secondary action button | "Forgot password", "Register" — triggers a sub-flow |
+| `SelectCollector` | Dropdown or radio group | |
+| `MultiSelectCollector` | Multi-select list | |
+| `LabelCollector` | Display-only text | No user input |
+| `QrCodeCollector` | QR code display | Flow waits for external device scan |
+| `SsoCollector` / `IdpCollector` | Social / external IdP button | Google, Apple, Facebook; triggers IdP redirect |
+| `PhoneCollector` | Phone input with country picker | |
+
+Auto-advancing (no user action): `DeviceAuthenticatorCollector` (biometric/passkey challenge), `ProtectCollector` (Protect signals — silent).
+
+**Pattern:** iterate `node.collectors`, render by type, collect input, call `node.next()`.
+
+---
 
 ## Common failure modes
 
@@ -267,4 +300,4 @@ For full Android, iOS, and JavaScript breaking-change tables and migration strat
 
 ## Source
 
-[PingOne Native SDK Documentation](https://docs.pingidentity.com/r/en-us/pingone-native-sdk)
+[PingOne Native SDK Documentation](https://docs.pingidentity.com/pingone/native-sdks/p1_native_sdks_landing.html)

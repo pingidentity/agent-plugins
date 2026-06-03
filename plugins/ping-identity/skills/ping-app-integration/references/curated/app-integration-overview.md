@@ -9,8 +9,8 @@ use_cases: ["customer", "workforce", "cross-platform"]
 doc_type: concept
 status: current
 canonical: true
-last_updated: "2026-06-01"
-slug: "https://docs.pingidentity.com/r/en-us/ping-integrations"
+last_updated: "2026-06-03"
+slug: "https://developer.pingidentity.com/pingone-api/platform/"
 ---
 
 # Ping Identity App Integration — Overview
@@ -186,4 +186,4 @@ A production-ready integration passes through three phases. This skill owns Phas
 
 ## Source
 
-[Ping Identity Developer Documentation](https://docs.pingidentity.com/r/en-us/ping-integrations)
+[Ping Identity Developer Documentation](https://developer.pingidentity.com/pingone-api/platform/)

@@ -70,3 +70,19 @@ Complete platform setup first, then flow design, then hand off to this skill for
 1. Curated anchors (`references/curated/`) — load 1–3 max. Stop if sufficient.
 2. Generated shortlists (`references/generated/web/`, `references/generated/mobile/`, `references/generated/on-prem-integration/`, `references/generated/orchestration-sdks/`) — load the relevant directory for the surface; skip if empty.
 3. Docs MCP fallback — see `references/runtime/docs-mcp-routing.md`. Only if curated + shortlist insufficient.
+
+## Companion SDK skills — `ping-sdk-agent-skills`
+
+For deep implementation work (full code scaffolding, collector rendering, migration automation), delegate to the specialist skills in the `pingidentity/ping-sdk-agent-skills` plugin:
+
+| Specialist skill | Platform |
+|---|---|
+| `ping-orchestration-sdk-router` | Detects platform (Android/iOS/JS) and routes — use first when platform is ambiguous |
+| `ping-orchestration-android-sdk` | Android Kotlin / Jetpack Compose — Journey + DaVinci |
+| `ping-orchestration-ios-sdk` | iOS Swift / SwiftUI — Journey + DaVinci |
+| `ping-orchestration-reactjs-journey-sdk` | React + AIC Journey flows |
+| `ping-orchestration-reactjs-davinci-sdk` | React + PingOne MT DaVinci flows |
+| `ping-orchestration-javascript-sdk` | Angular / Vue / Vanilla JS |
+| `forgerock-to-ping-journey-migration` | ForgeRock SDK → Ping SDK automated migration |
+
+Install: `https://github.com/pingidentity/ping-sdk-agent-skills`

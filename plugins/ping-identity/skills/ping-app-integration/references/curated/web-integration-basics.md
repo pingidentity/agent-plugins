@@ -9,8 +9,8 @@ use_cases: ["customer", "workforce", "cross-platform"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-06-01"
-slug: "https://docs.pingidentity.com/r/en-us/ping-javascript-sdk"
+last_updated: "2026-06-03"
+slug: "https://docs.pingidentity.com/pingone/javascript-sdk/p1_javascript_sdk_landing.html"
 ---
 
 # Web Integration Basics — React, JavaScript, OIDC, and SAML
@@ -118,14 +118,42 @@ Journey callbacks arrive as typed objects from the SDK iterator:
 | `NameCallback` | Text input (username field) |
 | `PasswordCallback` | Password input |
 | `ChoiceCallback` | Radio group or select |
-| `TextOutputCallback` | Display-only message |
+| `TextOutputCallback` | Display-only message (INFO / WARNING / ERROR level) |
 | `ConfirmationCallback` | Button group (OK / Cancel) |
-| `DeviceProfileCallback` | Silent (SDK collects device fingerprint automatically) |
-| `HiddenValueCallback` | Silent (SDK handles; no UI required) |
-| `ValidatedCreateUsernameCallback` | Text input with validation rules returned from server |
+| `DeviceProfileCallback` | Silent — SDK collects device fingerprint automatically |
+| `HiddenValueCallback` | Silent — SDK handles; no UI required |
+| `ValidatedCreateUsernameCallback` | Text input with server-returned validation rules |
 | `ValidatedCreatePasswordCallback` | Password input with strength rules |
+| `StringAttributeInputCallback` | Text input for a named user attribute (email, phone, etc.) |
+| `BooleanAttributeInputCallback` | Checkbox for a boolean attribute |
+| `PollingWaitCallback` | Display wait spinner; SDK polls until journey advances |
+| `MetadataCallback` | Silent — read `.getValue()` for flow context |
+| `SuspendedTextOutputCallback` | Email-suspend message; user told to check email; flow resumes via link |
+| `SelectIdPCallback` | IdP selection list; render IdP names/logos |
+| `IdPCallback` | Social login button (Google, Apple, Facebook, OIDC) |
+| `KbaCreateCallback` | KBA question setup — display question list; collect answer |
+| `ReCaptchaCallback` | Google reCAPTCHA widget; submit token on completion |
+| `WebAuthnRegistrationCallback` | Trigger FIDO2/passkey registration via browser WebAuthn API |
+| `WebAuthnAuthenticationCallback` | Trigger FIDO2/passkey assertion via browser WebAuthn API |
 
 Pattern: iterate `node.callbacks`, render each by `callback.getType()`, collect user input, call `node.next(updatedCallbacks)`.
+
+### DaVinci collector types (web)
+
+For `@forgerock/davinci-client` (PingOne MT), collectors per step:
+
+| Collector type | Notes |
+|---|---|
+| `TextCollector` | Text input — username, email |
+| `PasswordCollector` | Masked password input |
+| `SubmitCollector` | Submit button — call `node.next()` on click |
+| `FlowCollector` | Secondary action — "Forgot password", "Register" |
+| `SelectCollector` | Dropdown or radio group |
+| `SsoCollector` / `IdpCollector` | Social login button (Google, Apple, Facebook) |
+| `QrCodeCollector` | QR code display; flow polls for scan completion |
+| `PhoneCollector` | Phone number with country picker |
+
+Auto-advancing (no render): `ProtectCollector` (signals, silent).
 
 ## Generic OIDC integration
 
@@ -274,4 +302,4 @@ Constraints:
 
 ## Source
 
-[Ping Identity JavaScript SDK Documentation](https://docs.pingidentity.com/r/en-us/ping-javascript-sdk)
+[Ping Identity JavaScript SDK Documentation](https://docs.pingidentity.com/pingone/javascript-sdk/p1_javascript_sdk_landing.html)
