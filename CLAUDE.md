@@ -69,5 +69,5 @@ The plugin at `plugins/ping-identity/` is designed to work standalone (without `
 
 ## GitHub
 
-Remote: `https://github.com/brando-dill_pingcorp/agent-skills.git`  
-Use the `george-bafaloukas_pingcorp` EMU account for all `gh` operations (`gh auth switch --user george-bafaloukas_pingcorp`).
+Remote: `https://github.com/pingidentity/agent-plugins.git`  
+Use the `george-bafaloukas-forgerock` account for all `gh` operations (`gh auth switch --user george-bafaloukas-forgerock`).

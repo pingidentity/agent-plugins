@@ -253,9 +253,9 @@ plugins/ping-identity/skills/<skill-name>/
 ### Steps
 
 1. Strip all internal-only references: Glean MCP, Polaris, internal Slack pointers, internal tenant URLs.
-2. Repo rename: `brando-dill_pingcorp/agent-skills` → `pingidentity/agent-skills`.
+2. ~~Repo rename~~ — repo is already at `pingidentity/agent-plugins`. ✅
 3. Flip visibility public; verify `gh repo view` is clean.
-4. Smoke test from a fresh machine: `/plugin marketplace add pingidentity/agent-skills`, ask 5 sample router questions, confirm correct routing.
+4. Smoke test from a fresh machine: `/plugin marketplace add pingidentity/agent-plugins`, ask 5 sample router questions, confirm correct routing.
 
 **Exit criterion:** Public repo installable in <2 minutes from any supported IDE.
 
