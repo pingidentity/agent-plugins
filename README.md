@@ -1,5 +1,9 @@
 # Ping Identity Agent Skills
 
+[![Validate Skills](https://github.com/pingidentity/agent-plugins/actions/workflows/validate-skills.yml/badge.svg)](https://github.com/pingidentity/agent-plugins/actions/workflows/validate-skills.yml)
+[![Evals](https://github.com/pingidentity/agent-plugins/actions/workflows/run-evals.yml/badge.svg)](https://github.com/pingidentity/agent-plugins/actions/workflows/run-evals.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 A public skill package that teaches AI coding agents (Claude Code, Cursor, Copilot CLI, Gemini CLI) how to reason about the Ping Identity platform — which product to use, how to configure it, and how to integrate it into an application.
 
 Skills provide **judgment and context** that MCP tools lack. MCP tools handle execution; skills handle the *what* and *why* before execution begins.
@@ -8,24 +12,16 @@ Skills provide **judgment and context** that MCP tools lack. MCP tools handle ex
 
 ## Install
 
-**Claude Code**
-```bash
-/plugin add pingidentity/agent-skills
-```
+| Agent | Command |
+|---|---|
+| **Claude Code** | `/plugin add pingidentity/agent-plugins` |
+| **Cursor** | Settings → Rules → Add Rule → Remote Rule → `https://github.com/pingidentity/agent-plugins` |
+| **GitHub Copilot** | Via Agent Skills specification support — see `.well-known/agent-skills/index.json` |
+| **OpenCode** | `npx skills add https://github.com/pingidentity/agent-plugins` |
+| **Codex** | `npx skills add https://github.com/pingidentity/agent-plugins` |
+| **Gemini CLI** | Add plugin path to your `GEMINI.md` or agent configuration |
 
-**Cursor** — add to `.cursor/settings.json`:
-```json
-"remoteRules": ["https://raw.githubusercontent.com/pingidentity/agent-skills/main/rules/routing-rules.md"]
-```
-
-**Copilot CLI / OpenCode**
-```bash
-npx skills add pingidentity/agent-skills
-```
-
-**Gemini CLI** — add the plugin path to your `GEMINI.md` or agent configuration.
-
-> The repo will move to `pingidentity/agent-skills` at public launch (Phase 4). Current location: `brando-dill_pingcorp/agent-skills`.
+Agent discovery: `https://developer.pingidentity.com/.well-known/agent-skills/index.json`
 
 ---
 
@@ -97,18 +93,18 @@ evals/
 
 ## Eval status
 
-Layer 1 routing eval — last run **2026-06-01** against `eu.anthropic.claude-sonnet-4-6` via Bedrock:
+Layer 1 routing eval — last run **2026-06-03** against `eu.anthropic.claude-sonnet-4-6` via Bedrock:
 
 | Skill | Trigger | Non-trigger | Ambiguous | Result |
 |---|---|---|---|---|
-| ping-quickstart | 90% | 100% | 100% | ✅ PASS |
-| ping-foundation | 90% | 100% | 100% | ✅ PASS |
-| ping-orchestration | 100% | 100% | 100% | ✅ PASS |
+| ping-quickstart | 92% | 100% | 100% | ✅ PASS |
+| ping-foundation | 100% | 100% | 100% | ✅ PASS |
+| ping-orchestration | 93% | 100% | 100% | ✅ PASS |
 | ping-universal-services | 100% | 100% | 100% | ✅ PASS |
 | ping-app-integration | 100% | 100% | 100% | ✅ PASS |
 | ping-identity-for-ai | 100% | 100% | 100% | ✅ PASS |
 
-Pass bar: 90% trigger / 90% non-trigger / 80% ambiguous. Full results: `evals/results/2026-06-01/claude.layer1.json`.
+Pass bar: 90% trigger / 90% non-trigger / 80% ambiguous. Full results: `evals/results/`.
 
 Run the eval yourself:
 ```bash
@@ -142,8 +138,8 @@ Key constraints enforced in review (and Phase 3 CI):
 |---|---|---|
 | 0 | Repo restructure + eval harness scaffold | ✅ Complete |
 | 1 | Author 3 new skills + Layer 1 eval passing | ✅ Complete (2026-06-01) |
-| 2 | Generated shortlists + reference manifests | ⏳ In progress (June 2–3) |
-| 3 | CI hardening + CONTRIBUTING.md | Planned (June 4) |
+| 2 | Generated shortlists + reference manifests | ✅ Complete (2026-06-03) |
+| 3 | CI hardening + CONTRIBUTING.md | ✅ Complete (2026-06-03) |
 | 4 | Public launch + repo rename | Planned (TBD) |
 | 5 | Marketplace distribution + blog post | Planned (TBD) |
 
