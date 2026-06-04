@@ -1,6 +1,6 @@
 ---
 name: ping-foundation
-description: Platform setup, administration, and core configuration for PingOne MT, PingOne ST (AIC), and on-premises Ping software. Use this whenever a user asks ANY question about setting up environments, registering OIDC/SAML/WS-Federation apps, configuring SSO or Platform SSO, managing directories and user populations, configuring authentication policies, branding, or administering PingFederate/PingAccess/PingDirectory/PingID — including advisory, planning, and "how should I..." questions, not just execution tasks. Also invoke with /ping-foundation.
+description: Platform setup, administration, and core configuration for PingOne MT, PingOne ST (AIC), and on-premises Ping software. Use this skill whenever a user asks ANY question about setting up environments, registering OIDC/SAML/WS-Federation apps, configuring SSO or Platform SSO, managing directories and user populations, configuring authentication policies, branding, or administering PingFederate/PingAccess/PingDirectory/PingID — including advisory, planning, and "how should I..." questions, not just execution tasks. Also invoke with /ping-foundation.
 compatibility: Designed for Ping Identity platform tasks. MCP tools for PingOne MT or PingOne ST are used when available; console instructions provided as fallback.
 metadata:
   publisher: Ping Identity
