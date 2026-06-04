@@ -56,12 +56,12 @@ trigger_prompts:
     notes: "Revocation and audit trail for AI agents."
 
   - id: T-09
-    prompt: "We are building an LLM-fronted customer portal. How do we authenticate end users of this AI-powered application using PingOne?"
+    prompt: "Our AI agent orchestrates actions across multiple internal APIs on behalf of employees. How do we give it a scoped identity so it can only access what it needs and we can audit everything it does?"
     expected_anchors:
+      - references/curated/agent-security-patterns.md
       - references/curated/identity-for-ai-overview.md
-      - references/curated/workforce-helpdesk-ai.md
     expected_tier: curated
-    notes: "AI app authentication for an LLM-fronted application."
+    notes: "Scoped agent identity, least-privilege token, audit trail — core Identity for AI scenario."
 
   - id: T-10
     prompt: "What is the recommended identity onboarding process for registering a new AI agent with Ping Identity so it can start calling protected APIs?"
