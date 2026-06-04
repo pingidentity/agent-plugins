@@ -50,9 +50,9 @@ trigger_prompts:
     expected_tier: curated
 
   - id: T-09
-    prompt: "How do I set up MFA policies in PingOne MT for my workforce users?"
+    prompt: "How do I configure the sign-on policy in PingOne MT to require MFA for my workforce users?"
     expected_anchors:
-      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-mt/tenant-and-environment-setup.md
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-mt/sign-on-policies.md
     expected_tier: curated
 
   - id: T-10
