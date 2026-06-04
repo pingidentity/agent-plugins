@@ -9,7 +9,7 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-06-01"
+last_updated: "2026-06-04"
 slug: "https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started.html"
 ---
 
@@ -38,23 +38,21 @@ Does NOT cover: detailed configuration steps — see `ping-foundation` for those
 
 ### PingOne MT
 
-1. Create or access a PingOne environment (trial via `pingidentity.com` → Try Ping button, or production).
-2. Add an application — choose OIDC (authorization code), SAML, or worker (client credentials).
-3. Connect a directory: PingOne Directory (built-in), LDAP gateway, or external IdP via social connection.
-4. Configure a sign-on policy: define MFA requirements, risk thresholds, or step-up conditions.
-5. Assign the sign-on policy to the application and test the flow.
+The official PingOne getting started sequence (8 tasks):
+1. **Access the admin console** — complete account registration from the invitation email; enroll an MFA method (email OTP or authenticator app — mandatory before first access).
+2. **Create a sandbox environment** — select solution type, services (SSO, MFA, PingFederate, etc.), environment type (Sandbox), region, and license. Sample users (2 populations, 40 users) can be generated automatically.
+3. **Add administrators** — assign roles individually, via groups, or by sending a registration invitation. Best practice: keep all admin identities in the Administrators environment.
+4. **Add users** — manually, via bulk import, API, provisioning/sync, self-registration journey, or dynamic groups.
+5. **Design registration experiences** — create a SAML or OIDC application with a registration-enabled sign-on policy; users self-register at the application's SSO URL.
+6. **Design authentication experiences** — configure sign-on policies (passwordless, MFA, risk-based); assign to applications.
+7. **Design profile management experiences** — configure the self-service portal for password reset, MFA device management, and profile updates.
+8. **Apply branding** — customize themes, logos, and hosted page CSS for the environment.
 
-Trial gotcha: PingOne MT trial enforces mandatory MFA enrollment at trial setup (email passcode, authenticator app, or passkey — one is required before the trial environment is accessible).
+**Admin MFA enrollment (mandatory):** The first sign-on to the admin console always triggers MFA enrollment. Supported methods: email passcode, authenticator app (TOTP). This cannot be skipped; enrollment completes before the Environments page is accessible.
 
-Session behavior: The admin console requires re-authentication after 30 minutes of inactivity. MFA is re-prompted if the last sign-on was more than 12 hours ago. These thresholds are not configurable.
+**Session behavior:** Admin console requires re-authentication after 30 minutes of inactivity. MFA is re-prompted if the last sign-on was more than 12 hours ago. These thresholds are not configurable.
 
-Key config fields for a new PingOne app:
-| Field | Value guidance |
-|---|---|
-| Grant type | Authorization Code + PKCE for SPAs/mobile; Client Credentials for M2M |
-| Redirect URI | Must exactly match what the client sends |
-| Token lifetime | Default 60 min; set shorter for high-risk apps |
-| MFA policy | Attach directly to sign-on policy for step-up |
+For detailed application, directory, and policy configuration see `ping-foundation` → `pingone-mt` branch.
 
 ### PingOne ST (AIC)
 

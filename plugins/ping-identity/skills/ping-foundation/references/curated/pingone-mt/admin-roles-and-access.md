@@ -9,7 +9,7 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 slug: "https://docs.pingidentity.com/pingone/administrators/p1_admin_roles.html"
 ---
 
@@ -137,6 +137,29 @@ Use when the target user does not yet have a PingOne account.
 After the invitation is sent, it appears in the Users list with an active/revoke toggle. The invitee receives an email with a registration link, pastes the invite code, sets a password, and verifies email.
 
 **Prerequisites:** PingOne must be the identity provider; administrator security must be enabled with PingOne or a hybrid authentication source.
+
+---
+
+## Administrator account registration flow
+
+After an admin is added by any of the three methods above, the new admin must complete a registration process before they can access the console.
+
+**What the adding admin must provide:**
+- The new admin's PingOne username (if different from their email address)
+- The Console Login URL (Settings > Environment Properties > URLs)
+- A temporary password (optional — if set at user creation) or instructions to use "Forgot Password"
+- Invitation code (Method 3 only — sent in the registration email)
+
+**What the new admin must do:**
+1. Use the Console Login URL provided by the administrator to access the admin console.
+2. Enter their PingOne username and set or reset their password.
+3. On first sign-on, complete MFA enrollment (required — cannot be skipped).
+4. Verify their email address when prompted — follow the verification link or enter the code sent to their email.
+5. After email verification, the admin account registration is complete and the console is accessible.
+
+**Email verification:** Verification must complete before the admin can access the console. An admin who has been added but not verified will see no environments or settings. The adding admin can resend verification from the user's Profile tab > Verify button.
+
+**Invitation code expiry (Method 3):** The invite code expires after a maximum of 24 hours. Entering an incorrect code five times locks the account and invalidates the invitation — the inviting admin must resend. Invitations can be revoked or resent from the Users list.
 
 ---
 
