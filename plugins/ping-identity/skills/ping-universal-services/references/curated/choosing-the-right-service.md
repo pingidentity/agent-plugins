@@ -50,6 +50,8 @@ Does NOT cover: how to configure or invoke a service once selected — see `refe
 |---|---|---|
 | "Detect that this login attempt is risky and challenge the user" | **PingOne Protect** | Evaluates signals to produce a risk score; does not verify identity |
 | "Block or allow based on device posture, IP, or behavior" | **PingOne Protect** | Signal aggregation + risk policy engine |
+| "Configure MFA methods, Device Authentication Policies, or manage enrolled devices" | **PingOne MFA** | Service-level MFA config and device management; see `mfa-configuration.md` |
+| "Use the MFA enrollment API to pre-enrol devices or manage pairing keys" | **PingOne MFA** | Enrollment API, pairing keys for push; requires `PING_ONE_MFA` in BOM |
 | "Verify that the user is who they claim to be using a government ID" | **PingOne Verify** | Document capture + liveness; produces a proofing outcome |
 | "Check identity before high-value account action" | **PingOne Verify** | Step-up verification, not just authentication |
 | "Issue a digital wallet credential after a user completes KYC" | **PingOne Credentials** | W3C Verifiable Credential issuance bound to a PingOne user |
@@ -75,7 +77,7 @@ Does NOT cover: how to configure or invoke a service once selected — see `refe
 | **Replaces MFA?** | No. Verify establishes identity assurance; MFA provides ongoing authentication factors | No. MFA does not establish the user's real-world identity |
 | **Correct skill** | `ping-universal-services` | `ping-orchestration` (the MFA step is a journey/flow design concern) |
 
-**Rule**: If the task involves capturing a photo of an ID document or running a liveness check, the answer is Verify. If the task involves OTP, push, TOTP, or FIDO2 as a login factor, it is MFA and belongs in `ping-orchestration`.
+**Rule**: If the task involves capturing a photo of an ID document or running a liveness check, the answer is Verify. If the task involves OTP, push, TOTP, or FIDO2 as a login factor within a flow, it belongs in `ping-orchestration`. If the task is configuring MFA policies, managing enrolled devices, or calling the enrollment API outside of a flow, it belongs in `ping-universal-services` → `mfa-configuration.md`.
 
 ---
 
