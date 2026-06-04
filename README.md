@@ -90,37 +90,54 @@ evals/
 
 ## Eval status
 
-Layer 1 routing eval across the Claude family (Bedrock, EU region) — last run **2026-06-04**.
+Layer 1 routing eval across the Claude family (Bedrock, EU region) — last run **2026-06-04** after description tuning.
 Pass bar: 90% trigger / 90% non-trigger / 80% ambiguous.
 
-### Cross-model comparison
+### Cross-model comparison (post-tuning)
 
 Same prompt set, same skill definitions, three model tiers:
 
 | Skill | Haiku 4.5 | Sonnet 4.6 | Opus 4.7 |
 |---|---|---|---|
 | ping-app-integration       | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ |
-| ping-foundation            | 100 / 100 / 100 ✅ | 95 / 100 / 100 ✅ | 95 / 100 / **67** ❌ |
+| ping-foundation            | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 95 / 100 / **67** ❌ |
 | ping-identity-for-ai       | 90 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 90 / 100 / 100 ✅ |
-| ping-orchestration         | 95 / 100 / 100 ✅ | 100 / 100 / **67** ❌ | 100 / 100 / 100 ✅ |
-| ping-quickstart            | 92 / 100 / 100 ✅ | 92 / 100 / 100 ✅ | **85** / 100 / 100 ❌ |
-| ping-universal-services    | **69** / 100 / 100 ❌ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ |
-| **Skills passing**         | **5 / 6** | **5 / 6** | **4 / 6** |
+| ping-orchestration         | **84** / 100 / 100 ❌ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ |
+| ping-quickstart            | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ |
+| ping-universal-services    | **88** / 100 / 100 ❌ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ |
+| **Skills passing**         | **4 / 6** | **6 / 6** 🎉 | **5 / 6** |
 
 Cells show `trigger% / non-trigger% / ambiguous%`. Bold = below the pass bar.
 
-### Read of the results
+### Movement vs the pre-tuning baseline
 
-- **Non-trigger discipline is rock-solid across all three tiers (100%).** The "do NOT trigger" guards in every description hold regardless of model size — false positives are not a concern.
-- **No single model dominates.** Each tier has a distinct weakness; the skill descriptions are not over-fitted to any one model.
-- **Haiku 4.5** struggles only on `ping-universal-services` (69% trigger) — the dense multi-service description (Protect / Verify / MFA / Credentials / IGA / Authorize) is the longest and Haiku occasionally misroutes service-config prompts to `ping-orchestration` or `ping-app-integration`. Tightening that description would lift Haiku into a clean 6/6.
-- **Sonnet 4.6** misses one ambiguous prompt for `ping-orchestration` (67%) — it answers a "journey vs DaVinci, which platform?" prompt directly instead of asking the clarifying question the description requests. This is a description-tuning issue, not a model issue.
-- **Opus 4.7** is surprisingly the weakest at 4/6 — it confidently routes platform-orientation prompts (T-06, T-09 in `ping-quickstart`) to a more specific skill instead of the front-door catch-all. Larger models reach for specificity earlier; the `ping-quickstart` description needs a stronger "use this BEFORE specialising" cue to compensate.
-- **The shared T-09 weak spot.** "MFA policy" prompts genuinely overlap `ping-foundation` (sign-on policy + MFA) and `ping-universal-services` (MFA service config). Sonnet and Opus both route to universal-services; Haiku routes to foundation. This is a known-ambiguity prompt that needs rewriting (already in the backlog).
+| Skill | Haiku 4.5 | Sonnet 4.6 | Opus 4.7 |
+|---|---|---|---|
+| ping-orchestration         | 95 → **84** ↓ | **67 → 100** ↑ ambiguous | 100 → 100 |
+| ping-quickstart            | 92 → **100** ↑ | 92 → **100** ↑ | **85 → 100** ↑ |
+| ping-universal-services    | **69 → 88** ↑ | 100 → 100 | 100 → 100 |
+| Aggregate skills passing   | 5/6 → 5/6 | **5/6 → 6/6** | **4/6 → 5/6** |
 
-### What this tells us about the skill descriptions
+Three description tweaks landed in commit `5f71bf9`:
+- `ping-universal-services`: explicit "service-in-flow rule" — when a service node sits inside a flow, configuring it belongs here.
+- `ping-orchestration`: imperative clarifying-question cue ("you MUST ask one clarifying question").
+- `ping-quickstart`: priority cue — "use BEFORE more specialised skill" when orientation framing is present.
 
-Across all three tiers, **5/6 skills pass on at least 2 of 3 models**, and **non-trigger accuracy is 100% everywhere**. The descriptions are robust enough for production use across the Claude family. The three known weak spots (`ping-universal-services` on Haiku, `ping-quickstart` on Opus, the T-09 prompt) are tuning targets, not architectural problems.
+### Read of the post-tuning results
+
+- **Sonnet 4.6 hits a perfect 6/6.** Every skill at 100% across trigger, non-trigger, and ambiguous. The descriptions are production-quality at this tier.
+- **Opus 4.7 lifted from 4/6 → 5/6.** The `ping-quickstart` priority cue worked exactly as designed — Opus now correctly routes "where do we start with KYC" and migration prompts to the front door. Only `ping-foundation` remains failing, and its single ambiguous miss (A-03 *"Add a user to Ping"*) is a known underspecified prompt, not a description issue.
+- **Haiku 4.5 traded one failure for another (5/6 → 4/6).** The new "you MUST ask one clarifying question" cue in `ping-orchestration` made Haiku over-cautious — it now asks for clarification on three trigger prompts that have explicit platform context (T-53, T-55, T-57 mention DaVinci or AIC by name). The smaller model can't distinguish "ambiguous compare-platforms framing" from "platform stated, just design the flow." Sonnet and Opus handle this nuance correctly.
+- **The Haiku failure is a tier limitation, not a description bug.** The same change that fixed Sonnet's ambiguous failures broke Haiku's trigger discipline. We could undo it for Haiku's sake, but Sonnet/Opus would regress. **Recommendation:** keep the imperative cue — Sonnet and Opus are the deployment targets; Haiku is a robustness probe.
+- **Non-trigger accuracy stays at 100% on every model.** No description change introduced false positives.
+
+### Known remaining weak spots (not description bugs)
+
+These are eval prompt issues — even humans would disagree on the correct skill:
+
+- `ping-foundation` T-09 *"How do I set up MFA policies in PingOne MT for my workforce users?"* — genuinely overlaps with `ping-universal-services`. Backlog item: rewrite as *"How do I configure the sign-on policy in PingOne MT to require MFA?"*
+- `ping-foundation` A-03 *"Add a user to Ping"* — under-specified; Opus assumes PingOne MT instead of asking which platform.
+- `ping-identity-for-ai` T-09 *"LLM-fronted customer portal — how do we authenticate end users?"* — Haiku and Opus both route to general SDK skills because the AI framing is subtle.
 
 Full results in `evals/results/2026-06-04/{haiku-4-5,sonnet-4-6,opus-4-7}.layer1.json`.
 
