@@ -4,14 +4,16 @@ description: Use this skill whenever the task involves setting up, configuring, 
 compatibility: Designed for Ping Identity platform tasks. MCP tools for PingOne MT or PingOne ST are used when available; console instructions provided as fallback.
 metadata:
   publisher: Ping Identity
-  version: "1.0"
+  version: "1.0.0"
 ---
 
 # ping-foundation
 
-Platform setup, administration, and core configuration for all Ping Identity deployments. Covers tenant and environment setup, apps, directories, policies, branding, and on-premises software administration.
+Platform setup, administration, and core configuration for all Ping Identity deployments. Covers tenant and environment setup, apps, directories, policies, branding, and on-premises software administration. MCP tools handle execution; this skill supplies architecture patterns, sequencing, configuration constraints, and guardrails.
 
-> **Role of this skill:** MCP tools handle execution. This skill supplies the context they lack: architecture patterns, correct sequencing, configuration constraints, platform concepts, and guardrails.
+## Invocation
+
+Invoke explicitly with `/ping-foundation` or by saying "use ping-foundation to...".
 
 ## When to use this skill
 
@@ -103,8 +105,6 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 | Cross-platform admin patterns (LDAP, OIDC, APIs) | `references/curated/cross-platform/core-admin-patterns.md` |
 
 **Generated shortlist by product** (fallback): `references/generated/ping-software/top-25.json`
-
----
 
 ## Retrieval and execution
 

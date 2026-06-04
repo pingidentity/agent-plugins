@@ -4,7 +4,7 @@ description: Use this skill whenever the task involves an AI agent, LLM, or agen
 compatibility: Designed for AI identity and agent security work on Ping Identity platforms. References product docs and Ping Labs content.
 metadata:
   publisher: Ping Identity
-  version: "0.2.0"
+  version: "1.0.0"
 ---
 
 # ping-identity-for-ai

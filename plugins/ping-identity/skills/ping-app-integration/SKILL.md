@@ -4,7 +4,7 @@ description: Use this skill whenever the task involves writing code or wiring an
 compatibility: Designed for Ping Identity app and SDK integration work. References product docs and SDK documentation.
 metadata:
   publisher: Ping Identity
-  version: "0.2.0"
+  version: "1.0.0"
 ---
 
 # ping-app-integration

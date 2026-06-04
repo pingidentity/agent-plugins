@@ -4,7 +4,7 @@ description: Use this skill whenever the task involves designing, building, or a
 compatibility: Designed for Ping Identity orchestration tasks. MCP tools for PingOne ST are used when available to create and update journeys directly.
 metadata:
   publisher: Ping Identity
-  version: "1.0"
+  version: "1.0.0"
 ---
 
 # ping-orchestration

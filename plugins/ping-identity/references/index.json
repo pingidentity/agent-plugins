@@ -45,6 +45,7 @@
     "ping-orchestration": {
       "curated": [
         "skills/ping-orchestration/references/curated/pingone-st/journey-design-patterns.md",
+        "skills/ping-orchestration/references/curated/pingone-st/nodes/node-fundamentals.md",
         "skills/ping-orchestration/references/curated/pingone-st/nodes/basic-auth-nodes.md",
         "skills/ping-orchestration/references/curated/pingone-st/nodes/mfa-nodes.md",
         "skills/ping-orchestration/references/curated/pingone-st/nodes/risk-management-nodes.md",
