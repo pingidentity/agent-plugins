@@ -97,13 +97,13 @@ Pass bar: 90% trigger / 90% non-trigger / 80% ambiguous. Cells show `trigger% / 
 
 | Skill | Haiku 4.5 | Sonnet 4.6 | Opus 4.7 | gpt-5.4-nano | gpt-5.4-mini | gpt-5.5 |
 |---|---|---|---|---|---|---|
-| ping-app-integration    | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / **80** / **33** ❌ | 100 / **80** / **0** ❌ | 100 / **80** / **0** ❌ |
-| ping-foundation         | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 95 / 100 / **67** ❌ | 100 / 100 / **33** ❌ | 100 / 100 / **33** ❌ | 100 / 100 / 100 ✅ |
-| ping-identity-for-ai    | 90 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 90 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / **67** ❌ | 100 / 100 / 100 ✅ |
-| ping-orchestration      | **84** / 100 / 100 ❌ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / **67** ❌ | 100 / **83** / 100 ❌ | 100 / 100 / 100 ✅ |
-| ping-quickstart         | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 92 / 100 / **67** ❌ | 100 / 100 / **33** ❌ | 100 / 100 / 100 ✅ |
-| ping-universal-services | **88** / 100 / 100 ❌ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 94 / **80** / **33** ❌ | 94 / **80** / **33** ❌ | 100 / 100 / **67** ❌ |
-| **Skills passing**      | **4 / 6** | **6 / 6** 🎉 | **5 / 6** | **1 / 6** | **0 / 6** | **3 / 6** |
+| ping-app-integration    | 100 / 100 / **67** ❌ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 93 / **80** / **67** ❌ | 100 / **80** / **67** ❌ | 100 / **80** / 100 ❌ |
+| ping-foundation         | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / **67** ❌ | 95 / 100 / 100 ✅ | 95 / 100 / 100 ✅ | 100 / 100 / 100 ✅ |
+| ping-identity-for-ai    | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / **33** ❌ | 100 / 100 / **67** ❌ |
+| ping-orchestration      | **84** / 100 / 100 ❌ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / **67** ❌ | 100 / 100 / **67** ❌ | 95 / 100 / 100 ✅ |
+| ping-quickstart         | 92 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 92 / 100 / 100 ✅ | 100 / 100 / **67** ❌ | 100 / 100 / 100 ✅ |
+| ping-universal-services | **88** / 100 / 100 ❌ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / **67** ❌ | 100 / 100 / **67** ❌ | 94 / 100 / **67** ❌ |
+| **Skills passing**      | **4 / 6** | **6 / 6** 🎉 | **5 / 6** | **3 / 6** | **1 / 6** | **3 / 6** |
 
 Bold = below the pass bar.
 
@@ -112,18 +112,18 @@ Bold = below the pass bar.
 | Model | Vendor | Trigger | Non-trigger | Ambiguous | Skills passing |
 |---|---|---|---|---|---|
 | **Sonnet 4.6** | Anthropic | **100%** | **100%** | **100%** | **6 / 6** 🥇 |
-| Opus 4.7 | Anthropic | 98% | 100% | 95% | 5 / 6 |
-| Haiku 4.5 | Anthropic | 94% | 100% | 100% | 4 / 6 |
-| gpt-5.5 | OpenAI | 100% | 95% | 72% | 3 / 6 |
-| gpt-5.4-nano | OpenAI | 98% | 90% | 56% | 1 / 6 |
-| gpt-5.4-mini | OpenAI | 99% | 91% | 56% | 0 / 6 |
+| Opus 4.7 | Anthropic | 100% | 100% | 95% | 5 / 6 |
+| Haiku 4.5 | Anthropic | 94% | 100% | 94% | 4 / 6 |
+| gpt-5.5 | OpenAI | 98% | 97% | 83% | 3 / 6 |
+| gpt-5.4-nano | OpenAI | 97% | 97% | 83% | 3 / 6 |
+| gpt-5.4-mini | OpenAI | 99% | 97% | 67% | 1 / 6 |
 
 ### What the results show
 
 - **Trigger accuracy is vendor-portable (94–100%).** All six models correctly identify which skill to load when the user's intent is clear — the descriptions transfer outside the Anthropic ecosystem.
 - **Sonnet 4.6 achieves a perfect 6/6** across trigger, non-trigger, and ambiguous prompts and is the recommended deployment target.
-- **The vendor gap is concentrated on ambiguous prompts.** Anthropic models average 98% on prompts that require a clarifying question; GPT-5.x averages 61%. GPT-5.x defaults to confident routing even when the description requests clarification — this is a vendor-behavioural difference, not a description quality issue.
-- **Non-trigger discipline is strong across the board.** Anthropic models hold 100% consistently; GPT-5.x drops to 80–95% on a small number of keyword-overlap edge cases.
+- **Non-trigger discipline improved significantly for GPT-5.x** (80–91% → 97%) after adding an adapter-level routing tie-breaker that tells GPT the integration verb (SDK, Swift, React, "my app") takes priority over the service noun when both appear in a prompt.
+- **The residual gap is concentrated on ambiguous prompts.** Anthropic models average 98% on prompts requiring a clarifying question; GPT-5.x averages 78%. GPT-5.x defaults to confident routing on borderline cases — this is a vendor-behavioural trait. The clarification rule in the adapter has narrowed but not fully closed this gap.
 
 ### Run the eval yourself
 

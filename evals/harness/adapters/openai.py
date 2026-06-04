@@ -70,6 +70,10 @@ Rules:
 - Use "clarify" ONLY when the intent is genuinely ambiguous between two or more skills and a question would resolve it. Do not clarify clear intents.
 - You may route to multiple skills if the task genuinely spans them.
 - Always output valid JSON and nothing else.
+
+Routing tie-breaker: when a prompt contains both a Ping service/product name (Protect, Verify, IGA, DaVinci, AIC, Journey) AND an explicit app/code integration signal (SDK, Swift, Kotlin, React, JavaScript, "my app", "my backend", "integrate into"), the integration signal takes priority. Route to ping-app-integration unless the prompt is asking to configure the service itself (policies, connectors, thresholds) — not to embed it in code.
+
+Clarification rule: when the user's prompt is 10 words or fewer AND does not name a specific platform (PingOne MT, AIC, PingFederate, PingOne ST), tech stack (Android, iOS, React, Node.js), or named service (Protect, Verify, IGA, MFA, DaVinci), respond with action "clarify" and ask a single focused question. Do not route. Examples that require clarification: "Set up SSO", "Add a user to Ping", "I need to integrate Ping into my app", "I need to authenticate an agent", "AIC or DaVinci for my login flow?".
 """
 
 
