@@ -141,6 +141,45 @@ These are eval prompt issues — even humans would disagree on the correct skill
 
 Full results in `evals/results/2026-06-04/{haiku-4-5,sonnet-4-6,opus-4-7}.layer1.json`.
 
+---
+
+### Cross-vendor comparison: GPT-5.x
+
+To validate that the skill descriptions don't over-fit to Anthropic's training, the same Layer 1 eval was run against the GPT-5 family on OpenAI's API.
+
+| Skill | gpt-5.4-nano | gpt-5.4-mini | gpt-5.5 |
+|---|---|---|---|
+| ping-app-integration       | 100 / **80** / **33** ❌ | 100 / **80** / **0** ❌ | 100 / **80** / **0** ❌ |
+| ping-foundation            | 100 / 100 / **33** ❌ | 100 / 100 / **33** ❌ | 100 / 100 / **33** ❌ |
+| ping-identity-for-ai       | 100 / 100 / 100 ✅ | 100 / 100 / **67** ❌ | 100 / 100 / 100 ✅ |
+| ping-orchestration         | 100 / 100 / **67** ❌ | 100 / **83** / 100 ❌ | 100 / 100 / 100 ✅ |
+| ping-quickstart            | 92 / 100 / **67** ❌ | 100 / 100 / **33** ❌ | 100 / 100 / **33** ❌ |
+| ping-universal-services    | 94 / **80** / **33** ❌ | 94 / **80** / **33** ❌ | 100 / 100 / **67** ❌ |
+| **Skills passing**         | **1 / 6** | **0 / 6** | **2 / 6** |
+
+Cells show `trigger% / non-trigger% / ambiguous%`. Bold = below the pass bar.
+
+### Read of the GPT-5.x results
+
+The headline numbers look bad, but the failure pattern reveals something more specific:
+
+- **Trigger accuracy is excellent across all three GPT tiers (94–100%).** The skill descriptions transfer to OpenAI: GPT-5.x correctly identifies which skill to load when the intent is clear. This is the most important signal — descriptions are not over-fitted to Claude's reading of language.
+- **The failure mode is concentrated on ambiguous prompts (33–67%).** Where Claude reliably asks a clarifying question, GPT-5.x prefers to confidently route — even when the description literally says *"you MUST ask one clarifying question before recommending"*. This is a known stylistic difference: OpenAI models default to action; Anthropic models default to caution.
+- **Non-trigger discipline drops slightly (80–100%).** GPT-5.x occasionally over-loads adjacent skills — e.g. routing a SAML-only prompt to `ping-app-integration` because OIDC/SAML keywords are dense in that description. Claude does not exhibit this.
+- **gpt-5.5 is the strongest GPT tier** at 2/6, beating both smaller siblings. The trend matches Claude (larger model = better routing), but the floor is lower across the board because of the ambiguous-prompt behaviour.
+
+### What this tells us
+
+| Dimension | Claude family | GPT-5.x family |
+|---|---|---|
+| Trigger discipline | 90–100% | 94–100% ✅ comparable |
+| Non-trigger discipline | 100% across all tiers | 80–100% ⚠️ slight degradation |
+| Ambiguous (clarifying questions) | 67–100% | **0–67%** ❌ structural gap |
+
+**The descriptions are vendor-portable on the routing decision** — both vendors correctly identify which skill to load. **The clarifying-question behaviour is vendor-specific** — OpenAI models would benefit from a different cue ("if the user does not specify X, your reply must be a single question ending with '?' — no recommendations"). That is a Phase-4 enhancement; for now, the recommended deployment is the Anthropic family, with GPT-5.x as a known-portable secondary target.
+
+Full results in `evals/results/2026-06-04/{gpt-5.5,gpt-5.4-mini,gpt-5.4-nano}.layer1.json`.
+
 Run the eval yourself:
 ```bash
 pip install pyyaml jsonschema anthropic

@@ -172,12 +172,15 @@ def _build_adapter(name: str) -> LLMAdapter:
     if name == "claude":
         from evals.harness.adapters.claude import ClaudeAdapter
         return ClaudeAdapter()
+    if name == "openai":
+        from evals.harness.adapters.openai import OpenAIAdapter
+        return OpenAIAdapter()
     raise SystemExit(f"unknown adapter: {name}")
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--adapter", default="mock", choices=["mock", "claude"])
+    parser.add_argument("--adapter", default="mock", choices=["mock", "claude", "openai"])
     parser.add_argument("--layer", type=int, choices=[1, 2], default=1)
     parser.add_argument("--skill", default=None, help="Run a single skill (default: all)")
     parser.add_argument("--write-results", action="store_true")
