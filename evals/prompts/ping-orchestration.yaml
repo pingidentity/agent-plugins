@@ -82,7 +82,7 @@ trigger_prompts:
     notes: "strategy-uc-4 (DaVinci)"
 
   - id: T-52
-    prompt: "Add passkey / FIDO2 passwordless authentication to our customer journey, with magic link fallback."
+    prompt: "Add passkey / FIDO2 passwordless authentication to our PingOne ST customer journey, with magic link fallback."
     expected_anchors:
       - plugins/ping-identity/skills/ping-orchestration/references/curated/cross-platform/passkeys-and-passwordless.md
     expected_tier: curated
@@ -119,7 +119,7 @@ trigger_prompts:
     notes: "feedback: authenticator app / TOTP enrollment trigger"
 
   - id: T-57
-    prompt: "Our users need to approve high-value transactions via an email confirmation step — how do I add that to the flow?"
+    prompt: "In our AIC journey, our users need to approve high-value transactions via an email confirmation step — which nodes do I use?"
     expected_anchors:
       - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-mt/davinci-flow-patterns.md
     expected_tier: curated
