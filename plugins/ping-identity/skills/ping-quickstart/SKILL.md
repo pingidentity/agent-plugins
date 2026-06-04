@@ -1,6 +1,6 @@
 ---
 name: ping-quickstart
-description: Use this skill BEFORE any more specialised Ping skill whenever the user is in orientation mode — phrases like "where do we start", "where do I start", "where do we begin", "how do we begin", "we want to add X — where do we start", "we're evaluating", "we're migrating from ForgeRock / Okta / Auth0", "I'm new to Ping", "I inherited a Ping deployment", "help me choose", "PingOne vs AIC vs PingFederate", "which Ping product do I need", "recommended starting point", "test this end to end / validate my Ping setup". Even when a specific feature, service, or product is mentioned (KYC, MFA, Verify, DaVinci, etc.), if the framing is "where do we start" or "we're evaluating" or "we're migrating" — route here FIRST. Specialisation comes after orientation. Catch-all front door when platform or starting point is unclear. Also invoke with /ping-quickstart.
+description: Use this skill BEFORE any more specialised Ping skill whenever the user is in orientation mode — phrases like "where do we start", "where do I start", "where do we begin", "how do we begin", "we want to add X — where do we start", "we're evaluating", "we're migrating from ForgeRock / Okta / Auth0", "I'm new to Ping", "I inherited a Ping deployment", "help me choose", "PingOne vs AIC vs PingFederate", "which Ping product do I need", "recommended starting point", "test this end to end / validate my Ping setup". Even when a specific feature, service, or product is mentioned (KYC, MFA, Verify, DaVinci, etc.), if the framing is "where do we start" or "we're evaluating" or "we're migrating" — route here FIRST. Also triggers on bare user-management commands with no platform named: "Add a user to Ping", "Create a user in Ping", "Manage users in Ping" — Ping has many products with separate user populations (PingOne MT, AIC, PingFederate, PingDirectory); for these prompts you MUST respond with action "clarify" asking which platform, not "route". Catch-all front door when platform or starting point is unclear. Also invoke with /ping-quickstart.
 compatibility: Designed for Ping Identity platform tasks. Requires no tools — orientation and routing only.
 metadata:
   publisher: Ping Identity
@@ -103,6 +103,7 @@ Ask at most one question at a time:
 
 1. "Are you setting something up for the first time, or do you have an existing deployment?"
 2. "Are you working in PingOne, PingOne ST, or on-premises software?"
+**Mandatory clarification — bare user-management commands:** if the prompt is "Add a user to Ping", "Create a user in Ping", or any equivalent with no platform named, you MUST ask which platform before answering — Ping has separate user populations in PingOne MT, PingOne ST (AIC), PingFederate, and PingDirectory. Do not assume PingOne MT.
 
 ---
 

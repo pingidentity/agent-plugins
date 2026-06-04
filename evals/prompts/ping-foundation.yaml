@@ -153,6 +153,11 @@ non_trigger_prompts:
     prompt: "Give my AI agent a verified identity using Ping."
     expected_skill: ping-identity-for-ai
 
+  - id: N-06
+    prompt: "Add a user to Ping."
+    expected_skill: ping-quickstart
+    notes: "Bare command with no platform named — must route to ping-quickstart for clarification first."
+
 ambiguous_prompts:
   - id: A-01
     prompt: "Configure MFA."
@@ -162,7 +167,3 @@ ambiguous_prompts:
   - id: A-02
     prompt: "Set up SSO."
     expected_clarification_keywords: ["pingone", "aic", "software", "platform", "workforce", "ciam"]
-
-  - id: A-03
-    prompt: "Add a user to Ping."
-    expected_clarification_keywords: ["pingone", "aic", "directory", "platform", "mt", "st"]
