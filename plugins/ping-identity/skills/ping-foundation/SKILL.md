@@ -1,6 +1,6 @@
 ---
 name: ping-foundation
-description: Platform setup, administration, and core configuration for PingOne MT, PingOne ST (AIC), and on-premises Ping software. Use this skill whenever a user asks ANY question about setting up environments, registering OIDC/SAML apps, managing directories and user populations, configuring authentication policies, branding, or administering PingFederate/PingAccess/PingDirectory/PingID — including advisory, planning, and "how should I..." questions, not just execution tasks. Also invoke with /ping-foundation.
+description: Platform setup, administration, and core configuration for PingOne MT, PingOne ST (AIC), and on-premises Ping software. Use this whenever a user asks ANY question about setting up environments, registering OIDC/SAML/WS-Federation apps, configuring SSO or Platform SSO, managing directories and user populations, configuring authentication policies, branding, or administering PingFederate/PingAccess/PingDirectory/PingID — including advisory, planning, and "how should I..." questions, not just execution tasks. Also invoke with /ping-foundation.
 compatibility: Designed for Ping Identity platform tasks. MCP tools for PingOne MT or PingOne ST are used when available; console instructions provided as fallback.
 metadata:
   publisher: Ping Identity
@@ -18,7 +18,8 @@ Platform setup, administration, and core configuration for all Ping Identity dep
 Trigger on ANY question about setting up, configuring, administering, or planning a Ping Identity platform — including advisory and planning requests:
 
 - Set up or provision environments, tenants, or realms
-- Register OIDC, SAML, or OAuth 2.0 applications
+- Register OIDC, SAML, WS-Federation, or OAuth 2.0 applications
+- Configure SSO, Platform SSO, or workforce single sign-on
 - Manage directories, identity stores, or user populations
 - Configure authentication policies, sign-on policies, or branding
 - Administer PingFederate, PingAccess, PingDirectory, or PingID
@@ -42,8 +43,6 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 | Risk, MFA step-up, Verify, IGA, Credentials | `ping-universal-services` |
 | App/SDK integration code | `ping-app-integration` |
 | AI agent identity | `ping-identity-for-ai` |
-
-**Workforce SSO + MFA (PingFederate):** ping-foundation → ping-universal-services (PingID MFA) → ping-app-integration. **CIAM registration (PingOne ST):** ping-foundation → ping-orchestration (registration journey) → ping-universal-services (Verify) → ping-app-integration
 
 ---
 

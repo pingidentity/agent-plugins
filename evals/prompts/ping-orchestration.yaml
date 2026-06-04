@@ -102,6 +102,36 @@ trigger_prompts:
     expected_tier: curated
     notes: "strategy-uc-5 (Protect step-up)"
 
+  # ----- Feedback use cases (June 2026) -----
+
+  - id: T-55
+    prompt: "Design a passwordless login flow using passkeys with a magic link fallback for our mobile banking app."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/cross-platform/passkeys-and-passwordless.md
+    expected_tier: curated
+    notes: "feedback: passwordless authentication trigger"
+
+  - id: T-56
+    prompt: "How do I build an authenticator app enrollment journey in AIC so users can set up TOTP on first login?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/nodes/mfa-nodes.md
+    expected_tier: curated
+    notes: "feedback: authenticator app / TOTP enrollment trigger"
+
+  - id: T-57
+    prompt: "Our users need to approve high-value transactions via an email confirmation step — how do I add that to the flow?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-mt/davinci-flow-patterns.md
+    expected_tier: curated
+    notes: "feedback: transaction approval / out-of-band step-up trigger"
+
+  - id: T-58
+    prompt: "Build a push notification approval flow for transaction sign-off using PingOne MFA."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/pingone-st/nodes/mfa-nodes.md
+    expected_tier: curated
+    notes: "feedback: push MFA transaction approval trigger"
+
 non_trigger_prompts:
   - id: N-01
     prompt: "How do I install PingFederate on RHEL and configure initial admin settings?"

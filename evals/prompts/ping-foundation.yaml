@@ -107,6 +107,29 @@ trigger_prompts:
     expected_tier: curated
     notes: "strategy-uc-8 (AIC)"
 
+  # ----- Feedback use cases (June 2026) -----
+
+  - id: T-56
+    prompt: "We need to register a WS-Federation app in PingFederate for our Office 365 integration."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/ping-software/pingfederate-basics.md
+    expected_tier: curated
+    notes: "feedback: WS-Federation trigger"
+
+  - id: T-57
+    prompt: "How do I configure Platform SSO for our employees using PingOne?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-mt/sign-on-policies.md
+    expected_tier: curated
+    notes: "feedback: Platform SSO / SSO trigger"
+
+  - id: T-58
+    prompt: "Set up SSO for our workforce so employees can sign in to all our apps with one account."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/cross-platform/foundation-overview.md
+    expected_tier: curated
+    notes: "feedback: SSO workforce trigger"
+
 non_trigger_prompts:
   - id: N-01
     prompt: "Build a DaVinci flow for customer login with risk-based step-up MFA."

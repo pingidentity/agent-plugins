@@ -19,6 +19,7 @@ Invoke explicitly with `/ping-universal-services` or by saying "use ping-univers
 
 - "Add PingOne Protect risk evaluation to my login flow"
 - "Use PingOne Verify for KYC / identity proofing during registration"
+- "Configure PingOne MFA — device management, MFA policies, or MFA-as-a-service enrollment API"
 - "Issue or present a verifiable credential"
 - "Add IGA governance to my PingOne environment"
 - "Use PingOne Authorize for fine-grained authorization"
@@ -32,7 +33,9 @@ Invoke explicitly with `/ping-universal-services` or by saying "use ping-univers
 - If the user is just orienting or choosing a platform: use `ping-quickstart`.
 - If the task is integrating a Protect / Verify / Credentials **SDK or library into app code**: use `ping-app-integration` — SDK wiring is app integration, not service configuration.
 - If the user mentions "add security" or "prevent suspicious logins" without naming a specific service, ask a clarifying question — the task may be Protect (risk scoring) or just MFA (orchestration).
+- If the task is **MFA node/connector wiring within a journey or flow** (not MFA policy or device management): use `ping-orchestration` — that is flow design, not service configuration.
 - If the task is generic app / SDK integration without referencing a named Universal Service: use `ping-app-integration`.
+- **PingOne Recognize** — not yet GA; this skill will cover it when available.
 
 ## Multi-skill use cases
 
@@ -60,6 +63,7 @@ When Protect and Verify are configured here, hand off to `ping-app-integration` 
 |---|---|
 | Evaluate risk or adapt flows based on risk signals | Protect branch |
 | Identity proofing / document + liveness check | Verify branch |
+| PingOne MFA — device enrollment API, MFA policy config, MFA-as-a-service | MFA branch — see `references/curated/choosing-the-right-service.md` for MFA vs flow-level MFA routing |
 | Issue or present verifiable credentials | Credentials branch |
 | Governance, access reviews, provisioning | IGA branch |
 | Fine-grained authorization policies | Authorize branch |

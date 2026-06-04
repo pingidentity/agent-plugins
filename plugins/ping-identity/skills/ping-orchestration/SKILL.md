@@ -19,6 +19,9 @@ Invoke this skill explicitly with `/ping-orchestration` or by saying "use ping-o
 
 Trigger on ANY question — including advisory, planning, and "what nodes do I need" requests, not just implementation — when the task involves:
 - Building or designing a login, registration, recovery, MFA, or step-up journey in PingOne ST / AIC / PingAM
+- Passwordless authentication flows (passkeys, FIDO2, magic links, biometric)
+- Authenticator app login, push MFA, or TOTP enrollment flows
+- Transaction approvals via email or push (CIBA / out-of-band step-up)
 - Creating or designing a DaVinci flow for authentication, MFA, or orchestration
 - Configuring a PingAM authentication tree or scripted decision node
 - Planning or reviewing journey structure before implementation
@@ -35,15 +38,11 @@ Trigger on ANY question — including advisory, planning, and "what nodes do I n
 
 ## Multi-skill use cases
 
-Orchestration sits in the middle of the stack. Platform foundation must exist first; other skills extend what flows can do.
-
 | Sequence | Skill |
 |---|---|
 | Before: tenant, realm, identity store, app configured | `ping-foundation` |
-| After: add risk scoring, MFA step-up, identity verification within the flow | `ping-universal-services` |
-| After: wire the finished flow into a web, mobile, or SDK-based app | `ping-app-integration` |
-
-**Example — CIAM with proofing:** `ping-foundation` → `ping-orchestration` → `ping-universal-services` (Verify) → `ping-app-integration`.
+| After: risk scoring, MFA step-up, identity verification | `ping-universal-services` |
+| After: wire flow into web, mobile, or SDK app | `ping-app-integration` |
 
 ---
 
