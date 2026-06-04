@@ -17,7 +17,7 @@ def test_minimal_task_validates():
         "id": "01-example",
         "skill": "ping-app-integration",
         "title": "Example",
-        "prompt": "Do the thing.",
+        "prompt": "Do the thing properly please.",
         "expected_artifacts": ["**/*.kt"],
         "deterministic_checks": [
             {
