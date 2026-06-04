@@ -100,14 +100,16 @@ Same 6 skills, same prompt set, same eval harness — six models side-by-side:
 | Skill | Haiku 4.5 | Sonnet 4.6 | Opus 4.7 | gpt-5.4-nano | gpt-5.4-mini | gpt-5.5 |
 |---|---|---|---|---|---|---|
 | ping-app-integration       | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / **80** / **33** ❌ | 100 / **80** / **0** ❌ | 100 / **80** / **0** ❌ |
-| ping-foundation            | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 95 / 100 / **67** ❌ | 100 / 100 / **33** ❌ | 100 / 100 / **33** ❌ | 100 / 100 / **33** ❌ |
+| ping-foundation            | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 95 / 100 / **67** ❌ | 100 / 100 / **33** ❌ | 100 / 100 / **33** ❌ | 100 / 100 / 100 ✅ |
 | ping-identity-for-ai       | 90 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 90 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / **67** ❌ | 100 / 100 / 100 ✅ |
 | ping-orchestration         | **84** / 100 / 100 ❌ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / **67** ❌ | 100 / **83** / 100 ❌ | 100 / 100 / 100 ✅ |
-| ping-quickstart            | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 92 / 100 / **67** ❌ | 100 / 100 / **33** ❌ | 100 / 100 / **33** ❌ |
+| ping-quickstart            | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 92 / 100 / **67** ❌ | 100 / 100 / **33** ❌ | 100 / 100 / 100 ✅ |
 | ping-universal-services    | **88** / 100 / 100 ❌ | 100 / 100 / 100 ✅ | 100 / 100 / 100 ✅ | 94 / **80** / **33** ❌ | 94 / **80** / **33** ❌ | 100 / 100 / **67** ❌ |
 | **Skills passing**         | **4 / 6** | **6 / 6** 🎉 | **5 / 6** | **1 / 6** | **0 / 6** | **2 / 6** |
 
 Cells show `trigger% / non-trigger% / ambiguous%`. Bold = below the pass bar.
+
+> **Note:** gpt-5.5 `ping-foundation` updated to 100% after the T-09 eval prompt was rewritten to remove a genuine ambiguity with `ping-universal-services`. All other cells reflect results from the same description tuning round (commit `5530876`).
 
 ### Aggregate metrics
 
@@ -118,17 +120,18 @@ Average across all 6 skills, per dimension:
 | **Sonnet 4.6** | Anthropic | **100%** | **100%** | **100%** | **6 / 6** 🥇 |
 | Opus 4.7 | Anthropic | 98% | 100% | 95% | 5 / 6 🥈 |
 | Haiku 4.5 | Anthropic | 94% | 100% | 100% | 4 / 6 🥉 |
-| gpt-5.5 | OpenAI | 100% | 95% | 56% | 2 / 6 |
+| gpt-5.5 | OpenAI | 100% | 95% | 72% | 3 / 6 |
 | gpt-5.4-nano | OpenAI | 98% | 90% | 56% | 1 / 6 |
 | gpt-5.4-mini | OpenAI | 99% | 91% | 56% | 0 / 6 |
 
 ### Reading the comparison
 
 - **The descriptions transfer across vendors on routing decisions.** Trigger accuracy is 94–100% across all six models — both vendors correctly identify which skill to load when the user's intent is stated.
-- **The vendor split appears on ambiguous prompts.** Anthropic models average 98% on prompts requiring a clarifying question; OpenAI models average 56%. The same description (*"you MUST ask one clarifying question"*) produces caution in Claude and confidence in GPT-5.x.
-- **Non-trigger discipline diverges by 8–10 points.** Anthropic models hold 100% on "should NOT trigger" prompts; OpenAI models drop to 80–95% — they occasionally over-load adjacent skills when keyword overlap is high.
-- **Sonnet 4.6 is the deployment recommendation** at perfect 6/6 / 100% across the board. Opus 4.7 and Haiku 4.5 are reliable secondary targets. GPT-5.x works for the routing decision but needs vendor-specific cues for clarifying-question behaviour (Phase-4 enhancement).
-- **Within OpenAI, gpt-5.5 wins (2/6) over its smaller siblings (1/6 and 0/6)** — the larger-model-routes-better trend matches Claude, just with a lower ceiling on this prompt set.
+- **The vendor split appears on ambiguous prompts.** Anthropic models average 98% on prompts requiring a clarifying question; OpenAI models average 61%. The `"you MUST ask one clarifying question"` phrasing produces caution in Claude and is frequently overridden in GPT-5.x, which defaults to confident routing.
+- **Attempts to close the ambiguous-prompt gap via stricter description wording backfired** — stronger format constraints ("your reply MUST be a single clarifying question ending with '?'") caused Claude models to over-ask on clear-intent prompts, regressing Sonnet from 6/6 to 4/6. The ambiguous-prompt gap for GPT-5.x is a **vendor-behavioural trait, not a description-tuning target**. It requires a vendor-specific adapter-level instruction (Phase-4 enhancement), not changes to the shared skill descriptions.
+- **Non-trigger discipline diverges by 8–10 points.** Anthropic models hold 100% consistently; OpenAI drops to 80–95% on a small number of keyword-overlap prompts. Addressable but not worth risking Claude regressions for.
+- **Sonnet 4.6 is the deployment recommendation** at perfect 6/6 / 100% across the board. Opus 4.7 and Haiku 4.5 are reliable secondary targets. GPT-5.x achieves correct routing but clarifying-question behaviour needs vendor-specific tuning.
+- **Within OpenAI, gpt-5.5 leads (3/6)** — the larger-model-routes-better trend matches Claude, just with a lower ambiguous-prompt ceiling.
 
 ---
 

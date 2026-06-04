@@ -98,7 +98,7 @@ class OpenAIAdapter:
     def run(self, prompt: str) -> RunResult:
         completion = self._client.chat.completions.create(
             model=self._model,
-            max_completion_tokens=512,
+            max_completion_tokens=1024,
             response_format={"type": "json_object"},
             messages=[
                 {"role": "system", "content": self._system},
