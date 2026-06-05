@@ -132,8 +132,8 @@ def build_judge_prompt(*, task_prompt: str, rubric: dict, artifact_files: list[P
     ) or "(no files)"
     criteria_block = "\n".join(
         f"- {c['name']} (weight {c['weight']}): {c['description']}"
-        for c in rubric["criteria"]
-    )
+        for c in (rubric.get("criteria") or [])
+    ) or "(no criteria provided)"
     return f"""You are an impartial judge scoring an AI assistant's response against a rubric.
 
 Task the assistant was given:
