@@ -124,3 +124,58 @@ def evaluate_check(check: dict, workdir: Path) -> CheckResult:
 
 def evaluate_task_checks(checks: list[dict], workdir: Path) -> CheckSummary:
     return CheckSummary(results=[evaluate_check(c, workdir) for c in checks])
+
+
+def build_judge_prompt(*, task_prompt: str, rubric: dict, artifact_files: list[Path]) -> str:
+    artifacts_block = "\n\n".join(
+        f"--- {f.name} ---\n{f.read_text(errors='replace')}" for f in artifact_files
+    ) or "(no files)"
+    criteria_block = "\n".join(
+        f"- {c['name']} (weight {c['weight']}): {c['description']}"
+        for c in rubric["criteria"]
+    )
+    return f"""You are an impartial judge scoring an AI assistant's response against a rubric.
+
+Task the assistant was given:
+{task_prompt}
+
+Assistant's output (concatenated artifact files):
+{artifacts_block}
+
+Rubric criteria:
+{criteria_block}
+
+For each criterion, return a score from 0.0 to 1.0 and a one-sentence justification.
+
+Respond with strict JSON of the form:
+{{"scores": [{{"name": "<criterion>", "score": <0..1>, "justification": "..."}}], "weighted_total": <0..1>}}
+
+Only output JSON, no prose, no markdown fences.
+"""
+
+
+def judge_task(
+    *, task_prompt: str, rubric: dict, artifact_files: list[Path],
+    judge_model: str, openai_client=None,
+) -> tuple[list[dict], float]:
+    """Returns (per-criterion scores, weighted_total)."""
+    import json
+    import os
+    from openai import OpenAI
+
+    client = openai_client or OpenAI(
+        api_key=os.environ["OPENAI_API_KEY"],
+        base_url=os.environ.get("OPENAI_BASE_URL"),
+    )
+    prompt = build_judge_prompt(task_prompt=task_prompt, rubric=rubric, artifact_files=artifact_files)
+    completion = client.chat.completions.create(
+        model=judge_model,
+        messages=[{"role": "user", "content": prompt}],
+        max_completion_tokens=1024,
+        response_format={"type": "json_object"},
+    )
+    raw = completion.choices[0].message.content or "{}"
+    data = json.loads(raw)
+    scores = data.get("scores", [])
+    weighted = float(data.get("weighted_total", 0.0))
+    return scores, weighted
