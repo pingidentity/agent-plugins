@@ -86,6 +86,10 @@ def test_build_argv_with_skill_uses_plugin_dir(tmp_path):
     assert "--bare" not in argv
     assert "--model" in argv
     assert "claude-sonnet-4-6" in argv
+    assert "--dangerously-skip-permissions" in argv
+    assert "--max-turns" in argv
+    assert "--output-format" in argv
+    assert "stream-json" in argv
 
 
 def test_build_argv_without_skill_uses_bare(tmp_path):

@@ -49,6 +49,9 @@ def parse_stream_json(lines: list[str]) -> RunOutcome:
                 if block.get("type") == "text" and block.get("text"):
                     last_assistant_text = block["text"]
         elif kind == "result":
+            # Token totals come from the final `result` block only.
+            # Per-turn `usage` on `assistant` messages are intermediate
+            # and intentionally ignored to avoid double-counting.
             usage = obj.get("usage") or {}
             out.tokens_input = int(usage.get("input_tokens") or 0)
             out.tokens_output = int(usage.get("output_tokens") or 0)
