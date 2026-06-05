@@ -106,11 +106,15 @@ def evaluate_check(check: dict, workdir: Path) -> CheckResult:
             if not part:
                 continue
             if part.startswith("[") and part.endswith("]"):
-                cursor = cursor[int(part[1:-1])]
+                try:
+                    cursor = cursor[int(part[1:-1])]
+                except (KeyError, IndexError, TypeError):
+                    return CheckResult(cid, False, f"path not found: {check['json_path']}")
             else:
-                cursor = cursor.get(part) if isinstance(cursor, dict) else None
-            if cursor is None:
-                return CheckResult(cid, False, f"path not found: {check['json_path']}")
+                if isinstance(cursor, dict) and part in cursor:
+                    cursor = cursor[part]
+                else:
+                    return CheckResult(cid, False, f"path not found: {check['json_path']}")
         if "expected" in check and cursor != check["expected"]:
             return CheckResult(cid, False, f"got {cursor!r}, expected {check['expected']!r}")
         return CheckResult(cid, True, f"value at {check['json_path']} = {cursor!r}")

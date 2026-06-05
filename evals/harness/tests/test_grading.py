@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 from evals.harness.runners.grading import (
     evaluate_check, evaluate_task_checks, CheckResult,
@@ -79,3 +80,52 @@ def test_evaluate_task_checks_all_pass_returns_pass_rate_1(tmp_path):
     assert summary.checks_passed == 2
     assert summary.checks_total == 2
     assert summary.pass_rate == 1.0
+
+
+def test_json_path_dotted_key_match(tmp_path):
+    (tmp_path / "config.json").write_text(json.dumps({"app": {"name": "demo"}}))
+    check = {"id": "c1", "description": "app name is demo",
+             "type": "json_path", "path": "config.json",
+             "json_path": "$.app.name", "expected": "demo"}
+    r = evaluate_check(check, tmp_path)
+    assert r.passed is True
+
+
+def test_json_path_index_traversal(tmp_path):
+    (tmp_path / "data.json").write_text(json.dumps({"users": [{"id": 1}, {"id": 2}]}))
+    check = {"id": "c1", "description": "second user id is 2",
+             "type": "json_path", "path": "data.json",
+             "json_path": "$.users[1].id", "expected": 2}
+    r = evaluate_check(check, tmp_path)
+    assert r.passed is True
+
+
+def test_json_path_distinguishes_null_value_from_missing_key(tmp_path):
+    """Regression test: a literal null must not be reported as missing."""
+    (tmp_path / "data.json").write_text(json.dumps({"disabled": None}))
+    check = {"id": "c1", "description": "disabled is null",
+             "type": "json_path", "path": "data.json",
+             "json_path": "$.disabled", "expected": None}
+    r = evaluate_check(check, tmp_path)
+    assert r.passed is True
+    assert "got None" not in r.evidence  # should not have flowed into the mismatch branch
+
+
+def test_json_path_missing_key_fails(tmp_path):
+    (tmp_path / "data.json").write_text(json.dumps({"present": 1}))
+    check = {"id": "c1", "description": "absent key",
+             "type": "json_path", "path": "data.json",
+             "json_path": "$.absent", "expected": "anything"}
+    r = evaluate_check(check, tmp_path)
+    assert r.passed is False
+    assert "path not found" in r.evidence
+
+
+def test_json_path_value_mismatch(tmp_path):
+    (tmp_path / "data.json").write_text(json.dumps({"app": {"version": "1.0"}}))
+    check = {"id": "c1", "description": "version is 2",
+             "type": "json_path", "path": "data.json",
+             "json_path": "$.app.version", "expected": "2.0"}
+    r = evaluate_check(check, tmp_path)
+    assert r.passed is False
+    assert "1.0" in r.evidence and "2.0" in r.evidence
