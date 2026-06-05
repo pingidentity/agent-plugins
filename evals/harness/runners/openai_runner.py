@@ -12,7 +12,6 @@ from __future__ import annotations
 import os
 import re
 import time
-from dataclasses import dataclass
 from pathlib import Path
 
 from evals.harness.runners.claude_code_cli import RunOutcome
@@ -20,6 +19,8 @@ from evals.harness.runners.claude_code_cli import RunOutcome
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SKILLS_ROOT_DEFAULT = REPO_ROOT / "plugins" / "ping-identity" / "skills"
+
+_FINAL_MESSAGE_MAX_CHARS = 2000
 
 
 def _read_skill_body(skills_root: Path, skill: str) -> str:
@@ -84,11 +85,14 @@ def run_in_workdir(
     timeout_seconds: int = 600,
 ) -> RunOutcome:
     """Single-turn OpenAI completion; extract code blocks into workdir."""
-    from openai import OpenAI
+    if config not in ("with_skill", "without_skill"):
+        raise ValueError(f"unknown config: {config!r}")
+
+    from openai import OpenAI, OpenAIError
 
     api_key = os.environ.get("OPENAI_API_KEY")
     if not api_key:
-        raise SystemExit("Missing OPENAI_API_KEY")
+        raise RuntimeError("Missing OPENAI_API_KEY — set OPENAI_API_KEY env var")
 
     client_kwargs = {"api_key": api_key}
     base_url = os.environ.get("OPENAI_BASE_URL")
@@ -108,7 +112,7 @@ def run_in_workdir(
             model=model, messages=messages, max_completion_tokens=8192,
             timeout=timeout_seconds,
         )
-    except Exception as exc:  # rate limit, timeout, etc.
+    except (OpenAIError, TimeoutError) as exc:
         return RunOutcome(error=type(exc).__name__, duration_ms=int((time.monotonic() - t0) * 1000))
 
     elapsed_ms = int((time.monotonic() - t0) * 1000)
@@ -121,6 +125,6 @@ def run_in_workdir(
         tokens_output=getattr(usage, "completion_tokens", 0) or 0,
         duration_ms=elapsed_ms,
         turn_count=1,
-        final_message=body[:2000],
+        final_message=body[:_FINAL_MESSAGE_MAX_CHARS],
         raw_lines=[body],
     )
