@@ -3,8 +3,13 @@ import textwrap
 from pathlib import Path
 
 import pytest
+import yaml
 
-from evals.harness.validate_prompts import ValidationError, validate_prompt_file
+from evals.harness.validate_prompts import (
+    ValidationError,
+    validate_prompt_file,
+    validate_task_file,
+)
 
 
 def write_yaml(tmp_path: Path, name: str, content: str) -> Path:
@@ -88,10 +93,6 @@ def test_expected_tier_enum_enforced(tmp_path: Path):
         validate_prompt_file(f)
 
 
-import yaml
-from evals.harness.validate_prompts import validate_task_file, ValidationError
-
-
 def test_validate_task_file_accepts_minimal(tmp_path):
     """Skill subdir matches filename's parent → passes."""
     # Layout: tmp_path/ping-app-integration/01-x.yaml
@@ -129,9 +130,5 @@ def test_validate_task_file_rejects_skill_mismatch(tmp_path):
         ],
         "judge_rubric": {"enabled": False},
     }))
-    try:
+    with pytest.raises(ValidationError, match="must match parent directory"):
         validate_task_file(target)
-    except ValidationError as exc:
-        assert "ping-orchestration" in str(exc) or "skill" in str(exc).lower()
-        return
-    raise AssertionError("expected ValidationError for skill/dir mismatch")

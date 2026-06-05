@@ -20,19 +20,19 @@ class ValidationError(Exception):
     pass
 
 
-def _load_schema() -> dict:
-    with SCHEMA_PATH.open() as f:
+def _load_schema(schema_path: Path) -> dict:
+    with schema_path.open() as f:
         return json.load(f)
 
 
-def validate_prompt_file(path: Path) -> None:
+def _validate_against_schema(path: Path, schema_path: Path) -> dict:
     with path.open() as f:
         data = yaml.safe_load(f)
 
     if not isinstance(data, dict):
         raise ValidationError(f"{path}: top-level must be a mapping")
 
-    schema = _load_schema()
+    schema = _load_schema(schema_path)
     errors = sorted(Draft7Validator(schema).iter_errors(data), key=lambda e: e.path)
     if errors:
         msgs = "; ".join(
@@ -40,6 +40,11 @@ def validate_prompt_file(path: Path) -> None:
         )
         raise ValidationError(f"{path}: {msgs}")
 
+    return data
+
+
+def validate_prompt_file(path: Path) -> None:
+    data = _validate_against_schema(path, SCHEMA_PATH)
     expected_skill = path.stem
     if data["skill"] != expected_skill:
         raise ValidationError(
@@ -47,23 +52,8 @@ def validate_prompt_file(path: Path) -> None:
         )
 
 
-def _load_task_schema() -> dict:
-    with TASK_SCHEMA_PATH.open() as f:
-        return json.load(f)
-
-
 def validate_task_file(path: Path) -> None:
-    with path.open() as f:
-        data = yaml.safe_load(f)
-    if not isinstance(data, dict):
-        raise ValidationError(f"{path}: top-level must be a mapping")
-    schema = _load_task_schema()
-    errors = sorted(Draft7Validator(schema).iter_errors(data), key=lambda e: e.path)
-    if errors:
-        msgs = "; ".join(
-            f"{'/'.join(map(str, e.path)) or '<root>'}: {e.message}" for e in errors
-        )
-        raise ValidationError(f"{path}: {msgs}")
+    data = _validate_against_schema(path, TASK_SCHEMA_PATH)
     expected_skill = path.parent.name
     if data["skill"] != expected_skill:
         raise ValidationError(
