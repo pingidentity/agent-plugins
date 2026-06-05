@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import warnings
 from dataclasses import dataclass, asdict, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -21,8 +22,8 @@ class RunRecord:
     duration_seconds: float
     turn_count: int
     deterministic_checks: list = field(default_factory=list)
-    judge_scores: object = None
-    error: object = None
+    judge_scores: list[dict] | None = None
+    error: str | None = None
 
     @property
     def tokens_total(self) -> int:
@@ -36,7 +37,7 @@ class RunRecord:
 
 def write_run_result(
     *, results_dir: Path, date_str: str, model: str, config: str,
-    records: list, plugin_sha: str,
+    records: list[RunRecord], plugin_sha: str,
 ) -> Path:
     out_dir = results_dir / date_str / "layer3"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -55,7 +56,7 @@ def write_run_result(
     return out_path
 
 
-def _mean(values: list) -> float:
+def _mean(values: list[float]) -> float:
     return sum(values) / len(values) if values else 0.0
 
 
@@ -69,7 +70,11 @@ def aggregate_results(layer3_dir: Path) -> dict:
     by_model_config: dict = {}
 
     for f in files:
-        data = json.loads(f.read_text())
+        try:
+            data = json.loads(f.read_text())
+        except json.JSONDecodeError as exc:
+            warnings.warn(f"Skipping malformed result file {f}: {exc}")
+            continue
         meta = data["metadata"]
         model = meta["model"]
         config = meta["config"]
