@@ -1,7 +1,7 @@
 ---
 name: ping-foundation
-description: Use this skill whenever the task involves setting up, configuring, or administering any Ping Identity platform — PingOne MT, PingOne ST (AIC), PingFederate, PingAccess, PingDirectory, or PingID. Triggers: create or manage environments, tenants, realms; register OIDC, SAML, WS-Federation, or OAuth 2.0 apps; configure SSO, Platform SSO, or workforce single sign-on; manage directories, LDAP, user populations, or schema; configure sign-on policies, authentication policies, or step-up MFA policy settings at the platform level; configure MFA methods or PingID in PingFederate; branding, custom domains, or notification templates; administer on-premises Ping software; advisory questions like "how should I structure my tenant" or "what grant type should I use". Prerequisite — a specific platform must be named or clearly implied; "add a user to Ping" or "create a user in Ping" without a named platform belongs in ping-quickstart first. Also invoke with /ping-foundation.
-compatibility: Designed for Ping Identity platform tasks. MCP tools for PingOne MT or PingOne ST are used when available; console instructions provided as fallback.
+description: Use this skill whenever the task involves setting up, configuring, or administering any Ping Identity platform — PingOne (multi-tenant cloud), PingOne Advanced Identity Cloud (AIC), PingFederate, PingAccess, PingDirectory, or PingID. Triggers: create or manage environments, tenants, realms; register OIDC, SAML, WS-Federation, or OAuth 2.0 apps; configure SSO, Platform SSO, or workforce single sign-on; manage directories, LDAP, user populations, or schema; configure sign-on policies, authentication policies, or step-up MFA policy settings at the platform level; configure MFA methods or PingID in PingFederate; branding, custom domains, or notification templates; administer on-premises Ping software; advisory questions like "how should I structure my tenant" or "what grant type should I use". Prerequisite — a specific platform must be named or clearly implied; "add a user to Ping" or "create a user in Ping" without a named platform belongs in ping-quickstart first. Also invoke with /ping-foundation.
+compatibility: Designed for Ping Identity platform tasks. MCP tools for PingOne and PingOne Advanced Identity Cloud (AIC) are used when available; console instructions provided as fallback.
 metadata:
   publisher: Ping Identity
   version: "1.0.0"
@@ -52,13 +52,13 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 
 | Platform signal | Branch |
 |---|---|
-| PingOne admin console, PingOne APIs, PingOne environment | [PingOne MT](#pingone-mt) |
-| PingOne ST tenant admin, identity cloud, PingAM, PingIDM, PingDS | [PingOne ST](#pingone-st) |
+| PingOne admin console, PingOne APIs, PingOne environment | [PingOne](#pingone) |
+| PingOne Advanced Identity Cloud (AIC), identity cloud, PingAM, PingIDM, PingDS | [PingOne Advanced Identity Cloud](#pingone-advanced-identity-cloud) |
 | PingFederate, PingAccess, PingDirectory, PingID, PingAM standalone | [Ping Software Suite](#ping-software-suite) |
 
 ---
 
-## PingOne MT
+## PingOne
 
 **Curated anchors — pick 1–3 matching the task:**
 
@@ -77,7 +77,7 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 
 ---
 
-## PingOne ST
+## PingOne Advanced Identity Cloud
 
 **Curated anchors — pick 1–3 matching the task:**
 

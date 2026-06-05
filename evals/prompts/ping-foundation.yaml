@@ -167,3 +167,29 @@ ambiguous_prompts:
   - id: A-02
     prompt: "Set up SSO."
     expected_clarification_keywords: ["pingone", "aic", "software", "platform", "workforce", "ciam"]
+
+# ----- Cross-skill boundary cases (medium / hard) -----
+# These test the foundation-vs-orchestration boundary. The correct first skill is
+# ping-foundation; the model must not jump straight to orchestration.
+
+cross_skill_prompts:
+  - id: M-01
+    prompt: "I want to add an MFA policy to my PingOne environment. Is that a policy configuration or do I need to build a flow?"
+    expected_primary_skill: ping-foundation
+    expected_secondary_skill: ping-orchestration
+    notes: "Foundation owns sign-on policy + MFA policy config; orchestration owns the flow nodes. Model should route to foundation and explain the distinction."
+
+  - id: H-01
+    prompt: "We're building a CIAM solution on PingOne Advanced Identity Cloud: tenant provisioned, apps registered, now we need a registration journey with email OTP, identity verification via PingOne Verify, and then the iOS SDK integration. What's the sequence of skills and what does each one own?"
+    expected_primary_skill: ping-foundation
+    expected_secondary_skills:
+      - ping-orchestration
+      - ping-universal-services
+      - ping-app-integration
+    notes: "Full-stack multi-skill case. Foundation is the orientation entry point; model should describe the layered skill sequence rather than attempting to answer all layers from one skill."
+
+  - id: H-02
+    prompt: "We're running PingFederate on-prem and want to add PingOne MFA as a step-up. How do these two products connect?"
+    expected_primary_skill: ping-foundation
+    expected_secondary_skill: ping-universal-services
+    notes: "Cross-platform integration: PingFederate (ping-software branch) + PingOne MFA (universal-services). Foundation handles the connector/adapter configuration; universal-services handles the MFA policy."

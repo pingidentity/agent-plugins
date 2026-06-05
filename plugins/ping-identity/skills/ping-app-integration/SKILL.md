@@ -46,9 +46,9 @@ A complete app integration spans three layers — all are required for a product
 
 Complete platform setup first, then flow design, then hand off to this skill for SDK wiring.
 
-**End-to-end example (Android + DaVinci on PingOne MT):**
+**End-to-end example (Android + DaVinci on PingOne):**
 
-1. Use `ping-foundation` to register an OIDC application in PingOne MT, configure the redirect URI (`myapp://callback`), and note the client ID and environment ID.
+1. Use `ping-foundation` to register an OIDC application in PingOne, configure the redirect URI (`myapp://callback`), and note the client ID and environment ID.
 2. Use `ping-orchestration` to build and test a DaVinci login flow with username/password and push MFA nodes.
 3. Use this skill (`ping-app-integration`) to add the `com.pingidentity.sdks:davinci` and `com.pingidentity.sdks:oidc` dependencies, initialize `PingOne.init(context)` with the client ID and discovery endpoint, call `PingOne.startAuthentication(activity)`, and handle the `AuthResult`.
 
@@ -82,7 +82,7 @@ For deep implementation work (full code scaffolding, collector rendering, migrat
 | `ping-orchestration-android-sdk` | Android Kotlin / Jetpack Compose — Journey + DaVinci |
 | `ping-orchestration-ios-sdk` | iOS Swift / SwiftUI — Journey + DaVinci |
 | `ping-orchestration-reactjs-journey-sdk` | React + AIC Journey flows |
-| `ping-orchestration-reactjs-davinci-sdk` | React + PingOne MT DaVinci flows |
+| `ping-orchestration-reactjs-davinci-sdk` | React + PingOne DaVinci flows |
 | `ping-orchestration-javascript-sdk` | Angular / Vue / Vanilla JS |
 | `forgerock-to-ping-journey-migration` | ForgeRock SDK → Ping SDK automated migration |
 

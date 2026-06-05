@@ -1,10 +1,7 @@
 ---
 name: ping-routing-eval
 description: Evaluate a Ping Identity skill-routing system run. Use this whenever you need to test whether an agent chose the right skill, the right platform branch, the right retrieval tier, and gave a correct answer — all while staying token-efficient. Invoke this eval format for any benchmark prompt before shipping a skill update.
-canonical_path: evals/routing-eval.md
 ---
-
-> **Note:** The canonical version of this file lives at `evals/routing-eval.md`. This copy in `shared/evals/` is kept for tools that reference the shared layer. Keep both in sync.
 
 # Ping Identity — Skill Routing Eval
 
@@ -236,3 +233,36 @@ A good benchmark prompt:
 - Is not solvable from general LLM knowledge alone — it requires the skill's curated context to answer well
 
 A poor benchmark prompt is a one-liner like "How do I set up PingOne?" — too vague to test routing precision.
+
+---
+
+## Relationship to the automated harness
+
+The automated harness (`evals/harness/run_eval.py`) tests **Layer 1 only** — routing decisions returned as JSON (`route` / `clarify` / `skip`). It runs against the YAML prompt files in `evals/prompts/`.
+
+This eval format tests **Layers 1–3**:
+
+| Layer | Tests | Automated? |
+|---|---|---|
+| 1 — Skill routing | Correct umbrella skill selected | Yes (`run_eval.py`) |
+| 2 — Anchor selection | Correct curated reference(s) chosen | Partially — `expected_anchors` in YAML; not yet checked programmatically |
+| 3 — Answer correctness | Factually correct, platform-specific answer | Manual only (this format) |
+
+### Extending harness to Layer 2
+
+The `trigger_prompts` in each YAML file already carry `expected_anchors`. To add automated Layer 2 coverage:
+
+1. After the model returns a `route` decision, pass the full skill body and prompt back to the model and ask it to select curated anchors.
+2. Compare the returned anchor paths against `expected_anchors` in the YAML.
+3. Score: full match = pass; subset = partial; no overlap = fail.
+
+The `cross_skill_prompts` section (present in `ping-foundation.yaml` and `ping-app-integration.yaml`) introduces multi-skill boundary cases not covered by Layer 1. These are best evaluated using this manual format until a Layer 2 runner exists.
+
+### Running a manual eval
+
+```bash
+# Load this skill as context, then invoke for a benchmark prompt:
+/ping-routing-eval
+
+# Then paste a prompt from the benchmark library, or from evals/prompts/*.yaml
+```

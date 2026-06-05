@@ -151,3 +151,12 @@ ambiguous_prompts:
     prompt: "How do I integrate Ping with my backend?"
     expected_clarification_keywords: ["app-integration", "foundation", "api", "oidc", "client-credentials", "token", "sdk", "server"]
     notes: "Ambiguous between app-integration (token validation, SDK) and ping-foundation (app registration, API config); backend could mean resource server or admin API."
+
+# ----- Cross-skill boundary cases (medium) -----
+
+cross_skill_prompts:
+  - id: M-03
+    prompt: "We have a PingOne Advanced Identity Cloud tenant set up and a journey ready. Now I need to integrate the hosted login page into our iOS app using the Ping SDK."
+    expected_primary_skill: ping-app-integration
+    expected_secondary_skill: ping-foundation
+    notes: "Clear app-integration trigger (iOS SDK, hosted login); foundation is a prerequisite already satisfied. Model should route directly to app-integration without re-doing foundation work."

@@ -9,7 +9,7 @@ metadata:
 
 # ping-universal-services
 
-Shared strategic services used across PingOne MT, PingOne ST (AIC), and Ping Software Suite — invoked from flows rather than administered as standalone products. Covers PingOne Protect (risk), PingOne Verify (identity proofing / KYC), PingOne Credentials (verifiable credentials), PingOne IGA (governance), PingOne Authorize (fine-grained authorization), and cross-platform SSO.
+Shared strategic services used across PingOne, PingOne Advanced Identity Cloud (AIC), and Ping Software Suite — invoked from flows rather than administered as standalone products. Covers PingOne Protect (risk), PingOne Verify (identity proofing / KYC), PingOne Credentials (verifiable credentials), PingOne IGA (governance), PingOne Authorize (fine-grained authorization), and cross-platform SSO.
 
 ## Invocation
 

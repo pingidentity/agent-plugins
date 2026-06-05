@@ -56,12 +56,12 @@ Scan available tools for MCP tools that can perform the required operation. If m
 
 | Platform signal | Branch |
 |---|---|
-| PingOne ST tenant, PingAM, identity cloud, ForgeRock lineage | [PingOne ST](#pingone-st) |
-| PingOne MT + DaVinci | [PingOne MT / DaVinci](#pingone-mt--davinci) |
+| PingOne Advanced Identity Cloud (AIC), PingAM, identity cloud, ForgeRock lineage | [PingOne Advanced Identity Cloud](#pingone-advanced-identity-cloud) |
+| PingOne + DaVinci | [PingOne / DaVinci](#pingone--davinci) |
 
 ---
 
-## PingOne ST
+## PingOne Advanced Identity Cloud
 
 Sub-routing by task and journey use case: see `references/curated/pingone-st/routing-index.md`.
 
@@ -83,7 +83,7 @@ Sub-routing by task and journey use case: see `references/curated/pingone-st/rou
 
 ---
 
-## PingOne MT / DaVinci
+## PingOne / DaVinci
 
 **Sub-routing by task:**
 
