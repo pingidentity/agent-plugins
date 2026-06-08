@@ -58,7 +58,10 @@ def parse_stream_json(lines: list[str]) -> RunOutcome:
             out.duration_ms = int(obj.get("duration_ms") or 0)
             out.turn_count = int(obj.get("num_turns") or 0)
             if obj.get("is_error"):
-                out.error = obj.get("subtype") or "unknown_error"
+                # Prefer the `result` text (contains the actual error message)
+                # over `subtype` (often "success" even on errors from old CLI versions).
+                error_text = obj.get("result") or obj.get("subtype") or "unknown_error"
+                out.error = error_text[:200]
     out.final_message = last_assistant_text
     return out
 
