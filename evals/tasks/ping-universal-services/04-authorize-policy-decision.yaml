@@ -1,0 +1,74 @@
+id: 04-authorize-policy-decision
+skill: ping-universal-services
+title: "PingOne Authorize: policy decision API call and response interpretation"
+
+prompt: |
+  Integrate PingOne Authorize as a policy decision point (PDP) into a
+  PingFederate post-authentication policy action using a direct REST API call.
+
+  Requirements:
+
+  1. Show the correct REST endpoint for requesting an authorization decision:
+     POST /environments/{envId}/decisions
+  2. Describe the required request body fields: the policy name (or policy ID),
+     the user token attributes passed as parameters, and the resource context.
+  3. Show the correct response body structure: the "decision" field containing
+     PERMIT or DENY, and the "obligations" array for step-up requirements.
+  4. Explain that PingFederate acts as the policy enforcement point (PEP) while
+     PingOne Authorize acts as the PDP — these roles must not be conflated.
+  5. Describe the fail-closed fallback: when Authorize is unreachable, the
+     decision must default to DENY, never PERMIT.
+
+  Write a technical integration guide (Markdown) covering the endpoint, request
+  schema, response interpretation, PEP/PDP role separation, and the fail-closed
+  fallback rule.
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+
+deterministic_checks:
+  - id: decisions-endpoint
+    description: "Uses correct /decisions endpoint (not /authorize or /evaluate)"
+    type: grep
+    glob: "**/*"
+    pattern: "/decisions"
+    must_match: true
+
+  - id: decision-permit-deny
+    description: "Response decision field contains PERMIT or DENY (not ALLOW/BLOCK)"
+    type: regex
+    glob: "**/*"
+    pattern: "\\bPERMIT\\b.*\\bDENY\\b"
+    flags: "ms"
+    must_match: true
+
+  - id: obligations-field
+    description: "Response includes obligations array for step-up requirements"
+    type: grep
+    glob: "**/*"
+    pattern: "obligations"
+    must_match: true
+
+  - id: pep-pdp-separation
+    description: "Distinguishes PEP (PingFederate) from PDP (PingOne Authorize)"
+    type: regex
+    glob: "**/*"
+    pattern: "(?i)(pep|policy enforcement point)"
+    must_match: true
+
+  - id: fail-closed
+    description: "Specifies fail-closed fallback: unavailable Authorize defaults to DENY"
+    type: regex
+    glob: "**/*"
+    pattern: "(?i)(fail.closed|default.*deny|unavailable.*deny|deny.*default)"
+    must_match: true
+
+  - id: no-wrong-endpoint
+    description: "Does NOT use /authorize as the decision endpoint"
+    type: not_contains
+    glob: "**/*"
+    pattern: "POST /environments/{envId}/authorize"
+
+judge_rubric:
+  enabled: false

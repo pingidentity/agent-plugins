@@ -1,0 +1,83 @@
+id: 05-mfa-device-policy
+skill: ping-universal-services
+title: "PingOne MFA: device authentication policy with push notification config"
+
+prompt: |
+  Configure a PingOne MFA Device Authentication Policy for a CIAM environment
+  that supports email OTP, SMS OTP, and push notification MFA.
+
+  Requirements:
+
+  1. Confirm that the PING_ONE_MFA entitlement is present in the environment's
+     Bill of Materials (BOM) before proceeding with any configuration.
+  2. Name the correct admin path for managing MFA policies:
+     Authentication > MFA > Device Authentication Policies (not "Sign-On Policies").
+  3. List the correct AMR codes for each method: EMAIL for email OTP, SMS for
+     SMS OTP, and MCA for mobile push. Explain the distinction between MCA
+     (includes silent push) and USER (requires explicit approval tap).
+  4. Describe the pairing key prerequisite for push MFA: a pairing key must be
+     generated via the API and the user must register their device before push
+     notifications can be delivered. Show the correct API endpoint:
+     POST /environments/{envId}/users/{userId}/mfaUserAuthClientPairingKeys
+  5. Explain that the Device Authentication Policy must be assigned to a sign-on
+     policy or referenced in the DaVinci/AIC flow connector — a policy that
+     exists but is not assigned is not enforced.
+
+  Write a configuration guide (Markdown) covering BOM check, admin path, AMR
+  codes, pairing key setup, and policy assignment.
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+
+deterministic_checks:
+  - id: bom-check
+    description: "Instructs verifying PING_ONE_MFA in the Bill of Materials before configuring"
+    type: grep
+    glob: "**/*"
+    pattern: "PING_ONE_MFA"
+    must_match: true
+
+  - id: device-auth-policy-name
+    description: "Uses correct policy type name Device Authentication Policy (not MFA Policy or Sign-On Policy)"
+    type: grep
+    glob: "**/*"
+    pattern: "Device Authentication Polic"
+    must_match: true
+
+  - id: amr-code-mca
+    description: "Uses MCA as the AMR code for push notification MFA (not PUSH or NOTIFY)"
+    type: grep
+    glob: "**/*"
+    pattern: "\\bMCA\\b"
+    must_match: true
+
+  - id: amr-user-distinction
+    description: "Distinguishes USER AMR (explicit approval) from MCA (includes silent push)"
+    type: grep
+    glob: "**/*"
+    pattern: "\\bUSER\\b"
+    must_match: true
+
+  - id: pairing-key-endpoint
+    description: "Shows correct pairing key API endpoint mfaUserAuthClientPairingKeys"
+    type: grep
+    glob: "**/*"
+    pattern: "mfaUserAuthClientPairingKeys"
+    must_match: true
+
+  - id: policy-assignment-required
+    description: "States that the policy must be assigned to be enforced"
+    type: regex
+    glob: "**/*"
+    pattern: "(?i)(assign|reference|not.*enforced|enforced.*assign)"
+    must_match: true
+
+  - id: no-wrong-amr-push
+    description: "Does NOT use PUSH as the AMR code for push MFA"
+    type: not_contains
+    glob: "**/*"
+    pattern: "AMR.*PUSH"
+
+judge_rubric:
+  enabled: false

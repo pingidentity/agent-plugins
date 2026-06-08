@@ -1,0 +1,70 @@
+id: 01-protect-risk-policy
+skill: ping-universal-services
+title: "PingOne Protect: configure risk policy with predictors and thresholds"
+
+prompt: |
+  Configure a PingOne Protect risk policy for a CIAM login flow. The policy must:
+
+  1. Use the Standard policy type (not Targeted).
+  2. Include three predictors: Anonymous Network Detection, New Device, and
+     User-based Risk Behavior.
+  3. Set a fallback risk level of MEDIUM on the New Device predictor.
+  4. Configure the risk-level thresholds so that scores below the low threshold
+     return LOW, scores in the middle band return MEDIUM, and scores above the
+     high threshold return HIGH.
+  5. Branch the DaVinci flow on the recommendation value returned by the Protect
+     connector — not on the raw numeric score.
+
+  Write a configuration guide (Markdown) describing each step, the correct field
+  names, and the exact enum values for risk levels and recommendation values.
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+
+deterministic_checks:
+  - id: risk-level-enum
+    description: "Uses correct risk level enum values LOW, MEDIUM, HIGH (not Low/Medium/High or numeric)"
+    type: regex
+    glob: "**/*"
+    pattern: "\\bLOW\\b.*\\bMEDIUM\\b.*\\bHIGH\\b"
+    flags: "ms"
+    must_match: true
+
+  - id: recommendation-value
+    description: "Branches on recommendation.value (ALLOW/CHALLENGE/BLOCK), not raw score"
+    type: grep
+    glob: "**/*"
+    pattern: "recommendation\\.value"
+    must_match: true
+
+  - id: recommendation-enum
+    description: "Correct recommendation enum values: ALLOW, CHALLENGE, BLOCK"
+    type: regex
+    glob: "**/*"
+    pattern: "\\bALLOW\\b.*\\bCHALLENGE\\b.*\\bBLOCK\\b"
+    flags: "ms"
+    must_match: true
+
+  - id: no-numeric-threshold-branch
+    description: "Does NOT hardcode a numeric score threshold in the flow branch condition"
+    type: not_contains
+    glob: "**/*"
+    pattern: "score > "
+
+  - id: standard-policy-type
+    description: "Uses Standard policy type (not Targeted) for this single-posture deployment"
+    type: grep
+    glob: "**/*"
+    pattern: "Standard"
+    must_match: true
+
+  - id: fallback-risk-level
+    description: "Sets fallback risk level (LOW/MEDIUM/HIGH) on predictors with insufficient data"
+    type: grep
+    glob: "**/*"
+    pattern: "fallback"
+    must_match: true
+
+judge_rubric:
+  enabled: false
