@@ -127,15 +127,15 @@ Per-skill delta with the ping-identity plugin loaded vs a clean baseline. Each c
 
 | Skill | haiku Δ pass | haiku Δ tokens |
 |---|---|---|
-| ping-app-integration | +0.20 | -11359 |
-| ping-foundation | +0.00 | -5054 |
-| ping-identity-for-ai | +0.20 | -16846 |
-| ping-orchestration | +0.20 | -2889 |
-| ping-quickstart | +0.00 | -509 |
-| ping-universal-services | +0.20 | -35670 |
+| ping-app-integration | +0.20 | -12051 |
+| ping-foundation | +0.00 | -4912 |
+| ping-identity-for-ai | +0.20 | -39871 |
+| ping-orchestration | +0.40 | -2448 |
+| ping-quickstart | +0.00 | +1025 |
+| ping-universal-services | +0.20 | -24768 |
 
 Headlines:
-- **haiku** — with skill: 20%, without: 7%, Δ +13%
+- **haiku** — with skill: 27%, without: 10%, Δ +17%
 
 <!-- END: layer3-eval-table -->
 
