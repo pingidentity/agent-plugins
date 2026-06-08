@@ -1,0 +1,50 @@
+id: 04-secure-mcp-server
+skill: ping-identity-for-ai
+title: "Secure an MCP server so only authorized AI agents can call it"
+
+prompt: |
+  I'm running an MCP (Model Context Protocol) server that exposes tools and
+  data to AI agents. Right now it has no authentication — any agent can call it.
+  Explain how to use Ping Identity to lock it down so that only agents holding
+  a valid, scoped access token can reach the MCP server. Cover: where to place
+  PingGateway or PingOne in the architecture, how Bearer token validation works,
+  which filters or components enforce authorization, and what the agent must
+  include in each request to be granted access.
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+
+deterministic_checks:
+  - id: mcp-reference
+    description: "Response explicitly addresses MCP server protection"
+    type: grep
+    glob: "**/*.md"
+    pattern: "MCP"
+    must_match: true
+
+  - id: bearer-token
+    description: "Describes Bearer token requirement for agent requests"
+    type: regex
+    glob: "**/*.md"
+    pattern: "[Bb]earer|access.token|Authorization"
+    must_match: true
+
+  - id: ping-gateway-or-pingone
+    description: "Identifies PingGateway or PingOne as the authorization layer"
+    type: regex
+    glob: "**/*.md"
+    pattern: "PingGateway|PingOne"
+    must_match: true
+
+judge_rubric:
+  enabled: true
+  criteria:
+    - name: correctness
+      description: "Uses real Ping Identity products and patterns, no hallucinated APIs"
+      weight: 0.6
+    - name: completeness
+      description: "Covers the key steps a developer needs to implement this"
+      weight: 0.4
+  pass_threshold: 0.7
+  judge_model: gpt-5.5

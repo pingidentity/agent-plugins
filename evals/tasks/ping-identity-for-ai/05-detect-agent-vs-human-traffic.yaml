@@ -1,0 +1,52 @@
+id: 05-detect-agent-vs-human-traffic
+skill: ping-identity-for-ai
+title: "Detect AI agent traffic vs human user traffic with Ping"
+
+prompt: |
+  Our application handles a mix of real human users and AI agents (LLMs,
+  automation frameworks, computer-using agents). We need to detect which
+  requests come from AI agents versus genuine human users so that we can
+  enforce different policies — e.g. block agents from human-only flows and
+  flag unexpected agentic activity. Explain how Ping Identity supports this
+  detection, which Ping product or feature provides the bot and agent detection
+  signals, how to integrate it into our authentication flow, and how to branch
+  on the detection result to allow, challenge, or block agent traffic.
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+
+deterministic_checks:
+  - id: protect-or-bot-detection
+    description: "Mentions PingOne Protect, bot detection, or risk signals"
+    type: regex
+    glob: "**/*.md"
+    pattern: "Protect|bot.detection|bot detection|signals|risk.signal"
+    flags: "i"
+    must_match: true
+
+  - id: agent-detection-capability
+    description: "Mentions agentic or AI agent detection specifically"
+    type: regex
+    glob: "**/*.md"
+    pattern: "agent.detect|agentic|CUA|computer.using|automation.framework"
+    flags: "i"
+    must_match: true
+
+  - id: no-fictional-traffic-api
+    description: "Does NOT hallucinate a fictional Ping AI Traffic API"
+    type: not_contains
+    glob: "**/*.md"
+    pattern: "Ping AI Traffic API"
+
+judge_rubric:
+  enabled: true
+  criteria:
+    - name: correctness
+      description: "Uses real Ping Identity products and patterns, no hallucinated APIs"
+      weight: 0.6
+    - name: completeness
+      description: "Covers the key steps a developer needs to implement this"
+      weight: 0.4
+  pass_threshold: 0.7
+  judge_model: gpt-5.5

@@ -1,0 +1,50 @@
+id: 01-llm-agent-machine-identity
+skill: ping-identity-for-ai
+title: "Give an LLM agent a verified machine identity with Ping"
+
+prompt: |
+  I'm deploying an autonomous LLM agent that calls internal APIs on our behalf —
+  no human in the loop. Explain how to give this agent a verified machine identity
+  using Ping Identity so it can authenticate and access those APIs securely.
+  Cover: how to register the agent, which OAuth 2.0 grant to use, which Ping
+  product acts as the authorization server, and how to handle token rotation so
+  the agent always has a valid, short-lived credential.
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+
+deterministic_checks:
+  - id: client-credentials-grant
+    description: "Mentions the client_credentials OAuth 2.0 grant type"
+    type: grep
+    glob: "**/*.md"
+    pattern: "client_credentials"
+    must_match: true
+
+  - id: pingone-as
+    description: "Identifies PingOne as the authorization server"
+    type: grep
+    glob: "**/*.md"
+    pattern: "PingOne"
+    must_match: true
+
+  - id: token-rotation
+    description: "Discusses token rotation or short-lived tokens"
+    type: regex
+    glob: "**/*.md"
+    pattern: "rotat|short.lived|TTL|expires_in|expir"
+    flags: "i"
+    must_match: true
+
+judge_rubric:
+  enabled: true
+  criteria:
+    - name: correctness
+      description: "Uses real Ping Identity products and patterns, no hallucinated APIs"
+      weight: 0.6
+    - name: completeness
+      description: "Covers the key steps a developer needs to implement this"
+      weight: 0.4
+  pass_threshold: 0.7
+  judge_model: gpt-5.5

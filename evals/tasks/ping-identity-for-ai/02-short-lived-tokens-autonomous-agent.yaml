@@ -1,0 +1,52 @@
+id: 02-short-lived-tokens-autonomous-agent
+skill: ping-identity-for-ai
+title: "Set up short-lived tokens for an autonomous AI agent accessing our API"
+
+prompt: |
+  Our autonomous AI agent needs to call our protected REST API continuously.
+  We want to use short-lived access tokens so that a stolen credential cannot
+  be used for long. Describe the recommended token lifetime configuration, which
+  OAuth 2.0 grant type to use, and exactly how the agent should detect when a
+  token is about to expire and re-authenticate before it becomes invalid.
+  Include a concrete configuration snippet showing the token request and the
+  expiry-based refresh logic.
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+
+deterministic_checks:
+  - id: client-credentials-grant
+    description: "Specifies the client_credentials grant type for M2M token acquisition"
+    type: grep
+    glob: "**/*.md"
+    pattern: "client_credentials"
+    must_match: true
+
+  - id: expiry-handling
+    description: "Covers token expiry / expires_in field handling"
+    type: regex
+    glob: "**/*.md"
+    pattern: "expir"
+    flags: "i"
+    must_match: true
+
+  - id: token-ttl
+    description: "Mentions a specific or recommended token TTL value"
+    type: regex
+    glob: "**/*.md"
+    pattern: "TTL|\\d+\\s*(minute|second|min|sec)|expires_in"
+    flags: "i"
+    must_match: true
+
+judge_rubric:
+  enabled: true
+  criteria:
+    - name: correctness
+      description: "Uses real Ping Identity products and patterns, no hallucinated APIs"
+      weight: 0.6
+    - name: completeness
+      description: "Covers the key steps a developer needs to implement this"
+      weight: 0.4
+  pass_threshold: 0.7
+  judge_model: gpt-5.5
