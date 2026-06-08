@@ -1,0 +1,84 @@
+id: 04-react-davinci-hook-integration
+skill: ping-app-integration
+title: "React DaVinci login widget using @forgerock/davinci-client"
+
+prompt: |
+  Build a React login widget that drives a PingOne DaVinci flow using the
+  Ping JavaScript SDK. The widget should:
+
+  - Install and import from the correct package: @forgerock/davinci-client.
+    Do NOT use @ping-identity/dvna-react or any other package name.
+  - Initialize the DaVinci client using the davinci() factory function
+    (named export from @forgerock/davinci-client).
+  - Start the flow by calling client.start() and handle subsequent steps
+    with client.next(updatedCollectors).
+  - Render TextCollector and PasswordCollector fields by reading
+    collector.name (for the field label) and collector.value (for
+    the current value), and updating via collector.value = newValue.
+  - Render a SubmitCollector as a submit button.
+  - Handle the node states: ContinueNode (render collectors), SuccessNode
+    (show a logged-in message), ErrorNode, and FailureNode.
+
+  Output a single file: LoginWidget.tsx.
+
+expected_artifacts:
+  - "**/*.tsx"
+
+deterministic_checks:
+  - id: correct-package-name
+    description: "Imports from @forgerock/davinci-client, not a wrong package"
+    type: grep
+    glob: "**/*.tsx"
+    pattern: "@forgerock/davinci-client"
+    must_match: true
+
+  - id: no-wrong-package-dvna
+    description: "Does NOT import from @ping-identity/dvna-react"
+    type: not_contains
+    glob: "**/*.tsx"
+    pattern: "@ping-identity/dvna-react"
+
+  - id: no-wrong-package-javascript-sdk
+    description: "Does NOT import from @forgerock/javascript-sdk (legacy)"
+    type: not_contains
+    glob: "**/*.tsx"
+    pattern: "@forgerock/javascript-sdk"
+
+  - id: davinci-factory-call
+    description: "Uses davinci() factory function to create the client"
+    type: regex
+    glob: "**/*.tsx"
+    pattern: "davinci\\s*\\("
+    must_match: true
+
+  - id: client-start-call
+    description: "Calls client.start() to begin the flow"
+    type: grep
+    glob: "**/*.tsx"
+    pattern: "client\\.start()"
+    must_match: true
+
+  - id: collector-name-property
+    description: "Reads collector.name for field label"
+    type: grep
+    glob: "**/*.tsx"
+    pattern: "collector\\.name"
+    must_match: true
+
+  - id: collector-value-property
+    description: "Reads and sets collector.value for field input"
+    type: grep
+    glob: "**/*.tsx"
+    pattern: "collector\\.value"
+    must_match: true
+
+  - id: all-node-types-handled
+    description: "Handles ContinueNode and SuccessNode states"
+    type: regex
+    glob: "**/*.tsx"
+    pattern: "ContinueNode.*SuccessNode|SuccessNode.*ContinueNode"
+    flags: "ms"
+    must_match: true
+
+judge_rubric:
+  enabled: false

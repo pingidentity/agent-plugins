@@ -1,0 +1,84 @@
+id: 03-davinci-ios-swiftui-flow
+skill: ping-app-integration
+title: "DaVinci full flow on iOS (SwiftUI)"
+
+prompt: |
+  Build a SwiftUI screen that drives a Ping DaVinci flow on iOS using the
+  Ping Identity iOS SDK. The flow uses TextCollector, PasswordCollector,
+  LabelCollector, and SubmitCollector.
+
+  Requirements:
+  - Use the PingDavinci module (package: ping-ios-sdk). Do NOT import FRAuth or
+    use the old forgerock-ios-sdk package URL.
+  - Initialize DaVinci with the correct builder pattern from PingOrchestrate.
+  - Handle ContinueNode, SuccessNode, FailureNode, and ErrorNode using a
+    switch/cast pattern (the SDK node types are classes, not enum cases).
+  - Use async/await with a Task block; annotate the ViewModel (or equivalent)
+    with @MainActor.
+  - Render collectors by iterating node.collectors and switching on type.
+  - Use the correct collector input property: for TextCollector and
+    PasswordCollector set the value via the .value property.
+
+  Output: DaVinciViewModel.swift and DaVinciScreen.swift.
+
+expected_artifacts:
+  - "**/*.swift"
+
+deterministic_checks:
+  - id: ping-davinci-import
+    description: "Imports PingDavinci, not FRAuth"
+    type: grep
+    glob: "**/*.swift"
+    pattern: "import PingDavinci"
+    must_match: true
+
+  - id: no-frauth-import
+    description: "Does NOT import legacy FRAuth module"
+    type: not_contains
+    glob: "**/*.swift"
+    pattern: "import FRAuth"
+
+  - id: no-forgerock-ios-sdk-url
+    description: "Does NOT reference the old forgerock-ios-sdk package URL"
+    type: not_contains
+    glob: "**/*.swift"
+    pattern: "forgerock-ios-sdk"
+
+  - id: ping-orchestrate-import
+    description: "Imports PingOrchestrate for node type handling"
+    type: grep
+    glob: "**/*.swift"
+    pattern: "import PingOrchestrate"
+    must_match: true
+
+  - id: all-node-branches
+    description: "Handles ContinueNode, SuccessNode, FailureNode, and ErrorNode"
+    type: regex
+    glob: "**/*.swift"
+    pattern: "ContinueNode.*SuccessNode|SuccessNode.*ContinueNode"
+    flags: "ms"
+    must_match: true
+
+  - id: main-actor-annotation
+    description: "ViewModel or class is annotated with @MainActor"
+    type: grep
+    glob: "**/*ViewModel*.swift"
+    pattern: "@MainActor"
+    must_match: true
+
+  - id: async-await-task
+    description: "Uses async/await inside a Task block"
+    type: grep
+    glob: "**/*.swift"
+    pattern: "Task\\s*{"
+    must_match: true
+
+  - id: collector-value-property
+    description: "Sets collector input via .value property"
+    type: grep
+    glob: "**/*.swift"
+    pattern: "\\.value\\s*="
+    must_match: true
+
+judge_rubric:
+  enabled: false
