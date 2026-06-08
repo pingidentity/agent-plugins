@@ -6,7 +6,7 @@ capabilities: ["orchestration"]
 services: ["mfa"]
 audience: ["developer", "architect"]
 use_cases: ["customer"]
-doc_type: use-case
+doc_type: guide
 status: current
 canonical: true
 last_updated: "2026-06-05"

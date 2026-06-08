@@ -26,7 +26,9 @@ slug: "https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_strong
 
 # PingOne MFA — Configuration and Device Management
 
-PingOne MFA is the shared MFA service for PingOne MT and AIC. This anchor covers service-level configuration — MFA policies, device management, the enrollment API, and authentication method reference. For MFA node/connector wiring within a flow or journey, see `ping-orchestration`.
+PingOne MFA is the shared MFA service for PingOne and PingOne Advanced Identity Cloud (AIC). This anchor covers service-level configuration — MFA policies, device management, the enrollment API, and authentication method reference. For MFA node/connector wiring within a flow or journey, see `ping-orchestration`.
+
+> **Workforce environments:** Before configuring MFA policy, establish the admin's PingOne region — the service model and available methods differ between native regions (e.g. Singapore, `apps.pingone.sg`) and hybrid regions (all others, using the PingID service). See `references/curated/mfa-region-and-service-model.md` first.
 
 ## Scope
 

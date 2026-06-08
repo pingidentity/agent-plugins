@@ -82,7 +82,8 @@
         "skills/ping-universal-services/references/curated/cross-platform-service-usage.md",
         "skills/ping-universal-services/references/curated/protect-configuration.md",
         "skills/ping-universal-services/references/curated/verify-configuration.md",
-        "skills/ping-universal-services/references/curated/mfa-configuration.md"
+        "skills/ping-universal-services/references/curated/mfa-configuration.md",
+        "skills/ping-universal-services/references/curated/mfa-region-and-service-model.md"
       ],
       "generated": {
         "protect": "skills/ping-universal-services/references/generated/protect/.gitkeep",
