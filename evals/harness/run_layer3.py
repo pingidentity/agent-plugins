@@ -171,7 +171,7 @@ def main(argv: list[str] | None = None) -> int:
         print("No runs to execute", file=sys.stderr)
         return 1
 
-    print(f"Executing {len(matrix)} runs with {workers} worker(s)")
+    print(f"Executing {len(matrix)} runs with {workers} worker(s)", flush=True)
     plugin_sha = _git_sha()
     by_model_cfg: dict[tuple[str, str], list[RunRecord]] = {}
 
@@ -192,7 +192,7 @@ def main(argv: list[str] | None = None) -> int:
                 )
             print(f"  [{spec.model} | {spec.config}] {record.skill}/{record.task_id} "
                   f"pass={record.pass_rate:.0%} tokens={record.tokens_input + record.tokens_output} "
-                  f"err={record.error}")
+                  f"err={record.error}", flush=True)
             by_model_cfg.setdefault((spec.model, spec.config), []).append(record)
 
     day = date.today().isoformat()
