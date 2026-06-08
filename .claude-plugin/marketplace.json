@@ -1,18 +1,24 @@
 {
-  "name": "ping-identity-skills",
+  "name": "pingidentity",
+  "description": "Agent plugins for Ping Identity — teach any AI coding agent how to build with Ping Identity.",
   "owner": {
     "name": "Ping Identity",
     "email": "developer-experience@pingidentity.com"
   },
-  "description": "Agent skills for Ping Identity platforms — six umbrella skills covering PingOne MT, PingOne Advanced Identity Cloud (ST), Ping Software Suite, DaVinci, universal services, app integration, and identity for AI.",
   "plugins": [
     {
-      "name": "ping-identity",
-      "source": "./plugins/ping-identity",
+      "name": "ping-identity-agent-plugins",
       "displayName": "Ping Identity",
-      "description": "Six umbrella skills modelled on the Cloudflare few-broad-skills approach: ping-quickstart, ping-foundation, ping-orchestration, ping-universal-services, ping-app-integration, ping-identity-for-ai. Each routes by intent, platform family, exact product/service, and reference tier.",
+      "source": "./plugins/ping-identity",
+      "description": "Six umbrella agent plugins covering journeys, app integration, universal services, platform setup, and identity for AI across PingOne, AIC, DaVinci, and PingFederate.",
       "version": "1.0.0",
-      "author": { "name": "Ping Identity" },
+      "author": {
+        "name": "Ping Identity",
+        "email": "developer-experience@pingidentity.com"
+      },
+      "homepage": "https://developer.pingidentity.com",
+      "repository": "https://github.com/pingidentity/agent-plugins",
+      "license": "MIT",
       "category": "identity",
       "keywords": ["ping", "pingone", "aic", "davinci", "pingfederate", "pingaccess", "identity", "authentication", "ciam", "ai-identity"]
     }

@@ -1,7 +1,7 @@
 {
   "plugin": "ping-identity",
   "description": "Local reference index for plugin-only installs. Lists all curated anchors and generated shortlists by skill and platform branch.",
-  "last_updated": "2026-06-03",
+  "last_updated": "2026-06-05",
   "skills": {
     "ping-quickstart": {
       "curated": [
@@ -32,6 +32,7 @@
         "skills/ping-foundation/references/curated/pingone-st/foundation-overview.md",
         "skills/ping-foundation/references/curated/pingone-st/app-setup.md",
         "skills/ping-foundation/references/curated/pingone-st/authentication-fundamentals.md",
+        "skills/ping-foundation/references/curated/pingone-st/am-services.md",
         "skills/ping-foundation/references/curated/pingone-st/themes-and-customization.md",
         "skills/ping-foundation/references/curated/pingone-st/directory-setup.md"
       ],

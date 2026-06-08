@@ -9,7 +9,7 @@ use_cases: ["workforce", "customer"]
 doc_type: reference
 status: current
 canonical: true
-last_updated: "2026-06-02"
+last_updated: "2026-06-05"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
@@ -33,19 +33,29 @@ Registers a FIDO2/WebAuthn authenticator (passkey, security key, platform authen
 
 | Field | Observed value | Notes |
 |---|---|---|
+| `relyingPartyDomain` | tenant domain, e.g. `openam-foo.forgeblocks.com` | Must match the origin; blank lets AM guess |
+| `origins` | `["https://openam-foo.forgeblocks.com"]` | Full URL(s) accepted as valid registration origins |
 | `userVerificationRequirement` | `PREFERRED` | Allows devices without UV but prefers it |
 | `authenticatorAttachment` | `UNSPECIFIED` | Platform or cross-platform authenticators accepted |
 | `generateRecoveryCodes` | `true` | Always enable; recovery codes displayed immediately after |
 | `maxSavedDevices` | `0` | Unlimited registered devices per user |
 | `attestationPreference` | `NONE` | No attestation statement required |
-| `acceptedSigningAlgorithms` | `[ES256, RS256]` | Covers most device types |
+| `acceptedSigningAlgorithms` | `["ES256", "RS256"]` | Covers most device types |
 | `timeout` | `60` | Seconds before registration attempt expires |
-| `asScript` | `true` | Required for hosted pages; injects WebAuthn as a script |
+| `postponeDeviceProfileStorage` | `false` | Stores device directly; set `true` only if using `WebAuthnDeviceStorageNode` |
+| `asScript` | `false` | Use `false` for SDK/custom UI; `true` only for legacy hosted pages |
+| `excludeCredentials` | `false` | Boolean — NOT a string |
+| `enforceRevocationCheck` | `false` | |
+| `validateFidoU2fAaguid` | `true` | |
+| `fidoCertificationLevel` | `OFF` | |
+| `trustStoreAlias` | `trustalias` | Required field even when attestation is NONE |
 
 - Outcomes: **success** / **unsupported** / **failure** / **error**
-- On `success`: route immediately to `RecoveryCodeDisplayNode` before proceeding
+- On `success`: route to `RecoveryCodeDisplayNode` (if `generateRecoveryCodes: true`), then proceed
 - On `unsupported`, `failure`, `error`: route to FailureNode or back to device selection
-- Requires HTTPS. Configure Relying Party Identifier (defaults to tenant domain).
+- Requires HTTPS. `relyingPartyDomain` must match the domain in `origins`.
+- **Standalone node** — does not need to be inside a PageNode. Place it directly in the journey graph.
+- When `postponeDeviceProfileStorage: false` (default/recommended), the device is stored immediately on `success` — no separate `WebAuthnDeviceStorageNode` required.
 
 ### WebAuthn Authentication node
 Authenticates a user with a previously registered FIDO2 device.
@@ -58,7 +68,7 @@ Authenticates a user with a previously registered FIDO2 device.
 | `isRecoveryCodeAllowed` | `true` | Exposes `recoveryCode` outcome |
 | `timeout` | `60` | |
 | `detectSignCountMismatch` | `false` | Set `true` in high-security deployments to detect cloned authenticators |
-| `asScript` | `true` | |
+| `asScript` | `false` | |
 
 - Outcomes: **success** / **unsupported** / **noDevice** / **failure** / **error** / **recoveryCode**
 - Route `noDevice` to device registration inner journey, not directly to Failure
@@ -68,11 +78,16 @@ Authenticates a user with a previously registered FIDO2 device.
 ### WebAuthn Device Storage node
 Persists the registered WebAuthn device credential to the user's profile.
 
-- Place after WebAuthn Registration `success` outcome, before RecoveryCodeDisplayNode.
+- Only needed when `postponeDeviceProfileStorage: true` on the registration node.
+- When `postponeDeviceProfileStorage: false` (the default), the device is already stored — do **not** add this node.
 
 ---
 
 ## OATH / TOTP
+
+### Node type name casing
+
+The correct type names are **`OathRegistrationNode`**, **`OathTokenVerifierNode`**, and **`OathDeviceStorageNode`** — capital O, lowercase `ath`. The names `OATHRegistrationNode` / `OATHTokenVerifierNode` return 404 and do not exist on AIC.
 
 ### OATH Registration node
 Registers a TOTP/HOTP authenticator app by generating and displaying a QR code shared secret.
@@ -88,12 +103,14 @@ Registers a TOTP/HOTP authenticator app by generating and displaying a QR code s
 | `generateRecoveryCodes` | `true` | Always enable |
 | `minSharedSecretLength` | `32` | |
 | `accountName` | `USERNAME` | Displayed in the authenticator app |
-| `issuer` | `ForgeRock` or tenant name | Displayed in the authenticator app |
+| `issuer` | tenant or org name | Displayed in the authenticator app |
 | `bgColor` | `032b75` | QR code background color |
+| `postponeDeviceProfileStorage` | `false` | Stores device directly; set `true` only if using `OathDeviceStorageNode` |
 
-- Outcomes: single (on success; display OATH device QR code)
+- Outcomes: **successOutcome** / **failureOutcome**
 - Always preceded by `GetAuthenticatorAppNode` when the user may not have an authenticator app installed
-- On `successOutcome`: route to `RecoveryCodeDisplayNode`
+- On `successOutcome`: route to `RecoveryCodeDisplayNode` (then proceed), or to the next step if recovery codes are handled later
+- When `postponeDeviceProfileStorage: false` (default/recommended), the device is stored immediately on success — no separate `OathDeviceStorageNode` required.
 
 ### Get Authenticator App node
 Displays download links for the ForgeRock Authenticator (Play Store + App Store) before OATH or Push registration. Used when `OathTokenVerifierNode` or `PushAuthenticationSenderNode` returns `notRegisteredOutcome` / `NOT_REGISTERED`.
@@ -123,7 +140,10 @@ Verifies the OTP entered by the user against the registered OATH device.
 - On `failureOutcome`: route to `RetryLimitDecisionNode` (see retry-loop-with-lockout pattern below)
 
 ### OATH Device Storage node
-Persists the OATH device to the user's profile. Place after OATH Registration before proceeding.
+Persists the OATH device to the user's profile.
+
+- Only needed when `postponeDeviceProfileStorage: true` on the registration node.
+- When `postponeDeviceProfileStorage: false` (the default), the device is already stored — do **not** add this node.
 
 ### HOTP Generator node
 Generates an HMAC-based OTP for delivery via a side channel (email script, SMS).
@@ -249,6 +269,31 @@ Registers both OATH (TOTP) and Push simultaneously in a single step.
 - On `successOutcome`: route to `RecoveryCodeDisplayNode`
 - Use when the device selection PageNode offers an `OATH+PUSH` combined option
 
+### MFA method selection at registration
+
+`MFARegistrationOptionsNode` does **not** exist on AIC tenants. For user-choice registration flows, use:
+
+- **`ChoiceCollectorNode`** — simplest option for a static list. Config: `choices` array, `defaultChoice`, `prompt`. Outcomes are the choice strings themselves.
+- **`ScriptedDecisionNode` with a `choiceCallback`** — use when you need to map display labels to outcome/state values, or when the selection must be persisted to shared state for downstream scripts.
+
+The `ScriptedDecisionNode` pattern (example outcomes: `OTP`, `WebAuthn`, `PUSH`, `Error`):
+
+```javascript
+if (callbacks.isEmpty()) {
+    callbacksBuilder.choiceCallback("Select your MFA method", ["TOTP", "Security Key", "Push"], 0, false);
+} else {
+    var index = callbacks.getChoiceCallbacks().get(0)[0];
+    var choices = ["OTP", "WebAuthn", "PUSH"];
+    var selected = choices[index];
+    // Write the device type string — NOT an array — to shared state
+    var deviceTypeMap = { "OTP": "OTP", "WebAuthn": "FIDO2", "PUSH": "PUSH" };
+    nodeState.putShared("mfaDeviceType", deviceTypeMap[selected]);
+    action.goTo(selected);
+}
+```
+
+**Important:** Write `mfaDeviceType` as a **string** (e.g. `"FIDO2"`), not as an array. The standard tenant script that updates `custom_mfaDevices` reads `mfaDeviceType` as a string. Writing an array here will break that script.
+
 ### MFA Registration Options node
 Allows users to select which MFA factors to register.
 
@@ -323,6 +368,7 @@ The `ScriptedDecisionNode` sets `invalidCodeErrorMessage` in shared state. The P
 - `nodes/utility-nodes.md`
 - `journey-use-cases/mfa-authentication-multi-method.md`
 - `journey-use-cases/passwordless-mfa-registration.md`
+- `ping-foundation` → `references/curated/pingone-st/am-services.md` — Push Notification Service, ForgeRock Authenticator (Push/OATH) Service, WebAuthn Profile Encryption / Metadata services, Device Binding Service, Device Profiles Service must be configured at the realm level before the corresponding nodes work end-to-end
 
 ## Source
 

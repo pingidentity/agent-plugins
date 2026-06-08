@@ -145,6 +145,7 @@ Configure provisioning after basic app setup is complete and the identity store 
 
 - `references/curated/pingone-st/authentication-fundamentals.md`
 - `references/curated/pingone-st/foundation-overview.md`
+- `references/curated/pingone-st/am-services.md` — OAuth 2.0 Provider service backs every OIDC client; configure ACR-to-journey mapping and token formats here
 - `references/curated/pingone-st/directory-setup.md`
 
 ## Source

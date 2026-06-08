@@ -1,6 +1,48 @@
 {
-  "name": "ping-identity",
+  "name": "ping-identity-agent-plugins",
   "version": "1.0.0",
-  "description": "Core Ping Identity platform skills: ping-quickstart, ping-foundation, ping-orchestration, ping-universal-services, ping-app-integration, ping-identity-for-ai.",
-  "author": { "name": "Ping Identity" }
+  "description": "Agent plugins for Ping Identity — teach any AI coding agent how to build with Ping Identity.",
+  "author": {
+    "name": "Ping Identity",
+    "email": "devex@pingidentity.com",
+    "url": "https://www.pingidentity.com"
+  },
+  "homepage": "https://developer.pingidentity.com",
+  "repository": "https://github.com/pingidentity/agent-plugins",
+  "license": "MIT",
+  "keywords": ["ping", "pingone", "aic", "davinci", "pingfederate", "pingaccess", "identity", "authentication", "ciam", "ai-identity"],
+  "mcpServers": "./claude-mcp.json",
+  "userConfig": {
+    "aic_base_url": {
+      "type": "string",
+      "title": "AIC Base URL",
+      "description": "PingOne Advanced Identity Cloud tenant hostname (e.g. your-tenant.forgeblocks.com)",
+      "required": false
+    },
+    "davinci_environment_id": {
+      "type": "string",
+      "title": "DaVinci Environment ID",
+      "description": "PingOne environment UUID for DaVinci",
+      "required": false
+    },
+    "davinci_client_id": {
+      "type": "string",
+      "title": "DaVinci Client ID",
+      "description": "PingOne Worker Application Client ID for DaVinci",
+      "required": false
+    },
+    "davinci_root_domain": {
+      "type": "string",
+      "title": "PingOne Root Domain",
+      "description": "Regional PingOne domain (e.g. pingone.com, pingone.eu, pingone.asia)",
+      "default": "pingone.com",
+      "required": false
+    },
+    "davinci_custom_domain": {
+      "type": "string",
+      "title": "PingOne Custom Domain (optional)",
+      "description": "Your custom PingOne domain if you have one configured (e.g. auth.example.com). Leave blank to use the standard regional domain.",
+      "required": false
+    }
+  }
 }

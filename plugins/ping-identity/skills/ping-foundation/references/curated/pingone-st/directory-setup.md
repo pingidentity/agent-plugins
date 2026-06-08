@@ -9,7 +9,7 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-06-02"
+last_updated: "2026-06-05"
 slug: "https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-identity_store.html"
 ---
 
@@ -83,6 +83,35 @@ PingDS requires no additional setup — users created via PingIDM are stored her
 - Properties not defined in schema will not appear in the UI and their sub-properties cannot be configured
 - Custom object types (e.g., IoT devices, contracts) are supported
 
+### Custom attributes must be pre-created before journey use
+
+Scripted Decision nodes that read or write a custom attribute (e.g. `custom_mfaDevices`) will fail at runtime if the attribute does not exist in the managed object schema.
+
+- `openidm.patch` can write the attribute without it being in the schema, but `openidm.read` will not return it, and downstream scripts that expect it will receive null.
+- **Before deploying any journey that stores custom data on users**, add the attribute via the IDM admin console or via `patchManagedObjectDefinition` MCP tool with operation `add` on `/schema/properties/<attributeName>`.
+
+Recommended schema shape for a string-array custom attribute (e.g. `custom_mfaDevices`):
+
+```json
+{
+  "type": "array",
+  "items": { "type": "string" },
+  "title": "MFA Devices",
+  "description": "Enrolled MFA method identifiers for this user",
+  "returnByDefault": false,
+  "searchable": false,
+  "userEditable": false,
+  "viewable": false,
+  "isPersonal": false
+}
+```
+
+`returnByDefault: false` keeps it out of default profile reads for performance. Scripts that need it must request it explicitly:
+
+```javascript
+var result = openidm.read("managed/alpha_user/" + userId, null, ["custom_mfaDevices"]);
+```
+
 **Core user properties:** `userName`, `password`, `mail`, `givenName`, `sn`, `telephoneNumber`, `displayName`, `accountStatus`
 
 ---
@@ -150,6 +179,7 @@ PingIDM uses **mappings** to move identity data between systems.
 - `references/curated/pingone-st/foundation-overview.md`
 - `references/curated/pingone-st/authentication-fundamentals.md`
 - `references/curated/pingone-st/app-setup.md`
+- `references/curated/pingone-st/am-services.md` — User Service, Validation Service, and the OAuth 2.0 Provider's claim mappings reference managed object attributes
 
 ## Source
 

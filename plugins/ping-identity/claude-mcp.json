@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "aic": {
+      "command": "npx",
+      "args": ["-y", "@ping-identity/aic-mcp-server"],
+      "env": {
+        "AIC_BASE_URL": "${user_config.aic_base_url}"
+      }
+    },
+    "davinci": {
+      "command": "npx",
+      "args": ["-y", "@ping-identity/davinci-mcp-server", "start"],
+      "env": {
+        "DAVINCI_MCP_ENVIRONMENT_ID": "${user_config.davinci_environment_id}",
+        "AUTHORIZATION_CODE_CLIENT_ID": "${user_config.davinci_client_id}",
+        "ROOT_DOMAIN": "${user_config.davinci_root_domain}",
+        "CUSTOM_DOMAIN": "${user_config.davinci_custom_domain}"
+      }
+    }
+  }
+}
