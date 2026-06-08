@@ -1,0 +1,70 @@
+id: 02-davinci-risk-stepup-mfa
+skill: ping-orchestration
+title: "DaVinci flow: risk evaluation with step-up MFA using PingOne Protect"
+
+prompt: |
+  Design a DaVinci authentication flow that:
+  1. Collects username and password via an HTML Form.
+  2. Evaluates risk using PingOne Protect — name the exact connector and the
+     capability used to evaluate risk.
+  3. Routes LOW risk directly to success; routes MEDIUM and HIGH risk to an
+     MFA step-up subflow.
+  4. After MFA, reports the session result back to PingOne Protect.
+
+  Specify:
+  - The correct connector name for risk evaluation (not just "Protect").
+  - The correct capability name used to initialize the risk session.
+  - The correct capability name used to report the session result.
+  - What the MFA subflow should call first if the user has no enrolled devices.
+
+  Provide the flow design as a structured document or YAML.
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+  - "**/*.yaml"
+
+deterministic_checks:
+  - id: pingone-protect-connector
+    description: "Names the connector as 'PingOne Protect' (not just 'Protect' or 'Risk')"
+    type: grep
+    glob: "**/*"
+    pattern: "PingOne Protect"
+    must_match: true
+
+  - id: protect-initialize-capability
+    description: "Includes Initialize (or 'Protect Initialize') capability to open the risk session"
+    type: grep
+    glob: "**/*"
+    pattern: "(?i)Initiali[sz]e"
+    must_match: true
+
+  - id: protect-update-capability
+    description: "Includes Update capability to report session result back to Protect"
+    type: grep
+    glob: "**/*"
+    pattern: "(?i)Update"
+    must_match: true
+
+  - id: risk-routing-medium-high
+    description: "Routes MEDIUM and HIGH risk to MFA step-up"
+    type: regex
+    glob: "**/*"
+    pattern: "(?i)MEDIUM|HIGH"
+    must_match: true
+
+  - id: mfa-no-device-path
+    description: "MFA subflow addresses 'no device' / 'not enrolled' path"
+    type: regex
+    glob: "**/*"
+    pattern: "(?i)(no device|not enrolled|enrollment|no devices)"
+    must_match: true
+
+  - id: no-risk-advisor-node
+    description: "Does NOT name AIC node 'RiskAdvisorNode' as if it were a DaVinci connector"
+    type: not_contains
+    glob: "**/*"
+    pattern: "RiskAdvisorNode"
+
+judge_rubric:
+  enabled: false
