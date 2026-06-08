@@ -6,9 +6,12 @@ prompt: |
   Build an Android Jetpack Compose screen that drives a Ping DaVinci flow
   end-to-end. Handle ContinueNode, SuccessNode, ErrorNode, and FailureNode.
   The flow uses TextCollector, PasswordCollector, LabelCollector, and a
-  SubmitCollector. Output the Kotlin files needed (DaVinciConfig.kt,
-  AuthViewModel.kt, AuthScreen.kt). Use StateFlow + viewModelScope.launch
-  for state and async work.
+  SubmitCollector. Use StateFlow + viewModelScope.launch for state and async work.
+
+  Write the following files to disk using the Write tool:
+  - DaVinciConfig.kt
+  - AuthViewModel.kt
+  - AuthScreen.kt
 
 expected_artifacts:
   - "**/*.kt"

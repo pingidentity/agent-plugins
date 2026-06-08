@@ -5,7 +5,7 @@ title: "Migrate Android app from ForgeRock SDK to Ping Journey SDK"
 prompt: |
   You have an existing Android app using the legacy ForgeRock SDK
   (org.forgerock:forgerock-android-sdk). Migrate it to the Ping Identity
-  Journey SDK. Produce:
+  Journey SDK. Write the following files to disk:
 
   1. build.gradle.kts — updated dependency block replacing the ForgeRock
      artifact with the correct Ping SDK artifact ID
@@ -28,6 +28,8 @@ prompt: |
   3. Preserve the original code as commented-out blocks using the marker
      format: // [ping-migration] BEGIN legacy ... // [ping-migration] END legacy
 
+  Use the Write tool to create both files. Do not just describe the changes.
+
 expected_artifacts:
   - "**/*.kt"
   - "**/build.gradle.kts"
@@ -47,10 +49,10 @@ deterministic_checks:
     pattern: "org.forgerock"
 
   - id: callback-name-property
-    description: "Uses callback.name = x (property syntax), not setName()"
-    type: grep
+    description: "Uses .name = x (property syntax), not setName()"
+    type: regex
     glob: "**/*.kt"
-    pattern: "callback\\.name\\s*="
+    pattern: "\\.name\\s*="
     must_match: true
 
   - id: no-set-name-method

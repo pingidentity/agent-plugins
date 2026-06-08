@@ -19,7 +19,8 @@ prompt: |
   - Use the correct collector input property: for TextCollector and
     PasswordCollector set the value via the .value property.
 
-  Output: DaVinciViewModel.swift and DaVinciScreen.swift.
+  Write the following files to disk using the Write tool:
+  DaVinciViewModel.swift and DaVinciScreen.swift. Do not just describe the code.
 
 expected_artifacts:
   - "**/*.swift"

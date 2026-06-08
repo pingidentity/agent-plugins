@@ -15,18 +15,18 @@ prompt: |
      should record the selected option and immediately advance the flow.
   4. NameCallback — a basic text field for username input.
 
-  Use the correct Ping SDK property names for every callback. Emit a single
-  Kotlin file: JourneyCallbackScreen.kt.
+  Use the correct Ping SDK property names for every callback. Write a single
+  Kotlin file JourneyCallbackScreen.kt to disk using the Write tool.
 
 expected_artifacts:
   - "**/*.kt"
 
 deterministic_checks:
   - id: terms-accepted-property
-    description: "TermsAndConditionsCallback uses .accepted = true, not .accept"
-    type: grep
+    description: "Uses .accepted = true on TermsAndConditionsCallback, not .accept()"
+    type: regex
     glob: "**/*.kt"
-    pattern: "callback\\.accepted\\s*=\\s*true"
+    pattern: "\\.accepted\\s*=\\s*true"
     must_match: true
 
   - id: no-terms-accept-method
@@ -37,16 +37,16 @@ deterministic_checks:
 
   - id: kba-selected-question-property
     description: "KbaCreateCallback uses .selectedQuestion, not .question"
-    type: grep
+    type: regex
     glob: "**/*.kt"
-    pattern: "\\.selectedQuestion\\s*="
+    pattern: "selectedQuestion"
     must_match: true
 
   - id: kba-selected-answer-property
     description: "KbaCreateCallback uses .selectedAnswer, not .answer"
-    type: grep
+    type: regex
     glob: "**/*.kt"
-    pattern: "\\.selectedAnswer\\s*="
+    pattern: "selectedAnswer"
     must_match: true
 
   - id: confirmation-options-property
@@ -64,9 +64,9 @@ deterministic_checks:
 
   - id: confirmation-selected-property
     description: "ConfirmationCallback uses .selected = index, not .selectedIndex"
-    type: grep
+    type: regex
     glob: "**/*.kt"
-    pattern: "\\.selected\\s*=\\s*"
+    pattern: "\\.selected\\s*="
     must_match: true
 
   - id: confirmation-self-advancing

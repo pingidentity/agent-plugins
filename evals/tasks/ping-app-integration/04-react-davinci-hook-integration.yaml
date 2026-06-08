@@ -19,7 +19,7 @@ prompt: |
   - Handle the node states: ContinueNode (render collectors), SuccessNode
     (show a logged-in message), ErrorNode, and FailureNode.
 
-  Output a single file: LoginWidget.tsx.
+  Write the file LoginWidget.tsx to disk using the Write tool. Do not just describe the code.
 
 expected_artifacts:
   - "**/*.tsx"
