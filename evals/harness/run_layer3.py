@@ -32,7 +32,7 @@ TASKS_DIR_DEFAULT = REPO_ROOT / "evals" / "tasks"
 RESULTS_DIR_DEFAULT = REPO_ROOT / "evals" / "results"
 PLUGIN_DIR = REPO_ROOT / "plugins" / "ping-identity"
 
-ANTHROPIC_PREFIXES = ("claude-", "anthropic.")
+ANTHROPIC_PREFIXES = ("claude-", "anthropic.", "eu.", "us.", "ap.")
 OPENAI_PREFIXES = ("gpt-", "o1", "o3", "openai.")
 
 
