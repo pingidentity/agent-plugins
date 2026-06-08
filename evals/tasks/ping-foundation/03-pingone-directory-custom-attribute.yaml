@@ -1,0 +1,67 @@
+id: 03-pingone-directory-custom-attribute
+skill: ping-foundation
+title: "PingOne directory: custom user attribute schema definition"
+
+prompt: |
+  Create a JSON file (custom-attribute.json) that defines a custom user
+  attribute for PingOne MT Directory using the PingOne Management API schema.
+  The attribute must:
+    - Have the name "loyaltyTier"
+    - Have type "STRING" (the correct PingOne attribute type name — not "string"
+      or "text")
+    - Have enabled set to true
+    - Have required set to false
+    - Have unique set to false
+    - Have multiValued set to false
+    - Include a description field: "Customer loyalty tier classification"
+  Also write a second JSON file (patch-user.json) that shows a sample
+  PingOne API PATCH body to set loyaltyTier to "gold" on a user.
+  Use exact PingOne API field names.
+
+expected_artifacts:
+  - "**/*.json"
+
+deterministic_checks:
+  - id: attribute-type-string-uppercase
+    description: "Attribute type is STRING (uppercase) not lowercase string or text"
+    type: grep
+    glob: "**/custom-attribute.json"
+    pattern: "\"STRING\""
+    must_match: true
+
+  - id: no-lowercase-string-type
+    description: "Type field is not incorrectly set to lowercase 'string'"
+    type: not_contains
+    glob: "**/custom-attribute.json"
+    pattern: "\"type\".*\"string\""
+
+  - id: attribute-name-correct
+    description: "Attribute name is loyaltyTier"
+    type: grep
+    glob: "**/custom-attribute.json"
+    pattern: "loyaltyTier"
+    must_match: true
+
+  - id: enabled-true
+    description: "Attribute is enabled"
+    type: grep
+    glob: "**/custom-attribute.json"
+    pattern: "\"enabled\".*true"
+    must_match: true
+
+  - id: patch-body-value
+    description: "User PATCH body sets loyaltyTier to gold"
+    type: grep
+    glob: "**/patch-user.json"
+    pattern: "gold"
+    must_match: true
+
+  - id: patch-uses-value-op
+    description: "PATCH body uses correct op field for the update operation"
+    type: grep
+    glob: "**/patch-user.json"
+    pattern: "\"op\""
+    must_match: true
+
+judge_rubric:
+  enabled: false

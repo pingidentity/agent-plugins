@@ -1,0 +1,83 @@
+id: 05-branding-and-i18n-best-practice
+skill: ping-foundation
+title: "Branding and i18n best practice: PingOne MT vs AIC"
+
+prompt: |
+  Write a technical advisory document (branding-guide.md) that explains how to
+  brand the login UI across PingOne MT (multi-tenant cloud) and PingOne AIC
+  (Advanced Identity Cloud / PingOne ST). The document must cover:
+    1. The key difference between PingOne MT hosted-page branding (Settings →
+       Branding in the PingOne admin console) and AIC's Theme Editor
+       (AIC admin console → Realm → Theming).
+    2. Why DaVinci-hosted flow pages require a separate UI Studio configuration
+       in PingOne MT, and what happens if that step is skipped.
+    3. How custom fonts are handled in both platforms, including the Content
+       Security Policy (CSP) requirement.
+    4. The AIC per-realm and per-journey theme layering model.
+    5. Best practice for internationalization (i18n): how each platform selects
+       the locale for hosted pages, and how to add custom locale strings.
+    6. At least two gotchas or common mistakes that beginners make when
+       branding either platform.
+  The document should be accurate, specific to Ping Identity platforms, and
+  written for a developer/admin audience.
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+
+deterministic_checks:
+  - id: davinci-ui-studio-mentioned
+    description: "Document mentions DaVinci UI Studio as a separate branding surface"
+    type: grep
+    glob: "**/*.md"
+    pattern: "UI Studio"
+    must_match: true
+
+  - id: csp-requirement-mentioned
+    description: "Document addresses Content Security Policy requirement for custom fonts"
+    type: grep
+    glob: "**/*.md"
+    pattern: "Content Security Policy\\|CSP"
+    must_match: true
+
+  - id: pingone-mt-branding-path
+    description: "Document references the Settings Branding admin surface for PingOne MT"
+    type: regex
+    glob: "**/*.md"
+    pattern: "Settings.*Branding|Branding.*Settings"
+    must_match: true
+
+  - id: aic-theming-path
+    description: "Document references AIC Realm Theming admin surface"
+    type: regex
+    glob: "**/*.md"
+    pattern: "[Tt]heme|[Tt]heming"
+    must_match: true
+
+  - id: i18n-locale-covered
+    description: "Document explains locale / i18n handling on hosted pages"
+    type: regex
+    glob: "**/*.md"
+    pattern: "[Ll]ocale|[Ii]18n|[Ii]nternationali"
+    must_match: true
+
+judge_rubric:
+  enabled: true
+  criteria:
+    - name: correctness
+      description: >
+        All technical claims about PingOne MT and AIC branding are accurate:
+        correct admin surface paths, correct CSP handling, accurate description
+        of DaVinci UI Studio as a separate branding layer, and correct
+        description of the AIC per-realm/per-journey theme layering.
+      weight: 0.5
+    - name: completeness
+      description: >
+        Document addresses all six required topics: (1) MT vs AIC branding
+        difference, (2) DaVinci UI Studio requirement and consequence of
+        skipping, (3) custom fonts and CSP, (4) AIC realm/journey theme
+        layering, (5) i18n locale selection and custom strings, (6) at least
+        two gotchas or common mistakes.
+      weight: 0.5
+  pass_threshold: 0.7
+  judge_model: gpt-5.5

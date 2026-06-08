@@ -1,0 +1,61 @@
+id: 01-pingone-mt-app-registration
+skill: ping-foundation
+title: "PingOne MT OIDC web app registration (confidential client)"
+
+prompt: |
+  Create a JSON configuration file (pingone-app.json) that represents a
+  PingOne MT OIDC Web Application registration for a confidential server-side
+  client named "MyWebApp". The app must:
+    - Use the Authorization Code grant type only (no Implicit, no unused grants)
+    - Set tokenEndpointAuthMethod to "CLIENT_SECRET_BASIC" (not "none")
+    - Register exactly one redirect URI: "https://app.example.com/callback"
+    - Enable the openid and profile scopes
+    - Set enabled to true
+  Output a single JSON file with these fields. Use exact PingOne API field names.
+
+expected_artifacts:
+  - "**/*.json"
+
+deterministic_checks:
+  - id: auth-code-grant
+    description: "JSON includes authorization_code grant type"
+    type: grep
+    glob: "**/*.json"
+    pattern: "authorization_code"
+    must_match: true
+
+  - id: no-implicit-grant
+    description: "JSON does not include the implicit grant type"
+    type: not_contains
+    glob: "**/*.json"
+    pattern: "implicit"
+
+  - id: confidential-auth-method
+    description: "tokenEndpointAuthMethod is CLIENT_SECRET_BASIC not none"
+    type: grep
+    glob: "**/*.json"
+    pattern: "CLIENT_SECRET_BASIC"
+    must_match: true
+
+  - id: no-auth-method-none
+    description: "Token endpoint auth method is NOT set to none (public client mistake)"
+    type: not_contains
+    glob: "**/*.json"
+    pattern: "\"NONE\""
+
+  - id: redirect-uri-exact
+    description: "Exact redirect URI registered including https scheme and path"
+    type: grep
+    glob: "**/*.json"
+    pattern: "https://app.example.com/callback"
+    must_match: true
+
+  - id: enabled-true
+    description: "Application is explicitly enabled"
+    type: grep
+    glob: "**/*.json"
+    pattern: "\"enabled\".*true"
+    must_match: true
+
+judge_rubric:
+  enabled: false
