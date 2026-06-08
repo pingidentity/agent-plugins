@@ -1,0 +1,43 @@
+id: 04-pingone-mt-vs-st-saas-company
+skill: ping-quickstart
+title: "PingOne MT vs PingOne ST (AIC) — difference for a SaaS company"
+
+prompt: |
+  We are a SaaS company building a B2B product. We want to offer login,
+  registration, and MFA to our customers' end users. We are comparing
+  PingOne (multi-tenant) and PingOne Advanced Identity Cloud (AIC, single-tenant).
+  What is the actual difference between the two tenancy models and what are
+  the concrete trade-offs for a SaaS use case like ours?
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+
+deterministic_checks:
+  - id: mentions-mt-or-multi-tenant
+    description: "Response mentions MT or multi-tenant model"
+    type: regex
+    glob: "**/*.md"
+    pattern: "\\bMT\\b|multi.tenant"
+    flags: "i"
+    must_match: true
+
+  - id: mentions-st-or-single-tenant
+    description: "Response mentions ST or single-tenant model"
+    type: regex
+    glob: "**/*.md"
+    pattern: "\\bST\\b|single.tenant"
+    flags: "i"
+    must_match: true
+
+judge_rubric:
+  enabled: true
+  criteria:
+    - name: correctness
+      description: "Recommendations are factually accurate for Ping Identity products"
+      weight: 0.5
+    - name: completeness
+      description: "Covers the key decision points a developer needs"
+      weight: 0.5
+  pass_threshold: 0.7
+  judge_model: gpt-5.5

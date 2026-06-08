@@ -1,0 +1,40 @@
+id: 02-forgerock-migration-entry-point
+skill: ping-quickstart
+title: "ForgeRock to Ping migration — what is the entry point?"
+
+prompt: |
+  We are running self-managed ForgeRock Access Management on-premises today.
+  Our mobile app uses the ForgeRock Android and iOS SDKs (FRAuth, FRSession).
+  We want to migrate to Ping Identity. What is our entry point and what does
+  the migration path look like at a high level?
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+
+deterministic_checks:
+  - id: mentions-aic
+    description: "Response mentions AIC as the ForgeRock successor platform"
+    type: grep
+    glob: "**/*.md"
+    pattern: "AIC"
+    must_match: true
+
+  - id: mentions-journey-sdk-or-forgerock-sdk
+    description: "Response mentions Journey SDK or ForgeRock SDK migration path"
+    type: regex
+    glob: "**/*.md"
+    pattern: "Journey|ForgeRock"
+    must_match: true
+
+judge_rubric:
+  enabled: true
+  criteria:
+    - name: correctness
+      description: "Recommendations are factually accurate for Ping Identity products"
+      weight: 0.5
+    - name: completeness
+      description: "Covers the key decision points a developer needs"
+      weight: 0.5
+  pass_threshold: 0.7
+  judge_model: gpt-5.5

@@ -1,0 +1,49 @@
+id: 03-davinci-vs-journey-decision
+skill: ping-quickstart
+title: "DaVinci vs AIC Journey — which to use for a login flow?"
+
+prompt: |
+  We are designing a customer-facing login flow that includes username/password,
+  social login (Google), and step-up MFA triggered by risk signals.
+  We have access to both PingOne and PingOne Advanced Identity Cloud (AIC).
+  Should we use DaVinci or AIC Journey trees to build this flow?
+  Give us a concrete recommendation, not just "it depends."
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+
+deterministic_checks:
+  - id: mentions-davinci
+    description: "Response mentions DaVinci as one option"
+    type: grep
+    glob: "**/*.md"
+    pattern: "DaVinci"
+    must_match: true
+
+  - id: mentions-journey
+    description: "Response mentions Journey as the other option"
+    type: grep
+    glob: "**/*.md"
+    pattern: "Journey"
+    must_match: true
+
+  - id: concrete-decision-criterion
+    description: "Response includes at least one concrete decision criterion beyond 'it depends'"
+    type: regex
+    glob: "**/*.md"
+    pattern: "customiz|script|no.code|low.code|node|connector|greenfield|migration|ForgeRock|CIAM|workforce|complex"
+    flags: "i"
+    must_match: true
+
+judge_rubric:
+  enabled: true
+  criteria:
+    - name: correctness
+      description: "Recommendations are factually accurate for Ping Identity products"
+      weight: 0.5
+    - name: completeness
+      description: "Covers the key decision points a developer needs"
+      weight: 0.5
+  pass_threshold: 0.7
+  judge_model: gpt-5.5
