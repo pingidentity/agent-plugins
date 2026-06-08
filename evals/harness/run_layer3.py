@@ -33,11 +33,13 @@ RESULTS_DIR_DEFAULT = REPO_ROOT / "evals" / "results"
 PLUGIN_DIR = REPO_ROOT / "plugins" / "ping-identity"
 
 ANTHROPIC_PREFIXES = ("claude-", "anthropic.", "eu.", "us.", "ap.")
+# Single-word aliases the Claude CLI accepts (haiku, sonnet, opus, fast)
+ANTHROPIC_ALIASES = frozenset({"haiku", "sonnet", "opus", "fast"})
 OPENAI_PREFIXES = ("gpt-", "o1", "o3", "openai.")
 
 
 def _is_anthropic(model: str) -> bool:
-    return model.startswith(ANTHROPIC_PREFIXES)
+    return model in ANTHROPIC_ALIASES or model.startswith(ANTHROPIC_PREFIXES)
 
 
 def _is_openai(model: str) -> bool:
