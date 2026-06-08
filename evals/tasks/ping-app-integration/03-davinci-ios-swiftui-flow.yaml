@@ -69,14 +69,14 @@ deterministic_checks:
 
   - id: async-await-task
     description: "Uses async/await inside a Task block"
-    type: grep
+    type: regex
     glob: "**/*.swift"
-    pattern: "Task\\s*{"
+    pattern: "Task\\s*\\{"
     must_match: true
 
   - id: collector-value-property
     description: "Sets collector input via .value property"
-    type: grep
+    type: regex
     glob: "**/*.swift"
     pattern: "\\.value\\s*="
     must_match: true

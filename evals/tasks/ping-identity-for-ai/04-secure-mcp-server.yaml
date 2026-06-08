@@ -11,6 +11,8 @@ prompt: |
   which filters or components enforce authorization, and what the agent must
   include in each request to be granted access.
 
+  Write your answer to answer.md using the Write tool.
+
 expected_artifacts:
   - "**/*.md"
   - "**/*.txt"

@@ -28,7 +28,8 @@ prompt: |
   3. Preserve the original code as commented-out blocks using the marker
      format: // [ping-migration] BEGIN legacy ... // [ping-migration] END legacy
 
-  Use the Write tool to create both files. Do not just describe the changes.
+  Use the Write tool to create both files: AuthRepository.kt and build.gradle.kts.
+  Do not describe the code — write the actual file contents.
 
 expected_artifacts:
   - "**/*.kt"

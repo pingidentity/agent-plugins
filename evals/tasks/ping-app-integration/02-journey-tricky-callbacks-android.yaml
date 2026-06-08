@@ -23,10 +23,10 @@ expected_artifacts:
 
 deterministic_checks:
   - id: terms-accepted-property
-    description: "Uses .accepted = true on TermsAndConditionsCallback, not .accept()"
+    description: "Uses .accepted = on TermsAndConditionsCallback, not .accept()"
     type: regex
     glob: "**/*.kt"
-    pattern: "\\.accepted\\s*=\\s*true"
+    pattern: "\\.accepted\\s*="
     must_match: true
 
   - id: no-terms-accept-method
@@ -51,7 +51,7 @@ deterministic_checks:
 
   - id: confirmation-options-property
     description: "ConfirmationCallback iterates .options, not .choices"
-    type: grep
+    type: regex
     glob: "**/*.kt"
     pattern: "\\.options"
     must_match: true

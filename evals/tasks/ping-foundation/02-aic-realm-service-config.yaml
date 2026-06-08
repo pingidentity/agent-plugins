@@ -46,7 +46,7 @@ deterministic_checks:
 
   - id: bearer-token-auth
     description: "Script passes admin bearer token in Authorization header"
-    type: grep
+    type: regex
     glob: "**/*.sh"
     pattern: "Authorization.*Bearer"
     must_match: true

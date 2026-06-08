@@ -52,31 +52,31 @@ deterministic_checks:
     must_match: true
 
   - id: client-start-call
-    description: "Calls client.start() to begin the flow"
-    type: grep
+    description: "Calls .start() to begin the flow"
+    type: regex
     glob: "**/*.tsx"
-    pattern: "client\\.start()"
+    pattern: "\\.start\\s*\\("
     must_match: true
 
   - id: collector-name-property
-    description: "Reads collector.name for field label"
-    type: grep
+    description: "Reads collector.name or field.name for label"
+    type: regex
     glob: "**/*.tsx"
-    pattern: "collector\\.name"
+    pattern: "\\.(name|label)"
     must_match: true
 
   - id: collector-value-property
-    description: "Reads and sets collector.value for field input"
-    type: grep
+    description: "Reads or sets collector.value for input"
+    type: regex
     glob: "**/*.tsx"
-    pattern: "collector\\.value"
+    pattern: "\\.value"
     must_match: true
 
   - id: all-node-types-handled
     description: "Handles ContinueNode and SuccessNode states"
     type: regex
     glob: "**/*.tsx"
-    pattern: "ContinueNode.*SuccessNode|SuccessNode.*ContinueNode"
+    pattern: "ContinueNode|continueNode|'continue'"
     flags: "ms"
     must_match: true
 

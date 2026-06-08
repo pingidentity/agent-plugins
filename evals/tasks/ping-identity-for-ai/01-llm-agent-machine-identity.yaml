@@ -10,6 +10,8 @@ prompt: |
   product acts as the authorization server, and how to handle token rotation so
   the agent always has a valid, short-lived credential.
 
+  Write your answer to answer.md using the Write tool.
+
 expected_artifacts:
   - "**/*.md"
   - "**/*.txt"

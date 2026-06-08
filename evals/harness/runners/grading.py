@@ -163,8 +163,11 @@ def judge_task(
     import os
     from openai import OpenAI
 
+    api_key = os.environ.get("OPENAI_API_KEY")
+    if not api_key:
+        raise RuntimeError("Missing OPENAI_API_KEY — set it to enable LLM judging")
     client = openai_client or OpenAI(
-        api_key=os.environ["OPENAI_API_KEY"],
+        api_key=api_key,
         base_url=os.environ.get("OPENAI_BASE_URL"),
     )
     prompt = build_judge_prompt(task_prompt=task_prompt, rubric=rubric, artifact_files=artifact_files)

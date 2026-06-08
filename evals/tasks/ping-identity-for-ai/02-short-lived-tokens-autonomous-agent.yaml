@@ -11,6 +11,8 @@ prompt: |
   Include a concrete configuration snippet showing the token request and the
   expiry-based refresh logic.
 
+  Write your answer to answer.md using the Write tool.
+
 expected_artifacts:
   - "**/*.md"
   - "**/*.txt"

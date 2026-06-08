@@ -52,7 +52,7 @@ deterministic_checks:
 
   - id: enabled-true
     description: "Application is explicitly enabled"
-    type: grep
+    type: regex
     glob: "**/*.json"
     pattern: "\"enabled\".*true"
     must_match: true

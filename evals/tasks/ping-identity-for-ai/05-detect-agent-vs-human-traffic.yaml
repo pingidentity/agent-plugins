@@ -12,6 +12,8 @@ prompt: |
   signals, how to integrate it into our authentication flow, and how to branch
   on the detection result to allow, challenge, or block agent traffic.
 
+  Write your answer to answer.md using the Write tool.
+
 expected_artifacts:
   - "**/*.md"
   - "**/*.txt"
