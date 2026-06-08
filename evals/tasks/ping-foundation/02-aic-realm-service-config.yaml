@@ -17,6 +17,7 @@ prompt: |
       /am/json/realms/root/realms/alpha/realm-config/services/oauth-oidc
     - Authenticate using a bearer token stored in $ADMIN_TOKEN
   Output only configure-realm.sh.
+  Use the Write tool to create configure-realm.sh. Do not just show the script in chat.
 
 expected_artifacts:
   - "**/*.sh"

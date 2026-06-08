@@ -9,6 +9,8 @@ prompt: |
   Should we use DaVinci or AIC Journey trees to build this flow?
   Give us a concrete recommendation, not just "it depends."
 
+  Write your answer to a file named answer.md using the Write tool.
+
 expected_artifacts:
   - "**/*.md"
   - "**/*.txt"

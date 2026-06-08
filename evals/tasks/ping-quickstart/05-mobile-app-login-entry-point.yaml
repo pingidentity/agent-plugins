@@ -8,6 +8,8 @@ prompt: |
   version (Swift/SwiftUI). We have not set up any Ping platform yet.
   Where do I start and which SDK should I use?
 
+  Write your answer to a file named answer.md using the Write tool.
+
 expected_artifacts:
   - "**/*.md"
   - "**/*.txt"

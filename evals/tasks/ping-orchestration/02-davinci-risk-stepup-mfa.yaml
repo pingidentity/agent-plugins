@@ -17,7 +17,7 @@ prompt: |
   - The correct capability name used to report the session result.
   - What the MFA subflow should call first if the user has no enrolled devices.
 
-  Provide the flow design as a structured document or YAML.
+  Write the flow design as a YAML or Markdown file named flow-design.md using the Write tool.
 
 expected_artifacts:
   - "**/*.md"

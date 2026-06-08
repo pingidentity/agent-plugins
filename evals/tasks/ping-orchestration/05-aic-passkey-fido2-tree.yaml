@@ -20,7 +20,7 @@ prompt: |
   4. The recoveryCodeType value to set on RecoveryCodeCollectorDecisionNode for
      a WebAuthn flow.
 
-  Output the design as a structured document.
+  Write the design to passkey-design.md using the Write tool.
 
 expected_artifacts:
   - "**/*.md"

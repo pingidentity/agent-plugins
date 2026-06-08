@@ -8,6 +8,8 @@ prompt: |
   We want to migrate to Ping Identity. What is our entry point and what does
   the migration path look like at a high level?
 
+  Write your answer to a file named answer.md using the Write tool.
+
 expected_artifacts:
   - "**/*.md"
   - "**/*.txt"

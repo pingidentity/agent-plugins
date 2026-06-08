@@ -14,13 +14,11 @@ prompt: |
   - Set the outcome variable correctly.
   - List both outcomes in the node configuration.
 
-  Provide the script and a brief node configuration snippet showing how the
-  outcomes are registered.
+  Write the script to decision-node.js and the configuration snippet to node-config.json using the Write tool.
 
 expected_artifacts:
   - "**/*.js"
-  - "**/*.md"
-  - "**/*.txt"
+  - "**/*.json"
 
 deterministic_checks:
   - id: node-state-api

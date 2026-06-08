@@ -8,6 +8,8 @@ prompt: |
   We have not chosen a Ping Identity platform yet.
   Where do we start, and what are our main options?
 
+  Write your answer to a file named answer.md using the Write tool.
+
 expected_artifacts:
   - "**/*.md"
   - "**/*.txt"

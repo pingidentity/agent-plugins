@@ -13,6 +13,8 @@ prompt: |
   and sends a magic-link email. Specify what happens on the Create Object node
   FAILURE outcome.
 
+  Write the design as a structured Markdown file named journey-design.md using the Write tool.
+
 expected_artifacts:
   - "**/*.md"
   - "**/*.txt"

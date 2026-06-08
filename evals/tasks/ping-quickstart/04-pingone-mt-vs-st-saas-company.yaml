@@ -9,6 +9,8 @@ prompt: |
   What is the actual difference between the two tenancy models and what are
   the concrete trade-offs for a SaaS use case like ours?
 
+  Write your answer to a file named answer.md using the Write tool.
+
 expected_artifacts:
   - "**/*.md"
   - "**/*.txt"
