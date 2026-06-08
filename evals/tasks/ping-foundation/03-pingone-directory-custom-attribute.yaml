@@ -43,10 +43,10 @@ deterministic_checks:
     must_match: true
 
   - id: enabled-true
-    description: "Attribute is enabled"
+    description: "Attribute type is STRING (uppercase) — discriminating Ping Directory API pattern"
     type: grep
     glob: "**/custom-attribute.json"
-    pattern: "\"enabled\".*true"
+    pattern: "\"STRING\""
     must_match: true
 
   - id: patch-body-value
@@ -57,11 +57,20 @@ deterministic_checks:
     must_match: true
 
   - id: patch-uses-value-op
-    description: "PATCH body uses correct op field for the update operation"
+    description: "PATCH body includes a value field for the update operation"
     type: grep
     glob: "**/patch-user.json"
-    pattern: "\"op\""
+    pattern: "\"value\""
     must_match: true
 
 judge_rubric:
-  enabled: false
+  enabled: true
+  criteria:
+    - name: correctness
+      description: "Recommendations are factually accurate for Ping Identity products"
+      weight: 0.5
+    - name: completeness
+      description: "Covers the key decision points a developer needs"
+      weight: 0.5
+  pass_threshold: 0.7
+  judge_model: gpt-5.5

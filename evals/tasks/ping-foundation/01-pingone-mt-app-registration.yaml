@@ -58,4 +58,13 @@ deterministic_checks:
     must_match: true
 
 judge_rubric:
-  enabled: false
+  enabled: true
+  criteria:
+    - name: correctness
+      description: "Recommendations are factually accurate for Ping Identity products"
+      weight: 0.5
+    - name: completeness
+      description: "Covers the key decision points a developer needs"
+      weight: 0.5
+  pass_threshold: 0.7
+  judge_model: gpt-5.5
