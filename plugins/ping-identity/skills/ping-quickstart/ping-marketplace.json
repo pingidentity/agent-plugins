@@ -1,7 +1,7 @@
 {
   "skill_id": "ping-quickstart",
   "display_name": "Ping Identity Quickstart",
-  "description": "Orientation and platform detection for Ping Identity. Routes users to the right skill based on their platform (PingOne, PingOne ST, on-prem software) and what they are trying to accomplish.",
+  "description": "Orientation and platform detection for Ping Identity. Routes users to the right skill based on their platform (PingOne, PingOne Advanced Identity Cloud, on-prem software) and what they are trying to accomplish.",
   "version": "1.0.0",
   "publisher": "Ping Identity",
   "tags": {

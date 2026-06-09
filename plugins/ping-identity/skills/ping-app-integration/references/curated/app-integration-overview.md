@@ -182,7 +182,7 @@ A production-ready integration passes through three phases. This skill owns Phas
 - `references/curated/mobile-integration-basics.md` — Android and iOS SDK wiring
 - `references/curated/web-integration-basics.md` — JavaScript / React / OIDC / SAML web integration
 - `references/curated/integration-troubleshooting-basics.md` — Failure modes and migration path
-- `references/runtime/docs-mcp-routing.md` — Escalation to Docs MCP when curated content is insufficient
+- `references/runtime/mcp-preflight.md` — MCP server config and preflight before tool execution
 
 ## Source
 

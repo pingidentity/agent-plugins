@@ -1,1 +1,7 @@
-{"generated": true, "skill": "ping-foundation", "branch": "ping-software", "items": []}
+{
+  "skill": "ping-foundation",
+  "branch": "ping-software",
+  "generated_at": "2026-06-08T00:00:00Z",
+  "max_docs": 25,
+  "docs": []
+}

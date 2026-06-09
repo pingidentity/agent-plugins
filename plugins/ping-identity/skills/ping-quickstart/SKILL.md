@@ -21,11 +21,11 @@ Trigger on ANY of the following — including questions, evaluation discussions,
 
 - "Where do I start with Ping Identity?"
 - "Which Ping product do I need?"
-- "Help me choose between PingOne, PingOne ST, and PingFederate"
+- "Help me choose between PingOne, PingOne Advanced Identity Cloud, and PingFederate"
 - "I'm new to Ping — what should I set up first?"
 - "I inherited a Ping deployment and don't know where to begin"
 - "We're evaluating Ping Identity — what should we be asking?"
-- "Pros and cons of PingOne vs PingOne ST vs PingFederate; cloud or on-prem?"
+- "Pros and cons of PingOne vs PingOne Advanced Identity Cloud vs PingFederate; cloud or on-prem?"
 - "Advise me on which Ping platform fits our use case"
 - "We're migrating from ForgeRock to Ping — what does the migration path look like?"
 - "Where do we start with adding [feature] to our app?" (any feature, when the platform is unspecified)
@@ -40,12 +40,12 @@ Trigger on ANY of the following — including questions, evaluation discussions,
 ## When NOT to use this skill
 
 - User asks to configure a PingOne OIDC application → use `ping-foundation`
-- User asks to build a registration journey or DaVinci flow in PingOne ST → use `ping-orchestration`
+- User asks to build a registration journey or DaVinci flow in PingOne Advanced Identity Cloud → use `ping-orchestration`
 - User asks to integrate the Ping iOS or Android SDK → use `ping-app-integration`
 - User asks about PingOne Protect risk scoring, PingOne Verify, or PingOne MFA policy → use `ping-universal-services`
 - User asks about Verified Trust, AI agent identity, or securing AI agents with Ping → use `ping-identity-for-ai`
 - User asks to configure PingFederate adapters or PingAccess policies on an existing deployment → use `ping-foundation`
-- User already knows their platform (PingOne, PingOne ST, or Ping Software) and knows their task → skip this skill and use the relevant skill directly
+- User already knows their platform (PingOne, PingOne Advanced Identity Cloud, or Ping Software) and knows their task → skip this skill and use the relevant skill directly
 
 ## Multi-skill use cases
 
@@ -63,7 +63,7 @@ A single end-to-end use case typically spans:
 
 **Example — Customer registration with identity verification:**
 1. `ping-foundation` — provision the environment, register the app, configure the directory
-2. `ping-orchestration` — design the DaVinci flow or PingOne ST journey for registration
+2. `ping-orchestration` — design the DaVinci flow or PingOne Advanced Identity Cloud journey for registration
 3. `ping-universal-services` — invoke PingOne Verify for document/liveness check within the flow
 4. `ping-app-integration` — wire the SDK into the mobile or web app
 
@@ -102,7 +102,7 @@ Ask or infer from context:
 Ask at most one question at a time:
 
 1. "Are you setting something up for the first time, or do you have an existing deployment?"
-2. "Are you working in PingOne, PingOne ST, or on-premises software?"
+2. "Are you working in PingOne, PingOne Advanced Identity Cloud (AIC), or on-premises software?"
 **Mandatory clarification — bare user-management commands:** if the prompt is "Add a user to Ping", "Create a user in Ping", or any equivalent with no platform named, you MUST ask which platform before answering — Ping has separate user populations in PingOne, PingOne Advanced Identity Cloud (AIC), PingFederate, and PingDirectory. Do not assume PingOne.
 
 ---

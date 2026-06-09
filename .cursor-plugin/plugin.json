@@ -1,8 +1,8 @@
 {
   "name": "ping-identity",
   "version": "1.0.0",
-  "description": "Six-umbrella agent skill suite for Ping Identity: PingOne MT, PingOne ST (AIC), Ping Software Suite, DaVinci, universal services, app integration, identity for AI.",
-  "author": { "name": "Ping Identity", "email": "devex@pingidentity.com" },
+  "description": "Six-umbrella agent skill suite for Ping Identity: PingOne, PingOne Advanced Identity Cloud (AIC), Ping Software Suite, DaVinci, universal services, app integration, identity for AI.",
+  "author": { "name": "Ping Identity", "email": "developer-experience@pingidentity.com" },
   "homepage": "https://developer.pingidentity.com",
   "repository": "https://github.com/pingidentity/agent-plugins",
   "license": "MIT",

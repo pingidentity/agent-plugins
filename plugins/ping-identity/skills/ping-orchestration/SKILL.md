@@ -1,7 +1,7 @@
 ---
 name: ping-orchestration
-description: "Use this skill whenever the task involves designing, building, or advising on authentication flows, journeys, or orchestration logic in Ping Identity. Triggers: DaVinci flows, PingOne ST journeys, PingAM authentication trees, scripted decision nodes; login, registration, recovery, MFA, or step-up journey design; passwordless authentication (passkeys, FIDO2, magic links, biometric); authenticator app enrollment, TOTP, push MFA flows; transaction approvals via email or push notification (CIBA, out-of-band step-up); progressive profiling, social login, consent; flow troubleshooting; 'what nodes do I need', 'design a flow for', 'build a journey that'. When the user asks 'journey vs DaVinci flow?', 'AIC or DaVinci?', 'which orchestration platform should we use?', or 'where do I configure MFA in Ping?' without stating both a use case (workforce / CIAM / B2B) AND a platform — you MUST ask one clarifying question before recommending. Do not guess. Also invoke with /ping-orchestration."
-compatibility: Designed for Ping Identity orchestration tasks. MCP tools for PingOne ST are used when available to create and update journeys directly.
+description: "Use this skill whenever the task involves designing, building, or advising on authentication flows, journeys, or orchestration logic in Ping Identity. Triggers: DaVinci flows, PingOne Advanced Identity Cloud (AIC) journeys, PingAM authentication trees, scripted decision nodes; login, registration, recovery, MFA, or step-up journey design; passwordless authentication (passkeys, FIDO2, magic links, biometric); authenticator app enrollment, TOTP, push MFA flows; transaction approvals via email or push notification (CIBA, out-of-band step-up); progressive profiling, social login, consent; flow troubleshooting; 'what nodes do I need', 'design a flow for', 'build a journey that'. When the user asks 'journey vs DaVinci flow?', 'AIC or DaVinci?', 'which orchestration platform should we use?', or 'where do I configure MFA in Ping?' without stating both a use case (workforce / CIAM / B2B) AND a platform — you MUST ask one clarifying question before recommending. Do not guess. Also invoke with /ping-orchestration."
+compatibility: Designed for Ping Identity orchestration tasks. MCP tools for PingOne Advanced Identity Cloud (AIC) are used when available to create and update journeys directly.
 metadata:
   publisher: Ping Identity
   version: "1.0.0"
@@ -18,7 +18,7 @@ Invoke this skill explicitly with `/ping-orchestration` or by saying "use ping-o
 ## When to use this skill
 
 Trigger on ANY question — including advisory, planning, and "what nodes do I need" requests, not just implementation — when the task involves:
-- Building or designing a login, registration, recovery, MFA, or step-up journey in PingOne ST / AIC / PingAM
+- Building or designing a login, registration, recovery, MFA, or step-up journey in PingOne Advanced Identity Cloud (AIC) / PingAM
 - Passwordless authentication flows (passkeys, FIDO2, magic links, biometric)
 - Authenticator app login, push MFA, or TOTP enrollment flows
 - Transaction approvals via email or push (CIBA / out-of-band step-up)
@@ -26,7 +26,7 @@ Trigger on ANY question — including advisory, planning, and "what nodes do I n
 - Configuring a PingAM authentication tree or scripted decision node
 - Planning or reviewing journey structure before implementation
 - Deciding between inner journeys, scripted nodes, or DaVinci connectors
-- Any question about designing, planning, or advising on authentication flows, journeys, or orchestration logic in PingOne ST, PingOne MT / DaVinci, or PingAM
+- Any question about designing, planning, or advising on authentication flows, journeys, or orchestration logic in PingOne Advanced Identity Cloud (AIC), PingOne / DaVinci, or PingAM
 
 ## When NOT to use this skill
 
@@ -97,7 +97,7 @@ Sub-routing by task and journey use case: see `references/curated/pingone-st/rou
 
 | Task | Reference |
 |---|---|
-| Passkeys / passwordless / FIDO2 design across PingOne MT, PingOne ST, Ping Software | `references/curated/cross-platform/passkeys-and-passwordless.md` |
+| Passkeys / passwordless / FIDO2 design across PingOne, PingOne Advanced Identity Cloud (AIC), Ping Software | `references/curated/cross-platform/passkeys-and-passwordless.md` |
 
 **Generated shortlist** (fallback): `references/generated/pingone-mt/top-25.json`
 

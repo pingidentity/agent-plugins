@@ -91,4 +91,4 @@ See `references/runtime/mcp-preflight.md` for MCP config and Cursor preflight st
 
 1. Curated anchors (`references/curated/`) — load 1–3 max. Stop if sufficient.
 2. Generated shortlists (`references/generated/<service>/`) — not yet populated; skip this tier until CI populates them.
-3. Docs MCP fallback — see `references/runtime/docs-mcp-routing.md`. Only if curated anchors are insufficient.
+3. Docs MCP fallback — query the Ping docs MCP server with a targeted product + task query. Only if curated anchors are insufficient.

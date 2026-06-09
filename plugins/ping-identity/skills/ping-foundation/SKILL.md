@@ -30,7 +30,7 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 
 ## When NOT to use this skill
 
-- If the primary task is **designing a DaVinci flow or PingOne ST journey**: use `ping-orchestration`
+- If the primary task is **designing a DaVinci flow or PingOne Advanced Identity Cloud journey**: use `ping-orchestration`
 - If the task is **configuring a Universal Service** (Protect, Verify, IGA, Credentials) **as a standalone service**: use `ping-universal-services`. If the task is **wiring a Universal Service into a journey or DaVinci flow** (e.g., adding Verify to a registration journey): use `ping-orchestration`
 - If the task is **integrating Ping into an app or SDK**: use `ping-app-integration`
 - If unsure which platform: use `ping-quickstart` first
@@ -105,12 +105,12 @@ See `references/runtime/mcp-preflight.md` for MCP config and Cursor preflight st
 
 ## Retrieval and execution
 
-**Rule:** (1) scan for MCP tools first — run the MCP config preflight above before executing; (2) load 1–3 curated anchors for the platform/task; (3) fall back to generated shortlist. Full rules: `references/runtime/docs-mcp-routing.md`.
+**Rule:** (1) scan for MCP tools first — run the MCP config preflight above before executing; (2) load 1–3 curated anchors for the platform/task; (3) fall back to generated shortlist; (4) as a last resort, query the Ping docs MCP server with a targeted product + task query.
 
 ## Cross-skill escalation
 
 | If the task also involves... | Reference skill |
 |---|---|
-| DaVinci flows or PingOne ST journey design | `ping-orchestration` |
+| DaVinci flows or PingOne Advanced Identity Cloud journey design | `ping-orchestration` |
 | Shared services (Protect, Verify, IGA, Credentials) | `ping-universal-services` |
 | App/SDK code integration | `ping-app-integration` |

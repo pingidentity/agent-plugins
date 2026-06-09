@@ -1,1 +1,7 @@
-{"generated": true, "skill": "ping-orchestration", "branch": "pingone-st", "items": []}
+{
+  "skill": "ping-orchestration",
+  "branch": "pingone-st",
+  "generated_at": "2026-06-08T00:00:00Z",
+  "max_docs": 25,
+  "docs": []
+}
