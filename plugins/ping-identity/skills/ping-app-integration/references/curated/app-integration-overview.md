@@ -135,7 +135,7 @@ A production-ready integration passes through three phases. This skill owns Phas
 
 ### Phase 1 — Platform setup (ping-foundation)
 
-- Tenant provisioning (PingOne MT, AIC, or PF license install)
+- Tenant provisioning (PingOne, AIC, or PF license install)
 - Application record creation (OIDC client ID, client secret, redirect URIs)
 - Sign-on policy / authentication policy attachment
 - Custom domain and certificate configuration
@@ -146,7 +146,7 @@ A production-ready integration passes through three phases. This skill owns Phas
 ### Phase 2 — Flow design (ping-orchestration)
 
 - Journey node graph authored (AIC / PingAM)
-- DaVinci flow logic defined (PingOne MT)
+- DaVinci flow logic defined (PingOne)
 - MFA policies and risk signal routing configured
 - Callbacks / collectors identified for the app to render
 
@@ -172,8 +172,8 @@ A production-ready integration passes through three phases. This skill owns Phas
 
 | Variant | Note |
 |---|---|
-| PingOne MT (multi-tenant cloud) | Use `@forgerock/davinci-client` or Android/iOS DaVinci modules; flows are DaVinci-based |
-| PingOne AIC / ST (single-tenant) | Use `@forgerock/journey-client` or Android/iOS Journey modules; flows are Journey-based |
+| PingOne (multi-tenant cloud) | Use `@forgerock/davinci-client` or Android/iOS DaVinci modules; flows are DaVinci-based |
+| PingOne Advanced Identity Cloud (AIC) | Use `@forgerock/journey-client` or Android/iOS Journey modules; flows are Journey-based |
 | PingFederate on-prem | OIDC or SAML from PF; no native Ping SDK needed unless also using MFA; agent-based enforcement via PingAccess |
 | ForgeRock SDK (legacy) | Being replaced by Ping native SDKs; migration guide in `references/curated/integration-troubleshooting-basics.md` |
 

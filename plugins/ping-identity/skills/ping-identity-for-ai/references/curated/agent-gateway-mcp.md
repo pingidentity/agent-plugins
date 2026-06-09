@@ -97,7 +97,7 @@ PingGateway works with any OAuth 2.0 AS. For MCP protection, the three Ping-nati
 | AS | Use when |
 |---|---|
 | **PingOne Advanced Identity Cloud (AIC)** | AIC-managed workloads; agent registered as AIC AI Agent client (`/aiagent/register`); Journey-based step-up available |
-| **PingOne MT** | Cloud-first; PingOne OAuth AS; agent registered as a Worker application |
+| **PingOne (multi-tenant cloud)** | Cloud-first; PingOne OAuth AS; agent registered as a Worker application |
 | **PingFederate** | On-premises or hybrid; PingFederate AS with RFC 8707 resource indicator support; supports `private_key_jwt` and mTLS |
 
 All three require RFC 8707 support on the AS side. Verify before deployment.

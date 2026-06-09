@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — App Setup"
+title: "PingOne Advanced Identity Cloud (AIC) — App Setup"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["foundation"]
@@ -13,9 +13,9 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-create_oauth2_client.html"
 ---
 
-# PingOne ST — App Setup
+# PingOne Advanced Identity Cloud (AIC) — App Setup
 
-Register OIDC, OAuth 2.0, and SAML applications in PingOne ST so they can authenticate users through journeys.
+Register OIDC, OAuth 2.0, and SAML applications in AIC so they can authenticate users through journeys.
 
 ## Scope
 
@@ -30,7 +30,7 @@ Register OIDC, OAuth 2.0, and SAML applications in PingOne ST so they can authen
 |---|---|
 | OIDC / OAuth 2.0 client | Web apps, SPAs, mobile apps, M2M service accounts needing tokens |
 | SAML SP | Enterprise apps using SAML 2.0 federation |
-| SAML IdP | PingOne ST acting as IdP to a third-party SP |
+| SAML IdP | AIC acting as IdP to a third-party SP |
 
 ---
 
@@ -73,12 +73,12 @@ Register OIDC, OAuth 2.0, and SAML applications in PingOne ST so they can authen
 | Field | Notes |
 |---|---|
 | Entity ID | Unique SP identifier; typically the app's base URL or a URN |
-| ACS URL | Assertion Consumer Service URL — where PingOne ST POST-binds the SAML response |
+| ACS URL | Assertion Consumer Service URL — where AIC POST-binds the SAML response |
 | Single Logout URL | Optional; required for SLO support |
 | Name ID Format | `email`, `persistent`, or `transient` — dictated by SP requirements |
 | Signing | Enable response and/or assertion signing; export IdP metadata to share with SP admin |
 
-**Metadata exchange:** Import SP metadata XML if available to auto-populate ACS URL, entity ID, and certificates. Export PingOne ST IdP metadata from Applications → SAML Applications → (app) → Export Metadata.
+**Metadata exchange:** Import SP metadata XML if available to auto-populate ACS URL, entity ID, and certificates. Export AIC IdP metadata from Applications → SAML Applications → (app) → Export Metadata.
 
 ---
 
@@ -129,7 +129,7 @@ Configure provisioning after basic app setup is complete and the identity store 
 
 ## Prerequisites
 
-- PingOne ST tenant with admin access
+- AIC tenant with admin access
 - Realm configured with at least one identity store (see `references/curated/pingone-st/directory-setup.md`)
 - At least one authentication journey ready or in progress (see `references/curated/pingone-st/authentication-fundamentals.md`)
 
@@ -150,6 +150,6 @@ Configure provisioning after basic app setup is complete and the identity store 
 
 ## Source
 
-[Register OAuth 2.0 clients — PingOne ST](https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-create_oauth2_client.html)
+[Register OAuth 2.0 clients — AIC](https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-create_oauth2_client.html)
 [OIDC client registration](https://docs.pingidentity.com/pingoneaic/am-oidc-guide/oidc-client-registration.html)
 [SAML application registration](https://docs.pingidentity.com/pingoneaic/am-saml2-guide/saml2-sp-registration.html)

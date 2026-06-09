@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — PingOne Protect Risk Integration"
+title: "PingOne Advanced Identity Cloud (AIC) — PingOne Protect Risk Integration"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["orchestration"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
-# PingOne ST — PingOne Protect Risk Integration
+# AIC — PingOne Protect Risk Integration
 
 Design patterns for integrating PingOne Protect risk evaluation into AIC journeys, derived from four production journey suites (CIAM Passwordless, Financial Services, Money Transfer, Threat Detection).
 

@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Themes and Customization"
+title: "PingOne Advanced Identity Cloud (AIC) — Themes and Customization"
 product_family: pingone-st
 products: ["pingone-aic"]
 capabilities: ["foundation"]
@@ -13,9 +13,9 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/pingoneaic/ui-customization-guide/ui-theming.html"
 ---
 
-# PingOne ST — Themes and Customization
+# PingOne Advanced Identity Cloud (AIC) — Themes and Customization
 
-Apply branding to PingOne ST hosted pages using the Theme Editor and custom CSS.
+Apply branding to AIC hosted pages using the Theme Editor and custom CSS.
 
 ## Scope
 
@@ -59,7 +59,7 @@ A single tenant can serve distinct branding to different user populations by ass
 
 Custom CSS class names are subject to change with product updates; validate against the current rendered output before deploying overrides.
 
-**CSP constraint:** PingOne ST hosted pages enforce a Content Security Policy. External fonts or assets loaded from custom CSS require the origin to be added to the CSP configuration.
+**CSP constraint:** AIC hosted pages enforce a Content Security Policy. External fonts or assets loaded from custom CSS require the origin to be added to the CSP configuration.
 
 **CSP admin surface:** AIC admin console → Security → Content Security Policy
 
@@ -113,7 +113,7 @@ Email templates are separate from visual themes but affect the end-user branding
 
 Template editor supports HTML with Freemarker expressions for dynamic values (e.g., `${user.givenName}`, `${resetLink}`). Test templates using the preview function before saving.
 
-CSP note: images embedded in email templates must be hosted on an externally accessible URL — PingOne ST does not host email images; reference them via absolute URL in the template HTML.
+CSP note: images embedded in email templates must be hosted on an externally accessible URL — AIC does not host email images; reference them via absolute URL in the template HTML.
 
 ---
 
@@ -130,7 +130,7 @@ CSP note: images embedded in email templates must be hosted on an externally acc
 
 ## Prerequisites
 
-- PingOne ST tenant with at least one realm
+- AIC tenant with at least one realm
 - Admin access to Theming
 - If using CDN fonts: CSP must allow the font origin before the theme is applied
 
@@ -152,6 +152,6 @@ CSP note: images embedded in email templates must be hosted on an externally acc
 
 ## Source
 
-[UI theming — PingOne ST](https://docs.pingidentity.com/pingoneaic/ui-customization-guide/ui-theming.html)
+[UI theming — AIC](https://docs.pingidentity.com/pingoneaic/ui-customization-guide/ui-theming.html)
 [UI customization overview](https://docs.pingidentity.com/pingoneaic/ui-customization-guide/ui-overview.html)
 [Getting started: apply basic branding](https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-apply_branding.html)

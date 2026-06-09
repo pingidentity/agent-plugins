@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Identity Management Nodes"
+title: "PingOne Advanced Identity Cloud (AIC) — Identity Management Nodes"
 product_family: pingone-st
 products: ["pingone-aic", "pingam", "pingidm"]
 capabilities: ["orchestration"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
-# PingOne ST — Identity Management Nodes
+# AIC — Identity Management Nodes
 
 Nodes for reading, writing, and managing user identity data during authentication journeys — registration, profile collection, consent, KBA, object operations, and social federation.
 
@@ -281,10 +281,10 @@ Checks the result of an ongoing PingOne Verify session.
 ## PingOne User Operations
 
 ### PingOne Create User node
-Creates a user in PingOne MT from within an AIC journey.
+Creates a user in PingOne (multi-tenant cloud) from within an AIC journey.
 
 ### PingOne Delete User node
-Deletes a PingOne MT user from within an AIC journey.
+Deletes a PingOne (multi-tenant cloud) user from within an AIC journey.
 
 ### PingOne Identity Match node
 Attempts to match an authenticating user against a PingOne identity.

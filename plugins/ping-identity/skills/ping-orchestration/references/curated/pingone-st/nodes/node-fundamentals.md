@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Node Fundamentals"
+title: "PingOne Advanced Identity Cloud (AIC) — Node Fundamentals"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["orchestration"]
@@ -13,9 +13,9 @@ last_updated: "2026-06-05"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
-# PingOne ST — Node Fundamentals
+# AIC — Node Fundamentals
 
-Tribal knowledge and non-obvious invariants about how nodes behave in PingOne ST journeys. Rules here are validated from live AIC sessions — they are not documented clearly in official docs and are common sources of bugs.
+Tribal knowledge and non-obvious invariants about how nodes behave in AIC journeys. Rules here are validated from live AIC sessions — they are not documented clearly in official docs and are common sources of bugs.
 
 ## Scope
 

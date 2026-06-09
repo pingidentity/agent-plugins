@@ -19,7 +19,7 @@ How to identify which Ping Identity product you have been given access to, disco
 
 ## Scope
 
-**Covers:** identifying the Ping product variant from access credentials or console URLs; running a discovery checklist for PingOne MT, AIC/PingOne ST, and PingFederate; understanding environment types and realm constraints in an inherited tenant.
+**Covers:** identifying the Ping product variant from access credentials or console URLs; running a discovery checklist for PingOne (multi-tenant cloud), AIC, and PingFederate; understanding environment types and realm constraints in an inherited tenant.
 
 **Does NOT cover:** creating new tenants, environments, or applications (see `ping-foundation` skill); designing authentication journeys or DaVinci flows (see `ping-orchestration` skill); migrating from a legacy ForgeRock deployment (see `forgerock-to-ping-journey-migration` skill).
 
@@ -31,10 +31,10 @@ Use the admin console URL or tenant URL you were given to determine which produc
 
 | Console URL or URL pattern | Product | Notes |
 |---|---|---|
-| `console.pingone.com` | **PingOne MT** | Multi-tenant SaaS. Organizations, environments, and a flat admin hierarchy. |
+| `console.pingone.com` | **PingOne (multi-tenant cloud)** | Multi-tenant SaaS. Organizations, environments, and a flat admin hierarchy. |
 | `admin.pingone.com` | **PingOne for Enterprise (P14E)** | Older SaaS product. Four sub-variants — see table below. |
-| `openam-<base>-<region>.id.forgerock.io` | **AIC / PingOne ST (Production)** | Single-tenant managed cloud. ForgeRock lineage. |
-| `openam-<sandbox>-<region>.forgeblocks.com` | **AIC / PingOne ST (Sandbox)** | Sandbox environment on Rapid channel. |
+| `openam-<base>-<region>.id.forgerock.io` | **AIC (Production)** | Single-tenant managed cloud. ForgeRock lineage. |
+| `openam-<sandbox>-<region>.forgeblocks.com` | **AIC (Sandbox)** | Sandbox environment on Rapid channel. |
 | `https://<host>:9999/pingfederate/app` | **PingFederate** | On-premises or customer-managed. Not SaaS. |
 
 ### P14E sub-variant identification
@@ -48,11 +48,11 @@ Log in to `admin.pingone.com` and inspect the top navigation items.
 | Above (no Customers) + **Customer Connections** | PingOne SSO for SaaS Apps |
 | Above + **Customer Connections** + **Managed Accounts** | PingOne SSO for SaaS Apps with Managed Accounts |
 
-P14E is a mature product with limited new feature investment. If the organization is planning expansion, confirm whether a migration to PingOne MT or AIC is on the roadmap.
+P14E is a mature product with limited new feature investment. If the organization is planning expansion, confirm whether a migration to PingOne (multi-tenant cloud) or AIC is on the roadmap.
 
 ---
 
-## Step 2: PingOne MT discovery checklist
+## Step 2: PingOne discovery checklist
 
 Work through these areas in order. All are configuration facts — no step-by-step UI procedures.
 
@@ -79,7 +79,7 @@ Work through these areas in order. All are configuration facts — no step-by-st
 
 ---
 
-## Step 3: AIC / PingOne ST discovery checklist
+## Step 3: AIC discovery checklist
 
 **Realms**
 - Confirm which realms exist. The hard limit is exactly two configurable end-user realms: **Alpha** and **Bravo**. The top-level realm is reserved for tenant administrators only and cannot hold end-user identities.
@@ -144,7 +144,7 @@ Sandbox is on the Rapid channel and is isolated from the promotion pipeline. Con
 
 ---
 
-## Realm isolation reminder (AIC / PingOne ST)
+## Realm isolation reminder (AIC)
 
 Realm isolation in AIC is complete. An identity in Alpha cannot authenticate to an application registered in Bravo. OAuth clients, sign-on policies, and user populations are fully separated between realms. If users report "access denied" errors after an environment handover, confirm the application is registered in the correct realm and the user exists in that realm's identity store.
 
@@ -154,13 +154,13 @@ Realm isolation in AIC is complete. An identity in Alpha cannot authenticate to 
 
 | What you found | Next step |
 |---|---|
-| PingOne MT with no applications configured | Use `ping-foundation` skill to register your first application and configure a sign-on policy |
-| PingOne MT with applications already registered, need to add a flow | Use `ping-orchestration` skill (DaVinci) |
+| PingOne with no applications configured | Use `ping-foundation` skill to register your first application and configure a sign-on policy |
+| PingOne with applications already registered, need to add a flow | Use `ping-orchestration` skill (DaVinci) |
 | AIC with journeys in place, need to render them in a mobile app | Use `ping-orchestration-sdks` skill for iOS or Android |
 | AIC with journeys, need to render in a web app | Use `ping-orchestration-sdks` skill (JavaScript/React path) |
-| PingFederate standalone, need to federate with PingOne MT | Use `ping-foundation` skill — PingFederate as external IdP pattern |
+| PingFederate standalone, need to federate with PingOne | Use `ping-foundation` skill — PingFederate as external IdP pattern |
 | Legacy ForgeRock SDK in mobile or web app | Use `forgerock-to-ping-journey-migration` skill |
-| PingFederate + PingOne MT migration in scope | See Cloud Acceleration Toolset reference below |
+| PingFederate + PingOne migration in scope | See Cloud Acceleration Toolset reference below |
 | AIC tenant, need to understand the migration phases | See AIC planning reference below |
 
 ---
@@ -179,7 +179,7 @@ Realm isolation in AIC is complete. An identity in Alpha cannot authenticate to 
 
 **AIC with custom top-level domain**: Tenants configured with a custom vanity FQDN (e.g., `login.example.com`) will not match the `.id.forgerock.io` or `.forgeblocks.com` patterns. Inspect the TLS certificate or DNS CNAME chain to confirm the underlying platform.
 
-**PingOne MT with Rate groups**: As of September 2025, PingOne MT enforces rate groups on API and flow-invocation traffic. Inherited deployments at high request volumes may be subject to throttling if the rate group baseline was not established before that date. Additional capacity requires the Maximum Throughput Assurance add-on.
+**PingOne with Rate groups**: As of September 2025, PingOne enforces rate groups on API and flow-invocation traffic. Inherited deployments at high request volumes may be subject to throttling if the rate group baseline was not established before that date. Additional capacity requires the Maximum Throughput Assurance add-on.
 
 **AIC Sandbox not in pipeline**: A common inherited confusion — Sandbox configuration changes cannot be promoted. If you need changes to flow to Dev/UAT/Staging/Prod, they must be made in the Development environment, not in Sandbox.
 
@@ -196,12 +196,12 @@ Realm isolation in AIC is complete. An identity in Alpha cannot authenticate to 
 ## Source
 
 - Which PingOne am I using: https://docs.pingidentity.com/pingoneforenterprise/p14e_which_p14e_am_i_using.html
-- PingOne MT getting started: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started.html
+- PingOne getting started: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started.html
 - PingOne license types: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_license_types.html
 - PingOne platform limits: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_platform_limits.html
 - AIC environments: https://docs.pingidentity.com/pingoneaic/tenants/environments.html
 - AIC realms: https://docs.pingidentity.com/pingoneaic/realms/alpha-bravo-realms.html
 - AIC getting started: https://docs.pingidentity.com/pingoneaic/getting-started/getting-started-about.html
-- Cloud Acceleration Toolset (PF → PingOne MT): https://docs.pingidentity.com/pingone/migration-tools/p1_cloud_acceleration_toolset.html
+- Cloud Acceleration Toolset (PF → PingOne): https://docs.pingidentity.com/pingone/migration-tools/p1_cloud_acceleration_toolset.html
 - AIC planning/migration: https://docs.pingidentity.com/pingoneaic/planning/plan-identity-cloud.html
 - PingFederate landing: https://docs.pingidentity.com/pingfederate/13.0/pf_pf_landing_page.html

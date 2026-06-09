@@ -112,7 +112,7 @@ After step-up is confirmed, the AI application requests a new delegated token wi
 
 | Step | Actor | Ping product | Output |
 |---|---|---|---|
-| 1. User authentication | End user (employee) | PingOne MT / PingOne AIC | User session; user access token |
+| 1. User authentication | End user (employee) | PingOne (multi-tenant cloud) / PingOne AIC | User session; user access token |
 | 2. Helpdesk app token request | AI helpdesk application (front-end) | PingOne AS / AIC OAuth AS | Delegated access token (RFC 8693 token exchange) |
 | 3. Low-risk request execution | AI agent (back-end) | Directory API / provisioning API | Action result; audit log entry |
 | 4. Risk-tier evaluation | AI application logic | (No Ping product — in-app decision) | Tier classification; step-up decision |

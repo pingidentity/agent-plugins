@@ -28,15 +28,15 @@ Does NOT cover: detailed configuration steps — see `ping-foundation` for those
 
 | Platform | When to use it | Admin entry point |
 |---|---|---|
-| PingOne MT | SaaS-hosted identity for new cloud-first deployments | console.pingone.com |
-| PingOne ST (AIC) | Fully managed, highly customizable identity cloud (ForgeRock lineage) | Your PingOne ST tenant URL |
+| PingOne (multi-tenant cloud) | SaaS-hosted identity for new cloud-first deployments | console.pingone.com |
+| PingOne Advanced Identity Cloud (AIC) | Fully managed, highly customizable identity cloud (ForgeRock lineage) | Your AIC tenant URL |
 | Ping Software Suite | On-premises or self-managed: PingFederate, PingAccess, PingDirectory | Deployed server admin consoles |
 
 ---
 
 ## Setup sequence by platform
 
-### PingOne MT
+### PingOne
 
 The official PingOne getting started sequence (8 tasks):
 1. **Access the admin console** — complete account registration from the invitation email; enroll an MFA method (email OTP or authenticator app — mandatory before first access).
@@ -54,9 +54,9 @@ The official PingOne getting started sequence (8 tasks):
 
 For detailed application, directory, and policy configuration see `ping-foundation` → `pingone-mt` branch.
 
-### PingOne ST (AIC)
+### AIC
 
-1. Access the PingOne ST tenant; locate the `alpha` and `bravo` realms.
+1. Access the AIC tenant; locate the `alpha` and `bravo` realms.
 2. Configure the realm identity store (LDAP, PingDirectory, or built-in datastore).
 3. Register an OAuth 2.0 / OIDC or SAML application under Realm → Applications.
 4. Create or activate an authentication journey (tree) or DaVinci flow.
@@ -138,11 +138,11 @@ Before acting on this guide, you need:
 
 - A Ping Identity account or active trial subscription.
 - Admin role on the target tenant or deployment:
-  - PingOne MT: Environment Admin or Organization Admin at `console.pingone.com`.
-  - PingOne ST: Tenant Administrator on your PingOne ST tenant.
+  - PingOne (multi-tenant cloud): Environment Admin or Organization Admin at `console.pingone.com`.
+  - AIC: Tenant Administrator on your AIC tenant.
   - Ping Software Suite: Server admin credentials for PingFederate/PingAccess/PingDirectory.
-- For PingOne MT: network access to `console.pingone.com` and `auth.pingone.com`.
-- For PingOne ST: your tenant's base URL (format: `https://<tenant>.forgeblocks.com` or custom domain).
+- For PingOne (multi-tenant cloud): network access to `console.pingone.com` and `auth.pingone.com`.
+- For AIC: your tenant's base URL (format: `https://<tenant>.forgeblocks.com` or custom domain).
 - For Software Suite: server access to deployed nodes; admin console TCP port (default 9999 for PingFederate).
 - A registered application (OAuth client) for any flow that issues tokens; note the client ID and redirect URIs before starting.
 - For SDK-based app integration: a development environment for the target platform (Android Studio, Xcode, or Node.js); see `ping-app-integration` for details.
@@ -159,17 +159,17 @@ Before acting on this guide, you need:
 - Start with trial for evaluation; plan a separate production tenant rather than promoting a trial.
 
 **Workforce vs CIAM starting points:**
-- Workforce: start with an SSO application connection and AD/LDAP adapter; focus on the `bravo` realm in PingOne ST or a PingFederate SP connection.
-- CIAM: start with a self-registration journey or DaVinci flow; focus on the `alpha` realm in PingOne ST or a PingOne MT customer-facing environment.
+- Workforce: start with an SSO application connection and AD/LDAP adapter; focus on the `bravo` realm in AIC or a PingFederate SP connection.
+- CIAM: start with a self-registration journey or DaVinci flow; focus on the `alpha` realm in AIC or a PingOne (multi-tenant cloud) customer-facing environment.
 
 **Multi-environment setup:**
-- PingOne MT uses separate environments per stage (Dev, QA, Prod) within the same org.
-- PingOne ST uses separate tenant instances per stage; configuration promotion is manual or via CI/CD pipelines using the PingOne ST REST API or Ping Platform Config Manager.
+- PingOne (multi-tenant cloud) uses separate environments per stage (Dev, QA, Prod) within the same org.
+- AIC uses separate tenant instances per stage; configuration promotion is manual or via CI/CD pipelines using the AIC REST API or Ping Platform Config Manager.
 - Ping Software Suite uses deployment topology (cluster) separation per stage.
 
 **Migrating from ForgeRock / legacy deployment:**
-- PingOne ST is the primary migration target from ForgeRock AM/IDM.
-- Import existing journey trees using PingOne ST's export/import tooling.
+- AIC is the primary migration target from ForgeRock AM/IDM.
+- Import existing journey trees using AIC's export/import tooling.
 - See `ping-orchestration` for journey migration patterns and `ping-foundation` → `pingone-st` branch for tenant setup.
 
 ---
@@ -181,7 +181,7 @@ Before acting on this guide, you need:
 
 ## Source
 
-- PingOne MT: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started.html
+- PingOne: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started.html
 - PingOne for Enterprise (P14E): https://docs.pingidentity.com/pingoneforenterprise/pingone_for_enterprise/p14e_getting_started.html
 - AIC: https://docs.pingidentity.com/pingoneaic/getting-started/getting-started-about.html
 - PingFederate: https://docs.pingidentity.com/pingfederate/13.0/pf_pf_landing_page.html

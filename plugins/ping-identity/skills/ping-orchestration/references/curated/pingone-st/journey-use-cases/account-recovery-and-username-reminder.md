@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Account Recovery and Username Reminder"
+title: "PingOne Advanced Identity Cloud (AIC) — Account Recovery and Username Reminder"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["orchestration"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
-# PingOne ST — Account Recovery and Username Reminder
+# AIC — Account Recovery and Username Reminder
 
 Design patterns for the OOTB account recovery and username reminder journey family, derived from live AIC journey exports.
 

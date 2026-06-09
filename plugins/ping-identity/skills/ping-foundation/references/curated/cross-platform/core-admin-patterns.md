@@ -14,7 +14,7 @@ slug: "https://docs.pingidentity.com/pingone/integrations/p1_ldap_gateways.html"
 
 # Core Admin Patterns
 
-Recurring administration patterns across PingOne MT, PingOne ST, and Ping Software Suite.
+Recurring administration patterns across PingOne (multi-tenant cloud), PingOne Advanced Identity Cloud (AIC), and Ping Software Suite.
 
 ## Scope
 
@@ -37,8 +37,8 @@ Does NOT cover: deep per-product reference — see the product-specific curated 
 | User search filter | `(uid=*)` for LDAP; `(&(objectClass=user)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))` to exclude disabled AD accounts |
 
 **Admin surfaces:**
-- PingOne MT: Connections → External Directories → + Add Directory
-- PingOne ST: Realm → Identity Stores → + Add Identity Store (type: LDAP) via AM admin console
+- PingOne (multi-tenant cloud): Connections → External Directories → + Add Directory
+- AIC: Realm → Identity Stores → + Add Identity Store (type: LDAP) via AM admin console
 - PingFederate: System → Data Stores → + Add Data Store → LDAP
 
 ---
@@ -58,8 +58,8 @@ Does NOT cover: deep per-product reference — see the product-specific curated 
 **Client type decision:** confidential (can hold a secret) vs. public (cannot — SPA or native app). Public clients require PKCE.
 
 **Admin surfaces:**
-- PingOne MT: Applications → + Add Application → OIDC Web App
-- PingOne ST: Realm → Applications → OAuth 2.0 → + Create Client (AIC console) or AM console → OAuth 2.0 → Clients
+- PingOne (multi-tenant cloud): Applications → + Add Application → OIDC Web App
+- AIC: Realm → Applications → OAuth 2.0 → + Create Client (AIC console) or AM console → OAuth 2.0 → Clients
 - PingFederate: Applications → OAuth → Clients → + Add Client
 
 ---
@@ -70,14 +70,14 @@ All platforms expose REST APIs for automation:
 
 | Platform | Base URL pattern |
 |---|---|
-| PingOne MT | `https://api.pingone.com/v1/environments/{envId}/...` |
-| PingOne ST | `https://<tenant>/am/json/...` or `https://<tenant>/openidm/...` |
+| PingOne (multi-tenant cloud) | `https://api.pingone.com/v1/environments/{envId}/...` |
+| AIC | `https://<tenant>/am/json/...` or `https://<tenant>/openidm/...` |
 | PingFederate | `https://<host>:9999/pf-admin-api/v1/...` |
 | PingAccess | `https://<host>:9000/pa-admin-api/v3/...` |
 
 **Authentication per platform:**
-- PingOne MT: Worker app (client credentials grant)
-- PingOne ST: AM OAuth2 client or IDM service account
+- PingOne (multi-tenant cloud): Worker app (client credentials grant)
+- AIC: AM OAuth2 client or IDM service account
 - PingFederate / PingAccess: HTTP Basic against the admin API (or OAuth2 if configured)
 
 ---
@@ -86,8 +86,8 @@ All platforms expose REST APIs for automation:
 
 | Platform | Mechanism |
 |---|---|
-| PingOne MT | Admin API environment export; or use frodo-lib / frodo-cli for config export |
-| PingOne ST | Admin API exports; or environment-level export from AIC admin console |
+| PingOne (multi-tenant cloud) | Admin API environment export; or use frodo-lib / frodo-cli for config export |
+| AIC | Admin API exports; or environment-level export from AIC admin console |
 | PingFederate | Server → Archive Configuration (ZIP); Git-backed server profiles recommended |
 | PingAccess | System → Backup → Export Configuration |
 | PingDirectory | `backup` and `restore` CLI tools |
@@ -100,13 +100,13 @@ Rotating client secrets without downtime:
 
 | Step | Notes |
 |---|---|
-| 1. Generate new secret in the platform | PingOne MT: app → Client Secret → Rotate; PingFederate: client record → regenerate secret |
+| 1. Generate new secret in the platform | PingOne (multi-tenant cloud): app → Client Secret → Rotate; PingFederate: client record → regenerate secret |
 | 2. Configure retention window | Keep old secret valid for a rolling period (grace period) while consumers update |
 | 3. Update consumers (apps, pipelines) | Deploy new secret to all services using the client |
 | 4. Verify old secret is no longer in use | Check access logs for tokens issued with old client secret |
 | 5. Remove old secret (or let it expire) | After all consumers are updated |
 
-For PingOne MT Worker apps: the secret can be retrieved only at creation time; if lost, rotate immediately.
+For PingOne (multi-tenant cloud) Worker apps: the secret can be retrieved only at creation time; if lost, rotate immediately.
 
 ---
 
@@ -114,8 +114,8 @@ For PingOne MT Worker apps: the secret can be retrieved only at creation time; i
 
 | Platform | Health check endpoint |
 |---|---|
-| PingOne MT | No direct health check endpoint; use OIDC discovery document to verify availability: `https://auth.pingone.com/<envId>/as/.well-known/openid-configuration` |
-| PingOne ST | AM health: `https://<tenant>/am/json/health/live`; IDM health: `https://<tenant>/openidm/info/ping` |
+| PingOne (multi-tenant cloud) | No direct health check endpoint; use OIDC discovery document to verify availability: `https://auth.pingone.com/<envId>/as/.well-known/openid-configuration` |
+| AIC | AM health: `https://<tenant>/am/json/health/live`; IDM health: `https://<tenant>/openidm/info/ping` |
 | PingFederate | `https://<host>:9031/pf/heartbeat.ping` (returns HTTP 200 with body `SERVER_ALIVE`) |
 | PingAccess | `https://<host>:3000/pa/heartbeat.ping` (engine node; requires PA version-specific path) |
 | PingDirectory | `bin/status` CLI; or LDAP search on `cn=monitor` for operational data |
@@ -126,15 +126,15 @@ For PingOne MT Worker apps: the secret can be retrieved only at creation time; i
 
 | Platform | Audit log access |
 |---|---|
-| PingOne MT | Admin console → Reports → Audit; or Admin API `GET /v1/environments/{envId}/activities` |
-| PingOne ST | AM audit log: `https://<tenant>/am/json/audit/access`; IDM audit: `/openidm/audit/access` |
+| PingOne (multi-tenant cloud) | Admin console → Reports → Audit; or Admin API `GET /v1/environments/{envId}/activities` |
+| AIC | AM audit log: `https://<tenant>/am/json/audit/access`; IDM audit: `/openidm/audit/access` |
 | PingFederate | Log files in `<pf-home>/log/` — `audit.log`, `server.log`; or syslog forward |
 | PingAccess | Log files in `<pa-home>/log/` — `audit.log`; or syslog forward |
 | PingDirectory | `<pd-home>/logs/access` — LDAP access log; filterable by operation type |
 
 ## Prerequisites
 
-Admin access to the relevant platform: PingOne organization admin, PingOne ST superadmin, or server administrator credentials for on-premises products.
+Admin access to the relevant platform: PingOne organization admin, AIC superadmin, or server administrator credentials for on-premises products.
 
 ## Common variants
 
@@ -142,7 +142,7 @@ Admin access to the relevant platform: PingOne organization admin, PingOne ST su
 |---|---|
 | API-only configuration | Prefer the REST API for all platforms; use the admin UI only for initial bootstrapping or when an API endpoint is not available |
 | Console-driven configuration | Use for one-off tasks, diagnostics, or platform features not yet exposed via API |
-| Config-as-code (Ping Software Suite) | Use server profiles (Git-backed) for PingFederate and PingAccess; use frodo-cli for PingOne MT/ST exports |
+| Config-as-code (Ping Software Suite) | Use server profiles (Git-backed) for PingFederate and PingAccess; use frodo-cli for PingOne (multi-tenant cloud) / AIC exports |
 
 ## Related references
 

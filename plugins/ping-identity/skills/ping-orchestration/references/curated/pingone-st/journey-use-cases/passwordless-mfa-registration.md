@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Passwordless MFA Device Registration"
+title: "PingOne Advanced Identity Cloud (AIC) — Passwordless MFA Device Registration"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["orchestration"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
-# PingOne ST — Passwordless MFA Device Registration
+# AIC — Passwordless MFA Device Registration
 
 Design patterns for the MFA device registration inner journey, supporting 7 factor types with per-method registration paths. Derived from CIAM Passwordless and Threat Detection journey exports.
 

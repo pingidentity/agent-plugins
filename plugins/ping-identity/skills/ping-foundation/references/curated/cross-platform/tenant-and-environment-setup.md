@@ -14,14 +14,14 @@ slug: "https://docs.pingidentity.com/pingone/environments/p1_c_environments.html
 
 # Tenant and Environment Setup
 
-Provisioning requirements and key configuration decisions for a new PingOne environment or PingOne ST tenant.
+Provisioning requirements and key configuration decisions for a new PingOne environment or PingOne Advanced Identity Cloud (AIC) tenant.
 
 ## Scope
 
 Covers: initial provisioning and configuration of environments/tenants.
 Does NOT cover: on-prem server installation (see `references/curated/cross-platform/core-admin-patterns.md`).
 
-## PingOne MT — New Environment
+## PingOne (multi-tenant cloud) — New Environment
 
 **Admin surface:** console.pingone.com → Environments → + Add Environment
 
@@ -41,9 +41,9 @@ Does NOT cover: on-prem server installation (see `references/curated/cross-platf
 
 ---
 
-## PingOne ST — New Tenant
+## AIC — New Tenant
 
-**Admin surface:** Your PingOne ST tenant URL (provided by Ping during onboarding)
+**Admin surface:** Your AIC tenant URL (provided by Ping during onboarding)
 
 **Required decisions:**
 - Identity store: PingDS (default, no setup needed) or external LDAP/AD (requires additional configuration)
@@ -68,7 +68,7 @@ Does NOT cover: on-prem server installation (see `references/curated/cross-platf
 
 Complete these before routing live users to the environment:
 
-| Item | PingOne MT | PingOne ST |
+| Item | PingOne (multi-tenant cloud) | AIC |
 |---|---|---|
 | Custom domain configured | Settings → Custom Domains | Tenant Settings → Custom Domains |
 | Email sender verified | Settings → Notifications → Senders | Notifications → Email provider |
@@ -82,13 +82,13 @@ Complete these before routing live users to the environment:
 
 ## Configuration-as-code and promotion patterns
 
-| Pattern | PingOne MT | PingOne ST | Ping Software Suite |
+| Pattern | PingOne (multi-tenant cloud) | AIC | Ping Software Suite |
 |---|---|---|---|
 | Export configuration | Admin API export; or `frodo-cli` | Admin API export; or frodo-cli | Git-backed server profile; or archive ZIP |
 | Import to another environment | Admin API import; or frodo-cli push | Admin API import; or frodo-cli push | Redeploy from server profile Git branch |
 | CI/CD integration | Worker app (client credentials) to authenticate pipeline API calls | AM/IDM service accounts from pipeline | Server profile Git push triggers config rebuild |
 | Secrets management | Store client secret in pipeline secret store; never in source code | ESV (Environment-Specific Variables) for runtime secrets | Vault integration or environment variable injection at container startup |
-| Secrets management | Store client secret in pipeline secret store; never in source code | ESV (Environment-Specific Variables) in PingOne ST for secrets and config values |
+| Secrets management | Store client secret in pipeline secret store; never in source code | ESV (Environment-Specific Variables) in AIC for secrets and config values |
 
 ---
 
@@ -96,25 +96,25 @@ Complete these before routing live users to the environment:
 
 | Gotcha | Applies to | Fix |
 |---|---|---|
-| Environment type immutable after creation | PingOne MT | Verify type (Sandbox / Development / Production) before creating; cannot be changed |
-| Region immutable after environment creation | PingOne MT | Select data residency region at creation time; cannot be changed after |
-| Services must be explicitly activated per environment | PingOne MT | DaVinci, Verify, Protect, etc. must be toggled on per environment — they are not on by default |
+| Environment type immutable after creation | PingOne (multi-tenant cloud) | Verify type (Sandbox / Development / Production) before creating; cannot be changed |
+| Region immutable after environment creation | PingOne (multi-tenant cloud) | Select data residency region at creation time; cannot be changed after |
+| Services must be explicitly activated per environment | PingOne (multi-tenant cloud) | DaVinci, Verify, Protect, etc. must be toggled on per environment — they are not on by default |
 | Custom domain required for production hosted login | Both | Users see Ping's default domain without a custom domain configuration |
-| Realms in PingOne ST cannot be merged | PingOne ST | Plan realm architecture (alpha vs. bravo vs. additional) before onboarding users; migrating users between realms is manual |
+| Realms in AIC cannot be merged | AIC | Plan realm architecture (alpha vs. bravo vs. additional) before onboarding users; migrating users between realms is manual |
 
 ## Prerequisites
 
-- **PingOne MT:** PingOne organization account with admin access. Admin role: Environment Admin or Organization Admin. DNS control for custom domain configuration.
-- **PingOne ST:** PingOne ST subscription; tenant URL and initial superadmin credentials from onboarding email. Custom domain DNS control for production tenants.
+- **PingOne (multi-tenant cloud):** PingOne organization account with admin access. Admin role: Environment Admin or Organization Admin. DNS control for custom domain configuration.
+- **AIC:** AIC subscription; tenant URL and initial superadmin credentials from onboarding email. Custom domain DNS control for production tenants.
 - **Ping Software Suite:** Java 11 or 17 JRE; license file from Ping Identity; Linux or Windows server meeting minimum hardware requirements per product.
 
 ## Common variants
 
 | Variant | Note |
 |---|---|
-| Multi-region HA tenants | PingOne ST production tenants support multi-region high availability; configured during Ping Identity onboarding |
+| Multi-region HA tenants | AIC production tenants support multi-region high availability; configured during Ping Identity onboarding |
 | Sandbox-to-production promotion | Export configuration from dev/staging using frodo-cli or admin API; import to production tenant |
-| Environment-per-pipeline | PingOne MT supports multiple environments (dev, staging, prod) within one organization; use environment types to control SLA |
+| Environment-per-pipeline | PingOne (multi-tenant cloud) supports multiple environments (dev, staging, prod) within one organization; use environment types to control SLA |
 | Blue/green deployment (Ping Software) | Run two server profile branches; switch load balancer to the new profile after validation; rollback by switching back |
 | Secrets rotation without downtime | Store secrets in a vault (HashiCorp Vault, AWS Secrets Manager); configure products to read secrets at startup; rotate in vault first, then restart |
 
@@ -136,20 +136,20 @@ All three products support Git-backed server profiles for configuration-as-code 
 
 - `references/curated/cross-platform/foundation-overview.md` — platform family orientation and capability comparison
 - `references/curated/cross-platform/policy-and-branding-basics.md` — authentication policy and branding once tenant is provisioned
-- `references/curated/pingone-mt/tenant-and-environment-setup.md` — PingOne MT-specific environment configuration details
-- `references/curated/pingone-st/foundation-overview.md` — PingOne ST tenant architecture and admin surfaces
+- `references/curated/pingone-mt/tenant-and-environment-setup.md` — PingOne (multi-tenant cloud)-specific environment configuration details
+- `references/curated/pingone-st/foundation-overview.md` — AIC tenant architecture and admin surfaces
 
 ## Common gotchas across platforms
 
 | Gotcha | Applies to | Fix |
 |---|---|---|
 | License file missing before first start | Ping Software Suite | Obtain a valid license file from Ping Identity support before installation; the server will not start |
-| Admin pop-up blocks service activation prompt | PingOne MT | Service activation requires an explicit step in the environment settings; it is not triggered automatically when creating apps |
-| Config promotion missing schema extensions | PingOne ST | Export schema changes from IDM first; import them before importing managed object data |
+| Admin pop-up blocks service activation prompt | PingOne (multi-tenant cloud) | Service activation requires an explicit step in the environment settings; it is not triggered automatically when creating apps |
+| Config promotion missing schema extensions | AIC | Export schema changes from IDM first; import them before importing managed object data |
 
 ## Source
 
 [PingOne environments](https://docs.pingidentity.com/pingone/environments/p1_c_environments.html)
-[PingOne ST tenant administration](https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-create_tenant.html)
-[PingOne MT environment types](https://docs.pingidentity.com/pingone/environments/p1_environment_types.html)
+[AIC tenant administration](https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-create_tenant.html)
+[PingOne (multi-tenant cloud) environment types](https://docs.pingidentity.com/pingone/environments/p1_environment_types.html)
 [frodo-cli for PingOne config export](https://github.com/rockcarver/frodo-cli)

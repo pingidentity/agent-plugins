@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Federation and Contextual Nodes"
+title: "PingOne Advanced Identity Cloud (AIC) — Federation and Contextual Nodes"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["orchestration"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
-# PingOne ST — Federation and Contextual Nodes
+# AIC — Federation and Contextual Nodes
 
 Nodes for federated identity (social login, SAML, OIDC), external OTP delivery (Twilio), device context, cookies, certificates, and behavioral signals.
 

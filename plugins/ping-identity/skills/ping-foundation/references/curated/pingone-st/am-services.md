@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — AM Services Configuration"
+title: "PingOne Advanced Identity Cloud (AIC) — AM Services Configuration"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["foundation"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-05"
 slug: "https://docs.pingidentity.com/pingoneaic/am-reference/services-configuration.html"
 ---
 
-# PingOne ST — AM Services Configuration
+# PingOne Advanced Identity Cloud (AIC) — AM Services Configuration
 
 PingAM-level services that must be configured at the global or realm scope **before** related journey nodes, applications, or features will function end-to-end.
 
@@ -66,7 +66,7 @@ Use this table first. If a journey requires one of these nodes, ensure the servi
 | Cross-origin SDK / SPA calls to AM endpoints | **CORS Service** *(global)* |
 | Android device verification (Play Integrity / Key Attestation) | **Android Key Attestation Service** |
 | Branded admin console naming / locale formatting | **Globalization Settings** *(global)* |
-| Connectivity from AM to PingOne MT services (MFA, Verify, Risk via PingOne Worker) | **PingOne Worker Service** |
+| Connectivity from AM to PingOne (multi-tenant cloud) services (MFA, Verify, Risk via PingOne Worker) | **PingOne Worker Service** |
 | OneSpan-based authentication | **OneSpan Configuration** |
 | Transaction-specific re-authentication (e.g. high-value transfer) | **Transaction Authentication Service** |
 | Per-input validation rules in journeys | **Validation Service** |
@@ -232,7 +232,7 @@ Default user profile attribute exposure. Foundational; rarely modified.
 ## PingOne integration
 
 ### PingOne Worker Service
-Connection from AIC to PingOne MT services (PingOne MFA, PingOne Verify, PingOne Protect/Risk, PingOne DaVinci). **Required before** any of:
+Connection from AIC to PingOne (multi-tenant cloud) services (PingOne MFA, PingOne Verify, PingOne Protect/Risk, PingOne DaVinci). **Required before** any of:
 
 - `PingOne MFA` nodes (Authenticate, Register, etc.)
 - `PingOne Verify` nodes (identity proofing)
@@ -243,7 +243,7 @@ Connection from AIC to PingOne MT services (PingOne MFA, PingOne Verify, PingOne
 
 **Test connection** before saving — the console exposes a "Test Connection" button. A failed connection will not block save, but every dependent node will fail at runtime.
 
-**See:** `ping-universal-services` skill for the corresponding PingOne MT service configuration on the other side of this connection.
+**See:** `ping-universal-services` skill for the corresponding PingOne (multi-tenant cloud) service configuration on the other side of this connection.
 
 ---
 
@@ -264,7 +264,7 @@ When configuring a new realm from scratch, work through services in this order t
    - Device Binding: Device Binding Service
    - Device Profile/Risk: Device Profiles Service
 8. **Social Authentication Implementations** — one entry per IdP
-9. **PingOne Worker Service** — if integrating with PingOne MT
+9. **PingOne Worker Service** — if integrating with PingOne (multi-tenant cloud)
 10. **Session Property Whitelist Service** — once your journey scripts settle on which session properties they read
 11. **Self Service Trees** — last; bind self-service operations to the journeys you've built
 
@@ -286,9 +286,9 @@ When configuring a new realm from scratch, work through services in this order t
 
 ## Prerequisites
 
-- PingOne ST tenant with realm-admin or super-admin access
+- AIC tenant with realm-admin or super-admin access
 - For Push Notification Service: AWS SNS endpoint, ARNs for APNs and FCM platform applications, and credentials provisioned by the AIC tenant onboarding team (these are typically supplied to the customer by Ping)
-- For PingOne Worker Service: a PingOne MT environment with a Worker application created
+- For PingOne Worker Service: a PingOne (multi-tenant cloud) environment with a Worker application created
 - For Social Authentication: client ID/secret and well-known endpoint for each external IdP
 
 ## Common variants
@@ -312,7 +312,7 @@ When configuring a new realm from scratch, work through services in this order t
 
 ## Source
 
-[AM services configuration — PingOne ST](https://docs.pingidentity.com/pingoneaic/am-reference/services-configuration.html)
+[AM services configuration — AIC](https://docs.pingidentity.com/pingoneaic/am-reference/services-configuration.html)
 [Push Notification Service](https://docs.pingidentity.com/pingoneaic/am-reference/push-notification-service.html)
 [ForgeRock Authenticator (Push) Service](https://docs.pingidentity.com/pingoneaic/am-reference/forgerock-authenticator-push-service.html)
 [ForgeRock Authenticator (OATH) Service](https://docs.pingidentity.com/pingoneaic/am-reference/forgerock-authenticator-oath-service.html)

@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Risk Management Nodes"
+title: "PingOne Advanced Identity Cloud (AIC) — Risk Management Nodes"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["orchestration"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
-# PingOne ST — Risk Management Nodes
+# AIC — Risk Management Nodes
 
 Nodes for evaluating authentication risk, enforcing account lockout, CAPTCHA, auth level routing, and transaction-level authorization.
 
@@ -240,7 +240,7 @@ Increments or sets the session authentication level.
 - `nodes/utility-nodes.md`
 - `journey-use-cases/pingone-protect-risk-integration.md`
 - `journey-use-cases/financial-services-step-up.md`
-- `ping-foundation` → `references/curated/pingone-st/am-services.md` — PingOne Worker Service must be configured before `PingOneProtectEvaluationNode` and other PingOne MT-backed nodes; Device Profiles Service must exist before `DeviceProfileCollectorNode`
+- `ping-foundation` → `references/curated/pingone-st/am-services.md` — PingOne Worker Service must be configured before `PingOneProtectEvaluationNode` and other PingOne-backed nodes; Device Profiles Service must exist before `DeviceProfileCollectorNode`
 
 ## Source
 

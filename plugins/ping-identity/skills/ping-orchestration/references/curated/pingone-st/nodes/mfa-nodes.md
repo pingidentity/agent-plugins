@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — MFA Nodes"
+title: "PingOne Advanced Identity Cloud (AIC) — MFA Nodes"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["orchestration"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-05"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
-# PingOne ST — MFA Nodes
+# AIC — MFA Nodes
 
 Nodes for registering and verifying second factors: WebAuthn/passkeys, OATH/TOTP, push, OTP, and recovery codes.
 

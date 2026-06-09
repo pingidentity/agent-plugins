@@ -1,5 +1,5 @@
 ---
-title: "PingOne MT — Sign-On Policies and MFA Configuration"
+title: "PingOne — Sign-On Policies and MFA Configuration"
 product_family: pingone-mt
 products: ["pingone"]
 capabilities: ["foundation"]
@@ -12,14 +12,14 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/pingone/authentication/p1_authenticationpolicies.html"
 ---
 
-# PingOne MT — Sign-On Policies and MFA Configuration
+# PingOne — Sign-On Policies and MFA Configuration
 
-Configuring authentication (sign-on) policies and MFA device policies in PingOne MT to control how users prove identity at sign-in.
+Configuring authentication (sign-on) policies and MFA device policies in PingOne to control how users prove identity at sign-in.
 
 ## Scope
 
 **Covers:** Authentication policy structure, action types and their conditions, MFA device policy configuration, step-up authentication, risk-based MFA conditions (Protect integration), policy attachment to applications, and common configuration gotchas.
-**Does NOT cover:** DaVinci flow design — see `skills/ping-orchestration/SKILL.md`. PingOne Protect service setup (risk predictors, risk policy scoring) — see `skills/ping-universal-services/SKILL.md`. PingOne ST journey-based policy — see `skills/ping-orchestration/SKILL.md`. FIDO2 device registration flows.
+**Does NOT cover:** DaVinci flow design — see `skills/ping-orchestration/SKILL.md`. PingOne Protect service setup (risk predictors, risk policy scoring) — see `skills/ping-universal-services/SKILL.md`. PingOne Advanced Identity Cloud (AIC) journey-based policy — see `skills/ping-orchestration/SKILL.md`. FIDO2 device registration flows.
 
 ---
 

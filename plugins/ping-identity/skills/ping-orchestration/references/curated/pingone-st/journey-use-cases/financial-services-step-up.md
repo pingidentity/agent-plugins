@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Financial Services Step-Up and Transaction Authorization"
+title: "PingOne Advanced Identity Cloud (AIC) — Financial Services Step-Up and Transaction Authorization"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["orchestration"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
-# PingOne ST — Financial Services Step-Up and Transaction Authorization
+# AIC — Financial Services Step-Up and Transaction Authorization
 
 Design patterns for financial-grade authentication journeys: full lifecycle credential outcomes, PingOne Authorize for per-transaction policy, step-up MFA, KBA, and operational routing. Derived from the Financial Services and Money Transfer journey exports.
 

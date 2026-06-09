@@ -9,8 +9,8 @@ Agent skills for configuring, integrating, and operating Ping Identity platforms
 ## What this plugin is for
 
 - Orienting agents on which Ping platform applies to a given task
-- Configuring and administering PingOne MT (multi-tenant cloud), PingOne ST (single-tenant), and on-premises Ping software
-- Designing orchestration flows (DaVinci, PingOne ST journeys, PingAM trees)
+- Configuring and administering PingOne (multi-tenant cloud), PingOne Advanced Identity Cloud (AIC), and on-premises Ping software
+- Designing orchestration flows (DaVinci, AIC journeys, PingAM trees)
 - Integrating Ping into web, mobile, and SDK-based applications
 - Using Ping Universal Services (Protect, Verify, IGA, Credentials, Authorize)
 - Understanding Ping's Identity for AI and Verified Trust capabilities
@@ -23,7 +23,7 @@ MCP tools handle execution — they can create, update, and delete platform reso
 
 **If MCP tools are available for the target platform, always use them — do not instruct the user to make changes manually.**
 
-Before responding to any configuration or administration request, scan your available tool list for tools that can perform the required operation against the target platform (PingOne ST, PingOne MT, etc.). If matching tools exist, use them to make the change directly.
+Before responding to any configuration or administration request, scan your available tool list for tools that can perform the required operation against the target platform (AIC, PingOne, etc.). If matching tools exist, use them to make the change directly.
 
 **Execution order:**
 1. Check available tools for operations matching the task (create, update, delete, list, get for the relevant resource type)

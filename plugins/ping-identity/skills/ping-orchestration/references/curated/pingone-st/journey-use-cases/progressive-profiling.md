@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Progressive Profiling"
+title: "PingOne Advanced Identity Cloud (AIC) — Progressive Profiling"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["orchestration"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
-# PingOne ST — Progressive Profiling
+# AIC — Progressive Profiling
 
 Design patterns for progressively collecting user profile data after login, without blocking authentication. Derived from the OOTB progressive profiling journey template.
 

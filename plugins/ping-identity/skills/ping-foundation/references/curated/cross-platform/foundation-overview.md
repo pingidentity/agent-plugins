@@ -18,12 +18,12 @@ Core concepts for platform setup and administration across all Ping Identity pla
 
 ## Scope
 
-Covers: the shared administrative model across PingOne MT, PingOne ST, and Ping Software Suite.
+Covers: the shared administrative model across PingOne (multi-tenant cloud), PingOne Advanced Identity Cloud (AIC), and Ping Software Suite.
 Does NOT cover: flow design (see `ping-orchestration`) or app integration code (see `ping-app-integration`).
 
 ## Core concepts
 
-### PingOne MT
+### PingOne (multi-tenant cloud)
 
 - **Environment**: top-level container; maps to an org or project. Holds apps, populations, policies, and connections.
 - **Population**: user store within an environment. Users belong to one population.
@@ -31,9 +31,9 @@ Does NOT cover: flow design (see `ping-orchestration`) or app integration code (
 - **Sign-on Policy**: ordered set of authentication rules applied to app sign-in.
 - **Directory**: user data store; default is PingOne Directory; external LDAP can be connected.
 
-### PingOne ST
+### AIC
 
-- **Tenant**: top-level admin unit. One tenant per PingOne ST deployment.
+- **Tenant**: top-level admin unit. One tenant per AIC deployment.
 - **Realm**: identity domain inside a tenant. Each realm has its own identity store, policies, and journeys.
 - **Identity Store**: PingDS (default) or external LDAP/AD.
 - **Journey / Auth Tree**: orchestrated authentication or registration flow. Core orchestration primitive.
@@ -49,7 +49,7 @@ Does NOT cover: flow design (see `ping-orchestration`) or app integration code (
 
 ## Platform capability comparison
 
-| Capability | PingOne MT | PingOne ST (AIC) | Ping Software Suite |
+| Capability | PingOne (multi-tenant cloud) | AIC | Ping Software Suite |
 |---|---|---|---|
 | Tenant provisioning | Self-service via admin console | Provided by Ping during onboarding | Self-managed installation |
 | Flow authoring | DaVinci flow designer | Journey/tree editor (PingAM) | PingFederate authentication policies + adapters |
@@ -63,11 +63,11 @@ Does NOT cover: flow design (see `ping-orchestration`) or app integration code (
 
 | Condition | Recommended platform |
 |---|---|
-| New greenfield deployment, no data residency requirement | PingOne MT |
-| Requires PingAM-native journey nodes or deep scripting customization | PingOne ST (AIC) |
+| New greenfield deployment, no data residency requirement | PingOne (multi-tenant cloud) |
+| Requires PingAM-native journey nodes or deep scripting customization | AIC |
 | Existing on-premises infrastructure or strict data residency mandate | Ping Software Suite |
-| Hybrid enterprise: cloud SSO + on-prem directory | PingOne MT + LDAP Gateway, or PingFederate + PingDirectory |
-| Regulated industry requiring dedicated compute | PingOne ST (AIC) — single-tenant, no shared infrastructure |
+| Hybrid enterprise: cloud SSO + on-prem directory | PingOne (multi-tenant cloud) + LDAP Gateway, or PingFederate + PingDirectory |
+| Regulated industry requiring dedicated compute | AIC — single-tenant, no shared infrastructure |
 
 ## Setup sequence (generic)
 
@@ -82,26 +82,26 @@ Does NOT cover: flow design (see `ping-orchestration`) or app integration code (
 | Gotcha | Applies to | Fix |
 |---|---|---|
 | Redirect URI trailing-slash mismatch | All platforms | Register exact URI; add both forms if the app may send either |
-| Environment type is immutable after creation | PingOne MT | Provision the correct type (Sandbox / Development / Production) from the start |
-| Realm-scoped resources not visible across realms | PingOne ST | Clients, journeys, and users in `alpha` realm are not accessible in `bravo` |
+| Environment type is immutable after creation | PingOne (multi-tenant cloud) | Provision the correct type (Sandbox / Development / Production) from the start |
+| Realm-scoped resources not visible across realms | AIC | Clients, journeys, and users in `alpha` realm are not accessible in `bravo` |
 | Admin API port exposed to internet | Ping Software Suite | Restrict PingFederate port 9999 and PingAccess port 9000 to management CIDR only |
-| Service not enabled in environment | PingOne MT | DaVinci, Verify, Protect, etc. must be explicitly activated per environment before use |
+| Service not enabled in environment | PingOne (multi-tenant cloud) | DaVinci, Verify, Protect, etc. must be explicitly activated per environment before use |
 
 ## Prerequisites
 
-Valid for any administrator with access to the relevant Ping Identity platform (PingOne organization account, PingOne ST subscription, or on-premises server access).
+Valid for any administrator with access to the relevant Ping Identity platform (PingOne organization account, AIC subscription, or on-premises server access).
 
 ## Common variants
 
 | Variant | Note |
 |---|---|
-| PingOne MT | Multi-tenant cloud; environments managed via console.pingone.com; no infrastructure to operate |
-| PingOne ST | Single-tenant SaaS; customer-specific URL; deeper customization, PingAM/IDM/DS stack |
+| PingOne (multi-tenant cloud) | Multi-tenant cloud; environments managed via console.pingone.com; no infrastructure to operate |
+| AIC | Single-tenant SaaS; customer-specific URL; deeper customization, PingAM/IDM/DS stack |
 | Ping Software Suite | Self-managed on-prem or IaaS; full infrastructure responsibility; use server profiles for config-as-code |
 
 ## Licensing and feature availability
 
-| Feature | PingOne MT | PingOne ST (AIC) | Ping Software Suite |
+| Feature | PingOne (multi-tenant cloud) | AIC | Ping Software Suite |
 |---|---|---|---|
 | Base SSO | Included | Included | PingFederate license |
 | MFA | Add-on (PingOne MFA) | Included in AIC | PingID add-on |
@@ -110,13 +110,13 @@ Valid for any administrator with access to the relevant Ping Identity platform (
 | SCIM provisioning | Outbound via PingOne | PingIDM connectors | PingDirectory + SCIM plugin |
 | Fine-grained authorization | PingOne Authorize add-on | PingAuthorize node | PingAuthorize standalone |
 
-Licensing is per organization for PingOne MT (enabled per environment). PingOne ST licensing is per tenant subscription. Ping Software Suite products are individually licensed.
+Licensing is per organization for PingOne (multi-tenant cloud) (enabled per environment). AIC licensing is per tenant subscription. Ping Software Suite products are individually licensed.
 
 ---
 
 ## Key terminology cross-reference
 
-| PingOne MT term | PingOne ST equivalent | Ping Software Suite equivalent |
+| PingOne (multi-tenant cloud) term | AIC equivalent | Ping Software Suite equivalent |
 |---|---|---|
 | Organization | Tenant | Server installation |
 | Environment | Realm | N/A (single server context) |
@@ -148,6 +148,6 @@ When a request is about Ping Identity, route through ping-foundation first, then
 ## Source
 
 [Ping Identity Documentation](https://docs.pingidentity.com/)
-[PingOne MT Documentation](https://docs.pingidentity.com/pingone)
-[PingOne ST (AIC) Documentation](https://docs.pingidentity.com/pingoneaic)
+[PingOne (multi-tenant cloud) Documentation](https://docs.pingidentity.com/pingone)
+[AIC Documentation](https://docs.pingidentity.com/pingoneaic)
 [PingFederate Documentation](https://docs.pingidentity.com/pingfederate)

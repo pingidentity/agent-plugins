@@ -15,7 +15,7 @@ slug: "https://docs.pingidentity.com/pingone/native-sdks/p1_native_sdks_landing.
 
 # Mobile Integration Basics — Android and iOS SDK
 
-Orientation for integrating Ping Identity authentication into Android (Kotlin) and iOS (Swift) apps using the PingOne Native SDKs — covers both PingOne MT and AIC (PingOne ST) targets.
+Orientation for integrating Ping Identity authentication into Android (Kotlin) and iOS (Swift) apps using the PingOne Native SDKs — covers both PingOne (multi-tenant cloud) and PingOne Advanced Identity Cloud (AIC) targets.
 
 ## Scope
 
@@ -44,7 +44,7 @@ dependencies {
     implementation("com.pingidentity.sdks:oidc:<version>")
     implementation("com.pingidentity.sdks:journey:<version>")
 
-    // DaVinci (if targeting PingOne MT / DaVinci flows)
+    // DaVinci (if targeting PingOne / DaVinci flows)
     implementation("com.pingidentity.sdks:davinci:<version>")
 
     // Optional modules
@@ -149,7 +149,7 @@ Select the modules needed:
 |---|---|
 | `PingOidc` | All apps — OIDC token management |
 | `PingJourney` | AIC / PingAM Journey-based flows |
-| `PingDavinci` | PingOne MT DaVinci-based flows |
+| `PingDavinci` | PingOne DaVinci-based flows |
 | `PingStorage` | Keychain-backed token storage (included by default) |
 | `PingExternalIdP` | Social login (Google, Apple, Facebook) |
 | `PingProtect` | PingOne Protect risk signals |
@@ -293,7 +293,7 @@ For full Android, iOS, and JavaScript breaking-change tables and migration strat
 
 ## Prerequisites
 
-- Application record created in PingOne MT, AIC, or PingAM with the correct redirect URI registered (use `ping-foundation` to complete this step)
+- Application record created in PingOne, AIC, or PingAM with the correct redirect URI registered (use `ping-foundation` to complete this step)
 - Journey or DaVinci flow designed and tested end-to-end (use `ping-orchestration`)
 - Android: API level 23+, Kotlin 1.8+, Gradle 8+
 - iOS: iOS 14+, Swift 5.7+, Xcode 14+
@@ -303,8 +303,8 @@ For full Android, iOS, and JavaScript breaking-change tables and migration strat
 
 | Variant | Note |
 |---|---|
-| PingOne MT target | Use `davinci` / `PingDavinci` modules; flows are DaVinci-based; discovery endpoint is `https://auth.pingone.com/<envId>/as/.well-known/openid-configuration` |
-| AIC / PingOne ST target | Use `journey` / `PingJourney` modules; flows are Journey-based; discovery endpoint is `https://<tenant>.forgeblocks.com/am/oauth2/realms/<realm>/.well-known/openid-configuration` |
+| PingOne target | Use `davinci` / `PingDavinci` modules; flows are DaVinci-based; discovery endpoint is `https://auth.pingone.com/<envId>/as/.well-known/openid-configuration` |
+| AIC target | Use `journey` / `PingJourney` modules; flows are Journey-based; discovery endpoint is `https://<tenant>.forgeblocks.com/am/oauth2/realms/<realm>/.well-known/openid-configuration` |
 | PingFederate on-prem | OIDC only (no Journey/DaVinci modules); use `oidc` / `PingOidc` module; discovery endpoint is `https://<pf-host>:<port>/.well-known/openid-configuration` |
 | Embedded webview | Not recommended — hosted login in a system browser (Chrome Custom Tab / ASWebAuthenticationSession) is required for security; custom scheme redirect URI must be registered |
 

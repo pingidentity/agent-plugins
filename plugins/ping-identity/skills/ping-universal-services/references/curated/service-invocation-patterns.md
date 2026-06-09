@@ -36,7 +36,7 @@ slug: ""
 
 # Universal Service Invocation Patterns
 
-How each Ping Universal Service is invoked from PingOne MT (DaVinci), PingOne ST / AIC (journey nodes), and Ping Software (PingFederate / PingAccess REST API calls).
+How each Ping Universal Service is invoked from PingOne (multi-tenant cloud) (DaVinci), AIC (journey nodes), and Ping Software (PingFederate / PingAccess REST API calls).
 
 ## Scope
 
@@ -46,7 +46,7 @@ Does NOT cover: which service to select for a given requirement — see `referen
 
 ---
 
-## PingOne MT — DaVinci flow connectors
+## PingOne (multi-tenant cloud) — DaVinci flow connectors
 
 DaVinci flows invoke Universal Services through **connectors** — pre-built integration units configured in the DaVinci connector library. Each connector maps to one service. A connector instance is configured once per environment and reused across flows.
 
@@ -94,7 +94,7 @@ Flow branch condition: decision == "PERMIT"  →  allow branch
 
 ---
 
-## PingOne ST / AIC — Journey nodes
+## AIC — Journey nodes
 
 AIC journeys invoke Universal Services through **journey nodes** — server-side tree nodes installed in the AIC journey engine. Each service has a dedicated node or set of nodes.
 
@@ -184,7 +184,7 @@ Authorize REST response (abbreviated):
 - A PingOne organization with the target environment provisioned.
 - The Universal Service licensed and enabled in that environment (see table above).
 - For DaVinci: a DaVinci license and at least one DaVinci flow created in the environment.
-- For AIC: a PingOne ST (AIC) tenant and access to the journey designer.
+- For AIC: an AIC tenant and access to the journey designer.
 - For Ping Software REST calls: a service account with an OAuth 2.0 client credential grant in PingOne; network access from PingFederate/PingAccess to PingOne API endpoints.
 - PingOne Protect requires the Protect JavaScript SDK (or mobile SDK) to be included in the user-facing application to collect device signals before the flow invokes the risk evaluation.
 

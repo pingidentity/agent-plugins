@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Foundation Overview"
+title: "PingOne Advanced Identity Cloud (AIC) — Foundation Overview"
 product_family: pingone-st
 products: ["pingone-aic", "pingam", "pingidm", "pingds"]
 capabilities: ["foundation"]
@@ -13,9 +13,9 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/pingoneaic/index.html"
 ---
 
-# PingOne ST — Foundation Overview
+# PingOne Advanced Identity Cloud (AIC) — Foundation Overview
 
-Conceptual orientation for PingOne ST (Advanced Identity Cloud): what it is, how it is structured, and what each component does before any configuration begins.
+Conceptual orientation for AIC: what it is, how it is structured, and what each component does before any configuration begins.
 
 ## Scope
 
@@ -29,13 +29,13 @@ Conceptual orientation for PingOne ST (Advanced Identity Cloud): what it is, how
 
 ## Key steps / content
 
-### What PingOne ST is
+### What AIC is
 
-PingOne ST (formerly ForgeRock Identity Cloud) is a fully managed, single-tenant SaaS identity platform. It runs a complete identity stack — authentication, identity management, and directory services — inside a dedicated tenant owned by Ping Identity but configured by the customer.
+AIC (formerly ForgeRock Identity Cloud) is a fully managed, single-tenant SaaS identity platform. It runs a complete identity stack — authentication, identity management, and directory services — inside a dedicated tenant owned by Ping Identity but configured by the customer.
 
-It is distinct from PingOne MT (multi-tenant cloud) in:
+It is distinct from PingOne (multi-tenant cloud) in:
 - Deployment model: single-tenant per customer, not shared infrastructure
-- Control plane: AIC admin console at a customer-specific URL, not the shared PingOne MT admin console
+- Control plane: AIC admin console at a customer-specific URL, not the shared PingOne (multi-tenant cloud) admin console
 - Customization depth: full journey/tree authoring, schema extension, custom scripts
 - Component model: three integrated products (PingAM, PingIDM, PingDS) vs. PingOne's service-based model
 
@@ -47,7 +47,7 @@ It is distinct from PingOne MT (multi-tenant cloud) in:
 | **PingIDM** | Identity management. Manages users, roles, groups, organizations, and provisioning to external systems. |
 | **PingDS** | Directory services. Backend data store for identity data. PingDS ships as the default identity store. |
 
-These three components are pre-integrated in every PingOne ST tenant. They share a common data plane but expose separate admin surfaces.
+These three components are pre-integrated in every AIC tenant. They share a common data plane but expose separate admin surfaces.
 
 ### Tenant architecture
 
@@ -137,7 +137,7 @@ Complete these steps in order before registering applications or onboarding user
 
 ## Prerequisites
 
-- PingOne ST subscription provisioned by Ping Identity
+- AIC subscription provisioned by Ping Identity
 - Tenant URL and initial superadmin credentials from onboarding email
 - Understanding of OAuth 2.0, OIDC, or SAML 2.0 for application integration planning
 
@@ -159,4 +159,4 @@ Complete these steps in order before registering applications or onboarding user
 
 ## Source
 
-[PingOne ST Documentation](https://docs.pingidentity.com/pingoneaic/index.html)
+[AIC Documentation](https://docs.pingidentity.com/pingoneaic/index.html)

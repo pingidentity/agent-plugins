@@ -18,10 +18,10 @@ Lightweight routing rules for plugin-only installs. Replaces `/shared/taxonomies
 | Signal | Platform tag |
 |---|---|
 | "PingOne", "apps.pingone.com", PingOne admin console | `pingone-mt` |
-| "AIC", "PingOne ST", "PingAM", "IDM", "ForgeRock", "Identity Management", "IGA" | `pingone-st` |
+| "PingOne Advanced Identity Cloud (AIC)", "AIC", "PingAM", "IDM", "ForgeRock", "Identity Management", "IGA" | `pingone-st` |
 | "PingFederate", "PingAccess", "PingDirectory", "PingAM", "PingIDM", "PingDirectory", "PingAuthorize", "PingDS", PingGateway", "software", "on-prem", "self-managed" | `ping-software` |
-| Service question spanning PingOne MT and PingOne ST | `cross-platform` |
-| Unknown | Ask: "Are you in PingOne, PingOne ST, or on-premises software?" |
+| Service question spanning PingOne (multi-tenant cloud) and AIC | `cross-platform` |
+| Unknown | Ask: "Are you in PingOne, PingOne Advanced Identity Cloud (AIC), or on-premises software?" |
 
 ## Step 3 — Select reference tier
 
