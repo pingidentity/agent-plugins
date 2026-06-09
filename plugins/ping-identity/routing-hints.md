@@ -15,18 +15,19 @@ Lightweight routing rules for plugin-only installs. Replaces `/shared/taxonomies
 
 ## Step 2 — Detect the platform
 
+Match the MOST SPECIFIC signal first:
+
 | Signal | Platform tag |
 |---|---|
-| "PingOne", "apps.pingone.com", PingOne admin console | `pingone-mt` |
-| "AIC", "PingOne ST", "PingAM", "IDM", "ForgeRock", "Identity Management", "IGA" | `pingone-st` |
+| "PingOne Advanced Identity Cloud", "AIC", "PingAM", "IDM", "ForgeRock", "Identity Management", "identity cloud", "forgeblocks" | `pingone-st` |
+| "PingOne" (bare, without "Advanced Identity Cloud"), "apps.pingone.com", "PingOne environment", "PingOne admin console", "PingOne DaVinci", "auth.pingone.com" | `pingone-mt` |
 | "PingFederate", "PingAccess", "PingDirectory", "PingAM", "PingIDM", "PingDirectory", "PingAuthorize", "PingDS", PingGateway", "software", "on-prem", "self-managed" | `ping-software` |
-| Service question spanning PingOne MT and PingOne ST | `cross-platform` |
-| Unknown | Ask: "Are you in PingOne, PingOne ST, or on-premises software?" |
+| Service question spanning PingOne (multi-tenant cloud) and AIC | `cross-platform` |
+| Unknown | Ask: "Are you in PingOne, PingOne Advanced Identity Cloud (AIC), or on-premises software?" |
 
-## Step 3 — Select reference tier (stop at first sufficient tier)
+## Step 3 — Select reference tier
 
 1. `skills/<skill>/references/curated/` — load 1–3 anchor docs
-2. `skills/<skill>/references/generated/<platform-tag>/` — scan shortlist for matching titles
 
 ## Cross-skill escalation
 

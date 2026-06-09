@@ -34,8 +34,8 @@ Score 1–5 on each dimension. Output ONLY valid JSON:
   "completeness":    {"score": <int>, "reason": "<≤200 chars>"},
   "concreteness":    {"score": <int>, "reason": "<≤200 chars>"},
   "tier_discipline": {"score": <int>, "reason": "<≤200 chars>",
-                      "expected": "<curated|generated|docs-mcp>",
-                      "observed": "<curated|generated|docs-mcp|none>"}
+                      "expected": "<curated|docs-fallback>",
+                      "observed": "<curated|docs-fallback|none>"}
 }
 
 Rubric:

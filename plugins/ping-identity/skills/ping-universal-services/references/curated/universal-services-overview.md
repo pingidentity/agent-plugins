@@ -35,7 +35,7 @@ slug: ""
 
 # Ping Universal Services — Overview
 
-Strategic services that are invoked from PingOne MT, PingOne ST (AIC), or Ping Software flows rather than administered as standalone products.
+Strategic services that are invoked from PingOne (multi-tenant cloud), AIC, or Ping Software flows rather than administered as standalone products.
 
 ## Scope
 
@@ -63,12 +63,12 @@ This is the key criterion that separates Universal Services from product-specifi
 
 | Service | What it does | Invoked from | Typical flow stage |
 |---|---|---|---|
-| **PingOne Protect** | Evaluates authentication risk using device signals, behavior analytics, IP reputation, and threat intelligence; returns a risk score and recommended action | PingOne MT (DaVinci), PingOne ST (AIC journey node), Ping Software (REST API) | Post-credential-collection, pre-MFA decision |
-| **PingOne Verify** | Identity proofing — document capture, liveness check, and data match against a government-issued ID; returns a proofing outcome (VERIFIED / UNVERIFIED / REQUIRES_REVIEW) | PingOne MT (DaVinci), PingOne ST (AIC journey node) | Registration, step-up, high-assurance re-auth |
-| **PingOne Credentials** | Issues, presents, and revokes W3C Verifiable Credentials bound to a PingOne user; integrates with digital wallet apps | PingOne MT (DaVinci), PingOne ST (AIC journey node) | Post-registration, credential exchange at relying party |
-| **PingOne IGA** | Identity Governance and Administration — access requests, access reviews, role-based access, provisioning, and entitlement management | PingOne MT (Admin API, DaVinci), PingOne ST (AIC governance module) | Joiner/mover/leaver flows, periodic access certification |
-| **PingOne Authorize** | Fine-grained, policy-based authorization — attribute-based access control (ABAC) policies evaluated at runtime; separates authorization logic from application code | PingOne MT (DaVinci connector, REST API), PingOne ST (AIC journey node), PingFederate (policy enforcement point) | Post-authentication, before resource access |
-| **PingOne SSO** | Cross-application and cross-domain single sign-on; session management, token issuance (OIDC/SAML), and centralized logout | PingOne MT, PingOne ST, PingFederate | Entry point of every authenticated session |
+| **PingOne Protect** | Evaluates authentication risk using device signals, behavior analytics, IP reputation, and threat intelligence; returns a risk score and recommended action | PingOne (multi-tenant cloud) (DaVinci), AIC (journey node), Ping Software (REST API) | Post-credential-collection, pre-MFA decision |
+| **PingOne Verify** | Identity proofing — document capture, liveness check, and data match against a government-issued ID; returns a proofing outcome (VERIFIED / UNVERIFIED / REQUIRES_REVIEW) | PingOne (multi-tenant cloud) (DaVinci), AIC (journey node) | Registration, step-up, high-assurance re-auth |
+| **PingOne Credentials** | Issues, presents, and revokes W3C Verifiable Credentials bound to a PingOne user; integrates with digital wallet apps | PingOne (multi-tenant cloud) (DaVinci), AIC (journey node) | Post-registration, credential exchange at relying party |
+| **PingOne IGA** | Identity Governance and Administration — access requests, access reviews, role-based access, provisioning, and entitlement management | PingOne (multi-tenant cloud) (Admin API, DaVinci), AIC (governance module) | Joiner/mover/leaver flows, periodic access certification |
+| **PingOne Authorize** | Fine-grained, policy-based authorization — attribute-based access control (ABAC) policies evaluated at runtime; separates authorization logic from application code | PingOne (multi-tenant cloud) (DaVinci connector, REST API), AIC (journey node), PingFederate (policy enforcement point) | Post-authentication, before resource access |
+| **PingOne SSO** | Cross-application and cross-domain single sign-on; session management, token issuance (OIDC/SAML), and centralized logout | PingOne (multi-tenant cloud), AIC, PingFederate | Entry point of every authenticated session |
 
 ---
 

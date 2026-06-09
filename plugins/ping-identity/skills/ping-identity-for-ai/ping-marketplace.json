@@ -1,24 +1,35 @@
 {
   "skill_id": "ping-identity-for-ai",
-  "display_name": "Ping Identity — Identity for AI",
+  "display_name": "Ping Identity \u2014 Identity for AI",
   "description": "AI-era identity patterns: Identity for AI, Verified Trust, agent identity, agent security, AI app authentication, and workforce helpdesk AI use cases.",
   "version": "0.2.0",
   "publisher": "Ping Identity",
   "tags": {
-    "product_family": ["pingone-mt", "pingone-st", "cross-platform"],
+    "product_family": [
+      "pingone-mt",
+      "pingone-st",
+      "cross-platform"
+    ],
     "products": [
       "pingone",
       "pingone-st",
       "verified-trust"
     ],
-    "capabilities": ["identity-for-ai"],
-    "audience": ["developer", "architect"],
-    "use_cases": ["workforce", "ai-identity"]
+    "capabilities": [
+      "identity-for-ai"
+    ],
+    "audience": [
+      "developer",
+      "architect"
+    ],
+    "use_cases": [
+      "workforce",
+      "ai-identity"
+    ]
   },
   "entry_point": "SKILL.md",
   "references": {
-    "curated_path": "references/curated/",
-    "generated_path": "references/generated/"
+    "curated_path": "references/curated/"
   },
   "related_skills": [
     "ping-quickstart",

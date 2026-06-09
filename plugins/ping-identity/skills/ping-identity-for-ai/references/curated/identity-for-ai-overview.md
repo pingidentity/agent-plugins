@@ -34,7 +34,7 @@ Ping Identity's Identity for AI solution covers five distinct problem areas. Eac
 | **Agent Security** | Securing what agents can do after they authenticate — delegated access, scoped tokens, least-privilege controls, and token exchange so agents act on behalf of users through delegation, not impersonation | PingOne OAuth 2.0 AS, PingFederate OAuth AS, PingOne AIC |
 | **Agent Gateway** | Protecting the MCP servers, APIs, and resources agents call at runtime — validating requests, enforcing policy, throttling, and creating centralized audit trails before traffic reaches backend tools | PingGateway Agent Gateway module (MCP security gateway) |
 | **Agent Detection** | Detecting and responding to suspicious agent behavior — using Protect's bot detection predictor, which explicitly identifies agentic AI automation, CUAs, and automated frameworks | PingOne Protect (bot detection predictor) |
-| **AI App Authentication + Verified Trust** | Authenticating end-users of AI-powered apps (LLM chat interfaces, copilots), delegating access on their behalf, and embedding cryptographically verifiable trust signals that cross organizational boundaries | PingOne MT, PingOne AIC (Journey), DaVinci, PingOne Credentials |
+| **AI App Authentication + Verified Trust** | Authenticating end-users of AI-powered apps (LLM chat interfaces, copilots), delegating access on their behalf, and embedding cryptographically verifiable trust signals that cross organizational boundaries | PingOne (multi-tenant cloud), PingOne AIC (Journey), DaVinci, PingOne Credentials |
 
 ---
 
@@ -93,7 +93,7 @@ Ping Identity's Identity for AI solution covers five distinct problem areas. Eac
 - **PingOne DaVinci** — Verified Trust flow connector (DaVinci Advanced license required); issues/verifies signed trust assertions.
 - **PingOne AIC (Journey)** — Journey nodes for credential issuance and verification.
 - **PingOne Credentials** — W3C Verifiable Credential wallet, issuance, revocation.
-- **PingOne MT / AIC** — OIDC provider for end-user authentication of AI-powered apps; delegation via RFC 8693 token exchange.
+- **PingOne (multi-tenant cloud) / AIC** — OIDC provider for end-user authentication of AI-powered apps; delegation via RFC 8693 token exchange.
 
 ---
 
@@ -158,8 +158,8 @@ A production AI identity solution composes multiple skills in sequence. See the 
 
 | Variant | Notes |
 |---|---|
-| Cloud-native (PingOne MT) | Fully managed OAuth AS; DaVinci for orchestration; fastest to start |
-| AIC (PingOne ST lineage) | Journey nodes for Verified Trust; PingOne Credentials wallet integration |
+| Cloud-native (PingOne, multi-tenant cloud) | Fully managed OAuth AS; DaVinci for orchestration; fastest to start |
+| AIC | Journey nodes for Verified Trust; PingOne Credentials wallet integration |
 | On-premises (PingFederate) | PingFederate OAuth AS; dynamic client registration available for agent self-registration |
 | Hybrid | PingFederate federates to PingOne; agents get tokens from PingFederate, Verified Trust from DaVinci |
 

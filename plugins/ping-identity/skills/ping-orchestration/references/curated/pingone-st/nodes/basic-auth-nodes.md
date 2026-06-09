@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Basic Authentication Nodes"
+title: "PingOne Advanced Identity Cloud (AIC) — Basic Authentication Nodes"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["orchestration"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
-# PingOne ST — Basic Authentication Nodes
+# AIC — Basic Authentication Nodes
 
 Core nodes for credential collection, user lookup, and validation against identity stores.
 

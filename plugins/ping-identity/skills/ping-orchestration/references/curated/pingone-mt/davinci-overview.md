@@ -1,5 +1,5 @@
 ---
-title: "PingOne MT — DaVinci Overview"
+title: "PingOne — DaVinci Overview"
 product_family: pingone-mt
 products: ["davinci", "pingone"]
 capabilities: ["orchestration"]
@@ -13,14 +13,14 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/davinci/davinci_introduction.html"
 ---
 
-# PingOne MT — DaVinci Overview
+# PingOne — DaVinci Overview
 
-DaVinci is the orchestration engine for PingOne MT. It lets you build no-code/low-code authentication and identity flows using a visual flow canvas, connector library, and reusable subflows. Flows guide users through IAM activities — registration, authentication, MFA, account recovery, and self-service — and are deployed to PingOne applications via a flow policy.
+DaVinci is the orchestration engine for PingOne. It lets you build no-code/low-code authentication and identity flows using a visual flow canvas, connector library, and reusable subflows. Flows guide users through IAM activities — registration, authentication, MFA, account recovery, and self-service — and are deployed to PingOne applications via a flow policy.
 
 ## Scope
 
 **Covers:** DaVinci flow model, node types, logical operators, connector model, flow variables, versioning and deployment, subflow patterns, and flow invocation methods.
-**Does NOT cover:** PingOne MT environment and app setup — see `ping-foundation`. Flow design patterns — see `references/curated/pingone-mt/davinci-flow-patterns.md`. Detailed connector configuration — see per-connector references.
+**Does NOT cover:** PingOne environment and app setup — see `ping-foundation`. Flow design patterns — see `references/curated/pingone-mt/davinci-flow-patterns.md`. Detailed connector configuration — see per-connector references.
 
 ---
 
@@ -138,7 +138,7 @@ A DaVinci flow is exposed to users via one of three methods:
 
 ## Prerequisites
 
-- PingOne MT environment with DaVinci service activated
+- PingOne environment with DaVinci service activated
 - Admin access to DaVinci console (`davinci.pingidentity.com`)
 - At least one PingOne connector instance configured for user operations
 

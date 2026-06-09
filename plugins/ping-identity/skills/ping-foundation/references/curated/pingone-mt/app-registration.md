@@ -1,5 +1,5 @@
 ---
-title: "PingOne MT — Application Registration"
+title: "PingOne — Application Registration"
 product_family: pingone-mt
 products: ["pingone"]
 capabilities: ["foundation"]
@@ -13,14 +13,14 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html"
 ---
 
-# PingOne MT — Application Registration
+# PingOne — Application Registration
 
-Registering OIDC, SAML, and Worker applications in PingOne MT: required fields, grant type selection, public-vs-confidential client rules, and common failure modes.
+Registering OIDC, SAML, and Worker applications in PingOne: required fields, grant type selection, public-vs-confidential client rules, and common failure modes.
 
 ## Scope
 
-**Covers:** OIDC Web, Native, Single-Page App, Worker, and SAML application creation and post-creation configuration in PingOne MT (console.pingone.com).
-**Does NOT cover:** PingOne ST application setup (separate platform); Journey/DaVinci flow design — see `skills/ping-orchestration/SKILL.md`; SDK wiring and token consumption — see `skills/ping-app-integration/SKILL.md`.
+**Covers:** OIDC Web, Native, Single-Page App, Worker, and SAML application creation and post-creation configuration in PingOne (console.pingone.com).
+**Does NOT cover:** PingOne Advanced Identity Cloud (AIC) application setup (separate platform); Journey/DaVinci flow design — see `skills/ping-orchestration/SKILL.md`; SDK wiring and token consumption — see `skills/ping-app-integration/SKILL.md`.
 
 ---
 
@@ -189,7 +189,7 @@ After enabling the application, the Overview tab provides:
 
 ## Prerequisites
 
-- PingOne MT environment with Environment Admin or Application Admin role
+- PingOne environment with Environment Admin or Application Admin role
 - For SAML: SP metadata (ACS URL and Entity ID) from the service provider
 - For custom scopes: Resource definition created before app registration
 - For sign-on policies: Policy defined in the environment before attachment

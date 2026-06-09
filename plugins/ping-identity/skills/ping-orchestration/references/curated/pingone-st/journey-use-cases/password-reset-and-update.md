@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Password Reset and Authenticated Update"
+title: "PingOne Advanced Identity Cloud (AIC) — Password Reset and Authenticated Update"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["orchestration"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
-# PingOne ST — Password Reset and Authenticated Update
+# AIC — Password Reset and Authenticated Update
 
 Design patterns for unauthenticated password reset (email-gated) and authenticated password update (session-gated), derived from live AIC journey exports.
 

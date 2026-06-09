@@ -15,7 +15,7 @@ slug: "https://docs.pingidentity.com/pingone/authentication/p1_passkeys_overview
 
 # Passkeys and Passwordless Authentication
 
-Design patterns for passkey (FIDO2 / WebAuthn) and passwordless flows across PingOne MT (DaVinci), PingOne ST (AIC journeys), and the Ping Software Suite. Covers registration, authentication, recovery, fallback, and the three friction tiers (low / balanced / higher-assurance).
+Design patterns for passkey (FIDO2 / WebAuthn) and passwordless flows across PingOne (DaVinci), AIC journeys, and the Ping Software Suite. Covers registration, authentication, recovery, fallback, and the three friction tiers (low / balanced / higher-assurance).
 
 ## Scope
 
@@ -187,7 +187,7 @@ A passkey may be unavailable when the user changes phones, loses access to the c
 
 ## Platform-specific implementation reference
 
-### PingOne ST (AIC) — Journey nodes
+### AIC — Journey nodes
 
 | Node | Purpose |
 |---|---|
@@ -199,7 +199,7 @@ A passkey may be unavailable when the user changes phones, loses access to the c
 
 Reference: `references/curated/pingone-st/nodes/mfa-nodes.md`
 
-### PingOne MT (DaVinci) — Connector capabilities
+### PingOne (DaVinci) — Connector capabilities
 
 | Connector | Capability | Purpose |
 |---|---|---|
@@ -237,7 +237,7 @@ Reference: `plugins/ping-identity/skills/ping-foundation/references/curated/ping
 
 ## Prerequisites
 
-- Identity store user objects support a `webauthnDeviceProfile` attribute (AIC) or equivalent (PingOne MT user object includes this by default)
+- Identity store user objects support a `webauthnDeviceProfile` attribute (AIC) or equivalent (the PingOne user object includes this by default)
 - Application's redirect URI domain matches the WebAuthn `rpId` configured for the relying party
 - For higher-assurance tiers: PingOne Verify or another identity-proofing service licensed and configured (see `ping-universal-services`)
 - For DaVinci flows: PingOne MFA service activated in the environment
@@ -277,8 +277,8 @@ Reference: `plugins/ping-identity/skills/ping-foundation/references/curated/ping
 
 ## Source
 
-- [PingOne MT — Passkeys overview](https://docs.pingidentity.com/pingone/authentication/p1_passkeys_overview.html)
-- [PingOne ST — WebAuthn node reference](https://docs.pingidentity.com/auth-node-ref/latest/auth-node-webauthn-authentication.html)
+- [PingOne (multi-tenant cloud) — Passkeys overview](https://docs.pingidentity.com/pingone/authentication/p1_passkeys_overview.html)
+- [AIC — WebAuthn node reference](https://docs.pingidentity.com/auth-node-ref/latest/auth-node-webauthn-authentication.html)
 - [DaVinci — PingOne MFA connector](https://docs.pingidentity.com/davinci/connectors/davinci_pingone_mfa_connector.html)
 - [W3C WebAuthn Level 3](https://www.w3.org/TR/webauthn-3/)
 - [Passkeys.dev — RP guidance](https://passkeys.dev/docs/use-cases/)

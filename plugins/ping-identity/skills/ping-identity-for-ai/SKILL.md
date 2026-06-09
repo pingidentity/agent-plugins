@@ -82,5 +82,7 @@ See `references/runtime/mcp-preflight.md` for MCP config and Cursor preflight st
 ## Retrieval escalation
 
 1. Curated anchors (`references/curated/`) — load 1–3 max. Stop if sufficient.
-2. Generated shortlist (`references/generated/`) — load if curated did not fully answer the task.
-3. Docs MCP fallback — `references/runtime/docs-mcp-routing.md`. Only if curated + shortlist insufficient.
+
+## Output discipline
+
+Curated anchors provide accuracy context — they are not a substitute for the required output. If the task asks for code, a configuration file, or a design document, always produce that artifact. Do not return a prose summary that points at the anchor and stops.

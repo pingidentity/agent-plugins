@@ -1,12 +1,24 @@
+# Local agent / tooling state
 .playwright-mcp/
 .claude/
+.pytest_cache/
+
+# Eval run outputs (keep dir, drop contents)
 evals/results/**/
 !evals/results/.gitkeep
+
+# Internal planning / working docs — never ship
 PLAN.md
+PLAN-*.md
+*-PLAN.md
 CLAUDE.md
 PHASE-3-PLAN.md
 SUMMARY.md
+HELIX-SETUP.md
+helix-*.md
 docs/
+
+# Secrets and local config
 *.local.json
 .env.local
 .env

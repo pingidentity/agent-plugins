@@ -15,12 +15,12 @@ slug: https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_lice
 
 # PingOne Licensing and Packaging
 
-Reference for PingOne MT license types, the one-license-per-environment constraint, identity limits, DaVinci pricing models, key add-ons, and platform limits — everything a new user needs to avoid confusing quota errors.
+Reference for PingOne license types, the one-license-per-environment constraint, identity limits, DaVinci pricing models, key add-ons, and platform limits — everything a new user needs to avoid confusing quota errors.
 
 ## Scope
 
 Covers:
-- PingOne MT license types (ADMIN, TRIAL, SOLUTION, JIT_TRIAL, Combo)
+- PingOne license types (ADMIN, TRIAL, SOLUTION, JIT_TRIAL, Combo)
 - One-license-per-environment rule and combo license upgrade path
 - Identity soft and hard limits (MAU/AAU-based)
 - DaVinci pricing models (identity-based vs transaction-based)
@@ -144,14 +144,14 @@ The following capabilities are add-ons — they are not included in the base Ess
 
 ### Rate limits
 
-Rate groups are enforced in PingOne MT as of **September 2025**. Each environment is assigned a rate group based on its license tier. Additional throughput capacity is available via the **Maximum Throughput Assurance** add-on (contact AE).
+Rate groups are enforced in PingOne as of **September 2025**. Each environment is assigned a rate group based on its license tier. Additional throughput capacity is available via the **Maximum Throughput Assurance** add-on (contact AE).
 
 ---
 
 ## Trial gotchas
 
 **What works in trial:**
-- Full PingOne MT console access
+- Full PingOne console access
 - Up to 5 environments (including the mandatory Administrators environment)
 - Core SSO, MFA, and DaVinci flow authoring
 - API access with the same permissions as paid
@@ -192,7 +192,7 @@ Check Organisation Settings in the PingOne console: each environment lists its a
 The current environment license does not include DaVinci. The environment needs a combo license upgrade (e.g., SSO → SSO+DaVinci). Raise a request with your AE.
 
 **PingID stays on trial after org upgrade**
-PingID is licensed separately from PingOne MT. An org-level upgrade does not automatically upgrade PingID. Contact your AE to add PingID to the contract.
+PingID is licensed separately from PingOne. An org-level upgrade does not automatically upgrade PingID. Contact your AE to add PingID to the contract.
 
 **Rate limit errors after September 2025**
 Rate groups are now enforced. Verify the environment's rate group assignment in Organisation Settings. Purchase the Maximum Throughput Assurance add-on if limits are insufficient for production traffic.
@@ -202,7 +202,7 @@ Rate groups are now enforced. Verify the environment's rate group assignment in 
 ## Related references
 
 - `skills/ping-quickstart/references/curated/getting-started-overview.md` — platform family selection and first-step orientation
-- `skills/ping-quickstart/references/curated/choose-the-right-ping-platform.md` — decision guide for PingOne MT vs AIC vs PingFederate
+- `skills/ping-quickstart/references/curated/choose-the-right-ping-platform.md` — decision guide for PingOne (multi-tenant cloud) vs AIC vs PingFederate
 - `skills/ping-foundation/references/` — environment configuration, applications, and IdP setup
 
 ---

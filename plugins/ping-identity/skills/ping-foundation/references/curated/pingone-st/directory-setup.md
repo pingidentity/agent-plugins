@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Directory Setup (User Management)"
+title: "PingOne Advanced Identity Cloud (AIC) — Directory Setup (User Management)"
 product_family: pingone-st
 products: ["pingone-aic", "pingidm", "pingds"]
 capabilities: ["foundation"]
@@ -13,9 +13,9 @@ last_updated: "2026-06-05"
 slug: "https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-identity_store.html"
 ---
 
-# PingOne ST — Directory Setup (User Management)
+# PingOne Advanced Identity Cloud (AIC) — Directory Setup (User Management)
 
-Identity store options, schema configuration, and provisioning patterns for PingOne ST.
+Identity store options, schema configuration, and provisioning patterns for AIC.
 
 ## Scope
 
@@ -161,7 +161,7 @@ PingIDM uses **mappings** to move identity data between systems.
 
 ## Prerequisites
 
-- PingOne ST tenant with at least one realm
+- AIC tenant with at least one realm
 - For external LDAP/AD: LDAPv3-compliant server; TLS certificate shared with AM container; service account credentials
 - For PingDS multi-server replication: same encryption passphrase on all nodes
 
@@ -183,7 +183,7 @@ PingIDM uses **mappings** to move identity data between systems.
 
 ## Source
 
-[Identity store setup — PingOne ST](https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-identity_store.html)
+[Identity store setup — AIC](https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-identity_store.html)
 [Managed objects — PingIDM](https://docs.pingidentity.com/pingoneaic/idm-guide/managed-objects.html)
 [LDAP connector configuration](https://docs.pingidentity.com/pingoneaic/idm-connector-reference/ldap-connector.html)
 [Provisioning and reconciliation](https://docs.pingidentity.com/pingoneaic/idm-guide/provisioning-overview.html)

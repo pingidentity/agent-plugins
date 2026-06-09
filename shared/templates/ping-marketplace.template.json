@@ -14,12 +14,9 @@
   },
   "entry_point": "SKILL.md",
   "references": {
-    "curated_path": "references/curated/",
-    "generated_path": "references/generated/",
-    "runtime_path": "references/runtime/<platform>/docs-mcp-routing.md"
+    "curated_path": "references/curated/"
   },
   "related_skills": ["<ping-skill-name>"],
   "min_context_tokens": 500,
-  "max_curated_docs": 3,
-  "max_shortlist_docs": 25
+  "max_curated_docs": 3
 }

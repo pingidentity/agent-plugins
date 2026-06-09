@@ -70,20 +70,17 @@ Choose the smallest tier that resolves the prompt:
 | Tier | Use when |
 |---|---|
 | **Curated refs only** | The curated anchor(s) for the skill + platform fully answer the question |
-| **Curated refs + bounded shortlist** | Curated anchors orient but do not cover the specific task; a generated shortlist provides the gap |
-| **Docs fallback only if still necessary** | Neither curated nor shortlist is sufficient; a targeted external query is required |
+| **Docs fallback only if still necessary** | Curated anchors are insufficient; a targeted external query is required |
 
 **Retrieval discipline rules:**
 - Load the smallest trusted context first
 - Do not load more than 3 curated refs unless the task explicitly spans multiple domains
-- Do not open a generated shortlist if a curated anchor already resolves the task
 - Never load external docs if curated refs are sufficient
 - Stop as soon as the answer is good enough
 
 State:
 - Retrieval tier used
 - Curated refs you would load (by path)
-- Shortlist refs you would load (by path), if any
 - Whether external docs are needed: Yes / No
 - Estimated retrieval token spend
 - Estimated total token spend

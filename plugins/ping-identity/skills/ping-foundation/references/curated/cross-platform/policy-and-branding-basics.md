@@ -14,16 +14,16 @@ slug: "https://docs.pingidentity.com/pingone/authentication/p1_authenticationpol
 
 # Policy and Branding Basics
 
-Core configuration decisions for authentication policy and UI branding across PingOne MT and PingOne ST.
+Core configuration decisions for authentication policy and UI branding across PingOne (multi-tenant cloud) and PingOne Advanced Identity Cloud (AIC).
 
 ## Scope
 
 Covers: sign-on policies, MFA policies, themes, and hosted page customization.
-Does NOT cover: DaVinci flow design or PingOne ST journey logic — see `ping-orchestration`.
+Does NOT cover: DaVinci flow design or AIC journey logic — see `ping-orchestration`.
 
 ---
 
-## PingOne MT — Authentication Policies
+## PingOne (multi-tenant cloud) — Authentication Policies
 
 **Sign-on policy structure:**
 - An ordered list of actions evaluated at sign-in
@@ -41,7 +41,7 @@ Does NOT cover: DaVinci flow design or PingOne ST journey logic — see `ping-or
 
 ---
 
-## PingOne MT — Branding
+## PingOne (multi-tenant cloud) — Branding
 
 | Setting | Location |
 |---|---|
@@ -51,29 +51,29 @@ Does NOT cover: DaVinci flow design or PingOne ST journey logic — see `ping-or
 
 ---
 
-## PingOne ST — Policies
+## AIC — Policies
 
 - Authentication policies are realm-scoped
 - Auth trees/journeys define the login flow — see `ping-orchestration` for journey design
 - Policy sets apply authorization rules after authentication completes
 
-**Journey-as-policy:** In PingOne ST, the journey itself is the authentication policy. Bind a journey to the realm default or to a specific application to control which flow is used.
+**Journey-as-policy:** In AIC, the journey itself is the authentication policy. Bind a journey to the realm default or to a specific application to control which flow is used.
 
 **Admin surface:** Realm → Authentication → Trees or Journeys
 
 ---
 
-## PingOne ST — Theming
+## AIC — Theming
 
-For PingOne ST theming configuration, see `references/curated/pingone-st/themes-and-customization.md`.
+For AIC theming configuration, see `references/curated/pingone-st/themes-and-customization.md`.
 
 ---
 
 ## Notification templates
 
-Both PingOne MT and PingOne ST support custom email and SMS notification templates.
+Both PingOne (multi-tenant cloud) and AIC support custom email and SMS notification templates.
 
-### PingOne MT
+### PingOne (multi-tenant cloud)
 
 | Template type | Admin surface |
 |---|---|
@@ -83,15 +83,15 @@ Both PingOne MT and PingOne ST support custom email and SMS notification templat
 
 Email templates support HTML with merge variables (e.g., `${user.username}`, `${user.name.given}`). Verify sender domain ownership before go-live; unverified domains use Ping's default sending address.
 
-### PingOne ST
+### AIC
 
-Notification templates are managed at the realm level. PingOne ST supports locale-specific templates — add locale variants under the template editor to serve translated content based on the user's browser language.
+Notification templates are managed at the realm level. AIC supports locale-specific templates — add locale variants under the template editor to serve translated content based on the user's browser language.
 
 ---
 
 ## Branding checklist (pre-go-live)
 
-| Item | PingOne MT | PingOne ST |
+| Item | PingOne (multi-tenant cloud) | AIC |
 |---|---|---|
 | Custom domain configured and DNS verified | Settings → Custom Domains | Tenant Settings → Custom Domains |
 | Logo uploaded | Branding → Logo | Theme Editor → Logo |
@@ -106,11 +106,11 @@ Notification templates are managed at the realm level. PingOne ST supports local
 
 | Gotcha | Applies to | Fix |
 |---|---|---|
-| Notification sent from Ping default address | PingOne MT | Verify sender domain under Settings → Notifications → Senders before testing emails |
-| MFA policy not taking effect despite being configured | PingOne MT | Policy must be referenced inside an MFA action in a sign-on policy, and that policy must be attached to the application |
-| Journey is not branded | PingOne ST | Assign the theme to the realm (default) or to the specific journey in journey settings |
-| Custom font not loading | PingOne ST | Add font origin to Content Security Policy (CSP) settings; CSP blocks unconfigured external origins |
-| Policy change affects all apps silently | PingOne MT | Apps with no explicit policy assignment use the environment default — change to default affects all such apps simultaneously |
+| Notification sent from Ping default address | PingOne (multi-tenant cloud) | Verify sender domain under Settings → Notifications → Senders before testing emails |
+| MFA policy not taking effect despite being configured | PingOne (multi-tenant cloud) | Policy must be referenced inside an MFA action in a sign-on policy, and that policy must be attached to the application |
+| Journey is not branded | AIC | Assign the theme to the realm (default) or to the specific journey in journey settings |
+| Custom font not loading | AIC | Add font origin to Content Security Policy (CSP) settings; CSP blocks unconfigured external origins |
+| Policy change affects all apps silently | PingOne (multi-tenant cloud) | Apps with no explicit policy assignment use the environment default — change to default affects all such apps simultaneously |
 
 ## Prerequisites
 
@@ -121,8 +121,8 @@ Admin access to the target platform (PingOne organization admin for MT; AIC tena
 | Variant | Note |
 |---|---|
 | Workforce vs. CIAM | Workforce MFA policy typically uses TOTP/push; CIAM policies often add risk-based conditions and progressive enrollment |
-| Multi-application policies | PingOne MT supports per-application policy override; PingOne ST uses per-journey auth assignment |
-| Layered branding | PingOne MT supports global branding overridden per environment; PingOne ST supports realm and journey-level theme override |
+| Multi-application policies | PingOne (multi-tenant cloud) supports per-application policy override; AIC uses per-journey auth assignment |
+| Layered branding | PingOne (multi-tenant cloud) supports global branding overridden per environment; AIC supports realm and journey-level theme override |
 
 ---
 
@@ -149,4 +149,4 @@ PingFederate 10+ replaces per-SP adapter configuration with centralized authenti
 
 [PingOne sign-on policies](https://docs.pingidentity.com/pingone/latest/platformconsole/p1_c_sign_on_policies.html)
 [PingOne branding](https://docs.pingidentity.com/pingone/latest/platformconsole/p1_c_branding.html)
-[PingOne ST authentication journeys](https://docs.pingidentity.com/pingoneaic/am-journey-guide/journey-overview.html)
+[AIC authentication journeys](https://docs.pingidentity.com/pingoneaic/am-journey-guide/journey-overview.html)

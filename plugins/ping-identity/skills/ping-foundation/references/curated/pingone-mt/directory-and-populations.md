@@ -1,5 +1,5 @@
 ---
-title: "PingOne MT Directory Options and Population Management"
+title: "PingOne Directory Options and Population Management"
 product_family: pingone-mt
 products: ["pingone"]
 capabilities: ["foundation"]
@@ -13,16 +13,16 @@ last_updated: "2026-06-04"
 slug: "https://docs.pingidentity.com/pingone/directory/p1_aboutusers.html"
 ---
 
-# PingOne MT Directory Options and Population Management
+# PingOne Directory Options and Population Management
 
-Configure the user directory model and population structure for a PingOne MT environment before creating applications or sign-on policies.
+Configure the user directory model and population structure for a PingOne environment before creating applications or sign-on policies.
 
 ## Scope
 
-**Covers:** PingOne Directory (built-in cloud store), LDAP Gateway (proxy to on-premises LDAP/AD), external identity providers (OIDC, SAML, social), and population management in PingOne MT environments.
+**Covers:** PingOne Directory (built-in cloud store), LDAP Gateway (proxy to on-premises LDAP/AD), external identity providers (OIDC, SAML, social), and population management in PingOne environments.
 
 **Does NOT cover:**
-- PingOne ST directory configuration — see `references/curated/pingone-st/directory-setup.md`
+- PingOne Advanced Identity Cloud (AIC) directory configuration — see `references/curated/pingone-st/directory-setup.md`
 - Provisioning workflow design (inbound/outbound SCIM, HR sync) — use the `ping-orchestration` skill
 - SDK-level user management (create/update users via API in an app) — use the `ping-app-integration` skill
 - Sign-on policy design — see `references/curated/pingone-mt/sign-on-policies.md`

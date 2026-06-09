@@ -40,7 +40,7 @@ Integration guide for web applications authenticating through Ping Identity — 
 | Package | Target flow | Supported framework |
 |---|---|---|
 | `@forgerock/journey-client` | AIC / PingAM Journey-based auth | React (stable); Angular, Vue (roadmap) |
-| `@forgerock/davinci-client` | PingOne MT DaVinci-based auth | React (stable); Angular, Vue (roadmap) |
+| `@forgerock/davinci-client` | PingOne DaVinci-based auth | React (stable); Angular, Vue (roadmap) |
 | `@forgerock/oidc-client` | OIDC token lifecycle (any IdP) | Framework-agnostic |
 
 Install:
@@ -140,7 +140,7 @@ Pattern: iterate `node.callbacks`, render each by `callback.getType()`, collect 
 
 ### DaVinci collector types (web)
 
-For `@forgerock/davinci-client` (PingOne MT), collectors per step:
+For `@forgerock/davinci-client` (PingOne), collectors per step:
 
 | Collector type | Notes |
 |---|---|
@@ -194,7 +194,7 @@ No specific library is mandated. Any library implementing RFC 6749 + RFC 7636 wo
 
 ### CORS requirements for the token endpoint
 
-PingOne MT and AIC return `Access-Control-Allow-Origin` headers for cross-origin requests to the token endpoint. PingFederate requires explicit CORS configuration in `pf.properties` or via the PF admin console.
+PingOne (multi-tenant cloud) and AIC return `Access-Control-Allow-Origin` headers for cross-origin requests to the token endpoint. PingFederate requires explicit CORS configuration in `pf.properties` or via the PF admin console.
 
 For SPAs performing the token exchange in-browser (not via a BFF), the token endpoint must allow the app origin. Symptoms of CORS misconfiguration: the authorization request succeeds but the token exchange fails with a network error in the browser console (no response body).
 
@@ -277,7 +277,7 @@ Constraints:
 
 ## Prerequisites
 
-- Application record created in PingOne MT, AIC, or PingFederate with `redirect_uri` registered (use `ping-foundation`)
+- Application record created in PingOne, AIC, or PingFederate with `redirect_uri` registered (use `ping-foundation`)
 - Hosted login page or Journey/DaVinci flow operational (use `ping-orchestration`)
 - CORS origins configured on the Ping tenant or PingFederate instance for the app's domain
 - For SAML: SP entity ID and ACS URL registered at the IdP; IdP metadata downloaded for SP-side validation
@@ -286,8 +286,8 @@ Constraints:
 
 | Variant | Note |
 |---|---|
-| PingOne MT | `@forgerock/davinci-client`; discovery endpoint `https://auth.pingone.com/<envId>/as/.well-known/openid-configuration` |
-| AIC / PingOne ST | `@forgerock/journey-client`; realm-specific discovery endpoint |
+| PingOne | `@forgerock/davinci-client`; discovery endpoint `https://auth.pingone.com/<envId>/as/.well-known/openid-configuration` |
+| PingOne Advanced Identity Cloud (AIC) | `@forgerock/journey-client`; realm-specific discovery endpoint |
 | PingFederate on-prem | Standard OIDC (no Ping JS SDK required); CORS must be explicitly enabled in PF config |
 | React with Vite | Vite dev server proxy can be used to avoid CORS during development; do not proxy token endpoint in production |
 | Next.js (SSR) | Use server-side OAuth2 (NextAuth / Auth.js) with PingOne or PingFederate as the provider; do not use client-side PKCE for SSR routes |

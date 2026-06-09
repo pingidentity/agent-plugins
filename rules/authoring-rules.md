@@ -1,6 +1,6 @@
 # Authoring Rules for Skill Reference Files
 
-Rules for every `.md` file created in this repo. Apply these before writing any new reference, curated anchor, or generated stub.
+Rules for every `.md` file created in this repo. Apply these before writing any new reference or curated anchor.
 
 ---
 
@@ -81,7 +81,7 @@ The goal is to serve the minimum sufficient context at each stage.
 Skills are products, not one-time files. Before publishing a skill:
 1. Write at least 3 benchmark prompts that should trigger it
 2. Write at least 2 prompts that should NOT trigger it
-3. Verify routing decisions are correct using the eval format in `shared/evals/routing-eval.md`
+3. Verify routing decisions are correct using the eval format in `evals/routing-eval.md`
 4. Update the description if undertriggering is observed
 
 ---
@@ -124,7 +124,7 @@ Use `cross-platform` only when the content genuinely applies without modificatio
 
 ---
 
-## 2. Curated anchors vs. generated stubs — write them differently
+## 2. Curated anchors — how to write them
 
 ### Curated anchors (`references/curated/`)
 
@@ -135,26 +135,18 @@ Use `cross-platform` only when the content genuinely applies without modificatio
 - 150–400 lines max. If longer, split into two anchors.
 - No duplicate content with other curated files in the same skill
 
-### Generated stubs (`references/generated/`)
-
-- Placeholder only; populated by CI from the docs manifest
-- First line of body must be: `_Generated reference stub. Replace with curated content or populate from docs manifest._`
-- `canonical: false`
-- List topic coverage only — no step-by-step content
-- End with a `## Source` section pointing to the docs manifest path
-
 ---
 
 ## 3. Platform branch belongs in the directory path AND the frontmatter
 
-The directory path and `product_family` must agree:
+For platform-scoped curated anchors, the directory path and `product_family` must agree:
 
 | Directory | `product_family` |
 |---|---|
-| `references/generated/pingone-mt/` | `pingone-mt` |
-| `references/generated/pingone-st/` | `pingone-st` |
-| `references/generated/ping-software/` | `ping-software` |
-| `references/curated/` | any (curated files can be cross-platform) |
+| `references/curated/pingone-mt/` | `pingone-mt` |
+| `references/curated/pingone-st/` | `pingone-st` |
+| `references/curated/ping-software/` | `ping-software` |
+| `references/curated/cross-platform/` | `cross-platform` (or any) |
 
 A file in `pingone-mt/` with `product_family: pingone-st` is a validation error.
 
@@ -221,7 +213,7 @@ Always reference other files using repo-relative paths from the skill root:
 
 ```markdown
 - `references/curated/cross-platform/foundation-overview.md`
-- `references/generated/pingone-mt/top-25.json`
+- `references/curated/pingone-mt/app-registration.md`
 ```
 
 Never use absolute paths, full URLs to internal files, or bare filenames without a path.
@@ -274,8 +266,8 @@ The goal is to prevent agents from treating a single skill as complete when the 
 A `SKILL.md` must:
 - State when to use the skill (trigger phrases / user intents)
 - State when NOT to use the skill (redirect to the correct skill)
-- Route by task → platform → reference tier (in that order)
-- Reference curated and generated files by path
+- Route by task → platform → curated anchor (in that order)
+- Reference curated files by path
 
 A `SKILL.md` must NOT:
 - Contain step-by-step configuration instructions

@@ -1,5 +1,5 @@
 ---
-title: "PingOne MT — DaVinci Flow Patterns"
+title: "PingOne — DaVinci Flow Patterns"
 product_family: pingone-mt
 products: ["davinci", "pingone"]
 capabilities: ["orchestration"]
@@ -13,14 +13,14 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/davinci/flows/davinci_flows.html"
 ---
 
-# PingOne MT — DaVinci Flow Patterns
+# PingOne — DaVinci Flow Patterns
 
 Common DaVinci flow designs for authentication, registration, MFA step-up, progressive profiling, and error handling.
 
 ## Scope
 
 **Covers:** Common DaVinci flow design patterns, branching logic, error paths, and reusable subflow composition.
-**Does NOT cover:** DaVinci concepts and setup — see `references/curated/pingone-mt/davinci-overview.md`. PingOne MT environment setup — see `ping-foundation`.
+**Does NOT cover:** DaVinci concepts and setup — see `references/curated/pingone-mt/davinci-overview.md`. PingOne environment setup — see `ping-foundation`.
 
 ---
 
@@ -124,7 +124,7 @@ Map subflow output variables explicitly. All subflows should have a defined succ
 
 ## Prerequisites
 
-- PingOne MT environment with DaVinci enabled
+- PingOne environment with DaVinci enabled
 - At least one DaVinci connector configured
 - PingOne application with DaVinci policy assigned (see `references/curated/pingone-mt/davinci-overview.md`)
 

@@ -1,5 +1,5 @@
 ---
-title: "PingOne MT — Tenant and Environment Setup"
+title: "PingOne — Tenant and Environment Setup"
 product_family: pingone-mt
 products: ["pingone"]
 capabilities: ["foundation"]
@@ -12,14 +12,14 @@ last_updated: "2026-06-04"
 slug: "https://docs.pingidentity.com/pingone/platformconsole/p1_c_environments.html"
 ---
 
-# PingOne MT — Tenant and Environment Setup
+# PingOne — Tenant and Environment Setup
 
-Provisioning and initial configuration for PingOne MT environments, including environment types, service activation, and key pre-app settings.
+Provisioning and initial configuration for PingOne environments, including environment types, service activation, and key pre-app settings.
 
 ## Scope
 
-**Covers:** PingOne MT organization structure, environment types, service activation, populations, and pre-app configuration.
-**Does NOT cover:** On-prem server installation — see `references/curated/cross-platform/core-admin-patterns.md`. PingOne ST tenants — see `references/curated/cross-platform/tenant-and-environment-setup.md`.
+**Covers:** PingOne organization structure, environment types, service activation, populations, and pre-app configuration.
+**Does NOT cover:** On-prem server installation — see `references/curated/cross-platform/core-admin-patterns.md`. PingOne Advanced Identity Cloud (AIC) tenants — see `references/curated/cross-platform/tenant-and-environment-setup.md`.
 
 ---
 
@@ -35,7 +35,7 @@ PingOne Organization
     └── Services (MFA, Verify, DaVinci, Risk, Credentials)
 ```
 
-**Organization:** Top-level billing and admin unit. One organization per PingOne MT customer.
+**Organization:** Top-level billing and admin unit. One organization per PingOne customer.
 
 **Environment:** Logical container for a project, workload, or deployment stage (dev, staging, prod). All resources are environment-scoped.
 
@@ -83,7 +83,7 @@ Environment type is immutable after creation. Provision separate environments fo
 
 ---
 
-## MFA policy setup (PingOne MT)
+## MFA policy setup (PingOne)
 
 MFA policies are environment-scoped and control which authentication methods are permitted.
 

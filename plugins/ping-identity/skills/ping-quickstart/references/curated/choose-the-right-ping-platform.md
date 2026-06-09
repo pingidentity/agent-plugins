@@ -15,7 +15,7 @@ slug: "https://docs.pingidentity.com/pingone/introduction_to_pingone/p1_introduc
 
 # Choose the Right Ping Platform
 
-Decision guide for selecting between PingOne MT, PingOne ST, and the Ping Software Suite.
+Decision guide for selecting between PingOne (multi-tenant cloud), PingOne Advanced Identity Cloud (AIC), and the Ping Software Suite.
 
 ## Scope
 
@@ -28,16 +28,16 @@ Does NOT cover: configuration steps — see `ping-foundation`; journey or flow d
 
 | Need | Best platform |
 |---|---|
-| New deployment, SaaS-managed, low ops overhead | PingOne MT |
-| Deep customization, journey/tree orchestration, ForgeRock migration | PingOne ST |
+| New deployment, SaaS-managed, low ops overhead | PingOne (multi-tenant cloud) |
+| Deep customization, journey/tree orchestration, ForgeRock migration | AIC |
 | Existing on-prem or hybrid, PingFederate/PingAccess/PingDirectory | Ping Software Suite |
-| CIAM with DaVinci orchestration | PingOne MT + DaVinci |
-| Complex authentication trees and self-service | PingOne ST |
+| CIAM with DaVinci orchestration | PingOne (multi-tenant cloud) + DaVinci |
+| Complex authentication trees and self-service | AIC |
 | Federation hub for enterprise apps (SAML, WS-Fed) | PingFederate (Software Suite) |
 | API and web application protection | PingAccess (Software Suite) |
 | Authoritative LDAP/SCIM directory | PingDirectory (Software Suite) |
-| Workforce SSO with existing AD | PingFederate or PingOne MT SSO |
-| CIAM registration and login flows | PingOne ST or PingOne + DaVinci |
+| Workforce SSO with existing AD | PingFederate or PingOne (multi-tenant cloud) SSO |
+| CIAM registration and login flows | AIC or PingOne + DaVinci |
 
 ---
 
@@ -45,7 +45,7 @@ Does NOT cover: configuration steps — see `ping-foundation`; journey or flow d
 
 | Scenario | Use |
 |---|---|
-| DaVinci flows on PingOne MT | DaVinci SDK / DaVinci orchestration |
+| DaVinci flows on PingOne (multi-tenant cloud) | DaVinci SDK / DaVinci orchestration |
 | AIC / PingAM journey trees | Journey SDK / orchestration |
 | OIDC-compliant server (PingFederate, any IdP) | OIDC Sign-on — server-side journey changes reflected without app rebuild |
 
@@ -55,9 +55,9 @@ Source: https://developer.pingidentity.com/orchsdks/index.html
 
 ## Key differentiators
 
-### PingOne MT vs PingOne ST
+### PingOne (multi-tenant cloud) vs AIC
 
-| Dimension | PingOne MT | PingOne ST |
+| Dimension | PingOne (multi-tenant cloud) | AIC |
 |---|---|---|
 | Management model | SaaS console (console.pingone.com) | Fully managed tenant; REST/UI admin |
 | Orchestration | DaVinci flows (no-code/low-code) | Journey trees (node-based, highly scriptable) |
@@ -82,7 +82,7 @@ Source: https://docs.pingidentity.com/pingoneforenterprise/p14e_which_p14e_am_i_
 
 ### Cloud vs Software Suite
 
-| Dimension | Cloud (PingOne MT / PingOne ST) | Ping Software Suite |
+| Dimension | Cloud (PingOne / AIC) | Ping Software Suite |
 |---|---|---|
 | Infrastructure management | Ping Identity manages | Customer manages |
 | Upgrade cadence | Continuous / automatic | Quarterly; customer-controlled |
@@ -95,7 +95,7 @@ Source: https://docs.pingidentity.com/pingoneforenterprise/p14e_which_p14e_am_i_
 
 ## Protocol support by platform
 
-| Protocol | PingOne MT | PingOne ST | PingFederate | PingAccess | PingDirectory |
+| Protocol | PingOne (multi-tenant cloud) | AIC | PingFederate | PingAccess | PingDirectory |
 |---|---|---|---|---|---|
 | OAuth 2.0 / OIDC | Yes | Yes | Yes | Token-based authz | No |
 | SAML 2.0 | Yes | Yes | Yes (IdP + SP) | No | No |
@@ -111,35 +111,35 @@ Source: https://docs.pingidentity.com/pingoneforenterprise/p14e_which_p14e_am_i_
 
 ### Hybrid on-premises + cloud
 
-Use PingFederate as the federation hub bridging on-premises systems to cloud apps. PingFederate can act as an IdP for PingOne MT or PingOne ST, allowing a phased migration where on-prem identity stores are accessed via PingFederate adapters while the cloud platform handles app-facing flows.
+Use PingFederate as the federation hub bridging on-premises systems to cloud apps. PingFederate can act as an IdP for PingOne (multi-tenant cloud) or AIC, allowing a phased migration where on-prem identity stores are accessed via PingFederate adapters while the cloud platform handles app-facing flows.
 
 ### Existing Active Directory
 
 - If AD is authoritative and you need Windows Integrated Authentication: PingFederate with a Kerberos adapter is the fastest path.
-- If you want to keep AD but add cloud orchestration: connect PingOne MT to AD via an LDAP gateway or the PingOne Gateway for AD.
-- For PingOne ST: use the LDAP identity store connector pointed at AD DS.
+- If you want to keep AD but add cloud orchestration: connect PingOne (multi-tenant cloud) to AD via an LDAP gateway or the PingOne Gateway for AD.
+- For AIC: use the LDAP identity store connector pointed at AD DS.
 
 ### Multi-region requirements
 
-- PingOne MT: single global tenant; region selection (NA, EU, APAC) at environment creation time. Cross-region federation requires separate environments.
-- PingOne ST: single-region tenant by default; geo-redundant options depend on contract.
+- PingOne (multi-tenant cloud): single global tenant; region selection (NA, EU, APAC) at environment creation time. Cross-region federation requires separate environments.
+- AIC: single-region tenant by default; geo-redundant options depend on contract.
 - Ping Software Suite: full control over multi-region topology; deploy cluster nodes in each region with load balancer.
 
 ### Compliance constraints
 
 | Constraint | Guidance |
 |---|---|
-| Data residency (GDPR, data sovereignty) | PingOne MT: choose EU region at creation; PingOne ST: confirm tenant region with Ping; Software Suite: full control |
+| Data residency (GDPR, data sovereignty) | PingOne (multi-tenant cloud): choose EU region at creation; AIC: confirm tenant region with Ping; Software Suite: full control |
 | FedRAMP | PingFederate on-prem in a FedRAMP boundary; consult Ping for cloud FedRAMP status |
-| HIPAA | Business Associate Agreement available for PingOne MT; on-prem gives full control |
+| HIPAA | Business Associate Agreement available for PingOne (multi-tenant cloud); on-prem gives full control |
 | PCI DSS | On-prem Software Suite preferred for cardholder data environments |
 
 ### SLA characteristics
 
 | Platform | Availability SLA | Notes |
 |---|---|---|
-| PingOne MT | 99.99% (enterprise tier) | Consult contract for base tier |
-| PingOne ST | 99.9% typical | Varies by contract |
+| PingOne (multi-tenant cloud) | 99.99% (enterprise tier) | Consult contract for base tier |
+| AIC | 99.9% typical | Varies by contract |
 | Ping Software Suite | Customer-defined | Depends on deployment HA design |
 
 ---
@@ -161,14 +161,14 @@ Before making a platform selection decision, have the following inputs ready:
 
 ### Evaluation / PoC context vs production selection
 
-- For a PoC: start with PingOne MT trial (fastest to stand up); use the PoC to validate use cases and skill requirements before committing.
+- For a PoC: start with PingOne (multi-tenant cloud) trial (fastest to stand up); use the PoC to validate use cases and skill requirements before committing.
 - For production selection: run a formal requirements-to-criteria mapping using the decision matrix above; involve architecture and security teams.
 
 ### Greenfield vs migration context
 
-- Greenfield (no existing identity infrastructure): PingOne MT is lowest-friction; PingOne ST if journey complexity is anticipated.
-- Migration from ForgeRock AM/IDM: PingOne ST is the primary migration target; journey trees import directly.
-- Migration from legacy PingFederate: upgrade in place (major version) or lift to PingOne MT/ST for the orchestration layer while PingFederate continues as a federation bridge.
+- Greenfield (no existing identity infrastructure): PingOne (multi-tenant cloud) is lowest-friction; AIC if journey complexity is anticipated.
+- Migration from ForgeRock AM/IDM: AIC is the primary migration target; journey trees import directly.
+- Migration from legacy PingFederate: upgrade in place (major version) or lift to PingOne (multi-tenant cloud) / AIC for the orchestration layer while PingFederate continues as a federation bridge.
 
 ---
 

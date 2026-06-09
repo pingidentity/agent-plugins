@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Utility Nodes"
+title: "PingOne Advanced Identity Cloud (AIC) — Utility Nodes"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["orchestration"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
-# PingOne ST — Utility Nodes
+# AIC — Utility Nodes
 
 Flow control, session management, state manipulation, scripting, UI composition, and async coordination nodes.
 

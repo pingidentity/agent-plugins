@@ -47,43 +47,32 @@ Complete [this skill's layer] here, then hand off to the appropriate skill for e
 
 ---
 
-## Platform Branch: PingOne MT
+## Platform Branch: PingOne
 
-<!-- Capability-specific sub-routing for PingOne MT -->
+<!-- Capability-specific sub-routing for PingOne (multi-tenant cloud) -->
 
-**Curated references** (load first):
+**Curated references** (load 1–3):
 - `references/curated/[doc].md`
-
-**Generated shortlist** (fallback if curated is insufficient):
-- `references/generated/pingone-mt/top-25.json`
 
 ---
 
-## Platform Branch: PingOne ST
+## Platform Branch: PingOne Advanced Identity Cloud
 
-**Curated references** (load first):
+**Curated references** (load 1–3):
 - `references/curated/[doc].md`
-
-**Generated shortlist**:
-- `references/generated/pingone-st/top-25.json`
 
 ---
 
 ## Platform Branch: Ping Software Suite
 
-**Curated references** (load first):
+**Curated references** (load 1–3):
 - `references/curated/[doc].md`
-
-**Generated shortlist**:
-- `references/generated/ping-software/top-25.json`
 
 ---
 
 ## Retrieval escalation
 
 1. Load curated anchors — 1 to 3 files max. Stop if sufficient.
-2. If not sufficient, scan the generated shortlist for the matched branch. Pull summaries only.
-3. If still not sufficient, query Docs MCP per `references/runtime/<platform>/docs-mcp-routing.md` — surgical query, specific sections only.
 
 ## Cross-skill escalation
 

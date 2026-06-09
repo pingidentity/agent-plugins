@@ -1,5 +1,5 @@
 ---
-title: "PingOne MT — DaVinci Registration and MFA Flow Patterns"
+title: "PingOne — DaVinci Registration and MFA Flow Patterns"
 product_family: pingone-mt
 products: ["davinci", "pingone"]
 capabilities: ["orchestration"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/davinci/flows/davinci_getting_started.html"
 ---
 
-# PingOne MT — DaVinci Registration and MFA Flow Patterns
+# PingOne — DaVinci Registration and MFA Flow Patterns
 
 Complete flow designs for user registration with email verification, and MFA step-up using PingOne MFA and PingOne Protect — the two most common DaVinci use cases.
 
@@ -164,7 +164,7 @@ Extract this into a `MFA Authentication` subflow. Reference it from both login a
 
 ## Prerequisites
 
-- PingOne MT environment with DaVinci and PingOne MFA services activated
+- PingOne environment with DaVinci and PingOne MFA services activated
 - PingOne connector instance configured with environment-appropriate credentials
 - PingOne Notifications (email) configured and sender domain verified
 - For risk step-up: PingOne Protect service activated and PingOne Protect connector instance configured

@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Orchestration Routing Index"
+title: "PingOne Advanced Identity Cloud (AIC) — Orchestration Routing Index"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["orchestration"]
@@ -13,13 +13,13 @@ last_updated: "2026-06-05"
 slug: "https://docs.pingidentity.com/pingoneaic/journeys/auth-nodes.html"
 ---
 
-# PingOne ST — Orchestration Routing Index
+# AIC — Orchestration Routing Index
 
-Sub-routing table for the `ping-orchestration` skill. Use this file to select the correct curated anchor when the task falls under the PingOne ST / AIC / PingAM platform branch.
+Sub-routing table for the `ping-orchestration` skill. Use this file to select the correct curated anchor when the task falls under the AIC / PingAM platform branch.
 
 ## Scope
 
-**Covers:** Node-family routing, journey use case routing, and fallback order for PingOne ST orchestration tasks.
+**Covers:** Node-family routing, journey use case routing, and fallback order for AIC orchestration tasks.
 **Does NOT cover:** DaVinci flow routing — see `../pingone-mt/davinci-overview.md`. Platform setup — see `ping-foundation`.
 
 ---
@@ -61,7 +61,6 @@ Load the matching use-case anchor when the task maps to a named scenario:
 
 1. Match the task to a use case row first — use-case anchors are self-contained and include node guidance.
 2. If no use case matches, select 1–2 node-family anchors from the node-family table.
-3. If neither is sufficient, fall back to `references/generated/pingone-st/top-25.json`.
 
 ## Prerequisites
 

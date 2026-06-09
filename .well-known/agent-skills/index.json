@@ -10,13 +10,13 @@
     },
     {
       "name": "ping-foundation",
-      "description": "Platform setup, administration, and core configuration for PingOne MT, PingOne ST (AIC), PingFederate, PingAccess, PingDirectory, and PingID. Covers tenant setup, app registration, directories, policies, and branding.",
+      "description": "Platform setup, administration, and core configuration for PingOne, PingOne Advanced Identity Cloud (AIC), PingFederate, PingAccess, PingDirectory, and PingID. Covers tenant setup, app registration, directories, policies, and branding.",
       "source": "https://github.com/pingidentity/agent-plugins/tree/main/plugins/ping-identity/skills/ping-foundation",
       "tags": ["ping", "pingone", "aic", "pingfederate", "foundation", "setup", "admin", "configuration"]
     },
     {
       "name": "ping-orchestration",
-      "description": "Design and build authentication flows, journeys, and orchestration logic across DaVinci (PingOne MT), AIC/PingAM journeys (PingOne ST), and PingFederate authentication policies.",
+      "description": "Design and build authentication flows, journeys, and orchestration logic across DaVinci (PingOne), AIC/PingAM journeys (PingOne Advanced Identity Cloud), and PingFederate authentication policies.",
       "source": "https://github.com/pingidentity/agent-plugins/tree/main/plugins/ping-identity/skills/ping-orchestration",
       "tags": ["ping", "davinci", "aic", "journey", "authentication", "mfa", "registration", "orchestration"]
     },

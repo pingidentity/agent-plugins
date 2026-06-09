@@ -1,5 +1,5 @@
 ---
-title: "PingOne MT — Themes, Branding, and Notifications"
+title: "PingOne — Themes, Branding, and Notifications"
 product_family: pingone-mt
 products: ["pingone", "davinci"]
 capabilities: ["foundation", "branding"]
@@ -13,19 +13,19 @@ last_updated: "2026-06-03"
 slug: "https://docs.pingidentity.com/pingone/branding/p1_branding.html"
 ---
 
-# PingOne MT — Themes, Branding, and Notifications
+# PingOne — Themes, Branding, and Notifications
 
-UI customization for PingOne MT hosted pages and DaVinci-hosted flow pages: branding assets, custom domains, notification templates, and DaVinci UI Studio.
+UI customization for PingOne hosted pages and DaVinci-hosted flow pages: branding assets, custom domains, notification templates, and DaVinci UI Studio.
 
 ## Scope
 
 **Covers:** PingOne hosted-page branding (logo, colors, custom domain, error pages); email and SMS notification templates and senders; DaVinci UI Studio for flow pages; CSP/font constraints; multi-environment branding strategy.
 
-**Does NOT cover:** PingOne ST theming — see `references/curated/pingone-st/themes-and-customization.md`. DaVinci flow logic — see `ping-orchestration`. End-app UI customization — see `ping-app-integration`.
+**Does NOT cover:** PingOne Advanced Identity Cloud (AIC) theming — see `references/curated/pingone-st/themes-and-customization.md`. DaVinci flow logic — see `ping-orchestration`. End-app UI customization — see `ping-app-integration`.
 
 ---
 
-## Branding scope — what you can theme in PingOne MT
+## Branding scope — what you can theme in PingOne
 
 | Surface | Themed via | Notes |
 |---|---|---|
@@ -189,7 +189,7 @@ PingOne hosted pages enforce a Content Security Policy.
 
 ## Pre-go-live branding checklist
 
-| Item | PingOne MT | DaVinci |
+| Item | PingOne | DaVinci |
 |---|---|---|
 | Custom domain configured + DNS verified | Yes — Settings → Custom Domains | N/A (DaVinci uses its own subdomain) |
 | TLS certificate active | Yes — auto-provisioned or customer-uploaded | Yes — DaVinci-managed |
@@ -242,7 +242,7 @@ PingOne hosted pages enforce a Content Security Policy.
 
 - `references/curated/pingone-mt/tenant-and-environment-setup.md` — environment provisioning
 - `references/curated/cross-platform/policy-and-branding-basics.md` — branding overview
-- `references/curated/pingone-st/themes-and-customization.md` — PingOne ST theming (separate platform)
+- `references/curated/pingone-st/themes-and-customization.md` — AIC theming (separate platform)
 
 ## Source
 

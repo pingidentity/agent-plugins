@@ -66,8 +66,8 @@ Diagnostic guide for the most common failure patterns in Ping Identity app integ
 
 | Platform | Fix |
 |---|---|
-| PingOne MT | CORS origins are automatically configured for registered redirect URI origins — verify the app's origin matches a registered redirect URI's origin (`scheme://host:port`) |
-| AIC / PingOne ST | Same as PingOne MT; also check if the OAuth2 provider CORS configuration is set in the AM admin console |
+| PingOne | CORS origins are automatically configured for registered redirect URI origins — verify the app's origin matches a registered redirect URI's origin (`scheme://host:port`) |
+| PingOne Advanced Identity Cloud (AIC) | Same as PingOne; also check if the OAuth2 provider CORS configuration is set in the AM admin console |
 | PingFederate | Enable CORS in `pf.properties`: `pf.cors.enabled=true`; add allowed origins to the CORS filter configuration in the PF admin console |
 
 **Architectural alternative:** Move the token exchange to a server-side BFF (Backend For Frontend). The browser makes a same-origin request to the BFF, which performs the token exchange server-to-server. Eliminates CORS entirely for the token endpoint.
@@ -224,8 +224,8 @@ Migrating from `forgerock-android-sdk` or `forgerock-ios-sdk` to the Ping Native
 | Variant | Note |
 |---|---|
 | PingFederate on-prem | CORS configuration is in `pf.properties` + admin console; not auto-configured from redirect URI |
-| AIC (PingOne ST) | Journey-based flows; clock skew issues are most common when the AIC instance is recently provisioned |
-| PingOne MT | DaVinci flows; audience claim in access token is the resource server entity configured in the DaVinci policy |
+| AIC | Journey-based flows; clock skew issues are most common when the AIC instance is recently provisioned |
+| PingOne | DaVinci flows; audience claim in access token is the resource server entity configured in the DaVinci policy |
 | React Native | Uses the same JS SDK packages as React web; deep link handling differs (see Expo/React Native linking docs) |
 
 ## Related references

@@ -5,7 +5,11 @@
   "version": "1.0.0",
   "publisher": "Ping Identity",
   "tags": {
-    "product_family": ["pingone-mt", "pingone-st", "cross-platform"],
+    "product_family": [
+      "pingone-mt",
+      "pingone-st",
+      "cross-platform"
+    ],
     "products": [
       "pingone-protect",
       "pingone-verify",
@@ -13,14 +17,23 @@
       "pingone-authorize",
       "pingone-iga"
     ],
-    "capabilities": ["universal-services"],
-    "audience": ["developer", "architect", "admin"],
-    "use_cases": ["workforce", "customer", "cross-platform"]
+    "capabilities": [
+      "universal-services"
+    ],
+    "audience": [
+      "developer",
+      "architect",
+      "admin"
+    ],
+    "use_cases": [
+      "workforce",
+      "customer",
+      "cross-platform"
+    ]
   },
   "entry_point": "SKILL.md",
   "references": {
-    "curated_path": "references/curated/",
-    "generated_path": "references/generated/"
+    "curated_path": "references/curated/"
   },
   "related_skills": [
     "ping-quickstart",

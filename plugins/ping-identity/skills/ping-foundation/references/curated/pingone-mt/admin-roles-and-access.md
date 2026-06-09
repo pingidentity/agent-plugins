@@ -1,5 +1,5 @@
 ---
-title: "PingOne MT — Administrator Roles and Access Management"
+title: "PingOne — Administrator Roles and Access Management"
 product_family: pingone-mt
 products: ["pingone"]
 capabilities: ["foundation"]
@@ -13,15 +13,15 @@ last_updated: "2026-06-04"
 slug: "https://docs.pingidentity.com/pingone/administrators/p1_admin_roles.html"
 ---
 
-# PingOne MT — Administrator Roles and Access Management
+# PingOne — Administrator Roles and Access Management
 
-Configuring administrator roles, scoping access to environments and populations, and onboarding new administrators in PingOne MT.
+Configuring administrator roles, scoping access to environments and populations, and onboarding new administrators in PingOne.
 
 ## Scope
 
 **Covers:** Built-in and custom administrator roles, role scoping (org / environment / population), three methods for adding administrators (individual, group, invitation), admin email verification, and the Administrators environment best practice.
 
-**Does NOT cover:** End-user identity management — see `references/curated/pingone-mt/directory-and-populations.md`; application roles (PingOne Authorize authorization) — distinct from admin roles; PingOne ST admin configuration.
+**Does NOT cover:** End-user identity management — see `references/curated/pingone-mt/directory-and-populations.md`; application roles (PingOne Authorize authorization) — distinct from admin roles; PingOne Advanced Identity Cloud (AIC) admin configuration.
 
 ---
 

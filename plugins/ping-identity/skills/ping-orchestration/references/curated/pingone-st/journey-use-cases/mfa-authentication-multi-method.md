@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Multi-Method MFA Authentication"
+title: "PingOne Advanced Identity Cloud (AIC) — Multi-Method MFA Authentication"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["orchestration"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
-# PingOne ST — Multi-Method MFA Authentication
+# AIC — Multi-Method MFA Authentication
 
 Design patterns for the multi-method MFA authentication inner journey, supporting up to 8 factors with per-method retry loops and recovery code fallbacks. Derived from CIAM Passwordless, Financial Services, and Threat Detection journey exports.
 

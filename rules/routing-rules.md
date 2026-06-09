@@ -18,21 +18,17 @@ Decision logic for agents and SKILL.md files. Apply these rules in order to reac
 After routing to a skill, apply platform detection:
 
 1. PingOne admin console / PingOne APIs → `pingone-mt`
-2. PingOne ST tenant admin / AM / IDM / DS → `pingone-st`
+2. PingOne Advanced Identity Cloud (AIC) tenant admin / AM / IDM / DS → `pingone-st`
 3. On-prem deployment / server software → `ping-software`
 4. Cross-platform or service-layer question → `cross-platform`
 
 ## Step 3 — Select reference tier
 
-Apply in order; stop at the first tier that satisfies the task:
-
 1. **Curated anchors** (`references/curated/`) — canonical, task-completing docs. Load 1–3 max.
-2. **Generated shortlist** (`references/generated/<branch>/`) — ranked top-N candidate list. Pull only matching titles/summaries.
-3. **Docs MCP retrieval** (`references/runtime/<platform>/docs-mcp-routing.md`) — surgical query: exact product + task + feature. Retrieve specific sections, not full pages.
 
 ## Step 4 — Stop condition
 
-Stop retrieving context as soon as the task can be completed. Do not pre-load all tiers.
+Stop retrieving context as soon as the task can be completed. Do not pre-load every anchor.
 
 ## Cross-skill escalation
 

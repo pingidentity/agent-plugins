@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Authentication Fundamentals"
+title: "PingOne Advanced Identity Cloud (AIC) — Authentication Fundamentals"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["foundation"]
@@ -13,9 +13,9 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/pingoneaic/am-journey-guide/journey-overview.html"
 ---
 
-# PingOne ST — Authentication Fundamentals
+# PingOne Advanced Identity Cloud (AIC) — Authentication Fundamentals
 
-Understand and configure authentication in PingOne ST: the journey model, realm authentication settings, and key design rules before building any login flow.
+Understand and configure authentication in AIC: the journey model, realm authentication settings, and key design rules before building any login flow.
 
 ## Scope
 
@@ -26,7 +26,7 @@ Understand and configure authentication in PingOne ST: the journey model, realm 
 
 ### The journey model
 
-Authentication in PingOne ST is driven by **journeys** (also called authentication trees in PingAM). A journey is a configurable directed graph of **nodes** connected by outcome branches.
+Authentication in AIC is driven by **journeys** (also called authentication trees in PingAM). A journey is a configurable directed graph of **nodes** connected by outcome branches.
 
 - Journeys replace static login pages with flexible, branching flows
 - Nodes perform a single function: collect a credential, evaluate a condition, invoke a service, set a session variable
@@ -120,7 +120,7 @@ Cross-realm SSO requires explicit federation configuration (e.g., an OAuth2 auth
 
 ## Prerequisites
 
-- PingOne ST tenant with at least one realm configured
+- AIC tenant with at least one realm configured
 - Identity store connected to the realm (see `references/curated/pingone-st/directory-setup.md`)
 - Admin access to Authentication → Journeys
 - Scripts environment configured if Scripted Decision nodes will be used (AIC admin console → Scripts)
@@ -131,7 +131,7 @@ Cross-realm SSO requires explicit federation configuration (e.g., an OAuth2 auth
 |---|---|
 | Inner journeys | Nest frequently-reused logic (e.g., MFA step) into a reusable inner journey invoked by a Journey node |
 | Workforce vs. CIAM | Workforce flows are often simpler (username + password + MFA). CIAM flows add registration, progressive profiling, and verification steps — typically built in `ping-orchestration`. |
-| ForgeRock AM auth trees | Same underlying model as PingAM trees. Existing ForgeRock trees can be migrated to PingOne ST journeys with node mapping. |
+| ForgeRock AM auth trees | Same underlying model as PingAM trees. Existing ForgeRock trees can be migrated to AIC journeys with node mapping. |
 | ACR-based routing | Different client apps can invoke different journeys by passing `acr_values` on the authorization request; map ACR values to journey names in OAuth 2.0 provider settings |
 
 ## Related references
@@ -143,7 +143,7 @@ Cross-realm SSO requires explicit federation configuration (e.g., an OAuth2 auth
 
 ## Source
 
-[Journey overview — PingOne ST](https://docs.pingidentity.com/pingoneaic/am-journey-guide/journey-overview.html)
+[Journey overview — AIC](https://docs.pingidentity.com/pingoneaic/am-journey-guide/journey-overview.html)
 [Authentication nodes reference](https://docs.pingidentity.com/pingoneaic/am-authentication/authentication-node-reference.html)
 [Getting started: authentication journey](https://docs.pingidentity.com/pingoneaic/getting_started/getting_started-authentication_journey.html)
 [Session management — PingAM](https://docs.pingidentity.com/pingoneaic/am-sessions-guide/session-management-overview.html)

@@ -16,11 +16,11 @@ Index of included skills, their purpose, and when to use each. Use this file to 
 
 ### ping-orchestration
 **Path:** `skills/ping-orchestration/`
-**Use when:** The task is designing or troubleshooting a DaVinci flow, PingOne ST journey, or PingAM authentication tree.
+**Use when:** The task is designing or troubleshooting a DaVinci flow, PingOne Advanced Identity Cloud (AIC) journey, or PingAM authentication tree.
 
 ### ping-universal-services
 **Path:** `skills/ping-universal-services/`
-**Use when:** The task involves invoking a Ping Universal Service: PingOne Protect (risk scoring), PingOne Verify (identity verification/KYC), PingOne Credentials, IGA, Neo, or Authorize — across PingOne MT or PingOne ST. Also use for cross-platform shared service orchestration and service invocation patterns.
+**Use when:** The task involves invoking a Ping Universal Service: PingOne Protect (risk scoring), PingOne Verify (identity verification/KYC), PingOne Credentials, IGA, Neo, or Authorize — across PingOne (multi-tenant cloud) or AIC. Also use for cross-platform shared service orchestration and service invocation patterns.
 
 ### ping-app-integration
 **Path:** `skills/ping-app-integration/`

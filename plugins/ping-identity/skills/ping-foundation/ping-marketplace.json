@@ -5,7 +5,11 @@
   "version": "1.0.0",
   "publisher": "Ping Identity",
   "tags": {
-    "product_family": ["pingone-mt", "pingone-st", "ping-software"],
+    "product_family": [
+      "pingone-mt",
+      "pingone-st",
+      "ping-software"
+    ],
     "products": [
       "pingone",
       "pingone-st",
@@ -15,15 +19,30 @@
       "pingid",
       "pingam"
     ],
-    "capabilities": ["foundation"],
-    "audience": ["admin", "architect", "operator"],
-    "use_cases": ["workforce", "customer", "cross-platform"],
-    "protocols": ["oidc", "saml", "oauth2", "ldap", "scim"]
+    "capabilities": [
+      "foundation"
+    ],
+    "audience": [
+      "admin",
+      "architect",
+      "operator"
+    ],
+    "use_cases": [
+      "workforce",
+      "customer",
+      "cross-platform"
+    ],
+    "protocols": [
+      "oidc",
+      "saml",
+      "oauth2",
+      "ldap",
+      "scim"
+    ]
   },
   "entry_point": "SKILL.md",
   "references": {
-    "curated_path": "references/curated/",
-    "generated_path": "references/generated/"
+    "curated_path": "references/curated/"
   },
   "related_skills": [
     "ping-quickstart",

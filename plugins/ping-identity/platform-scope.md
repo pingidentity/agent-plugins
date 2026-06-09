@@ -7,28 +7,30 @@ Defines which platforms, products, and services are in scope. Use for platform d
 | Tag | Platform | Description |
 |---|---|---|
 | `pingone-mt` | PingOne (multi-tenant cloud) | SaaS-hosted administration: environments, apps, directories, policies. Admin at apps.pingone.com. |
-| `pingone-st` | PingOne ST (single-tenant) | Fully managed, highly customizable. Built on PingAM/PingIDM/PingDS. Distinct control plane from PingOne. |
+| `pingone-st` | PingOne Advanced Identity Cloud (AIC) | Fully managed, highly customizable. Built on PingAM/PingIDM/PingDS. Distinct control plane from PingOne. |
 | `ping-software` | Ping Software Suite (on-premises) | Customer-deployed server software. Different topology, ops model, and config surface from cloud families. Includes PingAM, PingIDM, PingDS, PingGateway, PingFederate, etc. |
 | `cross-platform` | Shared / Universal Services | Capabilities consumed across multiple platform families (Protect, Verify, IGA, etc.). |
 
 ## Platform Detection Signals
 
-**`pingone-mt`**
-- "Multi-Tenant"
-- "PingOne", "apps.pingone.com", "PingOne environment", "PingOne admin console"
-- PingOne MFA, PingOne Risk, PingOne DaVinci, PingOne Verify, PingOne Protect, PingOne IGA, PingOne Credentials, PingOne Neo, PingOne Authorize, PingOne SSO
+Match the MOST SPECIFIC signal first. "PingOne Advanced Identity Cloud" starts with "PingOne" — always check for the longer form before treating bare "PingOne" as the multi-tenant cloud.
 
-**`pingone-st`**
-- "Single-Tenant"
-- "PingOne ST", "AIC" (legacy abbreviation), "identity cloud tenant", "PingAM", "PingIDM", "PingDS"
-- "ForgeRock", "AM", "IDM", "DS" (in a PingOne ST Cloud context), PingOne ST tenant URL
+**`pingone-st`** (check first — longer/more specific signals)
+- "PingOne Advanced Identity Cloud", "AIC", "identity cloud tenant"
+- "PingAM", "PingIDM", "PingDS", "forgeblocks", "ForgeRock"
+- "AM", "IDM", "DS" (in an AIC cloud context), AIC tenant URL
 - Journeys, auth trees, realms
+
+**`pingone-mt`** (bare "PingOne" with no AIC qualifier)
+- "PingOne" (without "Advanced Identity Cloud" following), "apps.pingone.com", "auth.pingone.com"
+- "PingOne environment", "PingOne admin console"
+- PingOne MFA, PingOne Risk, PingOne DaVinci, PingOne Verify, PingOne Protect, PingOne IGA, PingOne Credentials, PingOne Neo, PingOne Authorize, PingOne SSO
 
 **`ping-software`**
 - "On-prem", "Software", "Download", "Binary", ".jar", "PingFederate", "PingAccess", "PingDirectory", "PingDataSync", "PingID on-prem", "PingAM standalone", "on-prem", "self-managed", "server profile"
 
 **`cross-platform`**
-- Service invoked from both PingOne MT and PingOne ST contexts
+- Service invoked from both PingOne (multi-tenant cloud) and AIC contexts
 - Universal Services layer questions (not product-specific setup)
 
 ## Products in Scope
@@ -36,8 +38,8 @@ Defines which platforms, products, and services are in scope. Use for platform d
 ### PingOne (multi-tenant)
 PingOne, PingOne MFA, PingOne Risk, PingOne DaVinci, PingOne Verify, PingOne Protect, PingOne IGA, PingOne Credentials, PingOne Neo, PingOne Authorize, PingOne SSO, PingOne Notifications
 
-### PingOne ST
-PingOne ST, PingAM (within PingOne ST), PingIDM (within PingOne ST), PingDS (within PingOne ST)
+### AIC
+AIC, PingAM (within AIC), PingIDM (within AIC), PingDS (within AIC)
 
 ### Ping Software Suite
 PingFederate, PingAccess, PingDirectory, PingDataSync, PingID (on-prem), PingAM (standalone), PingIDM (standalone), PingDS (standalone), PingAuthoriz, PingGateway

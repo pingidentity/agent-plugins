@@ -67,8 +67,8 @@ Use a maintained OIDC-compliant library — do not hand-roll OAuth.
 | Go | `golang.org/x/oauth2` + `github.com/coreos/go-oidc` | Combine for full OIDC flow |
 
 **OIDC discovery:** Always start from the well-known endpoint:
-- PingOne MT: `https://auth.pingone.com/{envId}/as/.well-known/openid-configuration`
-- PingOne ST (AIC): `https://<tenant>.forgerock.io/am/oauth2/realms/root/realms/<realm>/.well-known/openid-configuration`
+- PingOne (multi-tenant cloud): `https://auth.pingone.com/{envId}/as/.well-known/openid-configuration`
+- PingOne Advanced Identity Cloud (AIC): `https://<tenant>.forgerock.io/am/oauth2/realms/root/realms/<realm>/.well-known/openid-configuration`
 - PingFederate: `https://<pf-host>:9031/.well-known/openid-configuration`
 
 The discovery document defines the AS endpoints and supported algorithms. Do not hardcode token / userinfo / JWKS URLs.
@@ -195,8 +195,8 @@ Response: { access_token, expires_in, token_type, scope }
 **Token caching:** Cache the access token for `expires_in - 60s`. Re-fetch only on expiry. Most clients refresh too aggressively; this hammers the AS.
 
 **Worker / service principal model:**
-- PingOne MT: register a "Worker app"; assign admin roles directly to it
-- PingOne ST: create an OAuth 2.0 client with the `client_credentials` grant; use service-account-style scopes
+- PingOne (multi-tenant cloud): register a "Worker app"; assign admin roles directly to it
+- AIC: create an OAuth 2.0 client with the `client_credentials` grant; use service-account-style scopes
 - PingFederate: register an OAuth client with `client_credentials` grant in PingFederate AS
 
 **Recommendation — `private_key_jwt` over `client_secret_basic`:** asymmetric keys eliminate shared-secret leakage. Generate a key pair, register the public key (or its JWKS URL) with the AS, sign a JWT assertion at request time.
@@ -247,7 +247,7 @@ POST {token_endpoint}
 - AI agent acts on behalf of a user with a delegated, restricted token
 - Long-running job exchanges a session token for a long-lived task token
 
-PingOne MT supports token exchange via the standard token endpoint. Worker apps may need explicit token-exchange enablement at the OAuth provider level.
+PingOne supports token exchange via the standard token endpoint. Worker apps may need explicit token-exchange enablement at the OAuth provider level.
 
 ---
 
@@ -364,7 +364,7 @@ Production-grade backends MUST keep environment-specific config out of code:
 
 - [PingOne OIDC overview](https://docs.pingidentity.com/pingone/openid_connect/p1_oidc_overview.html)
 - [PingOne token exchange](https://docs.pingidentity.com/pingone/use_cases/p1_oauth_2_token_exchange.html)
-- [PingOne ST OAuth 2.0 guide](https://docs.pingidentity.com/pingoneaic/am-oauth2-guide/oauth2-introduction.html)
+- [AIC OAuth 2.0 guide](https://docs.pingidentity.com/pingoneaic/am-oauth2-guide/oauth2-introduction.html)
 - [PingFederate OAuth 2.0](https://docs.pingidentity.com/pingfederate/13.0/administrators_reference_guide/pf_oauth_overview.html)
 - [RFC 7636 — PKCE](https://datatracker.ietf.org/doc/html/rfc7636)
 - [RFC 8693 — Token Exchange](https://datatracker.ietf.org/doc/html/rfc8693)

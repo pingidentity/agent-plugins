@@ -20,7 +20,7 @@ Patterns for securing autonomous and semi-autonomous AI agents that call Ping Id
 ## Scope
 
 Covers: OAuth 2.0 client credentials flow as the default machine-to-machine pattern for AI agents, token scoping strategy, short-lived token rotation, revocation on compromise, and correlatable audit patterns.
-Does NOT cover: human-in-the-loop delegation (see `references/curated/workforce-helpdesk-ai.md`), Verified Trust signal issuance (see `references/curated/verified-trust-overview.md`), or standard OIDC application registration for user-facing apps (see `ping-foundation`).
+Does NOT cover: workforce helpdesk AI delegation patterns (see `references/curated/workforce-helpdesk-ai.md`), Verified Trust signal issuance (see `references/curated/verified-trust-overview.md`), or standard OIDC application registration for user-facing apps (see `ping-foundation`). CIBA human-in-the-loop approvals for high-risk agent actions are covered here in Pattern 6.
 
 ---
 
@@ -239,7 +239,7 @@ See `ping-universal-services` → `protect-configuration.md` for the full bot de
 
 ## Prerequisites
 
-- A PingOne environment (MT or AIC) or PingFederate deployment with an OAuth 2.0 AS configured.
+- A PingOne (multi-tenant cloud) or AIC environment, or a PingFederate deployment, with an OAuth 2.0 AS configured.
 - An application registered in the Ping AS with `client_credentials` grant type enabled.
 - For `private_key_jwt`: a JWKS URI registered on the client; the agent holds the corresponding private key.
 - For mTLS: X.509 certificate provisioned for the agent; PingFederate mTLS endpoint enabled.
@@ -251,7 +251,7 @@ See `ping-universal-services` → `protect-configuration.md` for the full bot de
 
 | Variant | Notes |
 |---|---|
-| PingOne MT | Client credentials supported natively; JWKS URI registration available in the app settings |
+| PingOne (multi-tenant cloud) | Client credentials supported natively; JWKS URI registration available in the app settings |
 | PingFederate | Supports `private_key_jwt`, mTLS, and RFC 7523 JWT bearer; dynamic client registration available for agent self-enrollment |
 | PingOne AIC | OAuth AS provided by the AIC tenant; same client credentials flow; token introspection endpoint available |
 | Multi-agent mesh | Each agent pair has a dedicated client registration; tokens are not shared; each agent's scope is narrowly tailored |

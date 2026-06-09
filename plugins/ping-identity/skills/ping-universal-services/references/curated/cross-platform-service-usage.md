@@ -36,11 +36,11 @@ slug: ""
 
 # Cross-Platform Universal Service Usage Rules
 
-Availability constraints, anti-patterns, service chaining patterns, and API versioning differences when using Ping Universal Services across PingOne MT, PingOne ST (AIC), and Ping Software Suite.
+Availability constraints, anti-patterns, service chaining patterns, and API versioning differences when using Ping Universal Services across PingOne (multi-tenant cloud), AIC, and Ping Software Suite.
 
 ## Scope
 
-Covers: platform-support matrix, known constraints per platform and per service, anti-patterns to avoid, service chaining patterns (Protect + Verify, IGA + Authorize, Verify + Credentials), and API versioning differences between PingOne MT and PingOne ST.
+Covers: platform-support matrix, known constraints per platform and per service, anti-patterns to avoid, service chaining patterns (Protect + Verify, IGA + Authorize, Verify + Credentials), and API versioning differences between PingOne (multi-tenant cloud) and AIC.
 
 Does NOT cover: step-by-step invocation syntax — see `references/curated/service-invocation-patterns.md`. Does NOT cover which service to select — see `references/curated/choosing-the-right-service.md`.
 
@@ -48,7 +48,7 @@ Does NOT cover: step-by-step invocation syntax — see `references/curated/servi
 
 ## Platform-support matrix
 
-| Service | PingOne MT (DaVinci) | PingOne ST / AIC | PingFederate | PingAccess | PingDirectory |
+| Service | PingOne (multi-tenant cloud) (DaVinci) | AIC | PingFederate | PingAccess | PingDirectory |
 |---|---|---|---|---|---|
 | **Protect** | Native connector | Native journey node | REST API (custom adapter required) | No native support | No |
 | **Verify** | Native connector | Native journey node | REST API (custom adapter required) | No native support | No |
@@ -67,14 +67,14 @@ Legend:
 
 ## Known constraints by platform
 
-### PingOne MT (DaVinci)
+### PingOne (multi-tenant cloud) (DaVinci)
 
 - **Protect**: The DaVinci connector requires the PingOne Protect JavaScript SDK to be embedded in the user-facing application to collect device signals. Without the SDK, the risk evaluation runs with reduced signal fidelity (IP and network signals only).
 - **Verify**: The Verify connector initiates a transaction and returns a transaction ID. The user must complete verification on a mobile device. DaVinci flows must implement a **polling loop** (using the Loop connector or recursive sub-flow) to check transaction status; there is no push callback to DaVinci.
 - **IGA**: IGA is not intended for real-time login flows. The IGA connector is suited for asynchronous provisioning and access-request flows, not for evaluating entitlements during a sub-second login transaction. Use Authorize for runtime entitlement enforcement.
 - **Credentials**: Credential issuance requires the user to have a compatible digital wallet installed on their device. The DaVinci flow must handle the case where the user does not have a wallet (branch to an enrollment or download step).
 
-### PingOne ST / AIC
+### AIC
 
 - **Protect**: The `_pingProtect` context object must be collected by the AIC tree's client-side script node before the Protect Evaluation node runs. If the client script fails to execute (e.g., the browser blocks JavaScript), the Protect node receives no device signals and may fall back to a default risk level.
 - **Verify**: The Verify node has a `Waiting` outcome that the journey designer must explicitly handle. Failing to wire the `Waiting` outcome to a polling or waiting page results in users being dropped to the `Error` outcome prematurely.
@@ -172,17 +172,17 @@ Runtime (synchronous — Authorize):
 
 ---
 
-## API versioning differences between PingOne MT and PingOne ST
+## API versioning differences between PingOne (multi-tenant cloud) and AIC
 
-PingOne MT and PingOne ST (AIC) share the same underlying PingOne platform APIs for Universal Services (Protect, Verify, Credentials, Authorize). However, there are differences in:
+PingOne (multi-tenant cloud) and AIC share the same underlying PingOne platform APIs for Universal Services (Protect, Verify, Credentials, Authorize). However, there are differences in:
 
-| Dimension | PingOne MT | PingOne ST (AIC) |
+| Dimension | PingOne (multi-tenant cloud) | AIC |
 |---|---|---|
 | **Protect API version** | v1 (stable) | v1 (same endpoint) |
 | **Verify API version** | v1 (stable) | v1 (same endpoint) |
 | **Journey node vs DaVinci connector version** | DaVinci connector version is managed in the DaVinci connector library; updates are pushed by Ping | AIC node version is tied to the AIC release train; updated with AIC version upgrades |
 | **Token format passed to Authorize** | PingOne access token (JWT); claims populated by DaVinci flow | AIC `id_token` or scripted session attribute map; mapped to Authorize input |
-| **Device signal collection** | Protect JS SDK embedded in the application; signals sent to PingOne MT endpoint | `_pingProtect` context object collected by an AIC client-side script node; same underlying Protect endpoint |
+| **Device signal collection** | Protect JS SDK embedded in the application; signals sent to PingOne endpoint | `_pingProtect` context object collected by an AIC client-side script node; same underlying Protect endpoint |
 | **Polling for Verify result** | DaVinci loop connector polls `GET /v1/environments/{envId}/users/{userId}/verifyTransactions/{transactionId}` | AIC `Polling Wait` node re-enters the Verify journey node; same underlying API |
 
 ---
@@ -198,7 +198,7 @@ PingOne MT and PingOne ST (AIC) share the same underlying PingOne platform APIs 
 
 ## Common variants
 
-- **Multi-environment chaining**: A PingOne MT DaVinci flow calling a Verify service configured in a separate PingOne environment (e.g., a shared services environment). Supported, but the flow connector must reference the service environment's `environmentId`.
+- **Multi-environment chaining**: A PingOne DaVinci flow calling a Verify service configured in a separate PingOne environment (e.g., a shared services environment). Supported, but the flow connector must reference the service environment's `environmentId`.
 - **Fallback when a service is unavailable**: Each Universal Service call should include a timeout and a fallback outcome. The recommended fallback policy: Protect unavailable → treat as LOW risk; Verify unavailable → route to manual review; Authorize unavailable → deny by default (fail-closed).
 - **Audit trail correlation**: Each service invocation returns a unique transaction/evaluation ID. Store these IDs in the user's session and in audit logs to correlate risk evaluations, verification outcomes, and authorization decisions across services.
 

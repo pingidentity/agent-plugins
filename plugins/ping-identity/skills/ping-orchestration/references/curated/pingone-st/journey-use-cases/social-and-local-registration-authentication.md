@@ -1,5 +1,5 @@
 ---
-title: "PingOne ST — Social and Local Registration and Authentication"
+title: "PingOne Advanced Identity Cloud (AIC) — Social and Local Registration and Authentication"
 product_family: pingone-st
 products: ["pingone-aic", "pingam"]
 capabilities: ["orchestration"]
@@ -13,7 +13,7 @@ last_updated: "2026-06-02"
 slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 ---
 
-# PingOne ST — Social and Local Registration and Authentication
+# AIC — Social and Local Registration and Authentication
 
 Design patterns for CIAM registration and authentication journeys supporting both local credentials and social identity providers. Derived from CIAM Passwordless and basic registration journey exports.
 

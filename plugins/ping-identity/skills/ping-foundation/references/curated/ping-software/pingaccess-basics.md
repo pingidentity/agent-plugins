@@ -20,7 +20,7 @@ Reverse-proxy policy enforcement point that protects web applications and APIs b
 ## Scope
 
 **Covers:** PingAccess deployment models, core entities (Virtual Host, Site, Application, Web Session, Resource, Rule), token provider setup, end-to-end web app and API protection configuration, common gotchas.
-**Does NOT cover:** PingFederate federation configuration (see `references/curated/ping-software/pingfederate-basics.md`), PingDirectory (separate anchor), OAuth/OIDC client design on PingOne MT/ST (ping-foundation MT/ST anchors), PingID MFA configuration.
+**Does NOT cover:** PingFederate federation configuration (see `references/curated/ping-software/pingfederate-basics.md`), PingDirectory (separate anchor), OAuth/OIDC client design on PingOne (multi-tenant cloud) / AIC (ping-foundation MT/ST anchors), PingID MFA configuration.
 
 ---
 
