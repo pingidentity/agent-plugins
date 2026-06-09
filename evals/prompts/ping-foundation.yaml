@@ -50,9 +50,9 @@ trigger_prompts:
     expected_tier: curated
 
   - id: T-09
-    prompt: "How do I set up MFA policies in PingOne MT for my workforce users?"
+    prompt: "How do I configure the sign-on policy in PingOne MT to require MFA for my workforce users?"
     expected_anchors:
-      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-mt/tenant-and-environment-setup.md
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-mt/sign-on-policies.md
     expected_tier: curated
 
   - id: T-10
@@ -107,6 +107,29 @@ trigger_prompts:
     expected_tier: curated
     notes: "strategy-uc-8 (AIC)"
 
+  # ----- Feedback use cases (June 2026) -----
+
+  - id: T-56
+    prompt: "We need to register a WS-Federation app in PingFederate for our Office 365 integration."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/ping-software/pingfederate-basics.md
+    expected_tier: curated
+    notes: "feedback: WS-Federation trigger"
+
+  - id: T-57
+    prompt: "How do I configure Platform SSO for our employees using PingOne?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-mt/sign-on-policies.md
+    expected_tier: curated
+    notes: "feedback: Platform SSO / SSO trigger"
+
+  - id: T-58
+    prompt: "Set up SSO for our workforce so employees can sign in to all our apps with one account."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/cross-platform/foundation-overview.md
+    expected_tier: curated
+    notes: "feedback: SSO workforce trigger"
+
 non_trigger_prompts:
   - id: N-01
     prompt: "Build a DaVinci flow for customer login with risk-based step-up MFA."
@@ -130,6 +153,11 @@ non_trigger_prompts:
     prompt: "Give my AI agent a verified identity using Ping."
     expected_skill: ping-identity-for-ai
 
+  - id: N-06
+    prompt: "Add a user to Ping."
+    expected_skill: ping-quickstart
+    notes: "Bare command with no platform named — must route to ping-quickstart for clarification first."
+
 ambiguous_prompts:
   - id: A-01
     prompt: "Configure MFA."
@@ -140,6 +168,28 @@ ambiguous_prompts:
     prompt: "Set up SSO."
     expected_clarification_keywords: ["pingone", "aic", "software", "platform", "workforce", "ciam"]
 
-  - id: A-03
-    prompt: "Add a user to Ping."
-    expected_clarification_keywords: ["pingone", "aic", "directory", "platform", "mt", "st"]
+# ----- Cross-skill boundary cases (medium / hard) -----
+# These test the foundation-vs-orchestration boundary. The correct first skill is
+# ping-foundation; the model must not jump straight to orchestration.
+
+cross_skill_prompts:
+  - id: M-01
+    prompt: "I want to add an MFA policy to my PingOne environment. Is that a policy configuration or do I need to build a flow?"
+    expected_primary_skill: ping-foundation
+    expected_secondary_skill: ping-orchestration
+    notes: "Foundation owns sign-on policy + MFA policy config; orchestration owns the flow nodes. Model should route to foundation and explain the distinction."
+
+  - id: H-01
+    prompt: "We're building a CIAM solution on PingOne Advanced Identity Cloud: tenant provisioned, apps registered, now we need a registration journey with email OTP, identity verification via PingOne Verify, and then the iOS SDK integration. What's the sequence of skills and what does each one own?"
+    expected_primary_skill: ping-foundation
+    expected_secondary_skills:
+      - ping-orchestration
+      - ping-universal-services
+      - ping-app-integration
+    notes: "Full-stack multi-skill case. Foundation is the orientation entry point; model should describe the layered skill sequence rather than attempting to answer all layers from one skill."
+
+  - id: H-02
+    prompt: "We're running PingFederate on-prem and want to add PingOne MFA as a step-up. How do these two products connect?"
+    expected_primary_skill: ping-foundation
+    expected_secondary_skill: ping-universal-services
+    notes: "Cross-platform integration: PingFederate (ping-software branch) + PingOne MFA (universal-services). Foundation handles the connector/adapter configuration; universal-services handles the MFA policy."

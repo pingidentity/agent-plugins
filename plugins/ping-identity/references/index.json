@@ -1,7 +1,7 @@
 {
   "plugin": "ping-identity",
   "description": "Local reference index for plugin-only installs. Lists all curated anchors and generated shortlists by skill and platform branch.",
-  "last_updated": "2026-06-03",
+  "last_updated": "2026-06-05",
   "skills": {
     "ping-quickstart": {
       "curated": [
@@ -9,7 +9,7 @@
         "skills/ping-quickstart/references/curated/choose-the-right-ping-platform.md",
         "skills/ping-quickstart/references/curated/common-starting-patterns.md",
         "skills/ping-quickstart/references/curated/pingone-licensing-and-packaging.md",
-        "skills/ping-quickstart/references/curated/forgerock-to-ping-migration-paths.md",
+        "skills/ping-quickstart/references/curated/migration-overview.md",
         "skills/ping-quickstart/references/curated/inherited-deployment-orientation.md",
         "skills/ping-quickstart/references/curated/end-to-end-validation.md"
       ]
@@ -32,6 +32,7 @@
         "skills/ping-foundation/references/curated/pingone-st/foundation-overview.md",
         "skills/ping-foundation/references/curated/pingone-st/app-setup.md",
         "skills/ping-foundation/references/curated/pingone-st/authentication-fundamentals.md",
+        "skills/ping-foundation/references/curated/pingone-st/am-services.md",
         "skills/ping-foundation/references/curated/pingone-st/themes-and-customization.md",
         "skills/ping-foundation/references/curated/pingone-st/directory-setup.md"
       ],
@@ -45,6 +46,7 @@
     "ping-orchestration": {
       "curated": [
         "skills/ping-orchestration/references/curated/pingone-st/journey-design-patterns.md",
+        "skills/ping-orchestration/references/curated/pingone-st/nodes/node-fundamentals.md",
         "skills/ping-orchestration/references/curated/pingone-st/nodes/basic-auth-nodes.md",
         "skills/ping-orchestration/references/curated/pingone-st/nodes/mfa-nodes.md",
         "skills/ping-orchestration/references/curated/pingone-st/nodes/risk-management-nodes.md",
@@ -79,7 +81,9 @@
         "skills/ping-universal-services/references/curated/service-invocation-patterns.md",
         "skills/ping-universal-services/references/curated/cross-platform-service-usage.md",
         "skills/ping-universal-services/references/curated/protect-configuration.md",
-        "skills/ping-universal-services/references/curated/verify-configuration.md"
+        "skills/ping-universal-services/references/curated/verify-configuration.md",
+        "skills/ping-universal-services/references/curated/mfa-configuration.md",
+        "skills/ping-universal-services/references/curated/mfa-region-and-service-model.md"
       ],
       "generated": {
         "protect": "skills/ping-universal-services/references/generated/protect/.gitkeep",

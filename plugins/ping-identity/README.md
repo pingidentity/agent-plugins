@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/banner-build-with-ai.png" alt="A banner representing building with Ping using AI.">
+</p>
+
 # Ping Identity Plugin
 
 Agent skills for configuring, integrating, and operating Ping Identity platforms.

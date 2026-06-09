@@ -1,0 +1,66 @@
+id: 03-aic-scripted-decision-node
+skill: ping-orchestration
+title: "AIC scripted decision node: correct API and return value pattern"
+
+prompt: |
+  Write a PingOne AIC Scripted Decision node script (next-gen JavaScript syntax)
+  that reads the "loginCount" value from shared state, and returns outcome
+  "firstLogin" if the count is 1, or "returningUser" otherwise.
+
+  The script must:
+  - Use the correct next-gen state API (nodeState, not sharedState or request).
+  - Read a value from shared state using the correct method.
+  - Write a value back to shared state.
+  - Set the outcome variable correctly.
+  - List both outcomes in the node configuration.
+
+  Write the script to decision-node.js and the configuration snippet to node-config.json using the Write tool.
+
+expected_artifacts:
+  - "**/*.js"
+  - "**/*.json"
+
+deterministic_checks:
+  - id: node-state-api
+    description: "Uses nodeState (next-gen API) not deprecated sharedState"
+    type: grep
+    glob: "**/*"
+    pattern: "nodeState"
+    must_match: true
+
+  - id: get-method
+    description: "Reads from state with .get() method"
+    type: regex
+    glob: "**/*"
+    pattern: "nodeState\\.get\\("
+    must_match: true
+
+  - id: put-shared-method
+    description: "Writes to shared state with putShared()"
+    type: grep
+    glob: "**/*"
+    pattern: "putShared"
+    must_match: true
+
+  - id: outcome-variable
+    description: "Sets the outcome variable (not 'return outcome' or 'result')"
+    type: regex
+    glob: "**/*"
+    pattern: "outcome\\s*="
+    must_match: true
+
+  - id: both-outcomes-declared
+    description: "Both 'firstLogin' and 'returningUser' outcomes are named"
+    type: regex
+    glob: "**/*"
+    pattern: "firstLogin"
+    must_match: true
+
+  - id: no-deprecated-shared-state
+    description: "Does NOT use the deprecated sharedState.get() API"
+    type: not_contains
+    glob: "**/*.js"
+    pattern: "sharedState.get"
+
+judge_rubric:
+  enabled: false

@@ -1,0 +1,68 @@
+id: 02-aic-realm-service-config
+skill: ping-foundation
+title: "AIC realm and OAuth2 provider service configuration"
+
+prompt: |
+  Write a shell script (configure-realm.sh) that uses the PingOne AIC (Advanced
+  Identity Cloud) AM REST API to configure the alpha realm's OAuth2 Provider
+  service. The script must:
+    - Target the correct OIDC discovery endpoint path for the alpha realm:
+      /am/oauth2/realms/root/realms/alpha/.well-known/openid-configuration
+    - Use the AM REST API base path /am/json/realms/root/realms/alpha/ for
+      all service calls
+    - Set the OAuth2 Provider service property "accessTokenLifetime" to 3600
+    - Set "refreshTokenLifetime" to 604800
+    - Set "issuer" to the tenant base URL variable $TENANT_URL
+    - Include a curl command that PATCHes the OAuth2Provider service via
+      /am/json/realms/root/realms/alpha/realm-config/services/oauth-oidc
+    - Authenticate using a bearer token stored in $ADMIN_TOKEN
+  Output only configure-realm.sh.
+  Use the Write tool to create configure-realm.sh. Do not just show the script in chat.
+
+expected_artifacts:
+  - "**/*.sh"
+
+deterministic_checks:
+  - id: alpha-realm-path
+    description: "Script targets the alpha realm path in the AM REST API"
+    type: grep
+    glob: "**/*.sh"
+    pattern: "realms/root/realms/alpha"
+    must_match: true
+
+  - id: oauth-oidc-service-path
+    description: "Script targets the oauth-oidc service endpoint, not a typo"
+    type: grep
+    glob: "**/*.sh"
+    pattern: "oauth-oidc"
+    must_match: true
+
+  - id: access-token-lifetime
+    description: "accessTokenLifetime is set in the PATCH payload"
+    type: grep
+    glob: "**/*.sh"
+    pattern: "accessTokenLifetime"
+    must_match: true
+
+  - id: bearer-token-auth
+    description: "Script passes admin bearer token in Authorization header"
+    type: regex
+    glob: "**/*.sh"
+    pattern: "Authorization.*Bearer"
+    must_match: true
+
+  - id: no-wrong-realm-path
+    description: "Script does not use the incorrect flat /am/json/realms/alpha path"
+    type: not_contains
+    glob: "**/*.sh"
+    pattern: "/am/json/realms/alpha/"
+
+  - id: patch-method
+    description: "Script uses HTTP PATCH for the service update"
+    type: regex
+    glob: "**/*.sh"
+    pattern: "-X\\s+PATCH|--request\\s+PATCH"
+    must_match: true
+
+judge_rubric:
+  enabled: false

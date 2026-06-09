@@ -1,6 +1,6 @@
 ---
 name: ping-universal-services
-description: Use this skill whenever a task involves configuring or invoking a Ping Universal Service (Protect, Verify, Credentials, IGA, Authorize, or SSO) at the service or policy level — e.g., setting risk thresholds, configuring a Verify policy, issuing credentials, wiring Authorize. Do NOT use for integrating a service SDK into app code (that is ping-app-integration). Do NOT use for vague "add security" or "prevent suspicious logins" requests without a named service — clarify first. Covers service selection guidance, invocation patterns from DaVinci flows or AIC journeys, policy configuration, and cross-product usage. Also invoke with /ping-universal-services.
+description: "Use this skill whenever the task involves configuring or invoking a Ping shared service at the policy or service level. Triggers: PingOne Protect (risk scoring, predictors, risk policies, Signals SDK); PingOne Verify (KYC, identity proofing, document + liveness, verification policies); PingOne MFA (device management, MFA policies, enrollment API, MFA-as-a-service); PingOne Credentials (verifiable credential issuance, presentation, revocation); PingOne IGA (access requests, access reviews, provisioning, entitlements); PingOne Authorize (fine-grained authorization, ABAC policies); cross-platform SSO; 'which shared service do I need'. Service-in-flow rule — when a Protect, Verify, IGA, or Authorize node or connector appears inside a DaVinci flow or AIC journey, configuring that node, connector, or service invocation belongs here, NOT in ping-orchestration. Orchestration owns the flow shape; this skill owns the service node configuration regardless of where the node lives. MFA region guardrail — for Workforce MFA tasks, always establish the admin's PingOne region (console domain: .pingone.sg for Singapore vs .pingone.com/.eu/.asia for other regions) before advising on service model or available methods; the service model differs by region. Do NOT trigger on vague 'add security' requests — clarify which service first. Also invoke with /ping-universal-services."
 compatibility: Designed for Ping Identity shared services work. References product docs and the Ping Marketplace.
 metadata:
   publisher: Ping Identity
@@ -9,7 +9,7 @@ metadata:
 
 # ping-universal-services
 
-Shared strategic services used across PingOne MT, PingOne ST (AIC), and Ping Software Suite — invoked from flows rather than administered as standalone products. Covers PingOne Protect (risk), PingOne Verify (identity proofing / KYC), PingOne Credentials (verifiable credentials), PingOne IGA (governance), PingOne Authorize (fine-grained authorization), and cross-platform SSO.
+Shared strategic services used across PingOne, PingOne Advanced Identity Cloud (AIC), and Ping Software Suite — invoked from flows rather than administered as standalone products. Covers PingOne Protect (risk), PingOne Verify (identity proofing / KYC), PingOne Credentials (verifiable credentials), PingOne IGA (governance), PingOne Authorize (fine-grained authorization), and cross-platform SSO.
 
 ## Invocation
 
@@ -19,6 +19,7 @@ Invoke explicitly with `/ping-universal-services` or by saying "use ping-univers
 
 - "Add PingOne Protect risk evaluation to my login flow"
 - "Use PingOne Verify for KYC / identity proofing during registration"
+- "Configure PingOne MFA — device management, MFA policies, or MFA-as-a-service enrollment API"
 - "Issue or present a verifiable credential"
 - "Add IGA governance to my PingOne environment"
 - "Use PingOne Authorize for fine-grained authorization"
@@ -32,7 +33,9 @@ Invoke explicitly with `/ping-universal-services` or by saying "use ping-univers
 - If the user is just orienting or choosing a platform: use `ping-quickstart`.
 - If the task is integrating a Protect / Verify / Credentials **SDK or library into app code**: use `ping-app-integration` — SDK wiring is app integration, not service configuration.
 - If the user mentions "add security" or "prevent suspicious logins" without naming a specific service, ask a clarifying question — the task may be Protect (risk scoring) or just MFA (orchestration).
+- If the task is **MFA node/connector wiring within a journey or flow** (not MFA policy or device management): use `ping-orchestration` — that is flow design, not service configuration.
 - If the task is generic app / SDK integration without referencing a named Universal Service: use `ping-app-integration`.
+- **PingOne Recognize** — not yet GA; this skill will cover it when available.
 
 ## Multi-skill use cases
 
@@ -60,6 +63,7 @@ When Protect and Verify are configured here, hand off to `ping-app-integration` 
 |---|---|
 | Evaluate risk or adapt flows based on risk signals | Protect branch |
 | Identity proofing / document + liveness check | Verify branch |
+| PingOne MFA — device enrollment API, MFA policy config, MFA-as-a-service | MFA branch — see `references/curated/choosing-the-right-service.md` for MFA vs flow-level MFA routing |
 | Issue or present verifiable credentials | Credentials branch |
 | Governance, access reviews, provisioning | IGA branch |
 | Fine-grained authorization policies | Authorize branch |
@@ -76,6 +80,12 @@ When Protect and Verify are configured here, hand off to `ping-app-integration` 
 | Cross-platform usage constraints and service chaining | `references/curated/cross-platform-service-usage.md` |
 | Protect predictors, risk policies, Signals SDK setup | `references/curated/protect-configuration.md` |
 | Verify policy fields, verification types, transaction lifecycle | `references/curated/verify-configuration.md` |
+| PingOne MFA — region and service model (Workforce: native vs hybrid, available methods) | `references/curated/mfa-region-and-service-model.md` |
+| PingOne MFA policy config, device management, pairing keys, enrollment API, AMR codes | `references/curated/mfa-configuration.md` |
+
+## MCP execution
+
+See `references/runtime/mcp-preflight.md` for MCP config and Cursor preflight steps.
 
 ## Retrieval escalation
 

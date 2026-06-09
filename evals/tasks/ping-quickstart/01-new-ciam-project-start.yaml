@@ -1,0 +1,42 @@
+id: 01-new-ciam-project-start
+skill: ping-quickstart
+title: "Where to start with Ping Identity for a new CIAM project"
+
+prompt: |
+  We are starting a brand-new CIAM project — no existing identity infrastructure.
+  We need customer registration, login, social sign-in, and eventually MFA.
+  We have not chosen a Ping Identity platform yet.
+  Where do we start, and what are our main options?
+
+  Write your answer to a file named answer.md using the Write tool.
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+
+deterministic_checks:
+  - id: mentions-pingone
+    description: "Response mentions PingOne as an option"
+    type: grep
+    glob: "**/*.md"
+    pattern: "PingOne"
+    must_match: true
+
+  - id: mentions-aic-or-advanced-identity-cloud
+    description: "Response mentions AIC or Advanced Identity Cloud as an option"
+    type: regex
+    glob: "**/*.md"
+    pattern: "AIC|Advanced Identity Cloud"
+    must_match: true
+
+judge_rubric:
+  enabled: true
+  criteria:
+    - name: correctness
+      description: "Recommendations are factually accurate for Ping Identity products"
+      weight: 0.5
+    - name: completeness
+      description: "Covers the key decision points a developer needs"
+      weight: 0.5
+  pass_threshold: 0.7
+  judge_model: gpt-5.5

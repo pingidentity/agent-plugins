@@ -1,0 +1,62 @@
+id: 04-davinci-vs-journey-selection
+skill: ping-orchestration
+title: "DaVinci vs AIC Journey selection rationale"
+
+prompt: |
+  A Ping Identity customer is building a consumer-facing (CIAM) registration and
+  login experience for a retail web app. They have access to both PingOne MT
+  (DaVinci) and PingOne Advanced Identity Cloud (AIC Journeys).
+
+  Write a concise advisory (400–600 words) explaining:
+  1. The key architectural differences between DaVinci flows and AIC Journeys
+     that affect this decision.
+  2. Which platform is better suited for this CIAM use case and why.
+  3. At least two scenarios where the OTHER platform would be the better choice
+     (e.g., what use cases favor AIC Journeys over DaVinci, or vice versa).
+  4. Whether and how the two platforms can be used together.
+
+  Save the output as a Markdown file.
+
+expected_artifacts:
+  - "**/*.md"
+
+deterministic_checks:
+  - id: mentions-davinci
+    description: "Document mentions DaVinci"
+    type: grep
+    glob: "**/*.md"
+    pattern: "DaVinci"
+    must_match: true
+
+  - id: mentions-aic-or-journey
+    description: "Document mentions AIC or Journey"
+    type: regex
+    glob: "**/*.md"
+    pattern: "AIC|Journey|Advanced Identity Cloud"
+    must_match: true
+
+  - id: no-invented-product-names
+    description: "Does not invent non-existent product names like 'PingOne Flow' or 'PingFlow'"
+    type: not_contains
+    glob: "**/*.md"
+    pattern: "PingFlow"
+
+judge_rubric:
+  enabled: true
+  criteria:
+    - name: correctness
+      description: >
+        Technical claims about DaVinci vs AIC Journeys are accurate: platform
+        differences (no-code connector model vs node-based tree), deployment
+        methods, and use case fit are correctly described. No invented product
+        names or false capabilities.
+      weight: 0.5
+    - name: completeness
+      description: >
+        Addresses all four required points: architectural differences, recommended
+        platform for the given CIAM use case with justification, at least two
+        counter-scenarios for the other platform, and co-existence or
+        complementary usage patterns.
+      weight: 0.5
+  pass_threshold: 0.7
+  judge_model: gpt-5.5

@@ -1,0 +1,65 @@
+id: 04-pingfederate-oauth-client
+skill: ping-foundation
+title: "PingFederate OAuth 2.0 client config with PKCE enforcement"
+
+prompt: |
+  Create a JSON file (pf-oauth-client.json) that represents a PingFederate
+  OAuth 2.0 client configuration for a public SPA client. The config must:
+    - Set "clientId" to "my-spa-client"
+    - Omit "clientSecret" entirely (public client — no secret)
+    - Set "grantTypes" to include only "authorization_code"
+    - Set "redirectUris" to ["https://spa.example.com/callback"]
+    - Set "requirePushedAuthorizationRequests" to false
+    - Set "requireProofKeyForCodeExchange" to true (PKCE required for public
+      client — the correct PingFederate property name)
+    - Set "tokenEndpointAuthMethod" to "none" (correct value for public client)
+    - Set "enabled" to true
+  Do NOT use "pkceEnforcement" as the property name — that is incorrect for
+  PingFederate. The correct property is "requireProofKeyForCodeExchange".
+
+expected_artifacts:
+  - "**/*.json"
+
+deterministic_checks:
+  - id: correct-pkce-property
+    description: "Uses requireProofKeyForCodeExchange, not the wrong pkceEnforcement name"
+    type: grep
+    glob: "**/*.json"
+    pattern: "requireProofKeyForCodeExchange"
+    must_match: true
+
+  - id: no-wrong-pkce-property
+    description: "Does not use the incorrect pkceEnforcement property name"
+    type: not_contains
+    glob: "**/*.json"
+    pattern: "pkceEnforcement"
+
+  - id: pkce-enabled-true
+    description: "PKCE is set to true (enforced)"
+    type: regex
+    glob: "**/*.json"
+    pattern: "requireProofKeyForCodeExchange.*true"
+    must_match: true
+
+  - id: token-endpoint-auth-none
+    description: "tokenEndpointAuthMethod is none for the public client"
+    type: grep
+    glob: "**/*.json"
+    pattern: "\"none\""
+    must_match: true
+
+  - id: no-client-secret
+    description: "clientSecret field is absent (public client has no secret)"
+    type: not_contains
+    glob: "**/*.json"
+    pattern: "clientSecret"
+
+  - id: auth-code-only
+    description: "grantTypes contains authorization_code"
+    type: grep
+    glob: "**/*.json"
+    pattern: "authorization_code"
+    must_match: true
+
+judge_rubric:
+  enabled: false

@@ -1,0 +1,93 @@
+id: 05-forgerock-to-ping-android-migration
+skill: ping-app-integration
+title: "Migrate Android app from ForgeRock SDK to Ping Journey SDK"
+
+prompt: |
+  You have an existing Android app using the legacy ForgeRock SDK
+  (org.forgerock:forgerock-android-sdk). Migrate it to the Ping Identity
+  Journey SDK. Write the following files to disk:
+
+  1. build.gradle.kts — updated dependency block replacing the ForgeRock
+     artifact with the correct Ping SDK artifact ID
+     (com.pingidentity.sdks:journey). Remove all org.forgerock references.
+
+  2. AuthRepository.kt — migrated authentication logic. The legacy code uses:
+     - FRAuth.start(context) for initialization
+     - FRSession.authenticate(context, "Login", nodeListener) with NodeListener
+       callbacks (onSuccess, onException, onCallbackReceived)
+     - Callback property setting via setName(x) / setPassword(x) methods
+
+     Replace with the Ping SDK equivalents:
+     - Journey { ... } builder for initialization
+     - journey.start("Login") suspend function
+     - Sealed Node when-branches: ContinueNode, SuccessNode, ErrorNode,
+       FailureNode
+     - Kotlin property syntax for callbacks: callback.name = x,
+       callback.password = x (NOT setName / setPassword)
+
+  3. Preserve the original code as commented-out blocks using the marker
+     format: // [ping-migration] BEGIN legacy ... // [ping-migration] END legacy
+
+  Use the Write tool to create both files: AuthRepository.kt and build.gradle.kts.
+  Do not describe the code — write the actual file contents.
+
+expected_artifacts:
+  - "**/*.kt"
+  - "**/build.gradle.kts"
+
+deterministic_checks:
+  - id: new-artifact-id
+    description: "Uses com.pingidentity.sdks:journey in Gradle, not org.forgerock"
+    type: grep
+    glob: "**/build.gradle.kts"
+    pattern: "com\\.pingidentity\\.sdks:journey"
+    must_match: true
+
+  - id: no-forgerock-artifact
+    description: "Does NOT reference org.forgerock artifact in Gradle"
+    type: not_contains
+    glob: "**/build.gradle.kts"
+    pattern: "org.forgerock"
+
+  - id: callback-name-property
+    description: "Uses .name = x (property syntax), not setName()"
+    type: regex
+    glob: "**/*.kt"
+    pattern: "\\.name\\s*="
+    must_match: true
+
+  - id: no-set-name-method
+    description: "Does NOT use legacy setName() method"
+    type: not_contains
+    glob: "**/*.kt"
+    pattern: ".setName("
+
+  - id: no-set-password-method
+    description: "Does NOT use legacy setPassword() method"
+    type: not_contains
+    glob: "**/*.kt"
+    pattern: ".setPassword("
+
+  - id: sealed-node-branches
+    description: "Uses all four sealed Node types in a when expression"
+    type: regex
+    glob: "**/*.kt"
+    pattern: "ContinueNode.*SuccessNode.*ErrorNode.*FailureNode"
+    flags: "ms"
+    must_match: true
+
+  - id: no-node-listener
+    description: "Does NOT use legacy NodeListener pattern"
+    type: not_contains
+    glob: "**/*.kt"
+    pattern: "NodeListener"
+
+  - id: migration-comment-markers
+    description: "Preserves legacy code with migration comment markers"
+    type: grep
+    glob: "**/*.kt"
+    pattern: "\\[ping-migration\\] BEGIN legacy"
+    must_match: true
+
+judge_rubric:
+  enabled: false

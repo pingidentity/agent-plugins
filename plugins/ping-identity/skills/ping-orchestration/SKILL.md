@@ -1,10 +1,10 @@
 ---
 name: ping-orchestration
-description: Use this skill whenever you need to design, build, plan, or advise on authentication flows, journeys, or orchestration logic for Ping Identity platforms — including DaVinci flows, PingOne ST journeys, PingAM trees, scripted decision nodes, and branching authentication/registration logic. When the intent is a platform or product comparison ("AIC vs DaVinci?", "journey vs DaVinci flow?", "which platform for my login flow?") without specifying the use case, workforce vs CIAM context, or platform, ask a clarifying question about the use case or platform before answering. When the platform is unspecified and matters (e.g., MFA configuration differs by platform), ask which platform before advising. Also invoke with /ping-orchestration.
+description: "Use this skill whenever the task involves designing, building, or advising on authentication flows, journeys, or orchestration logic in Ping Identity. Triggers: DaVinci flows, PingOne ST journeys, PingAM authentication trees, scripted decision nodes; login, registration, recovery, MFA, or step-up journey design; passwordless authentication (passkeys, FIDO2, magic links, biometric); authenticator app enrollment, TOTP, push MFA flows; transaction approvals via email or push notification (CIBA, out-of-band step-up); progressive profiling, social login, consent; flow troubleshooting; 'what nodes do I need', 'design a flow for', 'build a journey that'. When the user asks 'journey vs DaVinci flow?', 'AIC or DaVinci?', 'which orchestration platform should we use?', or 'where do I configure MFA in Ping?' without stating both a use case (workforce / CIAM / B2B) AND a platform — you MUST ask one clarifying question before recommending. Do not guess. Also invoke with /ping-orchestration."
 compatibility: Designed for Ping Identity orchestration tasks. MCP tools for PingOne ST are used when available to create and update journeys directly.
 metadata:
   publisher: Ping Identity
-  version: "1.0"
+  version: "1.0.0"
 ---
 
 # ping-orchestration
@@ -19,6 +19,9 @@ Invoke this skill explicitly with `/ping-orchestration` or by saying "use ping-o
 
 Trigger on ANY question — including advisory, planning, and "what nodes do I need" requests, not just implementation — when the task involves:
 - Building or designing a login, registration, recovery, MFA, or step-up journey in PingOne ST / AIC / PingAM
+- Passwordless authentication flows (passkeys, FIDO2, magic links, biometric)
+- Authenticator app login, push MFA, or TOTP enrollment flows
+- Transaction approvals via email or push (CIBA / out-of-band step-up)
 - Creating or designing a DaVinci flow for authentication, MFA, or orchestration
 - Configuring a PingAM authentication tree or scripted decision node
 - Planning or reviewing journey structure before implementation
@@ -35,34 +38,28 @@ Trigger on ANY question — including advisory, planning, and "what nodes do I n
 
 ## Multi-skill use cases
 
-Orchestration sits in the middle of the stack. Platform foundation must exist first; other skills extend what flows can do.
-
 | Sequence | Skill |
 |---|---|
 | Before: tenant, realm, identity store, app configured | `ping-foundation` |
-| After: add risk scoring, MFA step-up, identity verification within the flow | `ping-universal-services` |
-| After: wire the finished flow into a web, mobile, or SDK-based app | `ping-app-integration` |
-
-**Example — CIAM with proofing:** `ping-foundation` → `ping-orchestration` → `ping-universal-services` (Verify) → `ping-app-integration`.
+| After: risk scoring, MFA step-up, identity verification | `ping-universal-services` |
+| After: wire flow into web, mobile, or SDK app | `ping-app-integration` |
 
 ---
 
-## MCP tool-first execution
+## MCP execution
 
-Scan available tools for MCP tools that can perform the required operation. If matching tools are available, use them directly. Otherwise, proceed with curated references.
-
----
+Scan available tools for MCP tools that can perform the required operation. If matching tools are available, run the MCP config preflight first, then use them. Otherwise, proceed with curated references. See `references/runtime/mcp-preflight.md` for MCP config and Cursor preflight steps.
 
 ## Routing — Step 1: Which platform?
 
 | Platform signal | Branch |
 |---|---|
-| PingOne ST tenant, PingAM, identity cloud, ForgeRock lineage | [PingOne ST](#pingone-st) |
-| PingOne MT + DaVinci | [PingOne MT / DaVinci](#pingone-mt--davinci) |
+| PingOne Advanced Identity Cloud (AIC), PingAM, identity cloud, ForgeRock lineage | [PingOne Advanced Identity Cloud](#pingone-advanced-identity-cloud) |
+| PingOne + DaVinci | [PingOne / DaVinci](#pingone--davinci) |
 
 ---
 
-## PingOne ST
+## PingOne Advanced Identity Cloud
 
 Sub-routing by task and journey use case: see `references/curated/pingone-st/routing-index.md`.
 
@@ -84,7 +81,7 @@ Sub-routing by task and journey use case: see `references/curated/pingone-st/rou
 
 ---
 
-## PingOne MT / DaVinci
+## PingOne / DaVinci
 
 **Sub-routing by task:**
 

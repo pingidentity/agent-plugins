@@ -249,6 +249,7 @@ For login-count-based routing and incrementing the login counter, see `nodes/uti
 - `nodes/mfa-nodes.md`
 - `journey-use-cases/social-and-local-registration-authentication.md`
 - `journey-use-cases/mfa-authentication-multi-method.md`
+- `ping-foundation` → `references/curated/pingone-st/am-services.md` — Social Authentication Implementations (per-provider IdP config), Identity Assertion Service, and Device Profiles Service prerequisites for these nodes
 
 ## Source
 

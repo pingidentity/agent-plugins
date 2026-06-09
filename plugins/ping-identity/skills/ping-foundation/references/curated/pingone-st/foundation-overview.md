@@ -23,6 +23,7 @@ Conceptual orientation for PingOne ST (Advanced Identity Cloud): what it is, how
 **Does NOT cover:** Step-by-step setup tasks — see:
 - `references/curated/pingone-st/app-setup.md` for application registration
 - `references/curated/pingone-st/authentication-fundamentals.md` for journeys
+- `references/curated/pingone-st/am-services.md` for AM service prerequisites (Push, OATH, WebAuthn, Social, etc.)
 - `references/curated/pingone-st/directory-setup.md` for identity stores and users
 - `references/curated/pingone-st/themes-and-customization.md` for branding
 
@@ -152,6 +153,7 @@ Complete these steps in order before registering applications or onboarding user
 
 - `references/curated/pingone-st/app-setup.md`
 - `references/curated/pingone-st/authentication-fundamentals.md`
+- `references/curated/pingone-st/am-services.md`
 - `references/curated/pingone-st/directory-setup.md`
 - `references/curated/pingone-st/themes-and-customization.md`
 

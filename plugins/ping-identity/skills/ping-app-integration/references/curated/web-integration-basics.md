@@ -192,8 +192,6 @@ No specific library is mandated. Any library implementing RFC 6749 + RFC 7636 wo
 - Token expiry tracking and automatic refresh
 - Logout (RP-initiated logout, `end_session_endpoint`)
 
-Commonly used: `oidc-client-ts`, `@auth0/auth0-spa-js` (when using PingOne as IdP behind a proxy), `AppAuth-JS`.
-
 ### CORS requirements for the token endpoint
 
 PingOne MT and AIC return `Access-Control-Allow-Origin` headers for cross-origin requests to the token endpoint. PingFederate requires explicit CORS configuration in `pf.properties` or via the PF admin console.

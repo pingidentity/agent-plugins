@@ -1,0 +1,80 @@
+id: 05-aic-passkey-fido2-tree
+skill: ping-orchestration
+title: "AIC passkey/FIDO2 authentication tree with correct node names and config"
+
+prompt: |
+  Design a PingOne AIC (Advanced Identity Cloud) authentication journey that
+  authenticates a user with a registered FIDO2 passkey. The journey must handle
+  the case where the user has no registered passkey device (route to registration)
+  and the case where the user wants to use a recovery code instead of the passkey.
+
+  Provide:
+  1. The exact AIC node type names for: passkey authentication, passkey
+     registration, recovery code display, and recovery code validation.
+  2. Key configuration properties for the WebAuthn authentication node:
+     - the property that controls user verification
+     - the property that enables the recovery code outcome
+     - the property that controls whether a script is injected for hosted pages
+  3. The correct outcome names from the WebAuthn Authentication node, including
+     the outcome for when no device is registered.
+  4. The recoveryCodeType value to set on RecoveryCodeCollectorDecisionNode for
+     a WebAuthn flow.
+
+  Write the design to passkey-design.md using the Write tool.
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+  - "**/*.yaml"
+
+deterministic_checks:
+  - id: webauthn-authentication-node
+    description: "Names the correct node: WebAuthnAuthenticationNode (not 'FIDO2Node' or 'PasskeyNode')"
+    type: grep
+    glob: "**/*"
+    pattern: "WebAuthnAuthentication"
+    must_match: true
+
+  - id: webauthn-registration-node
+    description: "Names the correct registration node: WebAuthnRegistrationNode"
+    type: grep
+    glob: "**/*"
+    pattern: "WebAuthnRegistration"
+    must_match: true
+
+  - id: recovery-code-display-node
+    description: "Names RecoveryCodeDisplayNode for showing recovery codes post-enrollment"
+    type: grep
+    glob: "**/*"
+    pattern: "RecoveryCodeDisplay"
+    must_match: true
+
+  - id: no-device-outcome
+    description: "Includes 'noDevice' outcome (the correct outcome name for unregistered device)"
+    type: grep
+    glob: "**/*"
+    pattern: "noDevice"
+    must_match: true
+
+  - id: recovery-code-type-webauthn
+    description: "Sets recoveryCodeType to WEB_AUTHN for the WebAuthn recovery code collector"
+    type: grep
+    glob: "**/*"
+    pattern: "WEB_AUTHN"
+    must_match: true
+
+  - id: as-script-property
+    description: "References the asScript property for hosted pages injection"
+    type: grep
+    glob: "**/*"
+    pattern: "asScript"
+    must_match: true
+
+  - id: no-fido2-node-invented
+    description: "Does not use an invented node name like Fido2AuthNode or PasskeyAuthNode"
+    type: not_contains
+    glob: "**/*"
+    pattern: "Fido2AuthNode"
+
+judge_rubric:
+  enabled: false

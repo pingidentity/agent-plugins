@@ -1,0 +1,71 @@
+id: 02-verify-kyc-flow
+skill: ping-universal-services
+title: "PingOne Verify: KYC policy configuration and transaction lifecycle"
+
+prompt: |
+  Design a PingOne Verify KYC configuration for a customer registration flow.
+  The flow must satisfy these requirements:
+
+  1. The Verify policy must require Government ID document authentication,
+     Facial Comparison (threshold: High), and Liveness detection.
+  2. Enable "Store Verified Claims" so that extracted PII is stored as Identity
+     Assurance (IDA) attributes on the PingOne user object.
+  3. Set the Transaction Timeout to 10 minutes and the Data Collection Timeout
+     to 8 minutes.
+  4. The DaVinci flow must handle all terminal transaction statuses:
+     APPROVED, DECLINED, REQUIRES_REVIEW, and EXPIRED.
+  5. Explain why the REQUIRES_REVIEW status must be wired explicitly and what
+     happens if it is omitted.
+
+  Write a configuration guide (Markdown) that lists every policy field with its
+  correct name and value, and shows the DaVinci branch conditions for each
+  transaction status.
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+
+deterministic_checks:
+  - id: transaction-status-approved
+    description: "Handles APPROVED transaction status"
+    type: grep
+    glob: "**/*"
+    pattern: "APPROVED"
+    must_match: true
+
+  - id: transaction-status-requires-review
+    description: "Handles REQUIRES_REVIEW transaction status (not MANUAL_REVIEW or REVIEW_REQUIRED)"
+    type: grep
+    glob: "**/*"
+    pattern: "REQUIRES_REVIEW"
+    must_match: true
+
+  - id: transaction-status-declined
+    description: "Handles DECLINED transaction status"
+    type: grep
+    glob: "**/*"
+    pattern: "DECLINED"
+    must_match: true
+
+  - id: transaction-status-expired
+    description: "Handles EXPIRED transaction status"
+    type: grep
+    glob: "**/*"
+    pattern: "EXPIRED"
+    must_match: true
+
+  - id: store-verified-claims
+    description: "Mentions Store Verified Claims field for IDA attribute storage"
+    type: grep
+    glob: "**/*"
+    pattern: "Store Verified Claims"
+    must_match: true
+
+  - id: no-wrong-status
+    description: "Does NOT use incorrect status names like VERIFIED or UNVERIFIED"
+    type: not_contains
+    glob: "**/*"
+    pattern: "status.*VERIFIED[^_]"
+
+judge_rubric:
+  enabled: false

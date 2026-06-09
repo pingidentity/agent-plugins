@@ -9,7 +9,7 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 slug: "https://docs.pingidentity.com/pingone/directory/p1_aboutusers.html"
 ---
 
@@ -73,6 +73,40 @@ Populations determine:
 | Delegated admin | Create a population per business unit; assign Identity Admin role scoped to that population |
 
 **Silent failure warning:** A user who exists in the directory but is not in the population allowed by the application will be denied access with no error surfaced to the user. Verify the app's Allowed Populations list when debugging unexpected access denials.
+
+---
+
+## User ingestion methods
+
+Use the appropriate method based on scale and source.
+
+| Method | Description | Typical use case |
+|---|---|---|
+| Self-registration | End users create their own accounts through a registration journey or sign-on policy with "Enable Registration" | Customer-facing apps where end users sign up directly |
+| Manual creation | Admin creates individual users via Directory > Users | Small numbers; demo or test users |
+| Bulk import (CSV) | Import many users at once using a file-based process | Large-scale initial onboarding or migration from a legacy system |
+| Provisioning / sync | Sync users from an LDAP directory, Active Directory, or external IdP using SCIM or the LDAP gateway | Enterprise environments with an existing directory as the source of record |
+| API | Programmatically create users via the PingOne Management API (`POST /v1/environments/{envId}/users`) | Custom apps, scripts, or automated workflows |
+| Dynamic groups | Create a group with a filter expression and assign roles; membership auto-updates as user attributes change | Attribute-driven access control without explicit import |
+
+---
+
+## User detail panel tabs
+
+Each user's detail panel in Directory > Users exposes the following tabs:
+
+| Tab | What it shows |
+|---|---|
+| Profile | Name, username, email, phone; identity creation and update timestamps |
+| Groups | All group memberships; group details accessible from this tab |
+| Roles > Administrator Roles | PingOne admin roles assigned to this user (scoped to org, environment, or population) |
+| Roles > Application Roles | Application-level roles (from PingOne Authorize); separate from admin roles |
+| Services > Authentication | MFA status (enabled/disabled); paired devices; authoritative IdP; active sessions; linked social accounts |
+| Services > Consent | Most recent agreement the user has accepted |
+| Services > Credentials | Verifiable credentials; admin can view or revoke |
+| Services > ID Verification | PingOne Verify results; manual ID approval; IDA (Identity Assurance) attributes if enabled |
+| Services > Sync status | Provisioning sync health: Healthy / Partial sync / Not synced / Sync failure |
+| API | User data in JSON format; useful for developers consuming the Management API |
 
 ---
 

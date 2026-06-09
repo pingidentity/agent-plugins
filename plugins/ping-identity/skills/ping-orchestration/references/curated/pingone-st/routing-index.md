@@ -9,7 +9,7 @@ use_cases: ["workforce", "customer"]
 doc_type: reference
 status: current
 canonical: true
-last_updated: "2026-06-01"
+last_updated: "2026-06-05"
 slug: "https://docs.pingidentity.com/pingoneaic/journeys/auth-nodes.html"
 ---
 
@@ -53,6 +53,7 @@ Load the matching use-case anchor when the task maps to a named scenario:
 | Financial services step-up, transaction authorization, PingOne Authorize | `references/curated/pingone-st/journey-use-cases/financial-services-step-up.md` |
 | Progressive profiling (login-count trigger, attribute gate) | `references/curated/pingone-st/journey-use-cases/progressive-profiling.md` |
 | Social + local registration and authentication, email verification gate | `references/curated/pingone-st/journey-use-cases/social-and-local-registration-authentication.md` |
+| MFA method selection at registration, per-method enrollment (TOTP/WebAuthn/Push), mandatory MFA on login | `references/curated/pingone-st/journey-use-cases/mfa-method-selection-registration.md` |
 
 ---
 
@@ -74,6 +75,7 @@ Load the matching use-case anchor when the task maps to a named scenario:
 
 - `references/curated/pingone-st/journey-design-patterns.md`
 - `references/curated/pingone-mt/davinci-overview.md`
+- `ping-foundation` → `references/curated/pingone-st/am-services.md` — AM service prerequisites (Push, OATH, WebAuthn, Social, Device Profiles, PingOne Worker, etc.) that must be configured **before** the corresponding nodes will function
 
 ## Source
 

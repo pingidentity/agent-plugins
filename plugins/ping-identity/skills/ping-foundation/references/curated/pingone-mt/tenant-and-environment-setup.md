@@ -8,7 +8,7 @@ use_cases: ["workforce", "customer"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 slug: "https://docs.pingidentity.com/pingone/platformconsole/p1_c_environments.html"
 ---
 
@@ -129,6 +129,43 @@ Services must be explicitly activated per environment before flows can use them.
 | Verify | Add-on | Enables PingOne Verify identity proofing actions in sign-on policies |
 | Credentials | Add-on | Enables verifiable credential issuance and revocation |
 | IGA | Add-on (separate onboarding) | Requires additional provisioning step by Ping Identity support |
+
+---
+
+## Environment URLs
+
+Each PingOne environment exposes three distinct URLs, all visible under Settings > Environment Properties.
+
+| URL | Purpose |
+|---|---|
+| Console Login URL | Direct sign-in to the admin console for this specific environment; share with new admins so they land on the correct environment |
+| Self-Service URL | End-user self-service portal (profile management, password reset, MFA enrollment) |
+| Application Portal URL | Application launcher for end users; lists all apps the user is entitled to access |
+
+The Console Login URL is environment-specific — it differs from the global `console.pingone.com` entry point. Provide this URL, not the global one, when onboarding environment-scoped admins.
+
+---
+
+## Administrators environment
+
+PingOne automatically creates an **Administrators environment** when the organization is first provisioned. This environment is distinct from all user-created environments.
+
+| Property | Detail |
+|---|---|
+| Created by | Ping Identity at org provisioning; cannot be deleted |
+| Purpose | Houses administrator identities; keeps admin accounts isolated from end-user populations |
+| Best practice | Create all admin identities here; grant them environment-scoped roles on other environments from here |
+| Getting Started Guide toggle | Settings > Environment Properties > Getting Started Guides — controls whether the admin wizard appears on the Environments page |
+
+Administrator role assignments cross environment boundaries: a user in the Administrators environment can hold Environment Admin or Identity Data Admin for any other environment in the org.
+
+---
+
+## License and operational status
+
+**Viewing licenses:** The Environments page > Licenses menu shows Admin License, Active Licenses, and Expired Licenses. Details include organization name, number of environments, and license type (e.g., INTERNAL, TRIAL, MFA TRIAL).
+
+**Operational status:** Subscribe to real-time alerts for all Ping Identity services at [status.pingidentity.com](https://status.pingidentity.com/). Alerts cover PingOne, PingID, and other services; opt into email notifications from the status page.
 
 ---
 

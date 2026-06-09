@@ -49,6 +49,22 @@
           "notes":  { "type": "string" }
         }
       }
+    },
+    "cross_skill_prompts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "prompt", "expected_primary_skill"],
+        "additionalProperties": false,
+        "properties": {
+          "id":                       { "type": "string", "pattern": "^[MH]-[0-9]{2,3}$" },
+          "prompt":                   { "type": "string", "minLength": 10 },
+          "expected_primary_skill":   { "type": "string" },
+          "expected_secondary_skill": { "type": ["string", "null"] },
+          "expected_secondary_skills": { "type": "array", "items": { "type": "string" } },
+          "notes":                    { "type": "string" }
+        }
+      }
     }
   }
 }

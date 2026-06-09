@@ -1,10 +1,10 @@
 ---
 name: ping-identity-for-ai
-description: AI-era identity patterns for the Ping Identity platform. Use this skill whenever a task explicitly involves an AI agent, LLM, or agentic workflow — giving an AI agent a verified identity, securing agent-to-API access with client credentials, applying Verified Trust signals, delegated tokens for helpdesk AI bots, or Ping Identity's Identity for AI solution. Do NOT use for generic automated processes or batch jobs without explicit AI/LLM context — if the request says "automated process" or "scheduled job" without mentioning AI or an agent, ask a clarifying question first. Also invoke with /ping-identity-for-ai.
+description: "Use this skill whenever the task involves an AI agent, LLM, or agentic workflow interacting with Ping Identity. Triggers: giving an AI agent or LLM a verified machine identity; securing agent-to-API access with client credentials or short-lived tokens; Verified Trust signals or verifiable credentials for AI apps; Identity for AI 5-pillar architecture (Agent Identity, Agent Security, Agent Gateway, Agent Detection, Verified Trust); PingGateway as an MCP gateway for AI agents; CIBA human-in-the-loop approvals for high-risk agent actions; bot detection and AI agent detection with PingOne Protect; delegated tokens for helpdesk AI or workforce AI assistants; 'how do I give my AI agent an identity', 'secure my MCP server', 'token rotation for an autonomous agent'. If the request says 'automated process', 'scheduled job', or 'service account' WITHOUT mentioning AI, LLM, or agent — ask a clarifying question before routing here. If the prompt says only 'agent' or 'authenticate an agent' with no AI/LLM/agentic context — ask a clarifying question, as 'agent' is ambiguous (could mean AI agent, Ping integration agent, or browser user-agent). Also invoke with /ping-identity-for-ai."
 compatibility: Designed for AI identity and agent security work on Ping Identity platforms. References product docs and Ping Labs content.
 metadata:
   publisher: Ping Identity
-  version: "0.2.0"
+  version: "1.0.0"
 ---
 
 # ping-identity-for-ai
@@ -74,6 +74,10 @@ Complete agent token scoping, Verified Trust signal design, and delegation model
 ## Step 2: Load curated anchors (1–3 max)
 
 Load the anchors identified in Step 1. Stop if the curated anchor is sufficient. Do not load all four anchors unless the user's task explicitly spans all sub-areas.
+
+## MCP execution
+
+See `references/runtime/mcp-preflight.md` for MCP config and Cursor preflight steps.
 
 ## Retrieval escalation
 

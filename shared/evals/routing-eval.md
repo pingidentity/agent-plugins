@@ -1,7 +1,10 @@
 ---
 name: ping-routing-eval
 description: Evaluate a Ping Identity skill-routing system run. Use this whenever you need to test whether an agent chose the right skill, the right platform branch, the right retrieval tier, and gave a correct answer — all while staying token-efficient. Invoke this eval format for any benchmark prompt before shipping a skill update.
+canonical_path: evals/routing-eval.md
 ---
+
+> **Note:** The canonical version of this file lives at `evals/routing-eval.md`. This copy in `shared/evals/` is kept for tools that reference the shared layer. Keep both in sync.
 
 # Ping Identity — Skill Routing Eval
 

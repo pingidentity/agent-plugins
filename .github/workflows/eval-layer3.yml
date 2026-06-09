@@ -1,0 +1,67 @@
+name: eval-layer3
+
+on:
+  workflow_dispatch:
+    inputs:
+      models:
+        description: "Space-separated model IDs (or 'all')"
+        default: "all"
+        required: true
+      skill:
+        description: "Restrict to one skill (or empty for all)"
+        default: ""
+        required: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python deps
+        run: |
+          pip install --upgrade pip
+          pip install -r evals/harness/requirements.txt
+
+      - name: Install Claude Code CLI
+        run: |
+          curl -fsSL https://claude.ai/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Resolve model list
+        id: models
+        run: |
+          if [ "${{ inputs.models }}" = "all" ]; then
+            echo "list=claude-sonnet-4-6 claude-haiku-4-5 gpt-5.5" >> $GITHUB_OUTPUT
+          else
+            echo "list=${{ inputs.models }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run Layer 3
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY:    ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL:   ${{ secrets.OPENAI_BASE_URL }}
+        run: |
+          ARGS="--models ${{ steps.models.outputs.list }} --workers 4 --write-summary"
+          if [ -n "${{ inputs.skill }}" ]; then ARGS="$ARGS --skill ${{ inputs.skill }}"; fi
+          python3 -m evals.harness.run_layer3 $ARGS
+
+      - name: Update README
+        run: |
+          python3 scripts/update_readme_eval_table.py --models ${{ steps.models.outputs.list }}
+
+      - name: Commit results + README
+        run: |
+          git config user.name  "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add evals/results/ README.md
+          git commit -m "chore(evals): refresh Layer 3 results" || echo "no changes"
+          git push || echo "no push (forked repo or no changes)"

@@ -1,0 +1,81 @@
+id: 02-journey-tricky-callbacks-android
+skill: ping-app-integration
+title: "Journey tricky callbacks in Android Compose"
+
+prompt: |
+  Using the Ping Identity Android SDK (com.pingidentity.sdks:journey), write a
+  Jetpack Compose Composable called JourneyCallbackScreen that handles a
+  ContinueNode containing four callback types returned from an AIC Journey:
+
+  1. TermsAndConditionsCallback — show the T&C text and an Accept button.
+     When accepted, set the accepted flag and call onNext().
+  2. KbaCreateCallback — show a dropdown of available questions and a text
+     field for the answer. Wire both to the callback before calling onNext().
+  3. ConfirmationCallback — render each option as a button. Tapping a button
+     should record the selected option and immediately advance the flow.
+  4. NameCallback — a basic text field for username input.
+
+  Use the correct Ping SDK property names for every callback. Write a single
+  Kotlin file JourneyCallbackScreen.kt to disk using the Write tool.
+
+expected_artifacts:
+  - "**/*.kt"
+
+deterministic_checks:
+  - id: terms-accepted-property
+    description: "Uses .accepted = on TermsAndConditionsCallback, not .accept()"
+    type: regex
+    glob: "**/*.kt"
+    pattern: "\\.accepted\\s*="
+    must_match: true
+
+  - id: no-terms-accept-method
+    description: "Does NOT call .accept() as a method on TermsAndConditionsCallback"
+    type: not_contains
+    glob: "**/*.kt"
+    pattern: "termsCallback.accept()"
+
+  - id: kba-selected-question-property
+    description: "KbaCreateCallback uses .selectedQuestion, not .question"
+    type: regex
+    glob: "**/*.kt"
+    pattern: "selectedQuestion"
+    must_match: true
+
+  - id: kba-selected-answer-property
+    description: "KbaCreateCallback uses .selectedAnswer, not .answer"
+    type: regex
+    glob: "**/*.kt"
+    pattern: "selectedAnswer"
+    must_match: true
+
+  - id: confirmation-options-property
+    description: "ConfirmationCallback iterates .options, not .choices"
+    type: regex
+    glob: "**/*.kt"
+    pattern: "\\.options"
+    must_match: true
+
+  - id: no-confirmation-choices
+    description: "Does NOT use .choices on ConfirmationCallback"
+    type: not_contains
+    glob: "**/*.kt"
+    pattern: ".choices"
+
+  - id: confirmation-selected-property
+    description: "ConfirmationCallback uses .selected = index, not .selectedIndex"
+    type: regex
+    glob: "**/*.kt"
+    pattern: "\\.selected\\s*="
+    must_match: true
+
+  - id: confirmation-self-advancing
+    description: "ConfirmationCallback button tap calls onNext() directly (showNext = false pattern)"
+    type: regex
+    glob: "**/*.kt"
+    pattern: "ConfirmationCallback.*onNext|onNext.*ConfirmationCallback"
+    flags: "ms"
+    must_match: true
+
+judge_rubric:
+  enabled: false

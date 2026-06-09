@@ -1,0 +1,56 @@
+id: 01-davinci-android-full-flow
+skill: ping-app-integration
+title: "DaVinci full flow on Android (Compose)"
+
+prompt: |
+  Build an Android Jetpack Compose screen that drives a Ping DaVinci flow
+  end-to-end. Handle ContinueNode, SuccessNode, ErrorNode, and FailureNode.
+  The flow uses TextCollector, PasswordCollector, LabelCollector, and a
+  SubmitCollector. Use StateFlow + viewModelScope.launch for state and async work.
+
+  Write the following files to disk using the Write tool:
+  - DaVinciConfig.kt
+  - AuthViewModel.kt
+  - AuthScreen.kt
+
+expected_artifacts:
+  - "**/*.kt"
+
+deterministic_checks:
+  - id: davinci-import
+    description: "Uses DaVinci Oidc module, not Journey Oidc"
+    type: grep
+    glob: "**/*.kt"
+    pattern: "com.pingidentity.davinci.module.Oidc"
+    must_match: true
+
+  - id: no-journey-oidc
+    description: "Does NOT import Journey Oidc by mistake"
+    type: not_contains
+    glob: "**/*.kt"
+    pattern: "com.pingidentity.journey.module.Oidc"
+
+  - id: stateflow
+    description: "ViewModel uses StateFlow"
+    type: grep
+    glob: "**/*ViewModel*.kt"
+    pattern: "MutableStateFlow"
+    must_match: true
+
+  - id: viewmodel-scope
+    description: "ViewModel uses viewModelScope.launch"
+    type: grep
+    glob: "**/*ViewModel*.kt"
+    pattern: "viewModelScope.launch"
+    must_match: true
+
+  - id: all-node-branches
+    description: "AuthScreen handles all four node types"
+    type: regex
+    glob: "**/AuthScreen*.kt"
+    pattern: "ContinueNode.*SuccessNode.*ErrorNode.*FailureNode"
+    flags: "ms"
+    must_match: true
+
+judge_rubric:
+  enabled: false

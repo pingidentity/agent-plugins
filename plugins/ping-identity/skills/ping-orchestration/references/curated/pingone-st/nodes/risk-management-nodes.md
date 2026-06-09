@@ -240,6 +240,7 @@ Increments or sets the session authentication level.
 - `nodes/utility-nodes.md`
 - `journey-use-cases/pingone-protect-risk-integration.md`
 - `journey-use-cases/financial-services-step-up.md`
+- `ping-foundation` → `references/curated/pingone-st/am-services.md` — PingOne Worker Service must be configured before `PingOneProtectEvaluationNode` and other PingOne MT-backed nodes; Device Profiles Service must exist before `DeviceProfileCollectorNode`
 
 ## Source
 

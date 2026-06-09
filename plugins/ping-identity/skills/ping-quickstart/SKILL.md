@@ -1,6 +1,6 @@
 ---
 name: ping-quickstart
-description: Use this skill whenever you need to orient a user in the Ping Identity ecosystem — where to start, which platform to choose, or when the platform is unknown. Front door for all Ping Identity work. Also trigger when the user is migrating from ForgeRock or another IAM platform, asking "where do we start" for any Ping feature, evaluating the product landscape, or starting Ping for the first time (workforce or CIAM). Also trigger for cross-cutting end-to-end validation requests — "test this end to end", "validate what I built", "how do I prove the path works" — when no single layer (foundation / orchestration / app) owns the test. Routes to the correct skill after detecting platform and intent. Trigger phrases: where do I start with Ping, which Ping product do I need, PingOne vs PingOne ST vs PingFederate, help me decide, evaluating Ping Identity, migrating from ForgeRock, recommended starting point, test this end to end, validate my Ping setup, /ping-quickstart.
+description: "Use this skill BEFORE any more specialised Ping skill whenever the user is in orientation mode — phrases like 'where do we start', 'where do I start', 'where do we begin', 'how do we begin', 'we want to add X — where do we start', 'we are evaluating', 'we are migrating from ForgeRock / Okta / Auth0', 'I am new to Ping', 'I inherited a Ping deployment', 'help me choose', 'PingOne vs AIC vs PingFederate', 'which Ping product do I need', 'recommended starting point', 'test this end to end / validate my Ping setup'. Even when a specific feature, service, or product is mentioned (KYC, MFA, Verify, DaVinci, etc.), if the framing is 'where do we start' or 'we are evaluating' or 'we are migrating' — route here FIRST. Also triggers on bare user-management commands with no platform named: 'Add a user to Ping', 'Create a user in Ping', 'Manage users in Ping' — Ping has many products with separate user populations (PingOne, PingOne Advanced Identity Cloud / AIC, PingFederate, PingDirectory); for these prompts you MUST respond with action 'clarify' asking which platform, not 'route'. Catch-all front door when platform or starting point is unclear. Also invoke with /ping-quickstart."
 compatibility: Designed for Ping Identity platform tasks. Requires no tools — orientation and routing only.
 metadata:
   publisher: Ping Identity
@@ -90,10 +90,10 @@ Ask or infer from context:
 
 | Signal | Platform family | Next skill |
 |---|---|---|
-| "PingOne", "admin console at apps.pingone.com", "PingOne environment" | PingOne MT | `ping-foundation` → `pingone-mt` branch |
-| "AIC", "PingOne ST", "identity cloud", "PingOne ST", "PingAM", "IDM", "ForgeRock" | PingOne ST | `ping-foundation` → `pingone-st` branch |
+| "PingOne", "admin console at apps.pingone.com", "PingOne environment" | PingOne (multi-tenant cloud) | `ping-foundation` → PingOne branch |
+| "AIC", "PingOne Advanced Identity Cloud", "identity cloud", "PingAM", "IDM", "ForgeRock" | PingOne Advanced Identity Cloud | `ping-foundation` → AIC branch |
 | "PingFederate", "PingAccess", "PingDirectory", "on-prem", "self-managed" | Ping Software Suite | `ping-foundation` → `ping-software` branch |
-| Platform unknown | Ask: "Are you working in PingOne, PingOne ST, or on-premises software?" | — |
+| Platform unknown | Ask: "Are you working in PingOne, PingOne Advanced Identity Cloud (AIC), or on-premises software?" | — |
 
 ---
 
@@ -103,6 +103,7 @@ Ask at most one question at a time:
 
 1. "Are you setting something up for the first time, or do you have an existing deployment?"
 2. "Are you working in PingOne, PingOne ST, or on-premises software?"
+**Mandatory clarification — bare user-management commands:** if the prompt is "Add a user to Ping", "Create a user in Ping", or any equivalent with no platform named, you MUST ask which platform before answering — Ping has separate user populations in PingOne, PingOne Advanced Identity Cloud (AIC), PingFederate, and PingDirectory. Do not assume PingOne.
 
 ---
 
@@ -114,6 +115,6 @@ Load 1–2 of these matching the user's question. Stop when orientation is suffi
 - `references/curated/choose-the-right-ping-platform.md`
 - `references/curated/common-starting-patterns.md`
 - `references/curated/pingone-licensing-and-packaging.md`
-- `references/curated/forgerock-to-ping-migration-paths.md`
+- `references/curated/migration-overview.md`
 - `references/curated/inherited-deployment-orientation.md`
 - `references/curated/end-to-end-validation.md` — load when the user is past the build phase and asking "test what I just built"

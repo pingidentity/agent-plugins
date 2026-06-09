@@ -3,8 +3,13 @@ import textwrap
 from pathlib import Path
 
 import pytest
+import yaml
 
-from evals.harness.validate_prompts import ValidationError, validate_prompt_file
+from evals.harness.validate_prompts import (
+    ValidationError,
+    validate_prompt_file,
+    validate_task_file,
+)
 
 
 def write_yaml(tmp_path: Path, name: str, content: str) -> Path:
@@ -86,3 +91,44 @@ def test_expected_tier_enum_enforced(tmp_path: Path):
     """)
     with pytest.raises(ValidationError, match="expected_tier"):
         validate_prompt_file(f)
+
+
+def test_validate_task_file_accepts_minimal(tmp_path):
+    """Skill subdir matches filename's parent → passes."""
+    # Layout: tmp_path/ping-app-integration/01-x.yaml
+    skill_dir = tmp_path / "ping-app-integration"
+    skill_dir.mkdir()
+    target = skill_dir / "01-x.yaml"
+    target.write_text(yaml.safe_dump({
+        "id": "01-x",
+        "skill": "ping-app-integration",
+        "title": "Example task",
+        "prompt": "Do the thing properly please.",
+        "expected_artifacts": ["**/*"],
+        "deterministic_checks": [
+            {"id": "c1", "description": "desc here",
+             "type": "grep", "glob": "**/*", "pattern": "x", "must_match": True}
+        ],
+        "judge_rubric": {"enabled": False},
+    }))
+    validate_task_file(target)  # should not raise
+
+
+def test_validate_task_file_rejects_skill_mismatch(tmp_path):
+    skill_dir = tmp_path / "ping-app-integration"
+    skill_dir.mkdir()
+    target = skill_dir / "01-x.yaml"
+    target.write_text(yaml.safe_dump({
+        "id": "01-x",
+        "skill": "ping-orchestration",  # mismatch with parent dir
+        "title": "Example task",
+        "prompt": "Do the thing properly please.",
+        "expected_artifacts": ["**/*"],
+        "deterministic_checks": [
+            {"id": "c1", "description": "desc here",
+             "type": "grep", "glob": "**/*", "pattern": "x", "must_match": True}
+        ],
+        "judge_rubric": {"enabled": False},
+    }))
+    with pytest.raises(ValidationError, match="must match parent directory"):
+        validate_task_file(target)

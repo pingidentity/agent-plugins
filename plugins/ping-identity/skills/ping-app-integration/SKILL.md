@@ -1,10 +1,10 @@
 ---
 name: ping-app-integration
-description: Implementation skill for integrating Ping Identity into web, mobile, and SDK experiences. Use this whenever a task involves Android, iOS, or React SDK integration; embedding journeys or DaVinci flows into an application; wiring OIDC / OAuth redirect flows; browser-based auth flows; orchestration SDK references; on-prem app-side integration; migrating from the ForgeRock SDK to the Ping SDK; or troubleshooting app-side errors such as redirect_uri_mismatch, CORS errors on the token endpoint, token refresh failures, or push MFA not delivering. Also use when the task is integrating a Ping service SDK (e.g., Protect JavaScript SDK, Verify SDK) into app code. Also invoke with /ping-app-integration.
+description: "Use this skill whenever the task involves writing code or wiring an SDK to integrate Ping Identity into an application. Triggers: Android, iOS, or React/JavaScript SDK integration; embedding DaVinci flows or AIC journeys in a web or mobile app; OIDC authorization code + PKCE flow wiring; server-side backend OIDC (Node.js, Java, Python, .NET); token validation, refresh, and session management; client credentials (M2M) and token exchange patterns; redirect_uri_mismatch, CORS, token refresh failures, push MFA not delivering; migrating from ForgeRock SDK to Ping SDK; embedding a Ping service SDK (Protect JavaScript signals SDK, Verify mobile SDK) in app code; on-prem PingFederate or PingAccess agent integration. NOT for: configuring or invoking PingOne Verify, Protect, IGA, or Authorize at the service/policy level (use ping-universal-services); platform admin (use ping-foundation); flow design (use ping-orchestration). Also invoke with /ping-app-integration."
 compatibility: Designed for Ping Identity app and SDK integration work. References product docs and SDK documentation.
 metadata:
   publisher: Ping Identity
-  version: "0.2.0"
+  version: "1.0.0"
 ---
 
 # ping-app-integration
@@ -46,9 +46,9 @@ A complete app integration spans three layers — all are required for a product
 
 Complete platform setup first, then flow design, then hand off to this skill for SDK wiring.
 
-**End-to-end example (Android + DaVinci on PingOne MT):**
+**End-to-end example (Android + DaVinci on PingOne):**
 
-1. Use `ping-foundation` to register an OIDC application in PingOne MT, configure the redirect URI (`myapp://callback`), and note the client ID and environment ID.
+1. Use `ping-foundation` to register an OIDC application in PingOne, configure the redirect URI (`myapp://callback`), and note the client ID and environment ID.
 2. Use `ping-orchestration` to build and test a DaVinci login flow with username/password and push MFA nodes.
 3. Use this skill (`ping-app-integration`) to add the `com.pingidentity.sdks:davinci` and `com.pingidentity.sdks:oidc` dependencies, initialize `PingOne.init(context)` with the client ID and discovery endpoint, call `PingOne.startAuthentication(activity)`, and handle the `AuthResult`.
 
@@ -66,6 +66,10 @@ Complete platform setup first, then flow design, then hand off to this skill for
 | Server-side / backend OIDC, M2M client_credentials, token exchange, CIBA, retry/429 | `references/curated/server-side-integration-basics.md` |
 | Troubleshooting, migration (ForgeRock → Ping SDK) | `references/curated/integration-troubleshooting-basics.md` |
 
+## MCP execution
+
+See `references/runtime/mcp-preflight.md` for MCP config and Cursor preflight steps.
+
 ## Step 2: Retrieval escalation
 
 1. Curated anchors (`references/curated/`) — load 1–3 max. Stop if sufficient.
@@ -82,7 +86,7 @@ For deep implementation work (full code scaffolding, collector rendering, migrat
 | `ping-orchestration-android-sdk` | Android Kotlin / Jetpack Compose — Journey + DaVinci |
 | `ping-orchestration-ios-sdk` | iOS Swift / SwiftUI — Journey + DaVinci |
 | `ping-orchestration-reactjs-journey-sdk` | React + AIC Journey flows |
-| `ping-orchestration-reactjs-davinci-sdk` | React + PingOne MT DaVinci flows |
+| `ping-orchestration-reactjs-davinci-sdk` | React + PingOne DaVinci flows |
 | `ping-orchestration-javascript-sdk` | Angular / Vue / Vanilla JS |
 | `forgerock-to-ping-journey-migration` | ForgeRock SDK → Ping SDK automated migration |
 

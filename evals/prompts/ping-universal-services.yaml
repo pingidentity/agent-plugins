@@ -111,6 +111,22 @@ trigger_prompts:
     expected_tier: curated
     notes: "strategy-uc-5 (Verify)"
 
+  # ----- Feedback use cases (June 2026) -----
+
+  - id: T-52
+    prompt: "Configure PingOne MFA policies and manage enrolled MFA devices across our user base."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-universal-services/references/curated/choosing-the-right-service.md
+    expected_tier: curated
+    notes: "feedback: PingOne MFA as managed service / device management"
+
+  - id: T-53
+    prompt: "We want to use the PingOne MFA enrollment API to pre-enrol devices for our workforce before go-live."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-universal-services/references/curated/service-invocation-patterns.md
+    expected_tier: curated
+    notes: "feedback: PingOne MFA enrollment API"
+
 non_trigger_prompts:
   - id: N-01
     prompt: "Set up the PingOne MT environment and register an OIDC application."

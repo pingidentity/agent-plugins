@@ -271,6 +271,22 @@ Auto-advancing (no user action): `DeviceAuthenticatorCollector` (biometric/passk
 | Android Keystore error after OS upgrade | Keystore key invalidated post-biometric change | Handle `KeyPermanentlyInvalidatedException`; prompt user to re-authenticate |
 | SDK not resolving in Gradle | Ping Maven repo not declared | Add `maven { url = uri("https://maven.pingidentity.com/repository/releases/") }` |
 
+## PingOne MFA SDK — push MFA and custom AMR
+
+For apps using the PingOne MFA SDK (distinct from the orchestration SDK), the key integration point for push MFA is the `approve()` method on Android.
+
+**Custom AMR strings** can be passed to `approve()` to convey the authentication method used for the biometric-gated approval:
+
+| Custom AMR | Meaning |
+|---|---|
+| `face` | Face biometric used to approve the push |
+| `pin` | Device PIN used to approve |
+| `ftp` | Fingerprint used to approve |
+
+These strings appear in the `amr` claim of the resulting token, allowing the relying party to enforce assurance requirements (e.g., reject `pin` for high-value transactions and require `face`).
+
+**Pairing key prerequisite:** The device must be bound to the PingOne user via a pairing key before push MFA can be initiated. Generate the pairing key server-side via the PingOne MFA API and deliver it to the app for the initial device registration step. See `ping-universal-services/references/curated/mfa-configuration.md`.
+
 ## Migration path: ForgeRock SDK → Ping SDK
 
 For full Android, iOS, and JavaScript breaking-change tables and migration strategy, see `references/curated/integration-troubleshooting-basics.md` — Failure mode 6.

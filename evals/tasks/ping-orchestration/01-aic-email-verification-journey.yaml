@@ -1,0 +1,66 @@
+id: 01-aic-email-verification-journey
+skill: ping-orchestration
+title: "AIC Journey: email verification registration node sequence"
+
+prompt: |
+  Design a PingOne Advanced Identity Cloud (AIC) self-registration journey that
+  collects username, password, given name, family name, and email, then gates
+  progression on email verification before creating the user account.
+
+  Provide the ordered node sequence with exact node type names and their key
+  configuration properties. Include the node that checks whether the email address
+  is already verified on the user object, and the node that suspends the journey
+  and sends a magic-link email. Specify what happens on the Create Object node
+  FAILURE outcome.
+
+  Write the design as a structured Markdown file named journey-design.md using the Write tool.
+
+expected_artifacts:
+  - "**/*.md"
+  - "**/*.txt"
+  - "**/*.yaml"
+
+deterministic_checks:
+  - id: attribute-collector-node
+    description: "Uses AttributeCollector node (not a generic 'Form' node)"
+    type: grep
+    glob: "**/*"
+    pattern: "AttributeCollector"
+    must_match: true
+
+  - id: email-suspend-node
+    description: "Uses EmailSuspend node to send the magic-link email"
+    type: grep
+    glob: "**/*"
+    pattern: "EmailSuspend"
+    must_match: true
+
+  - id: create-object-node
+    description: "Uses CreateObject node (correct AIC node name) to create the user"
+    type: grep
+    glob: "**/*"
+    pattern: "CreateObject"
+    must_match: true
+
+  - id: failure-cleanup-pattern
+    description: "FAILURE outcome of CreateObject routes to cleanup (ScriptedDecision or equivalent) before FailureNode"
+    type: grep
+    glob: "**/*"
+    pattern: "(?i)(FAILURE|failure).*(?:Scripted|cleanup|delete)"
+    must_match: true
+
+  - id: no-create-user-davinci
+    description: "Does NOT confuse AIC node with DaVinci 'Create User' connector naming"
+    type: not_contains
+    glob: "**/*"
+    pattern: "PingOne Create User"
+
+  - id: attribute-value-decision
+    description: "Uses AttributeValueDecision (or AttributePresent) node to gate on emailVerified"
+    type: grep
+    glob: "**/*"
+    pattern: "AttributeValue|emailVerified"
+    must_match: true
+
+judge_rubric:
+  enabled: false

@@ -138,6 +138,7 @@ Cross-realm SSO requires explicit federation configuration (e.g., an OAuth2 auth
 
 - `references/curated/pingone-st/app-setup.md` — assign journeys to OIDC/SAML applications
 - `references/curated/pingone-st/foundation-overview.md` — tenant and realm architecture
+- `references/curated/pingone-st/am-services.md` — AM services that journey nodes depend on (Push, OATH, WebAuthn, Social, Session, Validation, etc.) — configure these before authoring the corresponding nodes
 - `references/curated/pingone-st/directory-setup.md` — identity store configuration required before journey data store decisions
 
 ## Source

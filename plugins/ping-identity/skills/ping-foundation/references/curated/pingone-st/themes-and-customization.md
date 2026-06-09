@@ -148,6 +148,7 @@ CSP note: images embedded in email templates must be hosted on an externally acc
 - `references/curated/pingone-st/foundation-overview.md`
 - `references/curated/pingone-st/authentication-fundamentals.md`
 - `references/curated/pingone-st/app-setup.md`
+- `references/curated/pingone-st/am-services.md` — CORS Service governs which origins can load themed hosted pages from custom UIs
 
 ## Source
 
