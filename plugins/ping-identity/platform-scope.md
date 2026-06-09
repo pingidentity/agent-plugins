@@ -13,16 +13,18 @@ Defines which platforms, products, and services are in scope. Use for platform d
 
 ## Platform Detection Signals
 
-**`pingone-mt`**
-- "Multi-Tenant"
-- "PingOne", "apps.pingone.com", "PingOne environment", "PingOne admin console"
-- PingOne MFA, PingOne Risk, PingOne DaVinci, PingOne Verify, PingOne Protect, PingOne IGA, PingOne Credentials, PingOne Neo, PingOne Authorize, PingOne SSO
+Match the MOST SPECIFIC signal first. "PingOne Advanced Identity Cloud" starts with "PingOne" — always check for the longer form before treating bare "PingOne" as the multi-tenant cloud.
 
-**`pingone-st`**
-- "Single-Tenant"
-- "AIC", "identity cloud tenant", "PingAM", "PingIDM", "PingDS"
-- "ForgeRock", "AM", "IDM", "DS" (in an AIC Cloud context), AIC tenant URL
+**`pingone-st`** (check first — longer/more specific signals)
+- "PingOne Advanced Identity Cloud", "AIC", "identity cloud tenant"
+- "PingAM", "PingIDM", "PingDS", "forgeblocks", "ForgeRock"
+- "AM", "IDM", "DS" (in an AIC cloud context), AIC tenant URL
 - Journeys, auth trees, realms
+
+**`pingone-mt`** (bare "PingOne" with no AIC qualifier)
+- "PingOne" (without "Advanced Identity Cloud" following), "apps.pingone.com", "auth.pingone.com"
+- "PingOne environment", "PingOne admin console"
+- PingOne MFA, PingOne Risk, PingOne DaVinci, PingOne Verify, PingOne Protect, PingOne IGA, PingOne Credentials, PingOne Neo, PingOne Authorize, PingOne SSO
 
 **`ping-software`**
 - "On-prem", "Software", "Download", "Binary", ".jar", "PingFederate", "PingAccess", "PingDirectory", "PingDataSync", "PingID on-prem", "PingAM standalone", "on-prem", "self-managed", "server profile"

@@ -86,12 +86,12 @@ Skills are designed to be composed. Load them in sequence as the task progresses
 
 ## Step 2 — Detect the platform
 
-Ask or infer from context:
+Ask or infer from context. Match the MOST SPECIFIC signal first — "PingOne Advanced Identity Cloud" starts with "PingOne", so check for the longer form before treating bare "PingOne" as the multi-tenant cloud.
 
 | Signal | Platform family | Next skill |
 |---|---|---|
-| "PingOne", "admin console at apps.pingone.com", "PingOne environment" | PingOne (multi-tenant cloud) | `ping-foundation` → PingOne branch |
-| "AIC", "PingOne Advanced Identity Cloud", "identity cloud", "PingAM", "IDM", "ForgeRock" | PingOne Advanced Identity Cloud | `ping-foundation` → AIC branch |
+| "PingOne Advanced Identity Cloud", "AIC", "identity cloud", "PingAM", "IDM", "ForgeRock", "forgeblocks" | PingOne Advanced Identity Cloud (AIC) | `ping-foundation` → AIC branch |
+| "PingOne" (bare, without "Advanced Identity Cloud"), "apps.pingone.com", "auth.pingone.com", "PingOne environment", "PingOne admin console" | PingOne (multi-tenant cloud) | `ping-foundation` → PingOne branch |
 | "PingFederate", "PingAccess", "PingDirectory", "on-prem", "self-managed" | Ping Software Suite | `ping-foundation` → `ping-software` branch |
 | Platform unknown | Ask: "Are you working in PingOne, PingOne Advanced Identity Cloud (AIC), or on-premises software?" | — |
 

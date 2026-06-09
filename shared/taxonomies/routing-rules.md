@@ -17,8 +17,8 @@ Decision logic for agents and SKILL.md files. Apply these rules in order to reac
 
 After routing to a skill, apply platform detection:
 
-1. PingOne admin console / PingOne APIs → `pingone-mt`
-2. PingOne Advanced Identity Cloud (AIC) tenant admin / AM / IDM / DS → `pingone-st`
+1. PingOne Advanced Identity Cloud (AIC) / AIC tenant / AM / IDM / DS → `pingone-st`
+2. PingOne (bare, without "Advanced Identity Cloud") / PingOne admin console / PingOne APIs → `pingone-mt`
 3. On-prem deployment / server software → `ping-software`
 4. Cross-platform or service-layer question → `cross-platform`
 
