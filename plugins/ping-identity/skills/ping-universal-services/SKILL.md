@@ -90,3 +90,7 @@ See `references/runtime/mcp-preflight.md` for MCP config and Cursor preflight st
 ## Retrieval escalation
 
 1. Curated anchors (`references/curated/`) — load 1–3 max. Stop if sufficient.
+
+## Output discipline
+
+Curated anchors provide accuracy context — they are not a substitute for the required output. If the task asks for a configuration file, code, JSON, or Markdown document, always produce that artifact. Do not return a prose summary that points at the anchor and stops.

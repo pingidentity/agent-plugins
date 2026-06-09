@@ -20,7 +20,7 @@ Patterns for securing autonomous and semi-autonomous AI agents that call Ping Id
 ## Scope
 
 Covers: OAuth 2.0 client credentials flow as the default machine-to-machine pattern for AI agents, token scoping strategy, short-lived token rotation, revocation on compromise, and correlatable audit patterns.
-Does NOT cover: human-in-the-loop delegation (see `references/curated/workforce-helpdesk-ai.md`), Verified Trust signal issuance (see `references/curated/verified-trust-overview.md`), or standard OIDC application registration for user-facing apps (see `ping-foundation`).
+Does NOT cover: workforce helpdesk AI delegation patterns (see `references/curated/workforce-helpdesk-ai.md`), Verified Trust signal issuance (see `references/curated/verified-trust-overview.md`), or standard OIDC application registration for user-facing apps (see `ping-foundation`). CIBA human-in-the-loop approvals for high-risk agent actions are covered here in Pattern 6.
 
 ---
 

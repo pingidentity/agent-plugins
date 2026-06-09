@@ -130,6 +130,51 @@ trigger_prompts:
     expected_tier: curated
     notes: "feedback: SSO workforce trigger"
 
+  # ----- Platform-declaration routing (bare PingOne → pingone-mt, AIC signals → pingone-st) -----
+
+  - id: T-60
+    prompt: "I have PingOne. How do I set up my first OIDC app?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-mt/app-registration.md
+    expected_tier: curated
+    notes: "Bare 'I have PingOne' must resolve to pingone-mt without asking for clarification."
+
+  - id: T-61
+    prompt: "I have PingOne AIC. How do I register an OAuth 2.0 client for my web app?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-st/app-setup.md
+    expected_tier: curated
+    notes: "'PingOne AIC' is an AIC signal → pingone-st branch."
+
+  - id: T-62
+    prompt: "We're using PingOne Advanced Identity Cloud and need to set up a new realm with a custom identity store."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-st/foundation-overview.md
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-st/directory-setup.md
+    expected_tier: curated
+    notes: "'PingOne Advanced Identity Cloud' full name → pingone-st. Must NOT treat as bare PingOne MT."
+
+  - id: T-63
+    prompt: "I'm on PingOne (not AIC). How do I configure a sign-on policy that requires MFA for all users?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-mt/sign-on-policies.md
+    expected_tier: curated
+    notes: "Explicit parenthetical disambiguation '(not AIC)' → must route pingone-mt."
+
+  - id: T-64
+    prompt: "My company has PingOne. I need to add a user population and a custom attribute to the directory."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-mt/directory-and-populations.md
+    expected_tier: curated
+    notes: "'My company has PingOne' — bare PingOne → pingone-mt."
+
+  - id: T-65
+    prompt: "We run AIC — I need to configure the hosted login page themes."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/pingone-st/themes-and-customization.md
+    expected_tier: curated
+    notes: "Bare 'AIC' → pingone-st."
+
 non_trigger_prompts:
   - id: N-01
     prompt: "Build a DaVinci flow for customer login with risk-based step-up MFA."
