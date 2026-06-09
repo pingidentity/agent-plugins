@@ -81,7 +81,7 @@ The goal is to serve the minimum sufficient context at each stage.
 Skills are products, not one-time files. Before publishing a skill:
 1. Write at least 3 benchmark prompts that should trigger it
 2. Write at least 2 prompts that should NOT trigger it
-3. Verify routing decisions are correct using the eval format in `shared/evals/routing-eval.md`
+3. Verify routing decisions are correct using the eval format in `evals/routing-eval.md`
 4. Update the description if undertriggering is observed
 
 ---
