@@ -1,5 +1,5 @@
 ---
-description: Apply when working on Ping Identity platform tasks (PingOne MT, PingOne ST/AIC, PingFederate, PingAccess, PingDirectory, PingID, DaVinci).
+description: Apply when working on Ping Identity platform tasks (PingOne, PingOne Advanced Identity Cloud / AIC, PingFederate, PingAccess, PingDirectory, PingID, DaVinci).
 alwaysApply: false
 globs:
   - "**/*.tsx"
@@ -25,10 +25,10 @@ When the user's task involves Ping Identity platforms, agents have access to six
 ## Routing decision order inside every skill
 
 1. What is the user trying to do? (intent)
-2. Which platform family? (PingOne MT / PingOne ST / Ping Software Suite / cross-platform)
+2. Which platform family? (PingOne / PingOne Advanced Identity Cloud / Ping Software Suite / cross-platform)
 3. Which exact product or service?
-4. Which reference tier? (curated → generated → docs-mcp)
+4. Which curated anchor(s) resolve the task?
 
 ## Tier discipline
 
-Use the smallest trusted context first. Load 1–3 curated anchors before considering the generated shortlist. Use Docs MCP only when the first two tiers are insufficient.
+Use the smallest trusted context first. Load 1–3 curated anchors and stop as soon as the task can be completed.

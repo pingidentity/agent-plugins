@@ -1,6 +1,6 @@
 ---
 name: reference-authoring
-description: Use this skill whenever you are asked to create, update, or review a reference file in this repo — including curated anchors, generated stubs, and node reference files. Invoke with /reference-authoring or when the task is "add a reference", "write a reference file", "create a curated anchor", "document [feature] in a reference", or any request to author content under a skill's references/ directory.
+description: Use this skill whenever you are asked to create, update, or review a reference file in this repo — including curated anchors and node reference files. Invoke with /reference-authoring or when the task is "add a reference", "write a reference file", "create a curated anchor", "document [feature] in a reference", or any request to author content under a skill's references/ directory.
 compatibility: Designed for this repo's skill system. No external tools required.
 metadata:
   publisher: internal
@@ -9,7 +9,7 @@ metadata:
 
 # reference-authoring
 
-Author well-formed reference files for any skill in this repo — curated anchors, generated stubs, and node reference files — following the conventions in AUTHORING-RULES.md.
+Author well-formed reference files for any skill in this repo — curated anchors and node reference files — following the conventions in AUTHORING-RULES.md.
 
 ## When to use this skill
 
@@ -28,16 +28,15 @@ Author well-formed reference files for any skill in this repo — curated anchor
 
 ---
 
-## Step 1 — Decide: curated or generated?
+## Step 1 — Confirm the reference type
 
 | Type | When to create it | Directory |
 |---|---|---|
 | Curated anchor | Hand-authored, task-completing, canonical | `references/curated/<platform>/` |
-| Generated stub | Placeholder for CI to populate; topic not yet authored | `references/generated/<platform>/` |
 
-Default to curated unless the content genuinely requires CI-generated output (shortlists, bulk manifests).
+All reference files are hand-authored curated anchors.
 
-**Canonical rule:** set `canonical: true` only on curated files. Generated stubs are always `canonical: false`.
+**Canonical rule:** set `canonical: true` on curated anchors.
 
 ---
 
@@ -75,9 +74,9 @@ Every reference file requires a complete frontmatter block. Use `curated-referen
 
 | Field | Notes |
 |---|---|
-| `canonical` | `true` for curated, `false` for generated |
+| `canonical` | `true` for curated anchors |
 | `last_updated` | YYYY-MM-DD |
-| `slug` | Canonical docs URL for this topic — enables T3 Docs MCP escalation |
+| `slug` | Canonical docs URL for this topic |
 
 ---
 

@@ -62,7 +62,7 @@ The pre-commit hook enforces these checks locally on every commit.
    ```bash
    cp shared/templates/SKILL.template.md plugins/ping-identity/skills/<name>/SKILL.md
    cp shared/templates/ping-marketplace.template.json plugins/ping-identity/skills/<name>/ping-marketplace.json
-   mkdir -p plugins/ping-identity/skills/<name>/references/{curated,generated,runtime}
+   mkdir -p plugins/ping-identity/skills/<name>/references/curated
    ```
 3. Fill in `SKILL.md`:
    - Keep it ≤120 lines — routing decision tree only, no prose
@@ -70,12 +70,11 @@ The pre-commit hook enforces these checks locally on every commit.
    - `description:` must be specific enough that an agent can decide to activate this skill without reading the body
    - Add a `## When to use` section, a `## When NOT to use` section, and a routing table
 4. Add ≥3 curated anchors in `references/curated/` — see Authoring a curated anchor below
-5. Add `references/runtime/docs-mcp-routing.md` — use `shared/templates/runtime-routing-stub.md` as a starting point
-6. Add the skill to `plugins/ping-identity/references/index.json`
-7. Add `evals/prompts/<skill>.yaml` — see Eval prompt requirements below
-8. Add the skill to `plugins/ping-identity/plugin-map.md` and `.well-known/agent-skills/index.json`
-9. Run `python3 scripts/validate_skills.py --root .` — must exit 0
-10. Run all mock evals — must exit 0
+5. Add the skill to `plugins/ping-identity/references/index.json`
+6. Add `evals/prompts/<skill>.yaml` — see Eval prompt requirements below
+7. Add the skill to `plugins/ping-identity/plugin-map.md` and `.well-known/agent-skills/index.json`
+8. Run `python3 scripts/validate_skills.py --root .` — must exit 0
+9. Run all mock evals — must exit 0
 
 **Decision rule** (from strategy doc § 4): A new skill is created only if it has a distinct trigger, a distinct user outcome, enough reference depth that routing materially improves results, and low overlap with an existing umbrella. Otherwise add it as a reference pack inside an existing skill.
 
