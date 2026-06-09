@@ -69,8 +69,6 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 | Themes, branding, custom domain, email/SMS templates, DaVinci UI Studio | `references/curated/pingone-mt/themes-and-branding.md` |
 | Cross-platform branding overview | `references/curated/cross-platform/policy-and-branding-basics.md` |
 
-**Generated shortlist** (fallback): `references/generated/pingone-mt/top-25.json` — sub-files: `tenants.md`, `apps.md`, `policies.md`, `directories.md`
-
 ## PingOne Advanced Identity Cloud
 
 **Curated anchors — pick 1–3 matching the task:**
@@ -84,8 +82,6 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 | Themes, branding, custom CSS | `references/curated/pingone-st/themes-and-customization.md` |
 | Identity store, user schema, LDAP/AD | `references/curated/pingone-st/directory-setup.md` |
 
-**Generated shortlist** (fallback): `references/generated/pingone-st/top-25.json`
-
 ## Ping Software Suite
 
 **Curated anchors — pick 1–3 matching the task:**
@@ -97,15 +93,13 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 | PingAccess web app and API protection | `references/curated/ping-software/pingaccess-basics.md` |
 | Cross-platform admin patterns (LDAP, OIDC, APIs) | `references/curated/cross-platform/core-admin-patterns.md` |
 
-**Generated shortlist by product** (fallback): `references/generated/ping-software/top-25.json`
-
 ## MCP execution
 
 See `references/runtime/mcp-preflight.md` for MCP config and Cursor preflight steps.
 
 ## Retrieval and execution
 
-**Rule:** (1) scan for MCP tools first — run the MCP config preflight above before executing; (2) load 1–3 curated anchors for the platform/task; (3) fall back to generated shortlist; (4) as a last resort, query the Ping docs MCP server with a targeted product + task query.
+**Rule:** (1) scan for MCP tools first — run the MCP config preflight above before executing; (2) load 1–3 curated anchors for the platform/task.
 
 ## Cross-skill escalation
 

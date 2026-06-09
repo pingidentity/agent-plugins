@@ -73,8 +73,7 @@ See `references/runtime/mcp-preflight.md` for MCP config and Cursor preflight st
 ## Step 2: Retrieval escalation
 
 1. Curated anchors (`references/curated/`) — load 1–3 max. Stop if sufficient.
-2. Generated shortlists (`references/generated/web/`, `references/generated/mobile/`, `references/generated/on-prem-integration/`, `references/generated/orchestration-sdks/`) — load the relevant directory for the surface; skip if empty.
-3. Docs MCP fallback — query the Ping docs MCP server with a targeted product + task query. Only if curated + shortlist insufficient.
+2. For deep implementation work, delegate to the companion SDK skills below.
 
 ## Companion SDK skills — `ping-sdk-agent-skills`
 

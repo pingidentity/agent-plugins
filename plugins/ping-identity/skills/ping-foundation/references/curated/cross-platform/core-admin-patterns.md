@@ -19,7 +19,7 @@ Recurring administration patterns across PingOne MT, PingOne ST, and Ping Softwa
 ## Scope
 
 Covers: common admin patterns that apply broadly across platforms.
-Does NOT cover: deep per-product reference — see generated shortlists for product-specific detail.
+Does NOT cover: deep per-product reference — see the product-specific curated anchors in this skill.
 
 ---
 

@@ -23,10 +23,9 @@ Lightweight routing rules for plugin-only installs. Replaces `/shared/taxonomies
 | Service question spanning PingOne MT and PingOne ST | `cross-platform` |
 | Unknown | Ask: "Are you in PingOne, PingOne ST, or on-premises software?" |
 
-## Step 3 — Select reference tier (stop at first sufficient tier)
+## Step 3 — Select reference tier
 
 1. `skills/<skill>/references/curated/` — load 1–3 anchor docs
-2. `skills/<skill>/references/generated/<platform-tag>/` — scan shortlist for matching titles
 
 ## Cross-skill escalation
 

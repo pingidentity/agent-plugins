@@ -4,7 +4,7 @@
   "description": "Agent plugins for Ping Identity — teach any AI coding agent how to build with Ping Identity.",
   "author": {
     "name": "Ping Identity",
-    "email": "developer-experience@pingidentity.com"
+    "email": "devex@pingidentity.com"
   },
   "homepage": "https://developer.pingidentity.com",
   "repository": "https://github.com/pingidentity/agent-plugins",

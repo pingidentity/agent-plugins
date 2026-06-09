@@ -5,22 +5,37 @@
   "version": "1.0.0",
   "publisher": "Ping Identity",
   "tags": {
-    "product_family": ["pingone-mt", "pingone-st"],
+    "product_family": [
+      "pingone-mt",
+      "pingone-st"
+    ],
     "products": [
       "pingone-st",
       "pingam",
       "davinci",
       "pingone"
     ],
-    "capabilities": ["orchestration"],
-    "audience": ["developer", "architect", "admin"],
-    "use_cases": ["workforce", "customer"],
-    "protocols": ["oidc", "oauth2", "saml"]
+    "capabilities": [
+      "orchestration"
+    ],
+    "audience": [
+      "developer",
+      "architect",
+      "admin"
+    ],
+    "use_cases": [
+      "workforce",
+      "customer"
+    ],
+    "protocols": [
+      "oidc",
+      "oauth2",
+      "saml"
+    ]
   },
   "entry_point": "SKILL.md",
   "references": {
-    "curated_path": "references/curated/",
-    "generated_path": "references/generated/"
+    "curated_path": "references/curated/"
   },
   "related_skills": [
     "ping-foundation",

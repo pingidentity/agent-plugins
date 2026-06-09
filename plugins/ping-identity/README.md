@@ -54,7 +54,7 @@ Load order for a plugin-only install:
 4. `routing-hints.md` → routing fallback (replaces `/shared/taxonomies/routing-rules.md`)
 5. Selected `skills/<skill>/SKILL.md`
 6. `ping-quickstart`: load from `skills/ping-quickstart/references/` (flat — 1–2 files max)
-7. Other skills: `skills/<skill>/references/curated/` → 1–3 curated anchors, then `references/generated/<branch>/` if needed
+7. Other skills: `skills/<skill>/references/curated/` → 1–3 curated anchors
 
 ## Full repo
 

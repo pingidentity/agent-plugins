@@ -61,7 +61,6 @@ Load the matching use-case anchor when the task maps to a named scenario:
 
 1. Match the task to a use case row first — use-case anchors are self-contained and include node guidance.
 2. If no use case matches, select 1–2 node-family anchors from the node-family table.
-3. If neither is sufficient, fall back to `references/generated/pingone-st/top-25.json`.
 
 ## Prerequisites
 

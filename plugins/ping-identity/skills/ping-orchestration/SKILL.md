@@ -76,9 +76,6 @@ Sub-routing by task and journey use case: see `references/curated/pingone-st/rou
 | Scripting, page composition, session, state, async, polling, LoginCount | `references/curated/pingone-st/nodes/utility-nodes.md` |
 | SAML/OIDC federation, Twilio Verify, device/cookie/cert | `references/curated/pingone-st/nodes/federation-contextual-nodes.md` |
 
-**Generated shortlist** (fallback):
-- `references/generated/pingone-st/top-25.json`
-
 ---
 
 ## PingOne / DaVinci
@@ -99,13 +96,11 @@ Sub-routing by task and journey use case: see `references/curated/pingone-st/rou
 |---|---|
 | Passkeys / passwordless / FIDO2 design across PingOne, PingOne Advanced Identity Cloud (AIC), Ping Software | `references/curated/cross-platform/passkeys-and-passwordless.md` |
 
-**Generated shortlist** (fallback): `references/generated/pingone-mt/top-25.json`
-
 ---
 
 ## Retrieval escalation
 
-Load 1–3 curated anchors for the detected platform/task; stop if sufficient. If not, scan the generated shortlist; pull summaries only.
+Load 1–3 curated anchors for the detected platform/task; stop if sufficient.
 
 ## Cross-skill escalation
 

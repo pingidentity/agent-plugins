@@ -19,7 +19,7 @@ Core configuration concepts for PingFederate: server architecture, SP/IdP connec
 ## Scope
 
 **Covers:** PingFederate deployment architecture, SP connections, IdP connections, authentication adapter chains, OAuth/OIDC client setup, initial admin setup.
-**Does NOT cover:** PingAccess (resource gateway), PingDirectory (directory services), or PingID MFA configuration — each has its own generated reference under `references/generated/ping-software/`.
+**Does NOT cover:** PingAccess (resource gateway), PingDirectory (directory services), or PingID MFA configuration — each has its own curated anchor: `references/curated/ping-software/pingaccess-basics.md` and `references/curated/ping-software/pingdirectory-basics.md`.
 
 ---
 
