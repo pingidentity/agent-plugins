@@ -1,5 +1,6 @@
 {
-  "name": "ping-identity-agent-plugins",
+  "name": "ping-identity",
+  "displayName": "Ping Identity",
   "version": "1.0.0",
   "description": "Agent plugins for Ping Identity — teach any AI coding agent how to build with Ping Identity.",
   "author": {
@@ -10,6 +11,7 @@
   "repository": "https://github.com/pingidentity/agent-plugins",
   "license": "MIT",
   "keywords": ["ping", "pingone", "aic", "davinci", "pingfederate", "pingaccess", "identity", "authentication", "ciam", "ai-identity"],
+  "logo": "assets/ping-logo-square.svg",
   "skills": "./skills/",
   "mcpServers": "./cursor-mcp.json"
 }

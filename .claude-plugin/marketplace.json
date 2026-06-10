@@ -1,16 +1,16 @@
 {
   "name": "pingidentity",
-  "description": "Agent plugins for Ping Identity — teach any AI coding agent how to build with Ping Identity.",
+  "description": "Agent plugin for Ping Identity — teach any AI coding agent how to build with Ping Identity.",
   "owner": {
     "name": "Ping Identity",
     "email": "devex@pingidentity.com"
   },
   "plugins": [
     {
-      "name": "ping-identity-agent-plugins",
+      "name": "ping-identity",
       "displayName": "Ping Identity",
       "source": "./plugins/ping-identity",
-      "description": "Six umbrella agent plugins covering journeys, app integration, universal services, platform setup, and identity for AI across PingOne, AIC, DaVinci, and PingFederate.",
+      "description": "Six umbrella agent skills covering journeys, app integration, universal services, platform setup, and identity for AI across PingOne, AIC, DaVinci, and PingFederate.",
       "version": "1.0.0",
       "author": {
         "name": "Ping Identity",
