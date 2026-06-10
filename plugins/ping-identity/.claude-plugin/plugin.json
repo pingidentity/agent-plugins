@@ -1,5 +1,5 @@
 {
-  "name": "ping-identity-agent-plugins",
+  "name": "ping-identity",
   "version": "1.0.0",
   "description": "Agent plugins for Ping Identity — teach any AI coding agent how to build with Ping Identity.",
   "author": {
