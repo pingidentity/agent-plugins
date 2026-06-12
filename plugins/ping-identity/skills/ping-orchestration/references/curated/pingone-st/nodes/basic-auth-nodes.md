@@ -40,6 +40,14 @@ Collects the username from the user. Writes to `username` in shared state. **Use
 - Outcomes: single (proceeds to next node)
 - Must be a PageNode child — standalone placement renders no input field
 
+> **SDK callback mapping — tree-purpose-dependent (P1 risk):**
+> | Tree purpose | Callback emitted |
+> |---|---|
+> | **authentication** | `NameCallback` |
+> | registration | `ValidatedCreateUsernameCallback`, `ValidatedUsernameCallback` |
+>
+> Do **not** infer `ValidatedUsernameCallback` for authentication trees. The Journey Node Manifest (`journey-node-manifest.md`) records the resolved value after a live probe.
+
 ### Platform Username node V2 (`ValidatedUsernameNodeV2`)
 V2 adds prepopulation support. Use V2 when the journey may have the username already in state (e.g., re-authentication after session expiry, step-up flows).
 
@@ -64,6 +72,14 @@ Collects the password from the user. Writes to `password` in transient state. **
 
 - Outcomes: single
 - Must be a PageNode child
+
+> **SDK callback mapping — tree-purpose-dependent (P1 risk):**
+> | Tree purpose | Callback emitted |
+> |---|---|
+> | **authentication** | `PasswordCallback` |
+> | registration / password-reset | `ValidatedCreatePasswordCallback`, `ValidatedPasswordCallback` |
+>
+> Do **not** infer `ValidatedPasswordCallback` for authentication trees. The Journey Node Manifest (`journey-node-manifest.md`) records the resolved value after a live probe.
 
 **Two-instance pattern (password update journeys):**
 - Instance 1 — "Verify Existing Password": `validateInput: false` (existing credential, no policy enforcement)

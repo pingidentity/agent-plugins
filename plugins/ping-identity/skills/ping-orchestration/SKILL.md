@@ -63,10 +63,15 @@ Scan available tools for MCP tools that can perform the required operation. If m
 
 Sub-routing by task and journey use case: see `references/curated/pingone-st/routing-index.md`.
 
+### Mandatory post-journey step: produce the Journey Node Manifest
+
+After **every** `createJourney` or `updateJourneyNode` call, produce a Journey Node Manifest before handing off to any SDK skill — otherwise downstream skills generate the wrong callback views (e.g. `ValidatedUsernameCallback` instead of `NameCallback` for a login tree). Read `references/curated/pingone-st/journey-node-manifest.md` for the schema. Populate `emitsCallbacks` via Tier 1 live probe (preferred) or Tier 2 reference map (fallback). Write to `.ping/journey-manifest.<journeyName>.json`, echo a node→callbacks table, and state: *"Manifest written — pass it to the SDK skill."*
+
 **Quick reference — node families:**
 
 | Task | Reference |
 |---|---|
+| Journey Node Manifest (produced after every createJourney; consumed by all SDK skills) | `references/curated/pingone-st/journey-node-manifest.md` |
 | Journey design principles, patterns, resilience, security | `references/curated/pingone-st/journey-design-patterns.md` |
 | Node composition rules, PageNode usage, child node gotchas | `references/curated/pingone-st/nodes/node-fundamentals.md` |
 | Username/password, passthrough auth, session entry, lifecycle outcomes | `references/curated/pingone-st/nodes/basic-auth-nodes.md` |

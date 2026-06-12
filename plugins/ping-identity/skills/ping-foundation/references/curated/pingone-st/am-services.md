@@ -270,6 +270,23 @@ When configuring a new realm from scratch, work through services in this order t
 
 ---
 
+## Session cookie name — AIC tenant-specific (P6)
+
+The AIC session cookie is **not always `iPlanetDirectoryPro`**. Many AIC tenants are provisioned with a tenant-specific cookie name. Using the wrong cookie name in SDK code causes silent authentication failures — the SDK receives a session token but posts it under the wrong header name.
+
+### How to find the real cookie name
+
+**Admin console path:** Native Consoles → Access Management → `<realm>` → Authentication → Settings → **Core** tab → **Cookie Name** field.
+
+**REST:** `GET {am-base-url}/am/json/realms/root/realms/{realm}/realm-config/authentication`  
+→ look for `"cookieName"` in the response body.
+
+**Write it into the Journey Node Manifest:** When producing a manifest for a journey (`ping-orchestration/references/curated/pingone-st/journey-node-manifest.md`), populate the `sessionCookieName` field with this value. SDK skills must use `sessionCookieName` from the manifest rather than hardcoding `iPlanetDirectoryPro`.
+
+**CORS header:** The cookie name also appears in the allowed headers list of the CORS Service (e.g. `iplanet-directory-pro`). If you change the cookie name, update the CORS allowed headers accordingly.
+
+---
+
 ## Common gotchas across services
 
 | Gotcha | Symptom | Fix |

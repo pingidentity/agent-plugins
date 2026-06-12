@@ -75,6 +75,16 @@ See `references/runtime/mcp-preflight.md` for MCP config and Cursor preflight st
 1. Curated anchors (`references/curated/`) — load 1–3 max. Stop if sufficient.
 2. For deep implementation work, delegate to the companion SDK skills below.
 
+## Journey Node Manifest — read before delegating to SDK skills
+
+Before calling any companion SDK skill for Journey-based integration work, check for a Journey Node Manifest:
+
+1. Look for `.ping/journey-manifest.*.json` in the working directory.
+2. If found, pass the manifest path to the SDK skill (e.g. `--manifest .ping/journey-manifest.AgentsLogin.json`) so it uses `callbackUnion` and per-node `emitsCallbacks` to generate the correct callback/collector views.
+3. If no manifest exists, emit a warning before delegating: *"No Journey Node Manifest found — callback generation will be inference-based and may be incorrect. Run `ping-orchestration` to rebuild the journey and produce a manifest first, or provide the journey export."*
+
+This is the contract that prevents silent runtime breaks where the wrong callback view is generated (e.g. `ValidatedUsernameCallback` instead of `NameCallback` for a login tree). See `ping-orchestration/references/curated/pingone-st/journey-node-manifest.md` for the manifest format.
+
 ## Companion SDK skills — `ping-sdk-agent-skills`
 
 For deep implementation work (full code scaffolding, collector rendering, migration automation), delegate to the specialist skills in the `pingidentity/ping-sdk-agent-skills` plugin:
