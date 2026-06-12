@@ -1,0 +1,11 @@
+{
+  "name": "ping-identity",
+  "version": "1.0.0",
+  "description": "Agent plugin for Ping Identity — teach the Antigravity CLI how to build with Ping Identity.",
+  "author": {
+    "name": "Ping Identity",
+    "email": "devex@pingidentity.com"
+  },
+  "skills": "./skills/",
+  "mcpServers": "./mcp_config.json"
+}
