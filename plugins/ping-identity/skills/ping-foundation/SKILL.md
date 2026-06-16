@@ -1,6 +1,6 @@
 ---
 name: ping-foundation
-description: "Use when setting up, configuring, or administering any Ping Identity platform — PingOne, PingOne Advanced Identity Cloud (AIC), PingFederate, PingAccess, PingDirectory, or PingID. Covers tenant/environment creation, app registration (including Worker apps and service accounts for M2M API access), SSO, directories, policies, and branding. Requires a named or clearly implied platform."
+description: "Use when setting up, configuring, or administering any Ping Identity platform — PingOne, PingOne Advanced Identity Cloud (AIC), or Ping Advanced Identity Software (PingAM, PingFederate, PingAccess, PingDirectory, PingID). Covers tenant/environment creation, app registration (including Worker apps and service accounts for M2M API access), SSO, directories, policies, and branding. Requires a named or clearly implied platform."
 compatibility: Designed for Ping Identity platform tasks. MCP tools for PingOne and PingOne Advanced Identity Cloud (AIC) are used when available; console instructions provided as fallback.
 metadata:
   publisher: Ping Identity
