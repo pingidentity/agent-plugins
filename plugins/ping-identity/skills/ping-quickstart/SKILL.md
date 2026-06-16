@@ -1,6 +1,6 @@
 ---
 name: ping-quickstart
-description: "Use before any other Ping skill when the user is in orientation mode — 'where do I start', 'which Ping product do I need', 'help me choose', 'we're evaluating', 'migrating from ForgeRock/Okta/Auth0', or when platform is unknown. Also use for bare user-management commands with no platform named ('Add a user to Ping') — clarify platform before routing. Also invoke with /ping-quickstart."
+description: "Use before any other Ping skill when the user is in orientation mode — 'where do I start', 'which Ping product do I need', 'help me choose', 'we're evaluating', 'migrating from ForgeRock/existing identity platform', 'inherited a Ping deployment', or when platform is unknown. Also use for bare user-management commands with no platform named ('Add a user to Ping') — clarify platform before routing."
 compatibility: Designed for Ping Identity platform tasks. Requires no tools — orientation and routing only.
 metadata:
   publisher: Ping Identity

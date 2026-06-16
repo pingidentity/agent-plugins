@@ -1,6 +1,6 @@
 ---
 name: ping-app-integration
-description: "Use when writing code or wiring an SDK to integrate Ping Identity into a web, mobile, or backend app — Android/iOS/JavaScript SDK installation, OIDC authorization code + PKCE flows, token management, ForgeRock-to-Ping SDK migration, and app-side troubleshooting (redirect_uri_mismatch, CORS, token refresh failures). Also invoke with /ping-app-integration."
+description: "Use when writing code or wiring an SDK to integrate Ping Identity into a web, mobile, or backend app — Android/iOS/JavaScript SDK installation, OIDC authorization code + PKCE flows, token management, ForgeRock-to-Ping SDK migration, and app-side troubleshooting (redirect_uri_mismatch, CORS, token refresh failures)."
 compatibility: Designed for Ping Identity app and SDK integration work. References product docs and SDK documentation.
 metadata:
   publisher: Ping Identity

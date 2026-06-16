@@ -1,6 +1,6 @@
 ---
 name: ping-universal-services
-description: "Use when configuring or invoking a Ping shared service at the policy or service level — PingOne Protect (risk scoring), PingOne Verify (KYC/identity proofing), PingOne MFA (device management, enrollment API), PingOne Credentials (verifiable credentials), PingOne IGA, or PingOne Authorize (fine-grained authorization). This skill owns service node configuration inside DaVinci flows and AIC journeys. Also invoke with /ping-universal-services."
+description: "Use when configuring or invoking a Ping shared service at the policy or service level — PingOne Protect (risk scoring), PingOne Verify (KYC/identity proofing), PingOne MFA (device management, enrollment API), PingOne Credentials (verifiable credentials), PingOne IGA, or PingOne Authorize (fine-grained authorization). This skill owns service node configuration inside DaVinci flows and AIC journeys."
 compatibility: Designed for Ping Identity shared services work. References product docs and the Ping Marketplace.
 metadata:
   publisher: Ping Identity

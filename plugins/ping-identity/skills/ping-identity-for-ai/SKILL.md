@@ -1,6 +1,6 @@
 ---
 name: ping-identity-for-ai
-description: "Use when an AI agent, LLM, or agentic workflow interacts with Ping Identity — agent machine identity, client credentials for agents, Verified Trust signals, Identity for AI 5-pillar architecture, PingGateway as MCP gateway, CIBA human-in-the-loop approvals, or AI/bot detection with PingOne Protect. Ask a clarifying question before routing if 'agent' lacks AI/LLM context. Also invoke with /ping-identity-for-ai."
+description: "Use when an AI agent, LLM, or agentic workflow interacts with Ping Identity — agent machine identity, client credentials for agents, Verified Trust signals, Identity for AI 5-pillar architecture, PingGateway as MCP gateway, CIBA human-in-the-loop approvals, or AI/bot detection with PingOne Protect. Ask a clarifying question before routing if 'agent' lacks AI/LLM context."
 compatibility: Designed for AI identity and agent security work on Ping Identity platforms. References product docs and Ping Labs content.
 metadata:
   publisher: Ping Identity

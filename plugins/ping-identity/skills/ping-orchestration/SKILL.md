@@ -1,6 +1,6 @@
 ---
 name: ping-orchestration
-description: "Use when designing, building, or advising on authentication flows or orchestration logic — DaVinci flows, PingOne Advanced Identity Cloud journeys, PingAM trees, login/registration/MFA/step-up/passwordless flows, scripted decision nodes, and social login. Ask one clarifying question about use case and platform before recommending journey vs DaVinci if either is unknown. Also invoke with /ping-orchestration."
+description: "Use when designing, building, or advising on authentication flows or orchestration logic — DaVinci flows, PingOne Advanced Identity Cloud journeys, PingAM trees, login/registration/MFA/step-up/passwordless flows, scripted decision nodes, and social login. Ask one clarifying question about use case and platform before recommending journey vs DaVinci if either is unknown."
 compatibility: Designed for Ping Identity orchestration tasks. MCP tools for PingOne Advanced Identity Cloud (AIC) are used when available to create and update journeys directly.
 metadata:
   publisher: Ping Identity
