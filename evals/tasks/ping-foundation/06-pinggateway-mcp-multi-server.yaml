@@ -1,0 +1,70 @@
+id: 06-pinggateway-mcp-multi-server
+skill: ping-foundation
+title: "PingGateway MCP gateway — two servers, path-split, introspection, no token exchange"
+
+prompt: |
+  I have two MCP servers already running:
+    - notflux MCP server at http://notflux-mcp-server:8000
+    - tools MCP server at http://tools-mcp-server:8000
+
+  Configure PingGateway to protect both behind a single gateway instance using
+  path-based routing (/mcp/notflux and /mcp/tools). Requirements:
+    - Inbound token validation via non-AM introspection (the AS is PingFederate)
+    - The /mcp/notflux route is primary (owns the well-known registration)
+    - The /mcp/tools route is secondary (uses rsFilter directly)
+    - No token exchange — both backends accept the inbound Bearer token
+    - Streaming enabled
+
+  Produce:
+    1. admin.json with streamingEnabled set
+    2. Route JSON for the primary /mcp/notflux route
+    3. Route JSON for the secondary /mcp/tools route, including the rsFilter heap objects
+    4. List of required environment variables / secrets
+
+expected_artifacts:
+  - "**/*.json"
+
+deterministic_checks:
+  - id: streaming-enabled
+    description: "admin.json sets streamingEnabled to true"
+    type: grep
+    glob: "**/admin.json"
+    pattern: "streamingEnabled"
+    must_match: true
+
+  - id: primary-route-uses-mcp-protection-filter
+    description: "Primary route uses McpProtectionFilter"
+    type: grep
+    glob: "**/*.json"
+    pattern: "McpProtectionFilter"
+    must_match: true
+
+  - id: secondary-route-uses-rsfiler-string
+    description: "Secondary route references rsFilter as a bare string (not inline object)"
+    type: grep
+    glob: "**/*.json"
+    pattern: '"rsFilter"'
+    must_match: true
+
+  - id: negative-lookahead-on-primary
+    description: "Primary route condition excludes secondary path using negative lookahead"
+    type: grep
+    glob: "**/*.json"
+    pattern: "(?!"
+    must_match: true
+
+  - id: introspection-provider-handler
+    description: "rsFilter heap includes IntrospectionProviderHandler or TokenIntrospectionAccessTokenResolver"
+    type: grep
+    glob: "**/*.json"
+    pattern: "Introspection"
+    must_match: true
+
+  - id: no-token-exchange-filter
+    description: "No OAuth2TokenExchangeFilter present (backends accept inbound token directly)"
+    type: not_contains
+    glob: "**/*.json"
+    pattern: "OAuth2TokenExchangeFilter"
+
+judge_rubric:
+  enabled: false

@@ -13,6 +13,7 @@ Agent skills for configuring, integrating, and operating Ping Identity platforms
 - Designing orchestration flows (DaVinci, AIC journeys, PingAM trees)
 - Integrating Ping into web, mobile, and SDK-based applications
 - Using Ping Universal Services (Protect, Verify, IGA, Credentials, Authorize)
+- Deploying and configuring PingGateway as an MCP security gateway in front of MCP servers
 - Understanding Ping's Identity for AI and Verified Trust capabilities
 
 ## Skill role: context, not execution

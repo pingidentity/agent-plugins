@@ -171,6 +171,7 @@ The Agent Gateway module is independent of other PingGateway modules — no othe
 
 ## Related references
 
+- `ping-foundation/references/curated/ping-software/pinggateway-mcp-gateway.md` — **deployment and configuration guide**: route patterns, token exchange, Docker/Kubernetes setup, PingAuthorize integration, and troubleshooting
 - `references/curated/agent-security-patterns.md` — token scoping, client credentials, revocation
 - `references/curated/identity-for-ai-overview.md` — 5-pillar ID4AI architecture
 - `references/curated/workforce-helpdesk-ai.md` — delegation and HITL patterns

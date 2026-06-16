@@ -16,6 +16,10 @@
         "ROOT_DOMAIN": "${user_config.davinci_root_domain}",
         "CUSTOM_DOMAIN": "${user_config.davinci_custom_domain}"
       }
+    },
+    "Helix-Doc-MCP": {
+      "type": "http",
+      "url": "https://openam-helix.forgeblocks.com/dpc/jas/helix/v1/environments/ecb1855e-fd85-4c74-8303-7d47e41b8715/mcpServers/PingDocMCP/versions/draft/mcp"
     }
   }
 }

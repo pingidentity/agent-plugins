@@ -1,6 +1,6 @@
 ---
 name: ping-foundation
-description: "Use this skill whenever the task involves setting up, configuring, or administering any Ping Identity platform — PingOne (multi-tenant cloud), PingOne Advanced Identity Cloud (AIC), PingFederate, PingAccess, PingDirectory, or PingID. Triggers: create or manage environments, tenants, realms; register OIDC, SAML, WS-Federation, or OAuth 2.0 apps; configure SSO, Platform SSO, or workforce single sign-on; manage directories, LDAP, user populations, or schema; configure sign-on policies, authentication policies, or step-up MFA policy settings at the platform level; configure MFA methods or PingID in PingFederate; branding, custom domains, or notification templates; administer on-premises Ping software; advisory questions like 'how should I structure my tenant' or 'what grant type should I use'. Prerequisite — a specific platform must be named or clearly implied; 'add a user to Ping' or 'create a user in Ping' without a named platform belongs in ping-quickstart first. Also invoke with /ping-foundation."
+description: "Use this skill whenever the task involves setting up, configuring, or administering any Ping Identity platform — PingOne (multi-tenant cloud), PingOne Advanced Identity Cloud (AIC), PingFederate, PingAccess, PingDirectory, PingGateway, or PingID. Triggers: create or manage environments, tenants, realms; register OIDC, SAML, WS-Federation, or OAuth 2.0 apps; configure SSO, Platform SSO, or workforce single sign-on; manage directories, LDAP, user populations, or schema; configure sign-on policies, authentication policies, or step-up MFA policy settings at the platform level; configure MFA methods or PingID in PingFederate; branding, custom domains, or notification templates; administer on-premises Ping software; deploy or configure PingGateway as an MCP security gateway, API gateway, or reverse proxy; advisory questions like 'how should I structure my tenant' or 'what grant type should I use'. Prerequisite — a specific platform must be named or clearly implied; 'add a user to Ping' or 'create a user in Ping' without a named platform belongs in ping-quickstart first. Also invoke with /ping-foundation."
 compatibility: Designed for Ping Identity platform tasks. MCP tools for PingOne and PingOne Advanced Identity Cloud (AIC) are used when available; console instructions provided as fallback.
 metadata:
   publisher: Ping Identity
@@ -24,8 +24,9 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 - Configure SSO, Platform SSO, or workforce single sign-on
 - Manage directories, identity stores, or user populations
 - Configure authentication policies, sign-on policies, or branding
-- Administer PingFederate, PingAccess, PingDirectory, or PingID
+- Administer PingFederate, PingAccess, PingDirectory, PingGateway, or PingID
 - Deploy or upgrade on-premises Ping software
+- Deploy or configure PingGateway as an MCP security gateway in front of MCP servers
 - Advisory: "How should I structure my tenant?", "What client type should I use?"
 
 ## When NOT to use this skill
@@ -52,7 +53,7 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 |---|---|
 | PingOne admin console, PingOne APIs, PingOne environment | [PingOne](#pingone) |
 | PingOne Advanced Identity Cloud (AIC), identity cloud, PingAM, PingIDM, PingDS | [PingOne Advanced Identity Cloud](#pingone-advanced-identity-cloud) |
-| PingFederate, PingAccess, PingDirectory, PingID, PingAM standalone | [Ping Software Suite](#ping-software-suite) |
+| PingFederate, PingAccess, PingDirectory, PingGateway, PingID, PingAM standalone | [Ping Software Suite](#ping-software-suite) |
 
 ## PingOne
 
@@ -91,6 +92,7 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 | PingFederate federation, SP/IdP connections, adapters | `references/curated/ping-software/pingfederate-basics.md` |
 | PingDirectory installation, replication, schema | `references/curated/ping-software/pingdirectory-basics.md` |
 | PingAccess web app and API protection | `references/curated/ping-software/pingaccess-basics.md` |
+| PingGateway MCP security gateway — deploy, configure, route patterns, token exchange, Docker/k8s | `references/curated/ping-software/pinggateway-mcp-gateway.md` |
 | Cross-platform admin patterns (LDAP, OIDC, APIs) | `references/curated/cross-platform/core-admin-patterns.md` |
 
 ## MCP execution

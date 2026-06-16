@@ -175,6 +175,50 @@ trigger_prompts:
     expected_tier: curated
     notes: "Bare 'AIC' → pingone-st."
 
+  # ----- PingGateway MCP gateway (added 2026-06-16) -----
+
+  - id: T-70
+    prompt: "Deploy PingGateway as an MCP security gateway in front of my existing MCP server on Kubernetes."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/ping-software/pinggateway-mcp-gateway.md
+    expected_tier: curated
+    notes: "Explicit PingGateway + Kubernetes deployment → ping-software anchor."
+
+  - id: T-71
+    prompt: "Configure PingGateway to protect two MCP servers on different paths with a single gateway instance."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/ping-software/pinggateway-mcp-gateway.md
+    expected_tier: curated
+    notes: "Multi-server path-split route pattern."
+
+  - id: T-72
+    prompt: "How do I set up token exchange in PingGateway so the backend MCP server gets a different token than the one my AI agent sends?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/ping-software/pinggateway-mcp-gateway.md
+    expected_tier: curated
+    notes: "Token exchange (OAuth2TokenExchangeFilter) config pattern."
+
+  - id: T-73
+    prompt: "I'm getting an AlreadyRegisteredException when I add a second MCP route to PingGateway. What's wrong?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/ping-software/pinggateway-mcp-gateway.md
+    expected_tier: curated
+    notes: "Primary/secondary route constraint — only one route may use McpProtectionFilter."
+
+  - id: T-74
+    prompt: "Configure PingOne Authorize fine-grained policies on PingGateway MCP routes to control which tools an AI agent can call."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/ping-software/pinggateway-mcp-gateway.md
+    expected_tier: curated
+    notes: "PingAuthorizeFilter (P1AZ) integration; 2026+ only."
+
+  - id: T-75
+    prompt: "Run PingGateway as an MCP gateway on Docker with an API key backend instead of token exchange."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/ping-software/pinggateway-mcp-gateway.md
+    expected_tier: curated
+    notes: "Docker deployment + API key HeaderFilter backend hop."
+
 non_trigger_prompts:
   - id: N-01
     prompt: "Build a DaVinci flow for customer login with risk-based step-up MFA."
