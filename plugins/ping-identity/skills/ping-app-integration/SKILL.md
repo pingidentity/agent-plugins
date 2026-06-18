@@ -1,6 +1,6 @@
 ---
 name: ping-app-integration
-description: "Use this skill whenever the task involves writing code or wiring an SDK to integrate Ping Identity into an application. Triggers: Android, iOS, or React/JavaScript SDK integration; embedding DaVinci flows or AIC journeys in a web or mobile app; OIDC authorization code + PKCE flow wiring; server-side backend OIDC (Node.js, Java, Python, .NET); token validation, refresh, and session management; client credentials (M2M) and token exchange patterns; redirect_uri_mismatch, CORS, token refresh failures, push MFA not delivering; migrating from ForgeRock SDK to Ping SDK; embedding a Ping service SDK (Protect JavaScript signals SDK, Verify mobile SDK) in app code; on-prem PingFederate or PingAccess agent integration. NOT for: configuring or invoking PingOne Verify, Protect, IGA, or Authorize at the service/policy level (use ping-universal-services); platform admin (use ping-foundation); flow design (use ping-orchestration). Also invoke with /ping-app-integration."
+description: "Use when writing code or wiring an SDK to integrate Ping Identity into a web, mobile, or backend app — Android/iOS/JavaScript SDK installation, OIDC authorization code + PKCE flows, token management, ForgeRock-to-Ping SDK migration, and app-side troubleshooting (redirect_uri_mismatch, CORS, token refresh failures)."
 compatibility: Designed for Ping Identity app and SDK integration work. References product docs and SDK documentation.
 metadata:
   publisher: Ping Identity
