@@ -97,6 +97,7 @@ Sub-routing by task and journey use case: see `references/curated/pingone-st/rou
 | Task | Reference |
 |---|---|
 | Passkeys / passwordless / FIDO2 design across PingOne, PingOne Advanced Identity Cloud (AIC), Ping Software | `references/curated/cross-platform/passkeys-and-passwordless.md` |
+| Promote journeys, scripts, themes, or DaVinci flows between dev/staging/production | `references/curated/cross-platform/journey-and-flow-promotion.md` |
 
 ---
 

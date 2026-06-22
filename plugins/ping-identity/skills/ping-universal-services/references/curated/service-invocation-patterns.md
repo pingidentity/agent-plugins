@@ -210,7 +210,7 @@ Authorize REST response (abbreviated):
 ## Source
 
 [PingOne DaVinci connector library](https://docs.pingidentity.com/davinci/connectors)
-[PingOne Protect API reference](https://apidocs.pingidentity.com/pingone/platform/v1/api/#post-create-risk-evaluation)
-[PingOne Verify API reference](https://apidocs.pingidentity.com/pingone/verify/v1/api/)
-[PingOne Authorize API reference](https://apidocs.pingidentity.com/pingone/authorize/v1/api/)
+[PingOne Protect API reference](https://developer.pingidentity.com/pingone-api/protect/introduction.html)
+[PingOne Verify API reference](https://developer.pingidentity.com/pingone-api/verify/introduction.html)
+[PingOne Authorize API reference](https://developer.pingidentity.com/pingone-api/authorize/introduction.html)
 [AIC journey node reference](https://docs.pingidentity.com/pingoneaic/journeys/auth-nodes.html)

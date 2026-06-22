@@ -1,6 +1,6 @@
 ---
 name: ping-foundation
-description: "Use when setting up, configuring, or administering any Ping Identity platform — PingOne, PingOne Advanced Identity Cloud (AIC), or Ping Advanced Identity Software (PingAM, PingFederate, PingAccess, PingDirectory, PingID). Covers tenant/environment creation, app registration (including Worker apps and service accounts for M2M API access), SSO, directories, policies, and branding. Requires a named or clearly implied platform."
+description: "Use when setting up, configuring, or administering any Ping Identity platform — PingOne, PingOne Advanced Identity Cloud (AIC), or Ping Advanced Identity Software (PingAM, PingFederate, PingAccess, PingDirectory, PingID). Covers tenant/environment creation, app registration (including Worker apps and service accounts for M2M API access), SSO, directories, policies, branding, and CLI-driven configuration automation (pingcli, Terraform/CaC export, multi-env promotion). Requires a named or clearly implied platform."
 compatibility: Designed for Ping Identity platform tasks. MCP tools for PingOne and PingOne Advanced Identity Cloud (AIC) are used when available; console instructions provided as fallback.
 metadata:
   publisher: Ping Identity
@@ -28,6 +28,7 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 - Configure authentication policies, sign-on policies, or branding
 - Administer PingFederate, PingAccess, PingDirectory, or PingID
 - Deploy or upgrade on-premises Ping software
+- Automate configuration with Ping CLI (`pingcli`), export Terraform/CaC packages, or manage multi-environment promotion pipelines
 - Advisory: "How should I structure my tenant?", "What client type should I use?"
 
 ## When NOT to use this skill
@@ -94,6 +95,13 @@ Trigger on ANY question about setting up, configuring, administering, or plannin
 | PingDirectory installation, replication, schema | `references/curated/ping-software/pingdirectory-basics.md` |
 | PingAccess web app and API protection | `references/curated/ping-software/pingaccess-basics.md` |
 | Cross-platform admin patterns (LDAP, OIDC, APIs) | `references/curated/cross-platform/core-admin-patterns.md` |
+
+## Cross-platform tooling
+
+| Task | Anchor |
+|---|---|
+| CLI-driven config, multi-env profiles, Terraform/CaC export across PingOne, DaVinci, PingFederate | `references/curated/cross-platform/ping-cli-basics.md` |
+| Promote configuration between environments (PingOne native promotion, AIC self-service promotions, Ping CLI + Terraform config-as-code) | `references/curated/cross-platform/config-promotion.md` |
 
 ## MCP execution
 

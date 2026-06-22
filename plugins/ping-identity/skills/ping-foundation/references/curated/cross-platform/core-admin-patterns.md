@@ -151,7 +151,7 @@ Admin access to the relevant platform: PingOne organization admin, AIC superadmi
 
 ## Source
 
-[PingOne API Reference](https://apidocs.pingidentity.com/pingone/platform/v1/api/)
+[PingOne API Reference](https://developer.pingidentity.com/pingone-api/platform/introduction.html)
 [PingFederate Admin API](https://docs.pingidentity.com/pingfederate/latest/admin-api-reference/pf-admin-api-reference.html)
 [PingAccess Admin API](https://docs.pingidentity.com/pingaccess/latest/pa-admin-api/pa-admin-api.html)
 [PingDirectory Admin Guide](https://docs.pingidentity.com/pingdirectory/latest/pd-directory-server-administration-guide/pd-ds-admin-overview.html)
