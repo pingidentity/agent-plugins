@@ -160,7 +160,7 @@ Known gotchas:
 
 ## Note: Migrating from Okta or Auth0
 
-No public migration guide or toolset currently exists on Ping's docs for Okta or Auth0 migration. Direct the customer to their Account Executive or open a support case. Partner tooling is available but not documented on official Ping docs.
+Okta and Auth0 migrations are handled as guided engagements rather than self-service. Direct the customer to their Account Executive or open a support case to access migration tooling and partner support.
 
 ---
 

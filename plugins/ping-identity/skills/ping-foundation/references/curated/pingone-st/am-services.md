@@ -222,7 +222,7 @@ Per-input validation rules invoked by `ValidatedUsernameNode`, `ValidatedPasswor
 Default user profile attribute exposure. Foundational; rarely modified.
 
 ### Email Service
-**Currently unused on AIC.** Email delivery is handled by IDM Notifications, not this AM service. Do not invest time configuring this — configure email under IDM (Identity Management → Email).
+**Not used on AIC.** Email delivery is handled by IDM Notifications, not this AM service. Do not invest time configuring this — configure email under IDM (Identity Management → Email).
 
 ### Dashboard Service
 *(See Global services above.)*

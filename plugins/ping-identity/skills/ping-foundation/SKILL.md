@@ -11,6 +11,8 @@ metadata:
 
 Platform setup, administration, and core configuration for all Ping Identity deployments. Covers tenant and environment setup, apps, directories, policies, branding, and on-premises software administration. MCP tools handle execution; this skill supplies architecture patterns, sequencing, configuration constraints, and guardrails.
 
+**What this skill does for you:** Generates configuration and drives setup directly through MCP tools where they exist (PingOne, AIC); where a tool does not exist, it guides you through the docs with the correct sequencing, field constraints, and guardrails. Both modes are available — it uses whichever the platform supports for the task.
+
 ## Invocation
 
 Invoke explicitly with `/ping-foundation` or by saying "use ping-foundation to...".

@@ -116,11 +116,38 @@ slug: ""                  # canonical docs URL for this topic
 | Value | Platform |
 |---|---|
 | `pingone-mt` | PingOne (multi-tenant cloud) |
-| `pingone-st` | PingOne ST (single-tenant) |
+| `pingone-st` | PingOne Advanced Identity Cloud (AIC) |
 | `ping-software` | Ping Software Suite (on-premises) |
 | `cross-platform` | Spans multiple platform families |
 
+> **Naming note:** The `pingone-st` value is a stable internal routing tag and directory name — it denotes **PingOne Advanced Identity Cloud (AIC)**. Always call the platform "PingOne Advanced Identity Cloud (AIC)" or "AIC" in prose. Never surface "PingOne ST" or "single-tenant" as the product name in author-facing or agent-facing text.
+
 Use `cross-platform` only when the content genuinely applies without modification to two or more platform families. If a doc has platform-specific sections, pick the primary family and note variants in the body.
+
+---
+
+## 1a. Editorial principles — accuracy, tone, and durability
+
+Skills and MCP tool descriptions ride alongside the product and the official docs. They must not get ahead of shipped behaviour, and they must not editorialise about Ping's own products or documentation.
+
+**Follow the product — do not jump ahead of it.** Only document behaviour that is shipped and documented. If a capability is not yet supported by the product or has no stable querying logic, do not invent it in a skill or MCP description. When in doubt, defer to the official docs.
+
+**No statements that go stale.** Do not bake release timing, channel state, or version-promotion plans into reference prose. These rot between updates and mislead agents.
+
+- ❌ "Available on the Rapid channel as of 2026-06-03; Regular channel promotion planned."
+- ❌ "Not yet GA; this skill will cover it when available."
+- ❌ "These will be introduced progressively from Q3 2026."
+- ✅ State the capability, then link to the live release notes / docs for current availability: "Check the [AIC release notes](…) for current channel availability."
+
+If availability genuinely gates usage, express it as a durable constraint plus a pointer to the authoritative source — not a dated promise.
+
+**No negative framing about Ping docs or products.** Reference files describe capability and behaviour neutrally. Do not characterise the official docs or product as deficient, and do not position skill content as compensating for them.
+
+- ❌ "Not documented clearly in official docs and a common source of bugs."
+- ❌ "Tribal knowledge the docs don't cover."
+- ✅ "Behavioural invariants validated against live sessions; complements the per-node reference docs."
+
+The test: state what the content **is** and what it **enables**, not what the docs or product **lack**.
 
 ---
 

@@ -15,7 +15,7 @@ slug: "https://docs.pingidentity.com/auth-node-ref/latest/overview.html"
 
 # AIC — Node Fundamentals
 
-Tribal knowledge and non-obvious invariants about how nodes behave in AIC journeys. Rules here are validated from live AIC sessions — they are not documented clearly in official docs and are common sources of bugs.
+Behavioural invariants and composition rules for nodes in AIC journeys, validated against live AIC sessions. This file complements the per-node reference docs with the cross-node behaviour an agent needs to wire journeys correctly the first time.
 
 ## Scope
 

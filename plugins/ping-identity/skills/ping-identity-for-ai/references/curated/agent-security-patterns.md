@@ -46,7 +46,7 @@ Registered agents appear in the AI Agents list (Directory > AI Agents in the Pin
 
 AIC provides a dedicated DCR endpoint for AI agents: `/aiagent/register` (in addition to the standard `/register`). This endpoint onboards AI agents as dynamic OAuth 2.0 clients with agent-specific defaults.
 
-> **Availability:** Production-ready as of 2026-06-03. Currently available on the **Rapid channel** only; Regular channel promotion is planned.
+> **Availability:** Channel availability changes over time — check the [AIC AI Agents release notes](https://docs.pingidentity.com/pingoneaic/release-notes/rapid-channel/ai-agents.html) before relying on this endpoint in a given tenant.
 
 AIC AI agents can perform tasks on behalf of end users through a delegated token exchange process (RFC 8693), maintaining distinct accountability and granular access control.
 

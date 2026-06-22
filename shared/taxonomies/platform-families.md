@@ -11,13 +11,13 @@ Cloud-hosted administration surface: environment setup, tenant management, apps,
 
 **Routing tag:** `pingone-mt`
 
-## PingOne ST
+## PingOne Advanced Identity Cloud (AIC)
 
-Fully managed identity platform built on PingAM/ForgeRock lineage. Distinct control plane, object model, and administration UI from PingOne MT.
+Fully managed identity platform built on PingAM, PingIDM, and PingDS. Distinct control plane, object model, and administration UI from PingOne (multi-tenant cloud).
 
-**Products:** PingOne ST, PingAM (within PingOne ST), PingIDM (within PingOne ST), PingDS (within PingOne ST)
+**Products:** PingOne Advanced Identity Cloud (AIC), PingAM (within AIC), PingIDM (within AIC), PingDS (within AIC)
 
-**Routing tag:** `pingone-st`
+**Routing tag:** `pingone-st` (the tag is a stable internal identifier; the platform it denotes is AIC)
 
 ## Ping Software Suite (On-Premises)
 
@@ -29,7 +29,7 @@ On-premises and self-managed deployments. Different deployment model, topology, 
 
 ## Shared / Cross-Platform
 
-Universal Services and patterns that span multiple platform families. Used when capability is invoked from both PingOne MT and PingOne ST contexts.
+Universal Services and patterns that span multiple platform families. Used when capability is invoked from both PingOne (multi-tenant cloud) and AIC contexts.
 
 **Services:** PingOne Protect, PingOne Verify, PingOne Credentials, PingOne SSO, PingOne IGA, PingOne Neo, PingOne Authorize
 
@@ -42,6 +42,6 @@ Universal Services and patterns that span multiple platform families. Used when 
 Apply platform family routing before any capability or product routing:
 
 1. Is the user working in PingOne admin console or PingOne APIs? → `pingone-mt`
-2. Is the user working in PingOne ST tenant admin, identity cloud, or AM/IDM/DS? → `pingone-st`
+2. Is the user working in AIC tenant admin, identity cloud, or AM/IDM/DS? → `pingone-st`
 3. Is the user deploying, configuring, or operating on-prem software? → `ping-software`
-4. Is the service invoked across both PingOne MT and PingOne ST? → `cross-platform`
+4. Is the service invoked across both PingOne (multi-tenant cloud) and AIC? → `cross-platform`

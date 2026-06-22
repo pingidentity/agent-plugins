@@ -4,12 +4,12 @@ Maps Ping Universal Services and strategic shared services to platform context a
 
 ## Universal Services
 
-These services are consumed across PingOne MT and PingOne ST. They are not configuration destinations; they are capabilities invoked from within a platform.
+These services are consumed across PingOne (multi-tenant cloud) and AIC. They are not configuration destinations; they are capabilities invoked from within a platform.
 
 | Service | Platform Context | Primary Skill | Notes |
 |---|---|---|---|
-| PingOne Protect | PingOne MT, PingOne ST via connector | ping-universal-services | Risk signals, adaptive auth, bot detection |
-| PingOne Verify | PingOne MT, PingOne ST via connector | ping-universal-services | Identity verification, document check, liveness |
+| PingOne Protect | PingOne (MT), AIC via connector | ping-universal-services | Risk signals, adaptive auth, bot detection |
+| PingOne Verify | PingOne (MT), AIC via connector | ping-universal-services | Identity verification, document check, liveness |
 | PingOne Credentials | PingOne MT | ping-universal-services | Verifiable credentials, digital wallet |
 | PingOne SSO | PingOne MT | ping-universal-services | Workforce SSO, app federation, SAML/OIDC |
 | PingOne IGA | PingOne MT | ping-universal-services | Identity governance, access requests, certifications |
@@ -23,7 +23,7 @@ These services are tightly coupled to orchestration. Route to ping-orchestration
 | Service | Primary Skill | Notes |
 |---|---|---|
 | PingOne DaVinci | ping-orchestration | Flow builder, connector library, CIAM orchestration |
-| PingOne ST Journeys / Trees | ping-orchestration | PingAM authentication trees, journey nodes |
+| AIC Journeys / Trees | ping-orchestration | PingAM authentication trees, journey nodes |
 
 ## On-Premises Strategic Services
 

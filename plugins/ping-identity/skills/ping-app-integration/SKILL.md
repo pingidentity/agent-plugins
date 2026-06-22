@@ -11,6 +11,8 @@ metadata:
 
 Implementation skill for integrating Ping Identity into web, mobile, and application SDK experiences.
 
+**What this skill does for you:** Generates app-side integration code — SDK wiring, OIDC/PKCE flows, token handling — and guides you through the SDK docs and troubleshooting where code generation alone is not enough. Primarily an artifact-generating skill.
+
 ## Invocation
 
 Invoke explicitly with `/ping-app-integration` or by saying "use ping-app-integration to...".
