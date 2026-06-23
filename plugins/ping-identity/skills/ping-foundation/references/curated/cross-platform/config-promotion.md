@@ -1,7 +1,7 @@
 ---
 title: "Configuration Promotion Across Environments"
 product_family: cross-platform
-products: ["pingone", "pingone-st", "pingfederate"]
+products: ["pingone", "pingone-st", "pingfederate", "pingaccess", "pingdirectory"]
 capabilities: ["foundation"]
 services: []
 audience: ["admin", "architect", "operator"]
@@ -96,7 +96,7 @@ Environment-specific values (connection endpoints, client IDs, URIs) must be ext
 | AIC | **Environment lock required** on source and target during promotion | Blocks ESV API and most admin APIs in the development environment; **authentication flows for end users are unaffected** |
 | AIC | Promotions take 10–45 minutes | Service restart in the upper environment is part of the process |
 | AIC | Rollback available via API only | Admin console does not expose rollback |
-| Ping CLI export | Terraform HCL export scope varies by service | Not all services produce HCL; check the [product compatibility matrix](https://developer.pingidentity.com/pingcli/1.0/product-compatibility.html) |
+| Ping CLI export | Terraform HCL export scope varies by service | Not all services produce HCL; check the [product compatibility matrix](https://developer.pingidentity.com/pingcli/latest/product-compatibility.html) |
 
 For current availability of specific resource types in native PingOne promotion, check the linked Ping documentation — this list changes as the feature evolves.
 

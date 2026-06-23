@@ -158,12 +158,6 @@ Known gotchas:
 
 ---
 
-## Note: Migrating from Okta or Auth0
-
-Okta and Auth0 migrations are handled as guided engagements rather than self-service. Direct the customer to their Account Executive or open a support case to access migration tooling and partner support.
-
----
-
 ## Pattern 6: Add identity verification (KYC)
 
 **Platform:** PingOne + PingOne Verify
