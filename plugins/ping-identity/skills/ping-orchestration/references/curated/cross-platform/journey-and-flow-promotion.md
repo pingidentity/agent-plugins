@@ -46,8 +46,8 @@ Journey-, script-, and DaVinci-flow-specific concerns when promoting between AIC
 ### PingOne DaVinci flows
 
 **Moves via native PingOne promotion:**
-- Flow definitions (all versions)
-- Flow policies (with their dependent flow versions auto-included)
+- Flow definitions — **most recently deployed version only** (not all versions; if you have 4 versions and version 3 is the most recently deployed, only version 3 promotes)
+- Flow policies (with their referenced flow versions auto-included as dependencies)
 - Connector configuration structure (connection IDs and non-secret settings)
 
 **Connector credentials do not move directly.** PingOne gates promotion of any attribute marked sensitive (client secrets, API keys, passwords embedded in connector config) — the promotion cannot proceed until a **sensitive promotion variable** exists for each blocked attribute. Variables are created in the *source* environment with the target-specific value specified at that point; the connector structure is then promoted and resolves to those target values at promotion time, not the source's.
@@ -80,19 +80,19 @@ Review Scripted Decision node scripts for `logger.error(...)` or `logger.message
 
 ### Flow versioning
 
-Each DaVinci flow has a **saved version** (draft) and a **published version** (live). Native PingOne promotion moves the published version. Ensure the correct version is published before triggering a promotion.
+Each DaVinci flow has multiple versions; only the **most recently deployed version** is promoted to the target environment. Ensure the correct version is deployed before triggering a promotion.
 
 ### Flow-policy dependency
 
-Flow policies reference a specific flow and version. When promoting a flow, also promote its associated flow policy — an unpromoted policy pointing at a flow that no longer matches will fail at authentication time.
+Flow policies reference specific flows and specific versions of those flows. **Promote the flow policy** — the promotion service then auto-includes the referenced flow versions as dependencies. Promoting the flow directly without the policy leaves the policy out of sync and will fail at authentication time.
 
 ### Promotion variables for connector credentials
 
-In DaVinci, connector credentials (client IDs, client secrets, webhook URLs, API keys) are environment-specific. Use **DaVinci promotion variables** to bind these to environment-specific values:
+In DaVinci, connector credentials (client secrets, webhook URLs, API keys) are environment-specific. PingOne auto-detects sensitive attributes and requires **sensitive promotion variables** before the promotion can proceed:
 
-1. In the source flow, replace the literal credential with a promotion variable token.
-2. In the target environment, assign the variable to the target-side credential value before applying the promotion.
-3. DaVinci flow promotion validates that all referenced variables have assigned values in the target.
+1. When you select a connector config resource for promotion, PingOne identifies sensitive attributes and auto-selects them as requiring variables — you cannot clear this.
+2. In the **source environment**, create a sensitive promotion variable for each blocked attribute and specify the target environment's value at that point.
+3. The promotion proceeds; the connector resolves to those target values after promotion, not the source's.
 
 ---
 
