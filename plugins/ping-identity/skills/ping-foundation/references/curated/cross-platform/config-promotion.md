@@ -129,13 +129,15 @@ The `pingcli-plugin-terraformer` plugin adds opinionated post-processing to prod
 
 ## Choosing a promotion model
 
-| Scenario | Recommended model |
-|---|---|
-| Single PingOne org, DaVinci-heavy config, in-console workflow preferred | PingOne native promotion |
-| AIC tenant with dev/staging/prod chain, sequential promotion | AIC self-service promotions |
-| Multi-product (PingOne + PingFederate), multi-org, or full CaC audit trail required | Ping CLI + Terraform |
-| Mixed: PingOne apps + AIC journeys | Both: native/AIC for fast iteration; Terraform for baseline config and cross-product consistency |
-| PingFederate federation config between servers | Server profiles (Git) + Terraform provider |
+For Ping's own guidance on model selection see the [configuration promotion overview](https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_landing_page.html).
+
+| Scenario | Typical fit | Why |
+|---|---|---|
+| Config lives entirely within one PingOne org; team prefers admin-console workflow | PingOne native promotion | Designed for same-org, in-console use; automatic dependency management; no toolchain required |
+| AIC tenant with dev/staging/prod environments | AIC self-service promotions | The only natively supported path between AIC environments; sequential pairs enforced by the platform |
+| Multi-product (PingOne + PingFederate), cross-org, or Git-backed audit trail needed | Ping CLI + Terraform | Only model that spans multiple products and orgs; state tracking and drift detection via Terraform |
+| Mix of PingOne and AIC in the same pipeline | Can combine both | Native/AIC handles per-platform config; Terraform handles cross-product baseline and long-term state |
+| PingFederate configuration between servers | Server profiles (Git) + Terraform provider | PingFederate's native config-as-code model; no equivalent in-console promotion UI |
 
 ---
 

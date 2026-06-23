@@ -152,12 +152,12 @@ If a promoted journey causes issues in the upper environment, AIC self-service r
 
 ## Choosing native promotion vs Terraform for journey/flow work
 
-| Scenario | Recommendation |
-|---|---|
-| AIC journey iteration within one tenant chain | AIC self-service promotions — fastest path, admin-console-driven |
-| DaVinci flow changes within one PingOne org | PingOne native promotion — in-console, automatic dependency management |
-| Multi-org, multi-cloud, or full audit trail required | Terraform (export via `pingcli platform export`, manage with Ping Terraform providers) |
-| Mixed AIC + DaVinci in the same pipeline | Both: native/AIC for journeys; Terraform for CaC baseline |
+| Scenario | Typical fit | Why |
+|---|---|---|
+| AIC journey iteration within one tenant chain | AIC self-service promotions | Native path between AIC environments; admin-console-driven; sequential pairs enforced by the platform |
+| DaVinci flow changes within one PingOne org | PingOne native promotion | In-console; automatic dependency management; same-org constraint applies |
+| Multi-org, multi-cloud, or Git-backed audit trail needed | Ping CLI + Terraform | Spans organisations and products; state tracking and drift detection |
+| Mixed AIC journeys + DaVinci flows in the same pipeline | Can combine both | Each platform's native model handles its own config; Terraform manages cross-product baseline |
 
 ---
 
