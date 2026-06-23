@@ -47,10 +47,10 @@ Journey-, script-, and DaVinci-flow-specific concerns when promoting between AIC
 
 **Moves via native PingOne promotion:**
 - Flow definitions (all versions)
-- Flow policies
-- Connector configurations (connection IDs and settings)
+- Flow policies (with their dependent flow versions auto-included)
+- Connector configuration structure (connection IDs and non-secret settings)
 
-**Key gotcha:** Connector credentials (client IDs, secrets, API keys) are environment-specific. Use **promotion variables** to externalise them so the promoted flow references the target environment's credential values, not the source's.
+**Connector credentials do not move directly.** PingOne blocks promotion of any attribute marked sensitive (client IDs, secrets, API keys embedded in connector config). You must create **sensitive promotion variables** for those attributes in the target environment before the promotion can complete — the connector structure is promoted, but resolves to the target's credentials at promotion time, not the source's.
 
 ---
 
