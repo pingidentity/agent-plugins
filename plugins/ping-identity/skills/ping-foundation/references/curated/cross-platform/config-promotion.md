@@ -134,8 +134,8 @@ For Ping's own guidance on model selection see the [configuration promotion over
 | Scenario | Typical fit | Why |
 |---|---|---|
 | Config lives entirely within one PingOne org; team prefers admin-console workflow | PingOne native promotion | Designed for same-org, in-console use; automatic dependency management; no toolchain required |
-| AIC tenant with dev/staging/prod environments | AIC self-service promotions | The only natively supported path between AIC environments; sequential pairs enforced by the platform |
-| Multi-product (PingOne + PingFederate), cross-org, or Git-backed audit trail needed | Ping CLI + Terraform | Only model that spans multiple products and orgs; state tracking and drift detection via Terraform |
+| AIC tenant with dev/staging/prod environments | AIC self-service promotions | The platform-provided self-service promotion path for AIC; sequential pairs enforced by the platform (dev→staging→production only) |
+| Cross-product (PingOne + PingFederate/PingAccess), cross-org, or Git-backed audit trail needed | Ping CLI + Terraform | Terraform providers cover PingFederate, PingAccess, and PingDirectory; Ping CLI CRUD for PingFederate is still rolling out — check the [compatibility matrix](https://developer.pingidentity.com/pingcli/1.0/product-compatibility.html); state tracking and drift detection via Terraform |
 | Mix of PingOne and AIC in the same pipeline | Can combine both | Native/AIC handles per-platform config; Terraform handles cross-product baseline and long-term state |
 | PingFederate configuration between servers | Server profiles (Git) + Terraform provider | PingFederate's native config-as-code model; no equivalent in-console promotion UI |
 

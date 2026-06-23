@@ -154,9 +154,9 @@ If a promoted journey causes issues in the upper environment, AIC self-service r
 
 | Scenario | Typical fit | Why |
 |---|---|---|
-| AIC journey iteration within one tenant chain | AIC self-service promotions | Native path between AIC environments; admin-console-driven; sequential pairs enforced by the platform |
+| AIC journey iteration within one tenant chain | AIC self-service promotions | Platform-provided self-service path for AIC; admin-console-driven; sequential pairs enforced by the platform (dev→staging→production only) |
 | DaVinci flow changes within one PingOne org | PingOne native promotion | In-console; automatic dependency management; same-org constraint applies |
-| Multi-org, multi-cloud, or Git-backed audit trail needed | Ping CLI + Terraform | Spans organisations and products; state tracking and drift detection |
+| Multi-org, multi-cloud, or Git-backed audit trail needed | Ping CLI + Terraform | Terraform providers span PingFederate, PingAccess, PingDirectory, and PingOne; Ping CLI CRUD for PingFederate is still rolling out — check the [compatibility matrix](https://developer.pingidentity.com/pingcli/1.0/product-compatibility.html); state tracking and drift detection via Terraform |
 | Mixed AIC journeys + DaVinci flows in the same pipeline | Can combine both | Each platform's native model handles its own config; Terraform manages cross-product baseline |
 
 ---
