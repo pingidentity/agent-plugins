@@ -48,7 +48,7 @@ Journey-, script-, and DaVinci-flow-specific concerns when promoting between AIC
 **Moves via native PingOne promotion:**
 - Flow definitions — **most recently deployed version only** (not all versions; if you have 4 versions and version 3 is the most recently deployed, only version 3 promotes)
 - Flow policies (with their referenced flow versions auto-included as dependencies)
-- Connector configuration structure (connection IDs and non-secret settings)
+- Connector configuration structure (connection IDs and non-secret settings) — **exception: LDAP gateway credentials cannot be promoted or managed using promotion variables** and must be manually configured in each environment
 
 **Connector credentials do not move directly.** PingOne gates promotion of any attribute marked sensitive (client secrets, API keys, passwords embedded in connector config) — the promotion cannot proceed until a **sensitive promotion variable** exists for each blocked attribute. Variables are created in the *source* environment with the target-specific value specified at that point; the connector structure is then promoted and resolves to those target values at promotion time, not the source's.
 
@@ -84,7 +84,7 @@ Each DaVinci flow has multiple versions; only the **most recently deployed versi
 
 ### Flow-policy dependency
 
-Flow policies reference specific flows and specific versions of those flows. **Promote the flow policy** — the promotion service then auto-includes the referenced flow versions as dependencies. Promoting the flow directly without the policy leaves the policy out of sync and will fail at authentication time.
+Flow policies reference specific flows and specific versions of those flows. **Promote the flow policy** — the promotion service then auto-includes the referenced flow versions as dependencies. If you promote a flow independently without also promoting its flow policy, the policy in the target environment may reference a different version than the one you promoted.
 
 ### Promotion variables for connector credentials
 
