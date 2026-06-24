@@ -21,7 +21,7 @@ Journey-, script-, and DaVinci-flow-specific concerns when promoting between AIC
 
 **Covers:** What journey and flow config moves; AIC ESV and script gotchas; DaVinci flow versioning and promotion variables; environment lock impact on running journeys; per-node promotion considerations; rollback.
 
-**Does NOT cover:** General promotion model choice, tool selection, environment topology, and Terraform/CaC pipeline — see `ping-foundation` → `references/curated/cross-platform/config-promotion.md`. That anchor is the entry point; load this one only when the task involves journey- or flow-specific concerns.
+**Does NOT cover:** General promotion model choice, environment topology, Terraform/CaC pipeline, and cross-product config promotion — see `ping-foundation` → `references/curated/cross-platform/config-promotion.md` for those. This anchor covers only the platform-native promotion mechanisms for journeys, flows, and their specific gotchas: AIC self-service promotions for journeys/scripts/themes, and PingOne native promotion for DaVinci flows and flow policies.
 
 ---
 
@@ -177,7 +177,7 @@ If a promoted journey causes issues in the upper environment, AIC self-service r
 | AIC standard dev/staging/prod chain | Sequential pairs; ESVs pre-configured in each upper env |
 | AIC with UAT tier | dev → UAT → staging → production; cannot skip UAT |
 | DaVinci flow to a sandbox (test) | Supported in PingOne native promotion; sandbox counts as a valid target env |
-| Terraform-managed journey baseline | Export with `pingcli platform export`; manage with Terraform; promote via PR + apply |
+| Terraform-managed journey baseline | Manage with Ping Identity Terraform providers; promote via PR + apply |
 
 ---
 

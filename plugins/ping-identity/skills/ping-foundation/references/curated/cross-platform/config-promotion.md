@@ -31,7 +31,7 @@ How to move Ping Identity configuration between development, staging, and produc
 |---|---|---|---|---|
 | **PingOne native promotion** | PingOne (multi-tenant cloud) | Applications, DaVinci flows and policies, sign-on policies, and most PingOne resources | Authorize, Credentials, Privilege, runtime user data, sessions, audit logs | Source/target same org; check live docs for current resource scope |
 | **AIC self-service promotions** | PingOne Advanced Identity Cloud | Journeys, scripts, themes, AM/IDM static config, ESV references | Live users, sessions, user-created applications, runtime data | Sequential pairs only: dev→staging, staging→production. Non-sequential promotion not supported. |
-| **Ping CLI + Terraform (config-as-code)** | PingOne, PingFederate, DaVinci, and supported universal services | Any resource exportable via `pingcli platform export`; Terraform-managed config | Per-resource, determined by provider support | None — Terraform manages state independently per target environment |
+| **Ping CLI + Terraform (config-as-code)** | PingOne, PingFederate, DaVinci, and supported universal services | Terraform-managed config via Ping Identity Terraform providers | Per-resource, determined by provider support | None — Terraform manages state independently per target environment |
 
 ---
 
@@ -54,7 +54,7 @@ How to move Ping Identity configuration between development, staging, and produc
 ### Ping Software (PingFederate, PingAccess, PingDirectory)
 
 - Configuration is managed via **server profiles** (Git-backed config-as-code). Promotion = merging and applying a server-profile branch.
-- Use `pingcli platform export` to extract current running config as Terraform HCL as a starting point.
+- The Ping Identity Terraform providers cover PingFederate, PingAccess, and PingDirectory for state-managed config-as-code.
 
 ---
 
@@ -112,21 +112,6 @@ For current availability of specific resource types in native PingOne promotion,
 
 ---
 
-## GitOps pattern with Ping CLI + Terraform
-
-For multi-product or multi-environment pipelines beyond a single org:
-
-1. `pingcli platform export --format HCL` — extract current config from a reference environment
-2. Store HCL in version control alongside `*.tfvars` per target environment
-3. Raise a PR; review diffs as configuration changes
-4. Run `terraform plan` against the target environment (dry run)
-5. Apply on merge: `terraform apply`
-6. Verify post-apply via smoke tests or `pingcli pingone ... list`
-
-The `pingcli-plugin-terraformer` plugin adds opinionated post-processing to produce cleaner, version-control-ready HCL. For details see `references/curated/cross-platform/ping-cli-basics.md`.
-
----
-
 ## Choosing a promotion model
 
 For Ping's own guidance on model selection see the [configuration promotion overview](https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_landing_page.html).
@@ -169,13 +154,13 @@ For Ping's own guidance on model selection see the [configuration promotion over
 | PingOne promotion fails on service dependency | Target env missing a service the source config references | Enable the service in the target environment before promoting |
 | AIC promotion locks admin APIs longer than expected | Large config sets take 10–45 minutes; lock is held throughout | Schedule promotions during low-traffic windows; monitor the promotion status API |
 | Rollback restores unexpected state | Multiple promotions in quick succession | Wait for each promotion to complete before running the next; check the promotion history before rollback |
-| `pingcli platform export` produces empty package for a service | Service not yet in HCL export scope | Check the product compatibility matrix; use `pingcli pingone api` as a fallback for raw export |
+| Terraform provider missing a resource type | Resource not yet in provider support | Check the Ping Terraform provider changelog; use `pingcli pingone api` for a raw read in the interim |
 
 ---
 
 ## Related references
 
-- `references/curated/cross-platform/ping-cli-basics.md` — Ping CLI install, profiles, CRUD, and Terraform export commands
+- `references/curated/cross-platform/ping-cli-basics.md` — Ping CLI install, profiles, and CRUD commands
 - `references/curated/cross-platform/core-admin-patterns.md` — secret rotation, API patterns
 - `references/curated/pingone-mt/tenant-and-environment-setup.md` — environment setup prerequisites
 - `ping-orchestration` → `references/curated/cross-platform/journey-and-flow-promotion.md` — journey, script, and DaVinci flow promotion specifics
@@ -189,5 +174,4 @@ For Ping's own guidance on model selection see the [configuration promotion over
 - [AIC self-service promotions](https://docs.pingidentity.com/pingoneaic/tenants/self-service-promotions.html)
 - [AIC promotion FAQ](https://docs.pingidentity.com/pingoneaic/tenants/self-service-promotions-faqs.html)
 - [AIC configuration placeholders (ESVs)](https://docs.pingidentity.com/pingoneaic/tenants/configuration-placeholders.html)
-- [Ping CLI platform export](https://developer.pingidentity.com/pingcli/general/exporting-platform-configuration.html)
 - [Ping Terraform provider](https://terraform.pingidentity.com)

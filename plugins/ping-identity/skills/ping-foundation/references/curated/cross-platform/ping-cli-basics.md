@@ -9,30 +9,30 @@ use_cases: ["workforce", "customer", "cross-platform"]
 doc_type: guide
 status: current
 canonical: true
-last_updated: "2026-06-22"
+last_updated: "2026-06-24"
 slug: "https://developer.pingidentity.com/pingcli/"
 ---
 
 # Ping CLI — Configuration Automation Basics
 
-Scriptable, deterministic configuration management across PingOne, PingFederate, DaVinci, and the Ping universal services using the `pingcli` command-line tool.
+Ping CLI (`pingcli`) is the unified open-source command-line tool for managing configuration across PingOne, PingFederate, DaVinci, and the Ping universal services.
 
 ## Scope
 
-**Covers:** Install and first-run, configuration profile model, connecting Ping services, CRUD via per-product subcommands, `pingcli platform export` for Configuration-as-Code / Terraform HCL, `pingcli request` for unmodeled endpoints, CI/CD patterns, and the migration from the legacy `pingctl` tool.
+**Covers:** Why to use Ping CLI, install and first-run, configuration profile model, connecting Ping services, CRUD via per-product subcommands (1.x), CI/CD patterns.
 
-**Does NOT cover:** Interactive agent-driven config — use the PingOne MCP Server or DaVinci MCP Server for that. Long-term Terraform state management — see the PingOne and PingFederate Terraform providers at `developer.pingidentity.com/terraform/`. DaVinci flow design — see `ping-orchestration`. PingFederate console or federation configuration — see `references/curated/ping-software/pingfederate-basics.md`. Per-service policy semantics (Protect risk, Verify KYC) — see `ping-universal-services`.
+**Does NOT cover:** `pingcli platform export` and `pingcli request` — these are 0.8 features not yet available in 1.x; see the [product compatibility matrix](https://developer.pingidentity.com/pingcli/latest/product-compatibility.html) for current 1.x feature availability. Interactive agent-driven config — use the PingOne MCP Server or DaVinci MCP Server. Long-term Terraform state management — see the PingOne and PingFederate Terraform providers. DaVinci flow design — see `ping-orchestration`. Per-service policy semantics — see `ping-universal-services`.
 
 ---
 
-## What Ping CLI is
+## Why Ping CLI
 
-Ping CLI (`pingcli`) is the unified open-source CLI for managing configuration across PingOne, PingFederate, DaVinci, and the Ping universal services. It provides:
+Ping CLI (`pingcli`) addresses the gap between the interactive admin console (good for humans, not scriptable) and raw REST API calls (scriptable, but require managing auth, base URLs, and retries manually). It provides:
 
-- A consistent CRUD interface for admin operations without raw `curl` calls
-- Multi-product Configuration-as-Code export (`pingcli platform export`) for Terraform integration
-- Profile-based authentication so the same scripts run against dev, staging, and production
-- Raw admin API access with managed auth for endpoints that don't yet have first-class commands
+- **Consistent CRUD interface** across PingOne, DaVinci, PingFederate, and the Ping universal services without raw `curl` calls
+- **Profile-based authentication** so the same scripts run against dev, staging, and production using different credentials per environment
+- **Automatic auth and base URL injection** — no per-command token management
+- **CI/CD friendly** — non-interactive auth via env vars, `--output-format json`, detailed exit codes
 
 For the current list of supported products and per-service CRUD availability, see the [product compatibility matrix](https://developer.pingidentity.com/pingcli/latest/product-compatibility.html).
 
@@ -57,15 +57,13 @@ Verify: `pingcli version`
 
 Profiles are named groups of settings stored in `$HOME/.pingcli/config.yaml`. Use one profile per target environment (dev, staging, prod).
 
-| Operation | Command (1.0) |
+| Operation | Command |
 |---|---|
 | Create a profile | `pingcli config profiles create --name dev` |
 | Switch active profile | `pingcli config profiles use dev` |
 | List profiles | `pingcli config profiles list` |
 | View active profile | `pingcli config view-profile` |
 | Delete a profile | `pingcli config profiles delete dev` |
-
-> **Version note:** Ping CLI 0.8 used different subcommand names (`add-profile`, `set-active-profile`). If commands fail, verify your installed version with `pingcli version` and cross-check the [0.8 command reference](https://developer.pingidentity.com/pingcli/0.8/command_reference/pingcli_config.html) if needed.
 
 ---
 
@@ -102,48 +100,9 @@ pingcli davinci flows list --application-id <id>
 
 # PingOne MFA — replace a device policy
 pingcli mfa device-policies replace -f policy.json
-
-# PingFederate — raw admin API call (GET /oauth/clients)
-pingcli pingfederate api GET /oauth/clients
 ```
 
 Universal-service connectors are accessible both at top level (`pingcli davinci ...`, `pingcli mfa ...`) and under the PingOne connector umbrella (`pingcli pingone davinci ...`). Both paths use the same PingOne Worker app credentials.
-
----
-
-## `pingcli platform export`
-
-Exports multi-product configuration as Configuration-as-Code packages, optionally as Terraform HCL `import {}` blocks.
-
-```bash
-# Export all connected products
-pingcli platform export
-
-# Export only PingOne services
-pingcli platform export --service-group pingone
-
-# Export as Terraform HCL (requires pingcli-plugin-terraformer)
-pingcli platform export --format HCL
-```
-
-**Export availability per product:** Not all products produce HCL today. `pingone-platform`, `pingone-sso`, `pingone-mfa`, `pingone-protect`, `pingone-authorize`, and `pingfederate` are supported; `pingone-davinci`, `pingone-credentials`, and `pingone-verify` are listed but export support is partial. Always check the [product compatibility page](https://developer.pingidentity.com/pingcli/latest/product-compatibility.html) for the current status.
-
-**Terraformer plugin:** `pingcli-plugin-terraformer` (installed via `pingcli plugin add`) produces opinionated, ready-to-store HCL with post-processing suited for GitOps promotion pipelines.
-
----
-
-## Custom API requests
-
-For endpoints without a first-class subcommand, use the raw request interfaces. The CLI injects auth, base URL, and retry handling automatically.
-
-```bash
-# Generic request (all products)
-pingcli request GET /pingone/environments/<envId>/applications
-
-# Product-specific wrappers (1.0)
-pingcli pingone api GET /environments/<envId>/applications
-pingcli pingfederate api GET /oauth/clients
-```
 
 ---
 
@@ -160,11 +119,11 @@ export PINGCLI_PINGONE_REGION=com
 pingcli pingone applications list --output-format json
 
 # Detailed exit codes for conditional pipeline steps
-pingcli -D platform export
 # Exit 0 = success; 1 = error; 2 = success with warnings
+pingcli -D pingone environments list
 ```
 
-**Profile-per-environment promotion pattern:** Create one profile per environment (dev/staging/prod), each binding to a different Worker app. A promotion script switches profiles and runs the export or create commands.
+**Profile-per-environment pattern:** Create one profile per environment (dev/staging/prod), each binding to a different Worker app. Scripts switch profiles to operate against the correct environment.
 
 ---
 
@@ -173,7 +132,6 @@ pingcli -D platform export
 - PingOne: Worker application with the required admin roles; `clientId`, `clientSecret`, `environmentId`, and region.
 - PingFederate: Admin API OAuth client; admin base URL (HTTPS, port 9999 by default).
 - Network access from the CLI host to each product's admin API endpoint.
-- For Terraform HCL export: `pingcli-plugin-terraformer` installed via `pingcli plugin add`.
 
 ---
 
@@ -182,9 +140,8 @@ pingcli -D platform export
 | Variant | Notes |
 |---|---|
 | Single tenant, one profile | Default setup; one profile, one Worker app |
-| Multi-environment promotion | One profile per env; promotion script switches profiles before export/create |
+| Multi-environment scripting | One profile per env; scripts switch profiles before running commands |
 | Docker-only CI | Run `pingidentity/pingcli:latest` as a container step; pass credentials as env vars |
-| Terraform GitOps | `pingcli platform export --format HCL` + Terraformer plugin + Terraform plan/apply in PR pipeline |
 | Migrating from `pingctl` | Re-configure profiles under `pingcli`; `pingctl` commands are not compatible |
 
 ---
@@ -195,8 +152,6 @@ pingcli -D platform export
 |---|---|---|
 | 404 on environment lookup | Wrong region in profile | Verify region string matches the PingOne tenant domain (e.g., `eu` for `pingone.eu`) |
 | 403 on `applications create` | Worker app missing roles | Verify the Worker app has the required admin roles in the PingOne environment |
-| 0.8 profile commands fail on 1.0 | Command names changed between versions | Run `pingcli version`; update scripts to use 1.0 command names (`profiles create`, not `add-profile`) |
-| `platform export` returns empty package for a service | Service not yet supported for export | Check the product compatibility matrix; use `pingcli request` as fallback |
 | `pingcli init` wizard skips a service | Service credentials not configured | Re-run `pingcli config set` for the missing service manually |
 
 ---
@@ -212,10 +167,8 @@ pingcli -D platform export
 
 ## Source
 
-- [Ping CLI overview](https://developer.pingidentity.com/pingcli/)
+- [Ping CLI overview and docs](https://developer.pingidentity.com/pingcli/)
 - [Install guide](https://developer.pingidentity.com/pingcli/latest/pingcli_landing_page.html)
 - [Product compatibility matrix](https://developer.pingidentity.com/pingcli/latest/product-compatibility.html)
 - [Command reference](https://developer.pingidentity.com/pingcli/latest/command_reference/pingcli.html)
-- [Exporting platform configuration](https://developer.pingidentity.com/pingcli/general/exporting-platform-configuration.html)
-- [Configuration promotion overview](https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_landing_page.html)
 - [GitHub: pingidentity/pingcli](https://github.com/pingidentity/pingcli)
