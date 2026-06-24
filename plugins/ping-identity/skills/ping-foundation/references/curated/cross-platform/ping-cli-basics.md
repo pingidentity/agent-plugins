@@ -62,7 +62,7 @@ Profiles are named groups of settings stored in `$HOME/.pingcli/config.yaml`. Us
 | Create a profile | `pingcli config profiles create --name dev` |
 | Switch active profile | `pingcli config profiles use dev` |
 | List profiles | `pingcli config profiles list` |
-| View active profile | `pingcli config view-profile` |
+| View active profile | `pingcli config profiles show` |
 | Delete a profile | `pingcli config profiles delete dev` |
 
 ---
@@ -80,7 +80,7 @@ Before using product subcommands, configure the service credentials in the activ
 
 Use `pingcli init` for a guided first-run setup wizard. Configure manually with `pingcli config set`.
 
-**Regions:** PingOne regions affect the base URL — ensure the profile uses the correct region string (`com`, `eu`, `asia`, `sg`, `ca`). A wrong region causes 404 on environment lookups.
+**Regions:** PingOne regions affect the base URL — ensure the profile uses the correct region code (`NA`, `EU`, `AP`, `AU`, `CA`, `SG`). A wrong region causes 404 on environment lookups.
 
 ---
 
@@ -96,10 +96,10 @@ pingcli pingone environments list
 pingcli pingone applications create -f app.json
 
 # DaVinci — list flows in an application
-pingcli davinci flows list --application-id <id>
+pingcli davinci flows list -e <environment-id>
 
 # PingOne MFA — replace a device policy
-pingcli mfa device-policies replace -f policy.json
+pingcli mfa mfa-device-policies replace -f policy.json
 ```
 
 Universal-service connectors are accessible both at top level (`pingcli davinci ...`, `pingcli mfa ...`) and under the PingOne connector umbrella (`pingcli pingone davinci ...`). Both paths use the same PingOne Worker app credentials.
