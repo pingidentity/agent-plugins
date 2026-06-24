@@ -29,7 +29,7 @@ How to move Ping Identity configuration between development, staging, and produc
 
 | Model | Applies to | What moves | What does not move | Sequential constraint |
 |---|---|---|---|---|
-| **PingOne native promotion** | PingOne (multi-tenant cloud) | Applications, DaVinci flows and policies, sign-on policies, and most PingOne resources | Authorize, Credentials, Privilege, runtime user data, sessions, audit logs | Source/target same org; check live docs for current resource scope |
+| **PingOne native promotion** | PingOne (multi-tenant cloud) | Applications, DaVinci flows and policies, sign-on policies, and most PingOne resources | Authorize, Credentials, Privilege, Recognize, runtime user data, sessions, audit logs | Source/target same org; check live docs for current resource scope |
 | **AIC self-service promotions** | PingOne Advanced Identity Cloud | Journeys, scripts, themes, AM/IDM static config, ESV references | Live users, sessions, user-created applications, runtime data | Sequential pairs only: dev→staging, staging→production. Non-sequential promotion not supported. |
 | **Ping CLI + Terraform (config-as-code)** | PingOne, PingFederate, DaVinci, and supported universal services | Terraform-managed config via Ping Identity Terraform providers | Per-resource, determined by provider support | None — Terraform manages state independently per target environment |
 
@@ -70,7 +70,7 @@ How to move Ping Identity configuration between development, staging, and produc
 | ESV / environment variables | Promotion variables only | ESV references move; secrets must be pre-configured in target | Via Terraform provider variables |
 | Users, sessions, audit logs | ✗ never | ✗ never | ✗ never |
 | Runtime user data (devices, MFA enrollments) | ✗ never | ✗ never | ✗ never |
-| PingOne Authorize, Credentials, Privilege | ✗ excluded | n/a | ✓ (where provider support exists) |
+| PingOne Authorize, Credentials, Privilege, Recognize | ✗ excluded | n/a | ✓ (where provider support exists) |
 
 ---
 
@@ -80,7 +80,7 @@ Environment-specific values (connection endpoints, client IDs, URIs) must be ext
 
 | Platform | Mechanism | Key constraint |
 |---|---|---|
-| PingOne native | **Promotion variables** — named substitution tokens in the exported config | Defined in the source; must be assigned values in the target before applying |
+| PingOne native | **Promotion variables** — named substitution tokens in the exported config | Created in the source environment; target environment values are specified at creation time in the source |
 | AIC | **Environment secrets and variables (ESVs)** | ESVs referenced in static config must exist in the upper environment. AIC's integrity check blocks promotion if any ESV is missing or if an encrypted secret is embedded directly in config rather than referenced via an ESV. |
 | Terraform | **Terraform input variables / `.tfvars` files per environment** | Standard Terraform pattern; per-environment variable files hold the target-specific values |
 
