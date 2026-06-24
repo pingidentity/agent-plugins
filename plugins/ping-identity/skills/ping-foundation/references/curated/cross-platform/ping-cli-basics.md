@@ -21,7 +21,7 @@ Ping CLI (`pingcli`) is the unified open-source command-line tool for managing c
 
 **Covers:** Why to use Ping CLI, install and first-run, configuration profile model, connecting Ping services, CRUD via per-product subcommands (1.x), CI/CD patterns.
 
-**Does NOT cover:** `pingcli platform export` and `pingcli request` — these are 0.8 features not yet available in 1.x; see the [product compatibility matrix](https://developer.pingidentity.com/pingcli/latest/product-compatibility.html) for current 1.x feature availability. Interactive agent-driven config — use the PingOne MCP Server or DaVinci MCP Server. Long-term Terraform state management — see the PingOne and PingFederate Terraform providers. DaVinci flow design — see `ping-orchestration`. Per-service policy semantics — see `ping-universal-services`.
+**Does NOT cover:** Features below 1.x. Interactive agent-driven config. Long-term Terraform state management — see the PingOne and PingFederate Terraform providers. DaVinci flow design — see `ping-orchestration`. Per-service policy semantics — see `ping-universal-services`.
 
 ---
 
@@ -69,18 +69,11 @@ Profiles are named groups of settings stored in `$HOME/.pingcli/config.yaml`. Us
 
 ## Connecting Ping services
 
-Before using product subcommands, configure the service credentials in the active profile:
+Configure Ping CLI connections according to the [official documentation](https://developer.pingidentity.com/pingcli/latest/pingcli_landing_page.html). Once configured, verify connectivity:
 
-| Service | Prerequisites | Key config fields |
-|---|---|---|
-| PingOne | Worker application (client credentials) | `clientId`, `clientSecret`, `environmentId`, `region` |
-| PingFederate | Admin API OAuth client | `baseURL`, `clientId`, `clientSecret` |
-| DaVinci | Same Worker app as PingOne | Shares PingOne credentials |
-| Universal services (MFA, Protect, Verify, Authorize, Credentials) | Same Worker app as PingOne | Share PingOne credentials via PingOne connector |
-
-Use `pingcli init` for a guided first-run setup wizard. Configure manually with `pingcli config set`.
-
-**Regions:** PingOne regions affect the base URL — ensure the profile uses the correct region code (`NA`, `EU`, `AP`, `AU`, `CA`, `SG`). A wrong region causes 404 on environment lookups.
+```bash
+pingcli config profiles show
+```
 
 ---
 
@@ -108,13 +101,9 @@ Universal-service connectors are accessible both at top level (`pingcli davinci 
 
 ## CI/CD patterns
 
-```bash
-# Non-interactive auth (client credentials — no browser prompt)
-export PINGCLI_PINGONE_CLIENT_ID=...
-export PINGCLI_PINGONE_CLIENT_SECRET=...
-export PINGCLI_PINGONE_ENVIRONMENT_ID=...
-export PINGCLI_PINGONE_REGION=com
+Ping CLI is well-suited for CI/CD pipelines. Configure credentials according to the [official documentation](https://developer.pingidentity.com/pingcli/latest/pingcli_landing_page.html) — do not store secrets in skill instructions.
 
+```bash
 # JSON output for pipeline parsing
 pingcli pingone applications list --output-format json
 
@@ -129,9 +118,8 @@ pingcli -D pingone environments list
 
 ## Prerequisites
 
-- PingOne: Worker application with the required admin roles; `clientId`, `clientSecret`, `environmentId`, and region.
-- PingFederate: Admin API OAuth client; admin base URL (HTTPS, port 9999 by default).
-- Network access from the CLI host to each product's admin API endpoint.
+- Ping CLI installed and authenticated — follow the [official setup guide](https://developer.pingidentity.com/pingcli/latest/pingcli_landing_page.html)
+- Network access from the CLI host to each product's admin API endpoint
 
 ---
 

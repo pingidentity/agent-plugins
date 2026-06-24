@@ -96,7 +96,7 @@ Environment-specific values (connection endpoints, client IDs, URIs) must be ext
 | AIC | **Environment lock required** on source and target during promotion | Blocks ESV API and most admin APIs in the development environment; **authentication flows for end users are unaffected** |
 | AIC | Promotions take 10–45 minutes | Service restart in the upper environment is part of the process |
 | AIC | Rollback available via API only | Admin console does not expose rollback |
-| Terraform provider coverage | Resource support varies by provider | Not all PingOne / PingFederate resources have Terraform provider support; check the [Ping Terraform provider docs](https://terraform.pingidentity.com) for current coverage |
+| Terraform provider coverage | Resource and data source support varies by provider | Check the [Ping Terraform provider docs](https://terraform.pingidentity.com) for available resources and data sources |
 
 For current availability of specific resource types in native PingOne promotion, check the linked Ping documentation — this list changes as the feature evolves.
 
@@ -108,7 +108,7 @@ For current availability of specific resource types in native PingOne promotion,
 |---|---|---|
 | PingOne native | Restores the target environment to its state before the most recent promotion | Admin console → Promote, or Configuration Management API |
 | AIC | Restores the upper environment's prior static config set | API only (`POST /promotions/{id}/rollback`) |
-| Terraform | `terraform destroy` + revert to prior state file or prior `apply` | Standard Terraform rollback — revert the commit and re-apply |
+| Terraform | Revert to prior state file or prior `apply` | Standard Terraform rollback — revert the commit and re-apply |
 
 ---
 
