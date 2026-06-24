@@ -34,7 +34,7 @@ Ping CLI (`pingcli`) is the unified open-source CLI for managing configuration a
 - Profile-based authentication so the same scripts run against dev, staging, and production
 - Raw admin API access with managed auth for endpoints that don't yet have first-class commands
 
-For the current list of supported products and per-service CRUD availability, see the [product compatibility matrix](https://developer.pingidentity.com/pingcli/1.0/product-compatibility.html).
+For the current list of supported products and per-service CRUD availability, see the [product compatibility matrix](https://developer.pingidentity.com/pingcli/latest/product-compatibility.html).
 
 > **Legacy note:** `pingctl` (earlier tool) is replaced by `pingcli`. Migrate by re-configuring profiles under the new tool.
 
@@ -45,8 +45,8 @@ For the current list of supported products and per-service CRUD availability, se
 | Platform | Method | Command |
 |---|---|---|
 | macOS | Homebrew (recommended) | `brew install pingidentity/tap/pingcli` |
-| Linux | Package manager (apt/yum) or binary | See [Linux install guide](https://developer.pingidentity.com/pingcli/1.0/install/linux.html) |
-| Windows | Binary download | See [Windows install guide](https://developer.pingidentity.com/pingcli/1.0/install/windows.html) |
+| Linux | Package manager (apt/yum) or binary | See [Linux install guide](https://developer.pingidentity.com/pingcli/latest/install/linux.html) |
+| Windows | Binary download | See [Windows install guide](https://developer.pingidentity.com/pingcli/latest/install/windows.html) |
 | CI/CD | Docker image | `docker run pingidentity/pingcli:latest` |
 
 Verify: `pingcli version`
@@ -126,7 +126,7 @@ pingcli platform export --service-group pingone
 pingcli platform export --format HCL
 ```
 
-**Export availability per product:** Not all products produce HCL today. `pingone-platform`, `pingone-sso`, `pingone-mfa`, `pingone-protect`, `pingone-authorize`, and `pingfederate` are supported; `pingone-davinci`, `pingone-credentials`, and `pingone-verify` are listed but export support is partial. Always check the [product compatibility page](https://developer.pingidentity.com/pingcli/1.0/product-compatibility.html) for the current status.
+**Export availability per product:** Not all products produce HCL today. `pingone-platform`, `pingone-sso`, `pingone-mfa`, `pingone-protect`, `pingone-authorize`, and `pingfederate` are supported; `pingone-davinci`, `pingone-credentials`, and `pingone-verify` are listed but export support is partial. Always check the [product compatibility page](https://developer.pingidentity.com/pingcli/latest/product-compatibility.html) for the current status.
 
 **Terraformer plugin:** `pingcli-plugin-terraformer` (installed via `pingcli plugin add`) produces opinionated, ready-to-store HCL with post-processing suited for GitOps promotion pipelines.
 
@@ -213,9 +213,9 @@ pingcli -D platform export
 ## Source
 
 - [Ping CLI overview](https://developer.pingidentity.com/pingcli/)
-- [Install guide (1.0)](https://developer.pingidentity.com/pingcli/1.0/pingcli_landing_page.html)
-- [Product compatibility matrix (1.0)](https://developer.pingidentity.com/pingcli/1.0/product-compatibility.html)
-- [Command reference (1.0)](https://developer.pingidentity.com/pingcli/1.0/command_reference/pingcli.html)
+- [Install guide](https://developer.pingidentity.com/pingcli/latest/pingcli_landing_page.html)
+- [Product compatibility matrix](https://developer.pingidentity.com/pingcli/latest/product-compatibility.html)
+- [Command reference](https://developer.pingidentity.com/pingcli/latest/command_reference/pingcli.html)
 - [Exporting platform configuration](https://developer.pingidentity.com/pingcli/general/exporting-platform-configuration.html)
 - [Configuration promotion overview](https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_landing_page.html)
 - [GitHub: pingidentity/pingcli](https://github.com/pingidentity/pingcli)
