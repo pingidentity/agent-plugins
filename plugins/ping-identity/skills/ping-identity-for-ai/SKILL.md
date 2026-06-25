@@ -11,6 +11,8 @@ metadata:
 
 AI-era identity patterns: Identity for AI, Verified Trust, agent identity, agent security, and AI application authentication.
 
+**What this skill does for you:** Guides you through architecture, patterns, and design decisions for securing AI agents with Ping. It is currently conceptual rather than executable — there are no dedicated ID4AI MCP tools, so it does not generate ID4AI-specific configuration. For the parts that map to existing platform capabilities (e.g. agent client credentials, PingGateway routes), it hands off to `ping-foundation` and `ping-app-integration`, which generate config and code.
+
 ## Invocation
 
 Invoke explicitly with `/ping-identity-for-ai` or by saying "use ping-identity-for-ai to...".

@@ -8,7 +8,7 @@ Maps user intents to the owning umbrella skill. Used by SKILL.md routing logic a
 |---|---|---|
 | Orientation / "Where do I start?" | ping-quickstart | Product detection, platform selection, initial direction |
 | Setup / Admin / Configuration | ping-foundation | Tenant setup, apps, directories, policies, branding, on-prem admin |
-| Flows / Journeys / Orchestration | ping-orchestration | DaVinci flows, PingOne ST journeys, PingAM auth trees |
+| Flows / Journeys / Orchestration | ping-orchestration | DaVinci flows, AIC journeys, PingAM auth trees |
 | AI identity / Agent trust | ping-identity-for-ai | Identity for AI, Verified Trust, agent security patterns |
 | Shared strategic services | ping-universal-services | Protect, Verify, Credentials, SSO, IGA, Neo, Authorize |
 | App / SDK / mobile integration | ping-app-integration | Web, mobile, SDK, browser flows, on-prem app integration |

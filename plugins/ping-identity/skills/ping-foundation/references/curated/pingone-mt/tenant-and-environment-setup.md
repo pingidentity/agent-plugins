@@ -205,4 +205,4 @@ Administrator role assignments cross environment boundaries: a user in the Admin
 [PingOne environments](https://docs.pingidentity.com/pingone/platformconsole/p1_c_environments.html)
 [PingOne MFA device policies](https://docs.pingidentity.com/pingone/mfa/p1_c_mfa_device_policies.html)
 [PingOne OIDC application setup](https://docs.pingidentity.com/pingone/platformconsole/p1_c_apps.html)
-[PingOne API reference](https://apidocs.pingidentity.com/pingone/platform/v1/api/)
+[PingOne API reference](https://developer.pingidentity.com/pingone-api/platform/introduction.html)

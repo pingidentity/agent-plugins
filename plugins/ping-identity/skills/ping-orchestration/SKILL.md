@@ -11,6 +11,8 @@ metadata:
 
 Design and build authentication flows, orchestration logic, and journey-based experiences across Ping Identity platforms. MCP tools handle execution; this skill supplies design patterns, node sequencing, branching logic, and platform-specific constraints.
 
+**What this skill does for you:** Builds journeys and flows directly through MCP tools where they exist (AIC journeys); where a tool does not exist, it guides you through the design with node sequencing, branching logic, and platform constraints. Both modes are available — it uses whichever the platform supports for the task.
+
 ## Invocation
 
 Invoke this skill explicitly with `/ping-orchestration` or by saying "use ping-orchestration to...".
@@ -95,6 +97,7 @@ Sub-routing by task and journey use case: see `references/curated/pingone-st/rou
 | Task | Reference |
 |---|---|
 | Passkeys / passwordless / FIDO2 design across PingOne, PingOne Advanced Identity Cloud (AIC), Ping Software | `references/curated/cross-platform/passkeys-and-passwordless.md` |
+| Promote journeys, scripts, themes, or DaVinci flows between dev/staging/production | `references/curated/cross-platform/journey-and-flow-promotion.md` |
 
 ---
 

@@ -132,6 +132,29 @@ trigger_prompts:
     expected_tier: curated
     notes: "feedback: push MFA transaction approval trigger"
 
+  # ----- Config promotion (added 2026-06-22) -----
+
+  - id: T-59
+    prompt: "I built a registration journey in our AIC dev tenant — how do I promote it to staging without breaking ESVs?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/cross-platform/journey-and-flow-promotion.md
+    expected_tier: curated
+    notes: "AIC journey promotion + ESV gotcha → journey-and-flow-promotion anchor."
+
+  - id: T-60
+    prompt: "What's the best way to move a DaVinci flow from one PingOne environment to another and keep connector credentials per environment?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/cross-platform/journey-and-flow-promotion.md
+    expected_tier: curated
+    notes: "DaVinci flow promotion variables → journey-and-flow-promotion anchor."
+
+  - id: T-61
+    prompt: "We have scripted decision nodes referencing environment-specific endpoints. How do we promote the journey across environments?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-orchestration/references/curated/cross-platform/journey-and-flow-promotion.md
+    expected_tier: curated
+    notes: "Scripted Decision node + ESV placeholder during AIC promotion."
+
 non_trigger_prompts:
   - id: N-01
     prompt: "How do I install PingFederate on RHEL and configure initial admin settings?"

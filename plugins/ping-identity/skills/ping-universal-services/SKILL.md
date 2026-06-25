@@ -11,6 +11,8 @@ metadata:
 
 Shared strategic services used across PingOne, PingOne Advanced Identity Cloud (AIC), and Ping Software Suite — invoked from flows rather than administered as standalone products. Covers PingOne Protect (risk), PingOne Verify (identity proofing / KYC), PingOne Credentials (verifiable credentials), PingOne IGA (governance), PingOne Authorize (fine-grained authorization), and cross-platform SSO.
 
+**What this skill does for you:** Generates service and policy configuration and drives it through MCP tools where they exist; where a tool does not exist, it guides you through the docs with the policy fields, thresholds, and node-wiring constraints for each service. Both modes are available — it uses whichever the platform supports for the task.
+
 ## Invocation
 
 Invoke explicitly with `/ping-universal-services` or by saying "use ping-universal-services to...".
@@ -35,7 +37,6 @@ Invoke explicitly with `/ping-universal-services` or by saying "use ping-univers
 - If the user mentions "add security" or "prevent suspicious logins" without naming a specific service, ask a clarifying question — the task may be Protect (risk scoring) or just MFA (orchestration).
 - If the task is **MFA node/connector wiring within a journey or flow** (not MFA policy or device management): use `ping-orchestration` — that is flow design, not service configuration.
 - If the task is generic app / SDK integration without referencing a named Universal Service: use `ping-app-integration`.
-- **PingOne Recognize** — not yet GA; this skill will cover it when available.
 
 ## Multi-skill use cases
 

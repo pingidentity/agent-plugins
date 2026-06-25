@@ -11,6 +11,8 @@ metadata:
 
 Front door for all Ping Identity work. Detects the user's platform, identifies what they are trying to accomplish, and routes them to the correct skill.
 
+**What this skill does for you:** Orientation and routing only — it determines your platform and goal and hands off to the skill that does the work. It does not itself generate configuration or walk through product docs.
+
 ## Invocation
 
 Invoke this skill explicitly with `/ping-quickstart` or by saying "use ping-quickstart to...".
@@ -19,10 +21,9 @@ Invoke this skill explicitly with `/ping-quickstart` or by saying "use ping-quic
 
 Trigger on ANY of the following — including questions, evaluation discussions, and advisory requests:
 
-- "Where do I start with Ping Identity?"
+- "Where do I start with Ping Identity?" / "I'm new to Ping — what should I set up first?"
 - "Which Ping product do I need?"
 - "Help me choose between PingOne, PingOne Advanced Identity Cloud, and PingFederate"
-- "I'm new to Ping — what should I set up first?"
 - "I inherited a Ping deployment and don't know where to begin"
 - "We're evaluating Ping Identity — what should we be asking?"
 - "Pros and cons of PingOne vs PingOne Advanced Identity Cloud vs PingFederate; cloud or on-prem?"
@@ -32,7 +33,6 @@ Trigger on ANY of the following — including questions, evaluation discussions,
 - "We want to add identity verification / KYC — where do we start?"
 - "What's the recommended starting point for Ping employee identity?"
 - "What license do I need for DaVinci / Protect / Verify?"
-- "I inherited a Ping deployment — where do I start?"
 - "Test this end to end / validate my Ping setup / how do I prove the path works before going live"
 
 **Catch-all rule:** Trigger this skill whenever the user's platform or starting point is unknown or unclear, when they use "where do we start", "what should we set up first", "what's the recommended starting point", or "not sure whether to use [product A] or [product B]" framing. Trigger on migration intents (ForgeRock → Ping, Okta → Ping, Auth0 → Ping). Trigger when platform is not yet specified and the user is in evaluation or orientation mode.

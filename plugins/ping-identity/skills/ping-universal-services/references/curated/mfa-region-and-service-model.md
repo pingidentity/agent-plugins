@@ -93,7 +93,7 @@ Methods available depend on environment type and service model:
 | Windows / Mac login | — | — | ✓ (PingID service) |
 | RADIUS Gateway (VPN) | — | ✓ | ✓ |
 
-> **Native region limitation (current):** Some PingID integrations (Windows/Mac login, desktop app, YubiKey OTP) are not yet available in native V2 regions. These will be introduced progressively from Q3 2026. Check `docs.pingidentity.com/pingone/strong_authentication_mfa/` for the latest availability.
+> **Native region note:** Availability of some PingID integrations (Windows/Mac login, desktop app, YubiKey OTP) varies by region and is expanding over time. Check `docs.pingidentity.com/pingone/strong_authentication_mfa/` for the methods available in the target region before designing around them.
 
 ---
 

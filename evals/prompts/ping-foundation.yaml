@@ -175,6 +175,52 @@ trigger_prompts:
     expected_tier: curated
     notes: "Bare 'AIC' → pingone-st."
 
+  # ----- Config promotion (added 2026-06-22) -----
+
+  - id: T-83
+    prompt: "How do I promote my PingOne configuration from sandbox to production — what's supported and what's not?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/cross-platform/config-promotion.md
+    expected_tier: curated
+    notes: "PingOne native promotion scope + constraints."
+
+  - id: T-84
+    prompt: "We use AIC with dev, staging, and prod tenants. What's the right way to promote config between them?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/cross-platform/config-promotion.md
+    expected_tier: curated
+    notes: "AIC self-service promotion topology → config-promotion anchor."
+
+  - id: T-85
+    prompt: "We want a Terraform-based config-as-code pipeline for promoting PingOne and PingFederate config across environments. Where do we start?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/cross-platform/config-promotion.md
+    expected_tier: curated
+    notes: "Terraform GitOps promotion pattern → config-promotion anchor."
+
+  # ----- Ping CLI automation (added 2026-06-22) -----
+
+  - id: T-80
+    prompt: "How do I use pingcli to export my PingOne and PingFederate configuration as Terraform HCL?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/cross-platform/ping-cli-basics.md
+    expected_tier: curated
+    notes: "Explicit pingcli + Terraform export → cross-platform CLI anchor."
+
+  - id: T-81
+    prompt: "Set up multiple Ping CLI configuration profiles so I can promote DaVinci changes from dev to prod in CI/CD."
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/cross-platform/ping-cli-basics.md
+    expected_tier: curated
+    notes: "Multi-env profiles + CI/CD promotion → ping-cli-basics."
+
+  - id: T-82
+    prompt: "How do I authenticate pingcli to PingFederate and run admin API calls from a script?"
+    expected_anchors:
+      - plugins/ping-identity/skills/ping-foundation/references/curated/cross-platform/ping-cli-basics.md
+    expected_tier: curated
+    notes: "pingcli PingFederate auth + raw API → ping-cli-basics."
+
 non_trigger_prompts:
   - id: N-01
     prompt: "Build a DaVinci flow for customer login with risk-based step-up MFA."
@@ -202,6 +248,16 @@ non_trigger_prompts:
     prompt: "Add a user to Ping."
     expected_skill: ping-quickstart
     notes: "Bare command with no platform named — must route to ping-quickstart for clarification first."
+
+  - id: N-07
+    prompt: "Design a DaVinci flow that does passwordless login with passkeys."
+    expected_skill: ping-orchestration
+    notes: "DaVinci flow design belongs in ping-orchestration, not ping-foundation, even though pingcli can manage DaVinci resources."
+
+  - id: N-08
+    prompt: "How do I rotate the client secret on my PingOne Worker app?"
+    expected_skill: ping-foundation
+    notes: "Secret rotation is a platform admin task → core-admin-patterns.md, not config-promotion.md."
 
 ambiguous_prompts:
   - id: A-01

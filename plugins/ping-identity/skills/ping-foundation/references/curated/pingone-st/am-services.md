@@ -222,7 +222,7 @@ Per-input validation rules invoked by `ValidatedUsernameNode`, `ValidatedPasswor
 Default user profile attribute exposure. Foundational; rarely modified.
 
 ### Email Service
-**Currently unused on AIC.** Email delivery is handled by IDM Notifications, not this AM service. Do not invest time configuring this — configure email under IDM (Identity Management → Email).
+**Not used on AIC.** In AIC, email delivery is configured via **Email Provider** and **Email Templates** (under Tenant Settings), not this AM service. Do not configure this AM-level service on AIC — it has no effect. For standalone PingIDM, configure email in IDM; for standalone PingAM, journey nodes connect to an external email provider directly.
 
 ### Dashboard Service
 *(See Global services above.)*

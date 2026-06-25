@@ -75,7 +75,7 @@ Ping Identity's Identity for AI solution covers five distinct problem areas. Eac
 
 ### Agent Identity
 - **PingOne** — AI Agents feature; register agents as first-class OAuth 2.0 identities with lifecycle management. License: Agent IAM Core (contact Ping Sales).
-- **PingOne AIC** — `/aiagent/register` DCR endpoint for dynamic agent onboarding; AI Agents admin UI in realm left-nav. **Available on Rapid channel as of 2026-06-03; Regular channel promotion planned.**
+- **PingOne AIC** — `/aiagent/register` DCR endpoint for dynamic agent onboarding; AI Agents admin UI in realm left-nav. Check the [AIC release notes](https://docs.pingidentity.com/pingoneaic/release-notes/rapid-channel/ai-agents.html) for current channel availability.
 - **PingFederate** — Dynamic client registration (DCR) for agent self-enrollment at runtime.
 
 ### Agent Security
