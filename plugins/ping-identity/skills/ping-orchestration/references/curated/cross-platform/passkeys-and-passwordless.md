@@ -241,6 +241,7 @@ Reference: `plugins/ping-identity/skills/ping-foundation/references/curated/ping
 - Application's redirect URI domain matches the WebAuthn `rpId` configured for the relying party
 - For higher-assurance tiers: PingOne Verify or another identity-proofing service licensed and configured (see `ping-universal-services`)
 - For DaVinci flows: PingOne MFA service activated in the environment
+- **For native Android/iOS apps (AIC):** Android asset links, Apple app site association, and CORS must be configured before mobile WebAuthn will work — see `references/curated/pingone-st/journey-use-cases/webauthn-mobile-setup.md`
 
 ---
 

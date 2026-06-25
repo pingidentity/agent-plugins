@@ -54,6 +54,7 @@ Load the matching use-case anchor when the task maps to a named scenario:
 | Progressive profiling (login-count trigger, attribute gate) | `references/curated/pingone-st/journey-use-cases/progressive-profiling.md` |
 | Social + local registration and authentication, email verification gate | `references/curated/pingone-st/journey-use-cases/social-and-local-registration-authentication.md` |
 | MFA method selection at registration, per-method enrollment (TOTP/WebAuthn/Push), mandatory MFA on login | `references/curated/pingone-st/journey-use-cases/mfa-method-selection-registration.md` |
+| WebAuthn / passkeys on native Android or iOS — AIC-side prerequisites (asset links, Apple app association, CORS) | `references/curated/pingone-st/journey-use-cases/webauthn-mobile-setup.md` |
 
 ---
 
