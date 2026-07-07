@@ -6,6 +6,15 @@
     {
       "name": "ping-identity",
       "source": "./plugins/ping-identity"
+    },
+    {
+      "name": "ping-orchestration-sdks",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/pingidentity/ping-sdk-agent-skills.git",
+        "path": "plugins/ping-orchestration-sdks",
+        "ref": "main"
+      }
     }
   ]
 }

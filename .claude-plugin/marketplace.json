@@ -21,6 +21,27 @@
       "license": "MIT",
       "category": "identity",
       "keywords": ["ping", "pingone", "aic", "davinci", "pingfederate", "pingaccess", "identity", "authentication", "ciam", "ai-identity"]
+    },
+    {
+      "name": "ping-orchestration-sdks",
+      "displayName": "Ping Orchestration SDKs",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/pingidentity/ping-sdk-agent-skills.git",
+        "path": "plugins/ping-orchestration-sdks",
+        "ref": "main"
+      },
+      "description": "Companion SDK skills for deep client-side integration — Android (Kotlin), iOS (Swift), and React/JavaScript SDK scaffolding, DaVinci collector rendering, Journey callbacks, and ForgeRock-to-Ping migration. Install alongside ping-identity for full app-integration support.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Ping Identity",
+        "email": "devex@pingidentity.com"
+      },
+      "homepage": "https://developer.pingidentity.com",
+      "repository": "https://github.com/pingidentity/ping-sdk-agent-skills",
+      "license": "MIT",
+      "category": "identity",
+      "keywords": ["ping", "pingone", "aic", "davinci", "sdk", "android", "ios", "react", "javascript", "identity", "authentication", "ciam"]
     }
   ]
 }

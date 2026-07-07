@@ -193,7 +193,7 @@ Migrating from `forgerock-android-sdk` or `forgerock-ios-sdk` to the Ping Native
 
 **Migration strategy — manual approach:** address breaking changes in order — (1) dependency declarations, (2) imports, (3) initialization, (4) flow entry points, (5) callback/node handling, (6) token retrieval and storage. Test each phase with the existing journey or DaVinci flow before proceeding to the next.
 
-**Automated migration:** For full automated code migration, use the `forgerock-to-ping-journey-migration` skill from the `pingidentity/ping-sdk-agent-skills` plugin. That skill runs a structured 9-phase workflow: (1) Detect platform, (2) Gather context (read manifest, package.json, Podfile), (3) Pre-flight build check, (4) Scope migration, (5) Scan for legacy usage, (6) Preview plan, (7) Apply changes with `[ping-migration] BEGIN/END legacy` comment markers, (8) Post-flight build verification, (9) Write migration report. It never silently deletes code and keeps the build working at every step.
+**Automated migration:** For full automated code migration, use the `forgerock-to-ping-journey-migration` skill from the `ping-orchestration-sdks` companion plugin (source repo `pingidentity/ping-sdk-agent-skills`), if it is installed. That skill runs a structured 9-phase workflow: (1) Detect platform, (2) Gather context (read manifest, package.json, Podfile), (3) Pre-flight build check, (4) Scope migration, (5) Scan for legacy usage, (6) Preview plan, (7) Apply changes with `[ping-migration] BEGIN/END legacy` comment markers, (8) Post-flight build verification, (9) Write migration report. It never silently deletes code and keeps the build working at every step.
 
 ## Quick-reference diagnostic table
 
@@ -233,7 +233,7 @@ Migrating from `forgerock-android-sdk` or `forgerock-ios-sdk` to the Ping Native
 - `references/curated/mobile-integration-basics.md` — Android and iOS SDK setup including migration table
 - `references/curated/web-integration-basics.md` — JavaScript OIDC and SAML integration
 - `references/curated/app-integration-overview.md` — Integration lifecycle and skill positioning
-- `pingidentity/ping-sdk-agent-skills` — `forgerock-to-ping-journey-migration` skill for automated SDK migration
+- `ping-orchestration-sdks` companion plugin (repo `pingidentity/ping-sdk-agent-skills`) — `forgerock-to-ping-journey-migration` skill for automated SDK migration
 
 ## Source
 

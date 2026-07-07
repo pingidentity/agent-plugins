@@ -36,6 +36,9 @@ Ping Identity Agent Plugins give AI coding agents deep knowledge of the Ping Ide
 | **Gemini CLI** | Add to `GEMINI.md`: `plugins: [https://github.com/pingidentity/agent-plugins]` |
 | **OpenCode / other** | `npx skills add pingidentity/agent-plugins` (via Skills CLI); see [skills.sh](https://skills.sh) for agent-specific setup |
 
+> [!IMPORTANT]
+> This marketplace lists **two** plugins: `ping-identity` (the six umbrella skills) and `ping-orchestration-sdks` (the companion SDK skills for Android, iOS, and React/JavaScript client-side integration). For full app-integration support — DaVinci collector rendering, Journey callbacks, SDK scaffolding, and ForgeRock → Ping migration — **install both**. Adding the marketplace makes both available; each is installed/enabled separately. The `ping-orchestration-sdks` plugin is sourced from the [`pingidentity/ping-sdk-agent-skills`](https://github.com/pingidentity/ping-sdk-agent-skills) repo so the SDK team maintains it in one place.
+
 ---
 
 ## Install Manually
@@ -44,6 +47,12 @@ You can also install using the Skills CLI:
 
 ```bash
 npx skills add pingidentity/agent-plugins
+```
+
+For the companion SDK skills (Android / iOS / React / JavaScript client-side integration), also install:
+
+```bash
+npx skills add pingidentity/ping-sdk-agent-skills
 ```
 
 Or install a specific skill:

@@ -75,11 +75,16 @@ See `references/runtime/mcp-preflight.md` for MCP config and Cursor preflight st
 ## Step 2: Retrieval escalation
 
 1. Curated anchors (`references/curated/`) — load 1–3 max. Stop if sufficient.
-2. For deep implementation work, delegate to the companion SDK skills below.
+2. For deep implementation work, delegate to the companion SDK skills below **if they are installed**. If they are not, complete the task from the curated anchors and tell the user how to install them (see "Installing the companion plugin").
 
-## Companion SDK skills — `ping-sdk-agent-skills`
+## Companion SDK skills — `ping-orchestration-sdks` plugin
 
-For deep implementation work (full code scaffolding, collector rendering, migration automation), delegate to the specialist skills in the `pingidentity/ping-sdk-agent-skills` plugin:
+Deep client-side work — full code scaffolding, DaVinci collector rendering, Journey callback wiring, and ForgeRock → Ping migration — lives in the specialist skills of the **`ping-orchestration-sdks`** companion plugin (source repo `pingidentity/ping-sdk-agent-skills`). Those skills carry SDK-specific detail (node/collector shapes, token exchange, storage) that this skill deliberately does not duplicate.
+
+**These specialist skills only resolve if the `ping-orchestration-sdks` plugin is installed alongside this one. Before delegating, check whether the target skill is actually available in this session:**
+
+- **If the specialist skill is available:** delegate to it for the platform below.
+- **If it is NOT available:** do not emit an unresolved "use skill X" instruction, and do not reverse-engineer the SDK by reading installed package source (e.g. grepping `node_modules/**/*.d.ts`). Complete what you can from the curated anchors in `references/curated/`, then tell the user to install the companion plugin before retrying the deep-integration step.
 
 | Specialist skill | Platform |
 |---|---|
@@ -87,8 +92,18 @@ For deep implementation work (full code scaffolding, collector rendering, migrat
 | `ping-orchestration-android-sdk` | Android Kotlin / Jetpack Compose — Journey + DaVinci |
 | `ping-orchestration-ios-sdk` | iOS Swift / SwiftUI — Journey + DaVinci |
 | `ping-orchestration-reactjs-journey-sdk` | React + AIC Journey flows |
-| `ping-orchestration-reactjs-davinci-sdk` | React + PingOne DaVinci flows |
+| `ping-orchestration-reactjs-davinci-sdk` | React + PingOne DaVinci flows (`@forgerock/davinci-client`) |
 | `ping-orchestration-javascript-sdk` | Angular / Vue / Vanilla JS |
 | `forgerock-to-ping-journey-migration` | ForgeRock SDK → Ping SDK automated migration |
 
-Install: `https://github.com/pingidentity/ping-sdk-agent-skills`
+### Installing the companion plugin
+
+The `ping-orchestration-sdks` plugin ships in the same Ping Identity marketplace as this skill. If the specialist skills are not resolving, install the companion plugin:
+
+| Agent | How |
+|---|---|
+| Claude Code | `/plugin marketplace add pingidentity/agent-plugins`, then install both the `ping-identity` and `ping-orchestration-sdks` plugins |
+| Cursor | Add `https://github.com/pingidentity/agent-plugins`, then enable both plugins |
+| Skills CLI / other | `npx skills add pingidentity/ping-sdk-agent-skills` |
+
+Source repo: `https://github.com/pingidentity/ping-sdk-agent-skills`
