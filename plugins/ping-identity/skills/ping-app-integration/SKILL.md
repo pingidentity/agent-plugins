@@ -68,6 +68,17 @@ Complete platform setup first, then flow design, then hand off to this skill for
 | Server-side / backend OIDC, M2M client_credentials, token exchange, CIBA, retry/429 | `references/curated/server-side-integration-basics.md` |
 | Troubleshooting, migration (ForgeRock → Ping SDK) | `references/curated/integration-troubleshooting-basics.md` |
 
+## Pre-flight for browser-based flows: configure CORS before writing token code
+
+Any SPA that performs the token exchange in the browser (React, Angular, Vue, vanilla JS, or a DaVinci/Journey flow rendered in-app) will fail at the token or `/authorize` request unless the app's origin is allowed on the server. This is not an edge case — **it breaks by default** on a new tenant. Address it proactively; do not wait for the runtime CORS error and then patch reactively.
+
+When the target is a browser app, before generating token-exchange code:
+
+1. Load `references/curated/web-integration-basics.md` → "CORS pre-flight" for the per-platform rule and the MCP-driven configuration path.
+2. Configure (or instruct the user to configure) the allow-origin for the app's origin. CORS lives on a different resource per platform: PingOne uses the application's `corsSettings` (an in-app DaVinci/Journey flow needs "Allow specific origins"); AIC uses the global `CorsService` policy (configurable via the AIC MCP tools); PingFederate uses the authorization server's Allowed Origin list.
+3. If the MCP server is unavailable (or read-only, or not configured for the platform), do not skip CORS — give the user the manual admin-console steps from the reference and wait, rather than generating token-exchange code that will fail at runtime. Only AIC is MCP-configurable today; PingOne and PingFederate are manual (or via their management APIs) regardless.
+4. If cross-origin setup is out of scope for the environment, propose the BFF (Backend For Frontend) pattern, which avoids browser CORS entirely.
+
 ## MCP execution
 
 See `references/runtime/mcp-preflight.md` for MCP config and Cursor preflight steps.

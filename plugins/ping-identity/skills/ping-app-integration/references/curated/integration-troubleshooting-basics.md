@@ -66,11 +66,13 @@ Diagnostic guide for the most common failure patterns in Ping Identity app integ
 
 | Platform | Fix |
 |---|---|
-| PingOne | CORS origins are automatically configured for registered redirect URI origins — verify the app's origin matches a registered redirect URI's origin (`scheme://host:port`) |
-| PingOne Advanced Identity Cloud (AIC) | Same as PingOne; also check if the OAuth2 provider CORS configuration is set in the AM admin console |
-| PingFederate | Enable CORS in `pf.properties`: `pf.cors.enabled=true`; add allowed origins to the CORS filter configuration in the PF admin console |
+| PingOne | Set on the application's `corsSettings` (Applications → [app] → Configuration → CORS Settings). The default `Allow any CORS-safe origin` permits `/as/token` from any origin but blocks `/as/authorize` and sensitive endpoints — an in-app DaVinci/Journey flow needs "Allow specific origins" with the app origin listed. Not derived from redirect URIs. |
+| PingOne Advanced Identity Cloud (AIC) | Global AM `CorsService` policy (Tenant settings → Global Settings → CORS). Add the app origin to `acceptedOrigins`; can be configured via the AIC MCP `CorsService` tools |
+| PingFederate | Admin console: System → OAuth Settings → Authorization Server Settings → Cross-Origin Resource Sharing Settings → Allowed Origin. Replicate to all cluster nodes after saving |
 
 **Architectural alternative:** Move the token exchange to a server-side BFF (Backend For Frontend). The browser makes a same-origin request to the BFF, which performs the token exchange server-to-server. Eliminates CORS entirely for the token endpoint.
+
+**Prevent it up front:** this failure is avoidable by configuring the app origin before the first token exchange rather than reacting to the error. For proactive per-platform setup — including configuring AIC CORS via the AIC MCP `CorsService` tools — see `references/curated/web-integration-basics.md` → "CORS pre-flight".
 
 ## Failure mode 3: Token introspection failures
 

@@ -22,7 +22,8 @@ Integration guide for web applications authenticating through Ping Identity — 
 **Covers:**
 - Ping JavaScript SDK (`@forgerock/journey-client`, `@forgerock/davinci-client`, `@forgerock/oidc-client`) for React apps
 - Generic OIDC authorization code + PKCE for SPAs; client credentials for server-to-server
-- OIDC redirect URI exact-match constraint, CORS requirements, token endpoint access
+- OIDC redirect URI exact-match constraint, token endpoint access
+- CORS pre-flight: configuring the app origin before the first token exchange (per-platform, MCP-driven for AIC, BFF alternative)
 - SAML SP-initiated and IdP-initiated flows — when to use SAML vs. OIDC
 - Browser-specific flows: hosted login page redirect, popup/post-message, silent renewal
 - Flow type comparison table
@@ -31,7 +32,7 @@ Integration guide for web applications authenticating through Ping Identity — 
 - Android or iOS native SDK integration — see `references/curated/mobile-integration-basics.md`
 - Journey node or DaVinci flow authoring — use `ping-orchestration`
 - Application record creation or redirect URI registration in the admin console — use `ping-foundation`
-- Failure-mode diagnosis — see `references/curated/integration-troubleshooting-basics.md`
+- Failure-mode diagnosis (including diagnosing a CORS error after it occurs) — see `references/curated/integration-troubleshooting-basics.md`. This file covers CORS as proactive setup; the troubleshooting file covers diagnosing the runtime error.
 
 ## React SDK — Ping JavaScript SDK
 
@@ -174,6 +175,8 @@ Required parameters for the authorization request:
 
 Token exchange: POST to the token endpoint with `grant_type=authorization_code`, `code`, `code_verifier`, `redirect_uri`, `client_id`.
 
+> **Before writing this in-browser POST, complete the CORS pre-flight below ("CORS pre-flight — configure before the first token exchange").** A cross-origin token POST from a SPA fails unless the app origin is already allowed on the server; configure it first rather than shipping code that breaks at runtime.
+
 Constraint: `redirect_uri` in the token exchange must be byte-for-byte identical to the one used in the authorization request and the one registered in the admin console. A trailing slash difference or protocol mismatch (`http` vs `https`) causes `invalid_grant`.
 
 ### Client credentials (server-to-server)
@@ -192,13 +195,47 @@ No specific library is mandated. Any library implementing RFC 6749 + RFC 7636 wo
 - Token expiry tracking and automatic refresh
 - Logout (RP-initiated logout, `end_session_endpoint`)
 
-### CORS requirements for the token endpoint
+### CORS pre-flight — configure before the first token exchange
 
-PingOne (multi-tenant cloud) and AIC return `Access-Control-Allow-Origin` headers for cross-origin requests to the token endpoint. PingFederate requires explicit CORS configuration in `pf.properties` or via the PF admin console.
+Any SPA that performs the token exchange in the browser (not via a BFF) requires the token endpoint to allow the app's origin. On a new tenant this is **not configured by default for arbitrary origins**, so a browser flow breaks at the token step unless the origin is allowed. Treat CORS as a setup pre-flight, not a failure to diagnose later: configure the allow-origin as part of standing up the app, before or alongside generating the in-browser token-exchange code.
 
-For SPAs performing the token exchange in-browser (not via a BFF), the token endpoint must allow the app origin. Symptoms of CORS misconfiguration: the authorization request succeeds but the token exchange fails with a network error in the browser console (no response body).
+Symptom if skipped: the authorization request succeeds (redirect to login, authenticate, redirect back), but the token exchange fails with a network error in the browser console and no response body — `Access to XMLHttpRequest at 'https://<tenant>/token' … blocked by CORS policy`.
 
-Constraint: the `OPTIONS` preflight for `/token` must receive `Access-Control-Allow-Origin` and `Access-Control-Allow-Headers: Content-Type, Authorization`.
+Constraint: the `OPTIONS` preflight for `/token` must receive `Access-Control-Allow-Origin` matching the app origin and `Access-Control-Allow-Headers: Content-Type, Authorization`. Keep the token request `Content-Type: application/x-www-form-urlencoded` (an `application/json` body forces a preflight that is commonly misconfigured).
+
+#### Per-platform configuration
+
+CORS is set on a different resource per platform. The app origin is `scheme://host:port` (e.g. `https://localhost:5173`, `https://app.example.com`) — not the redirect URI path.
+
+| Platform | Where CORS is configured |
+|---|---|
+| PingOne (multi-tenant cloud) | The **application's `corsSettings`** property (per-app), not a global resource and not derived from redirect URIs. Default `Allow any CORS-safe origin` permits `/as/token` (a "safe" endpoint) from any origin but **blocks `/as/authorize` and other sensitive/cookie endpoints from all origins**. A SPA that renders a DaVinci/Journey flow in-app (calls `/as/authorize` or `pi.flow` cross-origin) must set `corsSettings.behavior = ALLOW_SPECIFIC_ORIGINS` and list the app origin in `corsSettings.origins`. Admin surface: Applications → [app] → Configuration → CORS Settings → "Allow specific origins". |
+| PingOne Advanced Identity Cloud (AIC) | Global AM `CorsService` policy. Add the app origin to `acceptedOrigins`, with `acceptedMethods` including `POST`/`OPTIONS` and `acceptedHeaders` including `Content-Type`, `Authorization`. Admin surface: Tenant settings → Global Settings → Cross-Origin Resource Sharing (CORS). MCP-configurable (below). |
+| PingFederate (on-prem) | Authorization server CORS allow-list, covering `/as/token.oauth2`, `/idp/userinfo.openid`, `/.well-known/openid-configuration`, and related OAuth endpoints. Admin surface: System → OAuth Settings → Authorization Server Settings → Cross-Origin Resource Sharing Settings → Allowed Origin. Replicate to all cluster nodes after changing. |
+
+Plain authorization-code + PKCE SPAs that only POST to `/as/token` may work under the PingOne default; the in-app flow-rendering case (DaVinci `@forgerock/davinci-client`, Journey widget) is the one that reliably needs an explicit origin. When in doubt, set an explicit origin.
+
+#### Configuring AIC CORS via MCP
+
+When the AIC MCP server is connected, configure the AIC `CorsService` directly instead of deferring to a runtime failure or a manual console step:
+
+1. `listCorsPolicies` — inspect existing policies; if one already covers the app origin, stop.
+2. If no policy covers the origin: `createCorsPolicy` with `acceptedOrigins: ["https://app.example.com"]`, `acceptedMethods: ["GET","POST","OPTIONS"]`, `acceptedHeaders: ["Content-Type","Authorization"]`, `maxAge`, `allowCredentials`, and `enabled: true`.
+3. To extend an existing policy rather than add a new one: `updateCorsPolicy` (fetch-then-PUT merge) to append the origin to `acceptedOrigins`.
+
+**If the MCP server is not available, configure CORS manually — do not skip it and do not silently proceed.** MCP is a convenience, not a prerequisite: an unavailable, unconfigured, or read-only MCP server means the agent hands the user the exact manual steps and waits, rather than generating token-exchange code that will fail at runtime. Manual configuration per platform:
+
+| Platform | Manual steps (no MCP) |
+|---|---|
+| PingOne | Admin console: Applications → [app] → Configuration → CORS Settings → "Allow specific origins"; add the app origin. Or PUT the application's `corsSettings` via the PingOne Management API. |
+| AIC | Admin console: Tenant settings → Global Settings → Cross-Origin Resource Sharing (CORS) → add a policy with the app origin in Accepted Origins, methods incl. `POST`/`OPTIONS`, headers incl. `Content-Type`/`Authorization`. |
+| PingFederate | Admin console: System → OAuth Settings → Authorization Server Settings → Cross-Origin Resource Sharing Settings → Allowed Origin; add the app origin, then replicate to all cluster nodes. |
+
+Only AIC is MCP-configurable today (via the `CorsService` tools above). For PingOne the bundled DaVinci MCP server is read-only for application configuration, and PingFederate has no bundled MCP server — so PingOne and PingFederate are manual (or via their respective management APIs) regardless of MCP availability.
+
+#### CORS-free alternative
+
+If cross-origin configuration is out of scope for the environment, move the token exchange to a server-side BFF (Backend For Frontend): the browser calls the same-origin BFF, which performs the token exchange server-to-server. This eliminates browser CORS on the token endpoint entirely (see the BFF row in the flow-type table).
 
 ## SAML integration
 
