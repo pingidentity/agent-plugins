@@ -1,16 +1,49 @@
 {
   "name": "pingidentity",
-  "description": "Agent plugin for Ping Identity — teach any AI coding agent how to build with Ping Identity.",
+  "description": "Agent plugins for Ping Identity — human-facing quickstart, agent-facing cross-portfolio dispatcher, and product-specific plugins for autonomous agentic workflows.",
   "owner": {
     "name": "Ping Identity",
     "email": "devex@pingidentity.com"
   },
   "plugins": [
     {
+      "name": "ping-identity-quickstart",
+      "displayName": "Ping Identity Quickstart",
+      "source": "./plugins/ping-identity-quickstart",
+      "description": "Human-facing map of Ping Identity resources. Orients users, detects platform, and points to the right resource — docs, portal, marketplace, GitHub, tooling. Advisory only.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Ping Identity",
+        "email": "devex@pingidentity.com"
+      },
+      "homepage": "https://developer.pingidentity.com",
+      "repository": "https://github.com/pingidentity/agent-plugins",
+      "license": "MIT",
+      "category": "identity",
+      "keywords": ["ping", "pingone", "aic", "quickstart", "orientation", "identity", "authentication", "ciam"]
+    },
+    {
       "name": "ping-identity",
       "displayName": "Ping Identity",
       "source": "./plugins/ping-identity",
-      "description": "Six umbrella agent skills covering journeys, app integration, universal services, platform setup, and identity for AI across PingOne, AIC, DaVinci, and PingFederate.",
+      "description": "Cross-portfolio agent plugin for Ping Identity. Hosts the ping-identity foundations skill (portfolio orientation and routing) with reference topics covering the portfolio, solutions, and application-integration concepts. Pair with product plugins for implementation.",
+      "version": "2.0.0",
+      "author": {
+        "name": "Ping Identity",
+        "email": "devex@pingidentity.com"
+      },
+      "homepage": "https://developer.pingidentity.com",
+      "repository": "https://github.com/pingidentity/agent-plugins",
+      "license": "MIT",
+      "category": "identity",
+      "keywords": ["ping", "pingone", "aic", "davinci", "pingfederate", "pingaccess", "identity", "authentication", "ciam", "ai-identity", "dispatcher", "foundations"]
+    },
+    {
+      "name": "ping-identity-pingone",
+      "displayName": "Ping Identity PingOne",
+      "source": "./plugins/ping-identity-pingone",
+      "description": "App-integration guidance for connecting web, mobile, and backend applications to a PingOne environment (SDK wiring, OIDC/PKCE, CORS, Worker applications), DaVinci flow design guidance for building flows (registration, login, MFA, step-up, passkeys), live-MCP-backed troubleshooting for DaVinci flow executions, and audit-event investigation for platform operations.",
+      "version": "1.0.0",
       "version": "1.0.0",
       "author": {
         "name": "Ping Identity",
@@ -20,7 +53,44 @@
       "repository": "https://github.com/pingidentity/agent-plugins",
       "license": "MIT",
       "category": "identity",
-      "keywords": ["ping", "pingone", "aic", "davinci", "pingfederate", "pingaccess", "identity", "authentication", "ciam", "ai-identity"]
+      "keywords": ["ping", "pingone", "davinci", "audit", "troubleshoot", "debug", "flow-execution", "mcp", "cli", "api", "identity", "authentication"]
+    },
+    {
+      "name": "ping-identity-pingone-aic",
+      "displayName": "Ping Identity Advanced Identity Cloud",
+      "source": "./plugins/ping-identity-pingone-aic",
+      "description": "Journey design and build guidance for PingOne Advanced Identity Cloud (AIC) journeys and PingAM authentication trees — node selection, wiring invariants, risk, MFA, passkey, and recovery journeys — plus app-integration guidance for connecting applications to AIC (Journey modules, journey client, OIDC/PKCE, tenant CORS), with MCP-backed journey creation where connected.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Ping Identity",
+        "email": "devex@pingidentity.com"
+      },
+      "homepage": "https://developer.pingidentity.com",
+      "repository": "https://github.com/pingidentity/agent-plugins",
+      "license": "MIT",
+      "category": "identity",
+      "keywords": ["ping", "pingone", "aic", "pingam", "journeys", "authentication", "mfa", "identity", "ciam"]
+    },
+    {
+      "name": "ping-orchestration-sdks",
+      "displayName": "Ping Orchestration SDKs",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/pingidentity/ping-sdk-agent-skills.git",
+        "path": "plugins/ping-orchestration-sdks",
+        "ref": "main"
+      },
+      "description": "Companion SDK skills for deep client-side integration — Android (Kotlin), iOS (Swift), and React/JavaScript SDK scaffolding, DaVinci collector rendering, Journey callbacks, and ForgeRock-to-Ping migration.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Ping Identity",
+        "email": "devex@pingidentity.com"
+      },
+      "homepage": "https://developer.pingidentity.com",
+      "repository": "https://github.com/pingidentity/ping-sdk-agent-skills",
+      "license": "MIT",
+      "category": "identity",
+      "keywords": ["ping", "pingone", "aic", "davinci", "sdk", "android", "ios", "react", "javascript", "identity", "authentication", "ciam"]
     }
   ]
 }

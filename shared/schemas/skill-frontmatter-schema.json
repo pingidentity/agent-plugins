@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "SKILL.md Frontmatter Schema",
-  "description": "Required frontmatter for every SKILL.md. Drives marketplace listing, routing, and IDE discovery.",
+  "description": "Required frontmatter for every SKILL.md. Uses the agentskills.io fields plus a small metadata block for publishing and product discovery.",
   "type": "object",
   "required": ["name", "description", "compatibility", "metadata"],
   "additionalProperties": false,
@@ -15,12 +15,21 @@
     "description": {
       "type": "string",
       "minLength": 50,
-      "description": "Trigger description. Used by IDE discovery and skill routing. Must be specific enough for an agent to decide whether to activate this skill."
+      "maxLength": 500,
+      "description": "Trigger description. Used by IDE discovery and skill routing. Must be specific enough for an agent to decide whether to activate this skill — long enough to give confident routing signals, short enough to stay a cheap standing cost in agent context."
     },
     "compatibility": {
       "type": "string",
       "minLength": 10,
-      "description": "Short note on what platforms, tools, or context this skill requires."
+      "description": "Short note on the environment or tooling this skill assumes (MCP tools, CLI presence, tenant scopes)."
+    },
+    "license": {
+      "type": "string",
+      "description": "agentskills.io standard field. License name or reference to a bundled license file."
+    },
+    "allowed-tools": {
+      "type": "string",
+      "description": "agentskills.io standard field (experimental). Space-separated string of pre-approved tools, e.g. 'Bash(git:*) Read'."
     },
     "metadata": {
       "type": "object",
@@ -35,6 +44,11 @@
           "type": "string",
           "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
           "description": "Semantic version string, e.g. '1.0.0'"
+        },
+        "product_family": {
+          "type": "string",
+          "enum": ["pingone-mt", "aic", "ping-software", "cross-platform", "ai-identity", "multi-product"],
+          "description": "Primary product family the skill covers."
         }
       }
     }

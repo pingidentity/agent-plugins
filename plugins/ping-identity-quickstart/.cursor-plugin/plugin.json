@@ -1,0 +1,16 @@
+{
+  "name": "ping-identity-quickstart",
+  "displayName": "Ping Identity Quickstart",
+  "version": "0.1.0",
+  "description": "Human-facing map of Ping Identity resources. Detects the user's platform, then points to the right resource — docs, developer portal, marketplace, GitHub, or tooling. Advisory and orientation only.",
+  "author": {
+    "name": "Ping Identity",
+    "email": "devex@pingidentity.com"
+  },
+  "homepage": "https://developer.pingidentity.com",
+  "repository": "https://github.com/pingidentity/agent-plugins",
+  "license": "MIT",
+  "keywords": ["ping", "pingone", "aic", "pingfederate", "pingaccess", "quickstart", "orientation", "identity", "authentication", "ciam"],
+  "logo": "assets/ping-logo-square.svg",
+  "skills": "./skills/"
+}
