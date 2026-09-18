@@ -2,27 +2,26 @@
   <img src="assets/banner-build-with-ai.png" alt="A banner representing building with Ping using AI.">
 </p>
 
-# Ping Identity Agent Plugins (Skills, MCP, and more)
+# Ping Identity Agent Plugins
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Ping Identity Agent Plugins give AI coding agents deep knowledge of the Ping Identity platform through a set of purpose-built skills: which product to use, how to configure it, and how to integrate it into your applications. Stop prompt-engineering Ping context and let the skills help you.
+Ping Identity Agent Plugins give AI coding agents deep knowledge of the Ping Identity platform through purpose-built skills for platform foundations, flow and journey design, execution troubleshooting, and application integration. These skills help take the burden off you having to prompt-engineer Ping context. 
 
 > [!NOTE]
 > Plugins are being updated periodically. Check back here for updates!
 
-**[Features](#features) | [Install](#install) | [Install Manually](#install-manually) | [MCP Servers](#mcp-servers) | [Skills](#the-6-umbrella-skills) | [Example Prompts](#example-prompts) | [How it works](#how-it-works) | [Contributing](#contributing) | [Feedback](#feedback) | [Related Resources](#related-resources) | [License](#license)**
+**[Features](#features) | [Install](#install) | [Install Manually](#install-manually) | [MCP Servers](#mcp-servers) | [CLI Execution](#cli-execution) | [Plugins & Skills](#plugins--skills) | [Example Prompts](#example-prompts) | [Contributing](#contributing) | [Feedback](#feedback) | [Related Resources](#related-resources) | [License](#license)**
 
 ---
 
 ## Features
 
-- **Ping Identity platform expertise** - Skills give AI agents the right context upfront so they can answer questions, generate configurations, and write integrations without guessing.
-- **Works with all major AI coding agents** - Claude Code, Cursor, GitHub Copilot, Gemini CLI, and more.
-- **MCP server integration** - Installing the plugin in Claude Code or Cursor automatically registers the AIC and DaVinci MCP servers for live tenant access alongside the skills.
-- **6 umbrella skills** - Provides assistance with configuring Ping's Identity Platform across tenant setup, authentication orchestration, shared services (risk, KYC, MFA, governance), app integration, and securing your agents.
-- **Progressive context loading** - Skills load only what the agent needs for the task at hand, keeping token usage low and responses focused.
-- **Composable by design** - Skills work together. A complete solution typically spans 2-3 skills, and `ping-quickstart` routes you to the right combination automatically.
+- **Ping Identity platform expertise**: Skills give AI agents the right context upfront so they can answer questions, design architectures, and write integrations without guessing.
+- **Works with major AI coding agents**: Claude Code, Cursor, GitHub Copilot, Gemini CLI, and other agents that support skills or instruction files.
+- **MCP-aware execution**: Certain skills use Ping's remote MCP server to perform actions. For example, the AIC journey design skill uses MCP tools to create and update PingOne Advanced Identity Cloud journeys when available; the DaVinci skills use PingOne MCP tools for live operations. Without MCP, the skills produce design and implementation artifacts without assuming a tool setup.
+- **Multiple plugins covering various domains**: This repository provides plugins for human orientation, agents, as well as domain-specific ones.
+- **Progressive context loading**: Skills load only what the agent needs for the task at hand, reducing token usage.
 
 ---
 
@@ -33,8 +32,15 @@ Ping Identity Agent Plugins give AI coding agents deep knowledge of the Ping Ide
 | **Claude Code** | `/plugin marketplace add https://github.com/pingidentity/agent-plugins` |
 | **Cursor** | Settings → Plugins → search and add `https://github.com/pingidentity/agent-plugins` |
 | **GitHub Copilot** | Clone this repo, then add the relevant `SKILL.md` files to `.github/copilot-instructions.md` in your project |
-| **Gemini CLI** | Add to `GEMINI.md`: `plugins: [https://github.com/pingidentity/agent-plugins]` |
+| **Gemini CLI** | Add the relevant skill instructions to `GEMINI.md` in your project |
 | **OpenCode / other** | `npx skills add pingidentity/agent-plugins` (via Skills CLI); see [skills.sh](https://skills.sh) for agent-specific setup |
+
+> [!IMPORTANT]
+> This marketplace distributes different plugin surfaces:
+> - **`ping-identity-quickstart`**: human-facing front door for platform detection, orientation, and routing.
+> - **`ping-identity`**: cross-portfolio plugin containing the ping-identity foundations skill with portfolio reference topics.
+> - **`ping-orchestration-sdks`**: companion SDK plugin sourced from [`pingidentity/ping-sdk-agent-skills`](https://github.com/pingidentity/ping-sdk-agent-skills), with deep client-side integration skills when you need to embed PingOne AIC/PingAM journeys (trees) or PingOne DaVinci into your mobile and web apps.
+> Product/solution specific plugins, such as **`ping-identity-pingone`** and **`ping-identity-pingone-aic`** — providing instructions scoped to individual products and use cases.
 
 ---
 
@@ -46,137 +52,109 @@ You can also install using the Skills CLI:
 npx skills add pingidentity/agent-plugins
 ```
 
-Or install a specific skill:
+For deep Android, iOS, React, and JavaScript client-side integration skills, also install the companion repository:
 
 ```bash
-npx skills add pingidentity/agent-plugins/plugins/ping-identity/skills/ping-quickstart
-npx skills add pingidentity/agent-plugins/plugins/ping-identity/skills/ping-foundation
-npx skills add pingidentity/agent-plugins/plugins/ping-identity/skills/ping-orchestration
-npx skills add pingidentity/agent-plugins/plugins/ping-identity/skills/ping-universal-services
-npx skills add pingidentity/agent-plugins/plugins/ping-identity/skills/ping-app-integration
-npx skills add pingidentity/agent-plugins/plugins/ping-identity/skills/ping-identity-for-ai
+npx skills add pingidentity/ping-sdk-agent-skills
+```
+
+Or install a specific local plugin:
+
+```bash
+npx skills add pingidentity/agent-plugins/plugins/ping-identity-quickstart
+npx skills add pingidentity/agent-plugins/plugins/ping-identity
+npx skills add pingidentity/agent-plugins/plugins/ping-identity-pingone
+npx skills add pingidentity/agent-plugins/plugins/ping-identity-pingone-aic
 ```
 
 > [!TIP]
-> The skills work better together. We recommend installing the entire plugin for the most benefit.
+> The skills work better together. Install the quickstart and cross-portfolio plugins for orientation plus implementation guidance, add the companion SDK plugin when you are building mobile or web client integrations and add the domain-specific plugins for tailored domain guidance.
 
 ---
 
 ## MCP Servers
 
-When you install the plugin in **Claude Code** or **Cursor**, two locally-hosted MCP servers are automatically registered:
+Ping provides two remote MCP servers; one for AIC and one for PingOne. For more information on loading the MCP servers alongside these skills, refer to [AIC](https://developer.pingidentity.com/build-with-ai/aic-remote-mcp-server/overview.html) and [PingOne](https://developer.pingidentity.com/build-with-ai/pingone-mcp-server/p1-overview.html) remote MCP servers.
 
-| MCP Server | Purpose |
-|---|---|
-| [**AIC MCP Server**](https://github.com/pingidentity/aic-mcp-server) | Access to PingOne Advanced Identity Cloud (AIC) for journey authoring, tenant administration, and scripted node development, and more. Available in Development and Sandbox environments only. |
-| [**DaVinci MCP Server**](https://github.com/pingidentity/davinci-mcp-server) | Access to PingOne DaVinci for read-only access on flow management, application configuration, and more. |
+When no MCP server is configured, the skills still provide flow designs, node sequencing, routing guidance, and app-side implementation artifacts. For precise product, API, SDK, or service details, the `ping-identity` skill directs the agent to current Ping developer or product documentation rather than assuming that a local CLI or console workflow is available.
 
-These MCP Servers have variables that must be set to connect to your AIC or PingOne environment. Claude or Cursor will prompt you to enter these.
+## CLI Execution
 
-To add the MCP servers directly without the full plugin, visit the [Build with AI](https://www.pingidentity.com/en/resources/developer/build-with-ai.html) site.
+Where available, certain skills in plugins reference the Ping CLI to perform execution. As with the MCP servers, when the Ping CLI is not configured, the skills provide the same benefit.
 
 ---
 
-## The 6 umbrella skills
+## Plugins & Skills
+
+### `ping-identity-quickstart` (human-facing)
 
 | Skill | What it does | Use when... |
 |---|---|---|
-| `ping-quickstart` | Front door for all Ping Identity work. Identifies which platform you're on, what you're trying to accomplish, and routes you to the right skill | Platform is unknown; "where do I start"; evaluating or comparing Ping products; unsure which product handles your use case |
-| `ping-foundation` | Platform setup, administration, and core configuration across PingOne, AIC, PingFederate, PingAccess, PingDirectory, and PingID. Covers environments, app registration, SSO, directories, policies, and branding | Setting up or administering any Ping platform; registering apps; configuring sign-on policies, directories, or custom domains |
-| `ping-orchestration` | Design and build authentication flows, journeys, and orchestration logic across DaVinci, AIC/PingAM, and PingFederate. Covers login, registration, MFA, passwordless, step-up, progressive profiling, social login, and CIBA | Designing or building any authentication or registration flow; asking "what nodes do I need"; troubleshooting a journey or DaVinci flow |
-| `ping-universal-services` | Configure and invoke Ping's shared services: PingOne Protect (risk), PingOne Verify (KYC/identity proofing), PingOne MFA, PingOne Credentials (verifiable credentials), PingOne IGA (governance), and PingOne Authorize (fine-grained authorization) | Adding risk scoring, identity proofing, MFA-as-a-service, verifiable credentials, access governance, or fine-grained authorization to a flow or application |
-| `ping-app-integration` | Integrate Ping into web, mobile, and server-side applications. Covers Android, iOS, React, JavaScript SDKs; OIDC/OAuth2 wiring; backend token validation; on-prem agent integration; and SDK troubleshooting | Writing code to connect an app to Ping; embedding a DaVinci flow or AIC journey in a UI; troubleshooting redirect, CORS, or token errors |
-| `ping-identity-for-ai` | Secure AI agents and LLM-powered apps with Ping. Covers agent identity registration, machine-to-machine auth, Verified Trust signals, PingGateway as an MCP gateway, CIBA human-in-the-loop approvals, and bot/agent detection | Giving an AI agent a verified identity; securing an MCP server; delegating tokens for a helpdesk AI; applying the Identity for AI 5-pillar architecture |
+| `ping-identity-quickstart` | Human front door — identifies the user's platform and goal, provides initial orientation, and hands off to the relevant skill | Platform is unknown; "where do I start"; evaluating or comparing Ping products; planning a migration |
 
-Skills compose. A complete solution typically spans 2-3 skills. `ping-quickstart` tells you which combination to load.
+### `ping-identity` (cross-portfolio, agent-facing)
 
----
-
-## Example prompts
-
-| # | Prompt | Skill |
+| Skill | What it does | Use when... |
 |---|---|---|
-| 1 | "I'm new to Ping Identity and need to add login to my app. Where do I start?" | ping-quickstart |
-| 2 | "What's the difference between PingOne and PingOne Advanced Identity Cloud? Which should I use?" | ping-quickstart |
-| 3 | "Help me register an OIDC application in my PingOne environment." | ping-foundation |
-| 4 | "How do I add a risk-based step-up MFA challenge to my login flow?" | ping-universal-services |
-| 5 | "I need to integrate the Ping JavaScript SDK into my React app to handle a DaVinci flow." | ping-app-integration |
-| 6 | "Help me build a passwordless login journey using FIDO2/passkeys in AIC." | ping-orchestration |
-| 7 | "What nodes do I need to build a progressive profiling flow that collects a phone number after first login?" | ping-orchestration |
-| 8 | "How do I issue a verifiable credential to a user from PingOne Credentials?" | ping-universal-services |
-| 9 | "Give my AI agent a client credentials identity so it can call our internal APIs securely." | ping-identity-for-ai |
-| 10 | "List all the journeys in my AIC tenant and show me which ones have MFA enabled." | AIC MCP Server |
-| 11 | "Create a new login journey in my AIC sandbox that collects username and password, then sends an email OTP." | AIC MCP Server |
-| 12 | "Update the branding theme in my AIC tenant to use our company's primary color and logo." | AIC MCP Server |
-| 13 | "Show me all the DaVinci flows in my environment and which applications are using them." | DaVinci MCP Server |
-| 14 | "List the connectors configured in my DaVinci environment and their current connection status." | DaVinci MCP Server |
-| 15 | "Pull the configuration for my main login flow in DaVinci so I can review how the MFA step is set up." | DaVinci MCP Server |
+| `ping-identity` | Foundational portfolio layer — builds platform understanding across products, deployment models, solutions, integrations, and migration paths, then routes to authoritative docs or a downstream skill | You need product selection, cross-product architecture, solution orientation, migration planning, or journey/flow design principles |
 
-Prompts 10-15 require the plugin to be installed in Claude Code or Cursor with the MCP servers configured.
+### `ping-identity-pingone` (product-specific, agent-facing)
 
----
+| Skill | What it does | Use when... |
+|---|---|---|
+| `davinci-flow-design` | Designs and builds PingOne DaVinci flows — registration, login, MFA enrollment and step-up, passkeys, subflow composition, error paths, and promotion | You are building or reviewing a DaVinci flow, or preparing flows for promotion between environments |
+| `davinci-flow-engineering` | Traces and debugs live DaVinci flow executions using MCP evidence — actor/interaction/transaction correlation, subflow reconstruction, root cause and remediation | A flow execution failed or behaved unexpectedly and you need to find out why |
+| `pingone-app-integration` | Implements app-side integration against a PingOne environment — SDK wiring for Android/iOS/JavaScript, OIDC/PKCE, CORS, Worker applications, push registration, and app-side troubleshooting | You are integrating an Android, iOS, JavaScript/React, or backend app with PingOne |
 
-## How it works
+### `ping-identity-pingone-aic` (product-specific, agent-facing)
 
-Every skill follows a 3-tier progressive disclosure model:
+| Skill | What it does | Use when... |
+|---|---|---|
+| `aic-journey-design` | Designs and builds AIC journeys and PingAM authentication trees — node selection, wiring invariants, risk/MFA/passkey/recovery journeys — creating and updating journeys through AIC MCP tools when connected | You are building login, registration, recovery, MFA, step-up, passwordless, or social-login journeys in AIC or PingAM |
+| `aic-app-integration` | Implements app-side integration against PingOne Advanced Identity Cloud (AIC) — Journey modules and journey client for Android/iOS/JavaScript, journey callbacks, OIDC/PKCE, tenant CORS, SAML, and app-side troubleshooting | You are integrating an Android, iOS, JavaScript/React, or backend app with AIC or PingAM |
 
-```
-Tier 1 - Metadata (~100 tokens)
-  skill name + description - loaded at discovery for all skills
+### Companion plugin
 
-Tier 2 - SKILL.md (<5k tokens)
-  Routing decision tree: intent -> platform -> reference
-  Loaded in full when the skill activates
+- **`ping-orchestration-sdks`** — deep Android (Kotlin), iOS (Swift), and React/JavaScript SDK scaffolding and client-side integration guidance. It is sourced from [`pingidentity/ping-sdk-agent-skills`](https://github.com/pingidentity/ping-sdk-agent-skills), not stored under this repository's `plugins/` directory.
 
-Tier 3 - References (on demand)
-  Files that have the technical detail the agent needs to perform a specified task.
-```
-
-The agent stops at the first tier that answers the question. It never loads all anchors at once.
+The quickstart skill routes orientation requests to the cross-portfolio plugin. Within `ping-identity`, use the foundations skill for advisory orientation; use the product plugins for app integration, flow/journey design, and troubleshooting. Product-specific details remain in current Ping documentation and downstream companion skills.
 
 ---
 
-## Repo layout
+## Example Prompts
 
-```
-plugins/ping-identity/
-  skills/
-    ping-quickstart/          SKILL.md + references
-    ping-foundation/
-    ping-orchestration/
-    ping-universal-services/
-    ping-app-integration/
-    ping-identity-for-ai/
-  plugin-map.md               skill index and selection rules
-  references/index.json       all curated anchor paths
-rules/
-  authoring-rules.md          frontmatter contract, body length, naming
-  routing-rules.md            skill selection precedence
-  runtime-selection.md        sandbox-vs-production decision rule
-shared/
-  taxonomies/                 platform families, capability map, service map
-  schemas/                    frontmatter JSON schema
-  templates/                  SKILL.md and curated-reference templates
-evals/
-  prompts/                    trigger / non-trigger / ambiguous prompt sets per skill
-  harness/                    Layer 1 + Layer 2 runner, Claude + OpenAI adapters
-  results/                    dated eval run outputs
-```
+| # | Prompt | Plugin / Skill |
+|---|---|---|
+| 1 | "I'm new to Ping Identity and need to add login to my app. Where do I start?" | ping-identity-quickstart / ping-identity-quickstart |
+| 2 | "What's the difference between PingOne, PingOne Advanced Identity Cloud, and PingFederate? Which should I use?" | ping-identity-quickstart / ping-identity-quickstart |
+| 3 | "Design a solution that uses PingOne for CIAM and PingOne Protect for risk scoring." | ping-identity / ping-identity |
+| 4 | "Register a new OIDC application and connect it to a login flow in my PingOne environment." | ping-identity-pingone / pingone-app-integration + ping-identity-pingone / davinci-flow-design |
+| 5 | "Compare hosted-page branding options across PingOne Advanced Identity Cloud and PingOne." | ping-identity / ping-identity |
+| 6 | "Help me build a passwordless login journey using FIDO2/passkeys in PingOne Advanced Identity Cloud." | ping-identity-pingone-aic / aic-journey-design |
+| 7 | "What nodes do I need to build a progressive profiling flow?" | ping-identity-pingone-aic / aic-journey-design |
+| 8 | "Set up a password policy with lockout for an AIC environment." | ping-identity / ping-identity |
+| 9 | "Give my AI agent a client-credentials identity so it can call our internal APIs securely." | ping-identity / ping-identity |
+| 10 | "List all the journeys in my AIC tenant and show me which ones have MFA enabled." | ping-identity-pingone-aic / aic-journey-design + MCP |
+| 11 | "Create a new login journey in my AIC sandbox that collects username and password, then sends an email OTP." | ping-identity-pingone-aic / aic-journey-design + MCP |
+| 12 | "Migrate our on-prem PingAM authentication trees into AIC and modernize the orchestration design." | ping-identity-pingone-aic / aic-journey-design |
+| 13 | "Set up an Active Directory integration and determine which Ping service should own user synchronization." | ping-identity / ping-identity |
+
+Prompts marked "+ MCP" work best with the relevant Ping MCP execution tools connected. Without them, the design skills return a design or implementation artifact rather than performing live tenant changes.
+
+> [!TIP]
+> Extend these prompts with the AIC and PingOne remote MCP servers or the Ping CLI to enable your agents to take action.
 
 ---
 
 ## Contributing
 
-We welcome contributions! Whether it's a new skill, an improvement to an existing one, or a bug fix, see [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide including skill structure requirements, authoring rules, and how to submit a pull request.
+We welcome contributions! Add a skill, improve an existing skill, or fix a documentation issue by opening a pull request in this repository. Before submitting a change to skill or reference content, run the repository validator:
 
-## Eval status
+```bash
+python3 scripts/validate_skills.py --root .
+```
 
-> [!NOTE]
-> Our internal testing consistently shows **significant token savings** when the ping-identity skills are loaded compared to a bare baseline, across all six skills and multiple model tiers. Loading a skill gives the agent the right context upfront, so it spends fewer turns exploring, self-correcting, and making incorrect assumptions about Ping APIs.
->
-> Full eval results with per-skill and per-model breakdowns are being reviewed and will be published here once finalised.
-
----
+Refer to [AGENTS.md](AGENTS.md) for the repository layout, skill metadata requirements, reference-authoring rules, and validation guidance.
 
 ## Feedback
 
@@ -199,19 +177,19 @@ If you have feedback, questions, or want to request a new skill:
 ## Disclaimer
 
 > **This code is provided by Ping Identity Corporation ("Ping") on an "as is" basis, without
-warranty of any kind, to the fullest extent permitted by law.
+> warranty of any kind, to the fullest extent permitted by law.
 > Ping Identity Corporation does not represent or warrant or make any guarantee regarding the use of
-this code or the accuracy, timeliness or completeness of any data or information relating to this
-code, and Ping Identity Corporation hereby disclaims all warranties whether express, or implied or
-statutory, including without limitation the implied warranties of merchantability, fitness for a
-particular purpose, and any warranty of non-infringement.
+> this code or the accuracy, timeliness or completeness of any data or information relating to this
+> code, and Ping Identity Corporation hereby disclaims all warranties whether express, or implied or
+> statutory, including without limitation the implied warranties of merchantability, fitness for a
+> particular purpose, and any warranty of non-infringement.
 > Ping Identity Corporation shall not have any liability arising out of or related to any use,
-implementation or configuration of this code, including but not limited to use for any commercial
-purpose.
+> implementation or configuration of this code, including but not limited to use for any commercial
+> purpose.
 > Any action or suit relating to the use of the code may be brought only in the courts of a
-jurisdiction wherein Ping Identity Corporation resides or in which Ping Identity Corporation
-conducts its primary business, and under the laws of that jurisdiction excluding its conflict-of-law
-provisions.**
+> jurisdiction wherein Ping Identity Corporation resides or in which Ping Identity Corporation
+> conducts its primary business, and under the laws of that jurisdiction excluding its conflict-of-law
+> provisions.**
 
 ## License
 

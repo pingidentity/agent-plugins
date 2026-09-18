@@ -1,0 +1,16 @@
+{
+  "name": "ping-identity-pingone",
+  "displayName": "Ping Identity PingOne",
+  "version": "1.0.0",
+  "description": "Agent plugin for PingOne. App-integration guidance for connecting web, mobile, and backend applications to a PingOne environment (SDK wiring, OIDC/PKCE, CORS, Worker applications), DaVinci flow design guidance for building flows (registration, login, MFA, step-up, passkeys), and MCP-backed troubleshooting for live DaVinci flow executions.",
+  "author": {
+    "name": "Ping Identity",
+    "email": "devex@pingidentity.com"
+  },
+  "homepage": "https://developer.pingidentity.com",
+  "repository": "https://github.com/pingidentity/agent-plugins",
+  "license": "MIT",
+  "keywords": ["ping", "pingone", "davinci", "mcp", "authentication", "identity"],
+  "logo": "assets/ping-logo-square.svg",
+  "skills": "./skills/"
+}

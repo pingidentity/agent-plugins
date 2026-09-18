@@ -47,13 +47,9 @@ if (args[0] === "validate" || args.length === 0) {
   console.log("");
   console.log("Validates all skill content against authoring rules:");
   console.log("  - SKILL.md frontmatter schema");
-  console.log("  - SKILL.md ≤120 lines");
+  console.log("  - SKILL.md ≤160 lines");
   console.log("  - name: matches directory name");
-  console.log("  - Curated anchor frontmatter (title, product_family, capabilities, doc_type, status)");
-  console.log("  - product_family matches directory path");
   console.log("  - Routing table cross-references resolve");
-  console.log("  - index.json paths resolve");
-  console.log("  - No forbidden URLs (/r/en-us/, apps.pingone.com, /latest/ AIC)");
   process.exit(0);
 } else {
   console.error("Unknown command: " + args[0]);

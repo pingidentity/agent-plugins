@@ -1,0 +1,15 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ping-identity",
+  "version": "2.0.0",
+  "description": "Cross-portfolio agent plugin for Ping Identity. Hosts the ping-identity foundational portfolio orientation and routing skill with reference topics covering the portfolio, solutions, and application integration concepts.",
+  "author": {
+    "name": "Ping Identity",
+    "email": "devex@pingidentity.com",
+    "url": "https://www.pingidentity.com"
+  },
+  "homepage": "https://developer.pingidentity.com",
+  "repository": "https://github.com/pingidentity/agent-plugins",
+  "license": "MIT",
+  "keywords": ["ping", "pingone", "aic", "davinci", "pingfederate", "pingaccess", "identity", "authentication", "ciam", "ai-identity", "foundations"]
+}

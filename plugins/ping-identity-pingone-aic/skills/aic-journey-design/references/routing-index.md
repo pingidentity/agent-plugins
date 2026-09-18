@@ -1,0 +1,67 @@
+# AIC Journey Design — Routing Index
+
+Sub-routing table for the `aic-journey-design` skill. Use this file to select the correct local anchor when the task is an AIC / PingAM journey scenario.
+
+## Scope
+
+**Covers:** Node-family routing, journey use case routing, and retrieval order for AIC journey tasks.
+**Does NOT cover:** Platform setup — see platform configuration.
+
+---
+
+## Node-family routing
+
+| Task | Reference |
+|---|---|
+| Node composition rules, PageNode usage, child node gotchas | `references/nodes/node-fundamentals.md` |
+| Username/password collection, ValidatedUsernameNodeV2, passthrough auth, session entry, lifecycle outcomes | `references/nodes/basic-auth-nodes.md` |
+| MFA: WebAuthn, OATH, push, OTP, recovery codes | `references/nodes/mfa-nodes.md` |
+| Risk scoring, lockout, CAPTCHA, auth level, PingOne Authorize | `references/nodes/risk-management-nodes.md` |
+| User registration, attributes (PRESENT/EQUALS), consent, KBA, T&C, social login, SelectIdP, TimeSince | `references/nodes/identity-management-nodes.md` |
+| Scripting, page composition, session, state, async, polling, LoginCount (AT/EVERY), EmailSuspend/EmailTemplate config | `references/nodes/utility-nodes.md` |
+| SAML/OIDC federation, Twilio Verify, device/cookie/cert | `references/nodes/federation-contextual-nodes.md` |
+| Passkey journey design (vocabulary, friction tiers, patterns) | `references/passkey-journeys.md` |
+| MCP journey creation (createJourney PageNode pattern) | `references/mcp-journey-authoring.md` |
+
+---
+
+## Journey use case routing
+
+Load the matching use-case anchor when the task maps to a named scenario:
+
+| Use case | Reference |
+|---|---|
+| Account recovery, username reminder, anti-enumeration | `references/journey-use-cases/account-recovery-and-username-reminder.md` |
+| Password reset (unauthenticated) or password update (authenticated) | `references/journey-use-cases/password-reset-and-update.md` |
+| MFA device registration (WebAuthn, OATH, Push, SMS, VOICE) | `references/journey-use-cases/passwordless-mfa-registration.md` |
+| Multi-method MFA authentication with retry loops and recovery codes | `references/journey-use-cases/mfa-authentication-multi-method.md` |
+| PingOne Protect risk integration (init/eval pattern, step-up chain) | `references/journey-use-cases/pingone-protect-risk-integration.md` |
+| Financial services step-up, transaction authorization, PingOne Authorize | `references/journey-use-cases/financial-services-step-up.md` |
+| Progressive profiling (login-count trigger, attribute gate) | `references/journey-use-cases/progressive-profiling.md` |
+| Social + local registration and authentication, email verification gate | `references/journey-use-cases/social-and-local-registration-authentication.md` |
+| MFA method selection at registration, per-method enrollment (TOTP/WebAuthn/Push), mandatory MFA on login | `references/journey-use-cases/mfa-method-selection-registration.md` |
+| WebAuthn / passkeys on native Android or iOS — AIC-side prerequisites | `references/aic-config/webauthn-mobile-setup.md` |
+
+---
+
+## Retrieval order
+
+1. Match the task to a use case row first — use-case anchors are self-contained and include node guidance.
+2. If no use case matches, select 1–2 node-family anchors.
+
+## Prerequisites
+
+- PingOne AIC or PingAM tenant with at least one realm and journey capability enabled.
+
+## Common variants
+
+- AIC (PingOne Advanced Identity Cloud) and PingAM share the same node model; AIC adds ESVs, hosted pages, and tenant-security constraints.
+
+## Related references
+
+- `references/design-notes.md` — design checklist, AIC security lens, wiring invariants
+- AM service prerequisites (Push, OATH, WebAuthn, Social, Device Profiles, PingOne Worker, and related services) must be configured **before** the corresponding nodes will function
+
+## Source
+
+[Authentication nodes — PingOne AIC](https://docs.pingidentity.com/pingoneaic/journeys/auth-nodes.html)
