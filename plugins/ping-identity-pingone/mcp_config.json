@@ -1,0 +1,18 @@
+{
+ "mcpServers": {
+    "pingone-mcp-server": {
+      "serverUrl": "${PINGONE_ENV_MCP_URL}",
+      "oauth": {
+        "clientId": "pingone-mcp-server",
+        "clientSecret": ""
+    },
+  "variables": [
+    {
+      "name": "PINGONE_ENV_MCP_URL",
+      "title": "PingOne MCP server URL",
+      "description": "The PingOne remote MCP server URL for your environment. Ensure you have the Antigravity redirect URI added in the PingOne remote MCP server configuration. For more information, refer to https://developer.pingidentity.com/build-with-ai/pingone-mcp-server/p1-overview.html."
+    }
+   ]
+  }
+ }
+}

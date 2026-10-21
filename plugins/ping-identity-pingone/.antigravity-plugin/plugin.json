@@ -1,0 +1,23 @@
+{
+  "name": "ping-identity-pingone",
+  "description": "Agent plugin for PingOne multi-tenant. Includes skills and a remote MCP server that lets AI agents configure and monitor your PingOne environments.",
+  "skills": ["./skills"],
+  "displayName": "PingOne",
+  "logo": "assets/ping-logo-square.svg",
+  "suggestedPrompts": [
+    "Register a new OIDC application and connect it to a login flow in my PingOne environment.",
+    "Enable MFA for this user — complete common user security and access tasks.",
+    "Investigate audit logs for suspicious activity, jamie@example.com had trouble signing on this afternoon. What happened?"
+  ],
+  "category": ["Identity and Access Management", "Security", "Developer Tools"],
+  "version": "1.0.0",
+  "author": {
+    "name": "Ping Identity",
+    "email": "devex@pingidentity.com",
+    "url": "https://www.pingidentity.com"
+  },
+   "homepage": "https://developer.pingidentity.com",
+  "repository": "https://github.com/pingidentity/agent-plugins",
+  "license": "MIT",
+  "keywords": ["ping", "pingone", "multi-tenant", "davinci", "sso", "authentication", "mfa", "identity", "ciam"]
+}
