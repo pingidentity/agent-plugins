@@ -1,5 +1,6 @@
 {
   "name": "ping-identity-pingone",
+  "version": "1.0.0",
   "description": "Agent plugin for PingOne. App-integration guidance for connecting web, mobile, and backend applications to a PingOne environment (SDK wiring, OIDC/PKCE, CORS, Worker applications), DaVinci flow design guidance for building flows (registration, login, MFA, step-up, passkeys), MCP-backed troubleshooting for live DaVinci flow executions, and audit-event investigation for platform operations (failed logins, admin actions, compliance history, correlation IDs). Requires a PingOne environment and a registered OAuth client for live MCP operations.",
   "author": {
     "name": "Ping Identity",
