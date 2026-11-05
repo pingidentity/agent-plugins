@@ -1,0 +1,18 @@
+{
+ "mcpServers": {
+    "aic-mcp-server": {
+      "serverUrl": "${AIC_ENV_MCP_URL}",
+      "oauth": {
+        "clientId": "AICRemoteMCPClient",
+        "clientSecret": ""
+    },
+  "variables": [
+    {
+      "name": "AIC_ENV_MCP_URL",
+      "title": "AIC MCP server URL",
+      "description": "The AIC remote MCP server URL for your environment. For more information, refer to https://developer.pingidentity.com/build-with-ai/aic-remote-mcp-server/overview.html."
+    }
+   ]
+  }
+ }
+}
