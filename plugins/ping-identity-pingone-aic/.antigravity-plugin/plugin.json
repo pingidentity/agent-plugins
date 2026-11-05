@@ -1,0 +1,23 @@
+{
+  "name": "ping-identity-pingone-aic",
+  "description": "Agent plugin for PingOne Advanced Identity Cloud (AIC) single-tenant. Includes skills and a remote MCP server that lets AI agents configure and monitor your AIC environments.",
+  "skills": ["./skills"],
+  "displayName": "PingOne Advanced Identity Cloud",
+  "logo": "assets/ping-logo-square.svg",
+  "suggestedPrompts": [
+    "Create a new AIC journey that prompts for username and password but also allows login and registration of FIDO2 passkeys.",
+    "Check the last 24 hours of authentication attempts and tell me if anyone has been locked out of their account.",
+    "Help me connect to Entra ID to provision users into my AIC tenant."
+  ],
+  "category": ["Identity and Access Management", "Security", "Developer Tools"],
+  "version": "1.0.0",
+  "author": {
+    "name": "Ping Identity",
+    "email": "devex@pingidentity.com",
+    "url": "https://www.pingidentity.com"
+  },
+   "homepage": "https://developer.pingidentity.com",
+  "repository": "https://github.com/pingidentity/agent-plugins",
+  "license": "MIT",
+  "keywords": ["ping", "pingone aic", "aic", "advanced identity cloud", "single-tenant", "journeys", "sso", "authentication", "mfa", "identity", "ciam"]
+}
